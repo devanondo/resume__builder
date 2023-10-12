@@ -4,7 +4,7 @@ import { popkey } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { ChevronDown, ChevronUp, Plus, Trash } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { ElementRef, useEffect, useRef } from 'react'
 import {
     Controller,
     FieldValues,
@@ -14,6 +14,7 @@ import {
 } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
+import { useHidePopover } from '../hooks/use-hide-popover'
 
 interface CustomTextAreaProps {
     fields: Record<'id', string>[]
@@ -51,13 +52,25 @@ const CustomTextArea = ({
             inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
         }
     }
+    const divRef = useRef<ElementRef<'div'>>(null)
+    useHidePopover({
+        divRef,
+        disMount: () => {
+            dispatch(showPopover(null))
+        },
+    })
 
     return (
-        <div className="relative w-full">
+        <div ref={divRef} className="relative w-full">
             <div
                 onClick={() => {
                     // dispatch(showPopover(name + index))
-                    dispatch(showPopover(popkey(name, index)))
+                    dispatch(
+                        showPopover({
+                            name: popkey(name, index),
+                            type: 'single__entry',
+                        })
+                    )
                     // popkey(name, index)
                 }}
                 className="w-full"
@@ -81,7 +94,12 @@ const CustomTextArea = ({
                     <Button
                         onClick={() => {
                             append({ [fieldTitle]: '' })
-                            dispatch(showPopover(popkey(name, fields.length)))
+                            dispatch(
+                                showPopover({
+                                    name: popkey(name, fields.length),
+                                    type: 'single__entry',
+                                })
+                            )
                         }}
                         className="flex- gap-x-2 rounded-none"
                     >
@@ -90,7 +108,12 @@ const CustomTextArea = ({
 
                     <Button
                         onClick={() => {
-                            dispatch(showPopover(popkey(name, index + 1)))
+                            dispatch(
+                                showPopover({
+                                    name: popkey(name, index + 1),
+                                    type: 'single__entry',
+                                })
+                            )
                         }}
                         className="flex- gap-x-2 rounded-none"
                         disabled={index === fields.length - 1}
@@ -99,7 +122,12 @@ const CustomTextArea = ({
                     </Button>
                     <Button
                         onClick={() => {
-                            dispatch(showPopover(popkey(name, index - 1)))
+                            dispatch(
+                                showPopover({
+                                    name: popkey(name, index - 1),
+                                    type: 'single__entry',
+                                })
+                            )
                         }}
                         disabled={index === 0}
                         className="flex- gap-x-2 rounded-none"
@@ -111,9 +139,19 @@ const CustomTextArea = ({
                         onClick={() => {
                             remove(index)
                             if (fields.length - 1 === index) {
-                                dispatch(showPopover(popkey(name, index - 1)))
+                                dispatch(
+                                    showPopover({
+                                        name: popkey(name, index - 1),
+                                        type: 'single__entry',
+                                    })
+                                )
                             } else {
-                                dispatch(showPopover(popkey(name, index)))
+                                dispatch(
+                                    showPopover({
+                                        name: popkey(name, index),
+                                        type: 'single__entry',
+                                    })
+                                )
                             }
                         }}
                         className="rounded-none"

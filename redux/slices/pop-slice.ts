@@ -4,13 +4,39 @@ export const popoverSlice = createSlice({
     name: 'popover',
     initialState: {
         summeryPopoverKey: null as null | number | string,
+        groupPopoverKey: null as null | number | string,
     },
     reducers: {
-        showPopover: (state, action) => {
+        showPopover: (
+            state,
+            action: {
+                payload: {
+                    type: 'single__entry' | 'group__entry'
+                    name: string
+                } | null
+                type: string
+            }
+        ) => {
             if (action.payload === null) {
                 state.summeryPopoverKey = null
+                state.groupPopoverKey = null
             } else {
-                state.summeryPopoverKey = action.payload
+                switch (action.payload.type) {
+                    case 'single__entry':
+                        state.groupPopoverKey = null
+                        state.summeryPopoverKey = action.payload.name
+
+                        break
+
+                    case 'group__entry':
+                        state.summeryPopoverKey = null
+                        state.groupPopoverKey = action.payload.name
+
+                        break
+
+                    default:
+                        break
+                }
             }
         },
         showPopoverReverse: (state, action) => {

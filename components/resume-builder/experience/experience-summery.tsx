@@ -8,7 +8,7 @@ const ExperienceSummery = () => {
     const { control } = useFormContext()
 
     return (
-        <div>
+        <div className="border border-red-500">
             <Controller
                 name={`experienceSummary.name` as const}
                 control={control}
