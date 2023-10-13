@@ -52,18 +52,32 @@ const ResumePage = () => {
             record: 'ExperienceSection',
             name: 'Experience',
             enabled: true,
+
             items: [
                 {
+                    enabled: true,
                     position: 'Full Stackweb developer',
+                    bold_position: true,
                     workplace: 'Fiverr',
                     location: 'San Fransisco, CA',
+                    show_location: false,
 
-                    description:
-                        'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                    date: {
+                        from: '',
+                        to: '',
+                        is_present: true,
+                    },
+                    description: {
+                        text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                        italic_description: false,
+                        enabled: true,
+                    },
+
                     bulets: {
                         enabled: true,
+                        bulet_items: true,
+                        italic_items: false,
                         name: 'bulets',
-                        styles: 'styles',
                         items: [
                             {
                                 text: 'bullet description',
@@ -76,11 +90,18 @@ const ResumePage = () => {
                 },
             ],
         },
+        skills: {
+            record: 'SkillsSection',
+            name: 'Skills',
+            enabled: true,
+        },
     }
 
     const methods = useForm()
 
-    function onSubmit(values: any) {}
+    function onSubmit(values: any) {
+        console.log(values)
+    }
 
     useEffect(() => {
         if (Object.keys(data)?.length) {

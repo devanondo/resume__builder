@@ -9,7 +9,14 @@ import {
     UseFieldArrayRemove,
 } from 'react-hook-form'
 
-import { ChevronDown, ChevronUp, Plus, Trash } from 'lucide-react'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
+import { Switch } from '@/components/ui/switch'
+import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
+import { Controller, useFormContext } from 'react-hook-form'
 
 interface ExperienceGroupPopoverProps {
     fields: Record<'id', string>[]
@@ -20,6 +27,37 @@ interface ExperienceGroupPopoverProps {
     remove: UseFieldArrayRemove
 }
 
+const settings = [
+    {
+        title: 'Show Location',
+        render: 'show_location',
+    },
+    {
+        title: 'Position Bold',
+        render: 'bold_position',
+    },
+    {
+        title: 'Show Description',
+        render: 'description.enabled',
+    },
+    {
+        title: 'Description Italic',
+        render: 'description.italic_description',
+    },
+    {
+        title: 'Show Bullet Items',
+        render: 'bulets.enabled',
+    },
+    {
+        title: 'Show Bulets',
+        render: 'bulets.bulet_items',
+    },
+    {
+        title: 'Bulets Italic',
+        render: 'bulets.italic_items',
+    },
+]
+
 const ExperienceGroupPopover = ({
     fields,
     name,
@@ -28,6 +66,7 @@ const ExperienceGroupPopover = ({
     remove,
 }: ExperienceGroupPopoverProps) => {
     const dispatch = useAppDispatch()
+    const { control } = useFormContext()
 
     return (
         <div className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
@@ -89,6 +128,36 @@ const ExperienceGroupPopover = ({
             >
                 <ChevronUp className="w-4 h-4" />
             </Button>
+
+            <Popover>
+                <PopoverTrigger className="px-3 bg-black text-white py-3">
+                    <Settings className="w-4 h-4" />
+                </PopoverTrigger>
+                <PopoverContent>
+                    {settings.map((action) => {
+                        return (
+                            <div
+                                key={action.render}
+                                className="flex justify-between items-center py-1"
+                            >
+                                <div className="text-md">{action.title}</div>
+                                <Controller
+                                    name={
+                                        `${name}.${index}.${action.render}` as const
+                                    }
+                                    control={control}
+                                    render={({ field: f }) => (
+                                        <Switch
+                                            checked={f.value}
+                                            onCheckedChange={f.onChange}
+                                        />
+                                    )}
+                                />
+                            </div>
+                        )
+                    })}
+                </PopoverContent>
+            </Popover>
 
             <Button
                 onClick={() => {

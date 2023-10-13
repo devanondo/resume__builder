@@ -1,13 +1,13 @@
 'use client'
 
-import { useHidePopover } from '@/components/hooks/use-hide-popover'
+import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ExperienceGroupPopover from '@/components/popover/experience-popover'
 import TextAreaCommon from '@/components/shared/common-text-area'
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { Calendar, MapIcon } from 'lucide-react'
-import { ElementRef, useRef } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import ExperienceBuletItem from './experience-bullet-item'
 
@@ -25,13 +25,15 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
         control,
     })
 
-    const divRef = useRef<ElementRef<'div'>>(null)
-    useHidePopover({
-        divRef,
-        disMount: () => {
-            dispatch(showPopover(null))
-        },
-    })
+    const { watchValue } = useWatchForm({ name })
+
+    // const divRef = useRef<ElementRef<'div'>>(null)
+    // useHidePopover({
+    //     divRef,
+    //     disMount: () => {
+    //         dispatch(showPopover(null))
+    //     },
+    // }).
 
     return (
         <div className="border border-green-500 mt-1">
@@ -46,7 +48,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                 })
                             )
                         }}
-                        ref={divRef}
+                        // ref={divRef}
                         className=""
                     >
                         <Controller
@@ -54,7 +56,15 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             control={control}
                             defaultValue=""
                             render={({ field: f }) => (
-                                <Input className="text-xl" {...f} />
+                                <Input
+                                    className={cn(
+                                        'text-xl',
+
+                                        watchValue[i]?.bold_position &&
+                                            'font-bold'
+                                    )}
+                                    {...f}
+                                />
                             )}
                         />
                         <Controller
@@ -66,20 +76,22 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             )}
                         />
                         <div className="flex items-center pl-3">
-                            <div className="flex items-center gap-x-2">
-                                <Calendar className="w-4 h-4" />{' '}
-                                <Controller
-                                    name={`${name}.${i}.location` as const}
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field: f }) => (
-                                        <Input
-                                            className="text-sm font-bold"
-                                            {...f}
-                                        />
-                                    )}
-                                />
-                            </div>
+                            {watchValue[i]?.show_location && (
+                                <div className="flex items-center gap-x-2">
+                                    <Calendar className="w-4 h-4" />{' '}
+                                    <Controller
+                                        name={`${name}.${i}.location` as const}
+                                        control={control}
+                                        defaultValue=""
+                                        render={({ field: f }) => (
+                                            <Input
+                                                className="text-sm font-bold"
+                                                {...f}
+                                            />
+                                        )}
+                                    />
+                                </div>
+                            )}
                             <div className="flex items-center gap-x-2">
                                 <MapIcon className="w-4 h-4" />
                                 <Controller
@@ -95,22 +107,27 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                 />
                             </div>
                         </div>
-
-                        <Controller
-                            name={`${name}.${i}.description` as const}
-                            control={control}
-                            defaultValue=""
-                            render={({ field: f }) => (
-                                <TextAreaCommon
-                                    field={f}
-                                    fields={fields}
-                                    className="text-sm"
-                                />
-                            )}
-                        />
+                        {watchValue[i]?.description.enabled && (
+                            <Controller
+                                name={`${name}.${i}.description.text` as const}
+                                control={control}
+                                defaultValue=""
+                                render={({ field: f }) => (
+                                    <TextAreaCommon
+                                        field={f}
+                                        fields={fields}
+                                        className={cn(
+                                            'text-sm',
+                                            watchValue[i].description
+                                                .italic_description && 'italic'
+                                        )}
+                                    />
+                                )}
+                            />
+                        )}
                     </div>
 
-                    <ExperienceBuletItem name={`${name}.${i}.bulets.items`} />
+                    <ExperienceBuletItem name={`${name}.${i}.bulets`} />
 
                     {groupPopoverKey === name + i && (
                         <ExperienceGroupPopover

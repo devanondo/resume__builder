@@ -4,7 +4,7 @@ import { popkey } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { ChevronDown, ChevronUp, Plus, Trash } from 'lucide-react'
-import { ElementRef, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import {
     Controller,
     FieldValues,
@@ -14,7 +14,6 @@ import {
 } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
-import { useHidePopover } from '../hooks/use-hide-popover'
 
 interface CustomTextAreaProps {
     fields: Record<'id', string>[]
@@ -24,6 +23,7 @@ interface CustomTextAreaProps {
     append: UseFieldArrayAppend<FieldValues, string | any>
     remove: UseFieldArrayRemove
     fieldTitle: string
+    className?: string
 }
 
 const CustomTextArea = ({
@@ -33,6 +33,7 @@ const CustomTextArea = ({
     append,
     remove,
     fieldTitle,
+    className,
 }: CustomTextAreaProps) => {
     const inputRef = useRef<HTMLTextAreaElement | null>(null)
     const { summeryPopoverKey } = useAppSelector((state) => state.popover)
@@ -52,16 +53,16 @@ const CustomTextArea = ({
             inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
         }
     }
-    const divRef = useRef<ElementRef<'div'>>(null)
-    useHidePopover({
-        divRef,
-        disMount: () => {
-            dispatch(showPopover(null))
-        },
-    })
+    // const divRef = useRef<ElementRef<'div'>>(null)
+    // useHidePopover({
+    //     divRef,
+    //     disMount: () => {
+    //         dispatch(showPopover(null))
+    //     },
+    // })
 
     return (
-        <div ref={divRef} className="relative w-full">
+        <div className="relative w-full">
             <div
                 onClick={() => {
                     // dispatch(showPopover(name + index))
@@ -84,6 +85,7 @@ const CustomTextArea = ({
                             {...field}
                             ref={inputRef}
                             placeholder="What's the one thing that makes you that best candidate for this job?"
+                            className={className}
                         />
                     )}
                 />
