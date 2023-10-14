@@ -9,6 +9,8 @@ import { Button } from '../ui/button'
 import ExperienceSummery from './experience/experience-summery'
 import ResumeHeader from './resume-header'
 import ResumeSummery from './resume-summery'
+import SkillsSection from './skills/skills-section'
+import StrengthSection from './strengths/strength-section'
 
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
@@ -94,6 +96,141 @@ const ResumePage = () => {
             record: 'SkillsSection',
             name: 'Skills',
             enabled: true,
+            items: [
+                {
+                    title: 'Language & Libraries',
+                    show_title: true,
+                    bold_title: true,
+                    italic_title: true,
+                    underline_key: true,
+                    italic_key: true,
+                    bold_key: true,
+                    keys: [
+                        {
+                            keyItem: 'javaript',
+                        },
+                        {
+                            keyItem: 'java',
+                        },
+                        {
+                            keyItem: 'jvascript',
+                        },
+
+                        {
+                            keyItem: 'javascript',
+                        },
+                        {
+                            keyItem: 'javat',
+                        },
+                        {
+                            keyItem: 'javascript',
+                        },
+                    ],
+                },
+            ],
+        },
+        projects: {
+            record: 'ProjectSection',
+            name: 'Projects',
+            enabled: true,
+
+            items: [
+                {
+                    enabled: true,
+                    name: 'Full Stackweb developer',
+                    bold_name: true,
+                    link: '',
+                    link_icon: true,
+                    date: {
+                        record: 'DateRange',
+                        from: '',
+                        to: '',
+                        is_present: true,
+                        date_icon: true,
+                    },
+                    description: {
+                        text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                        italic_description: false,
+                        enabled: true,
+                    },
+
+                    bulets: {
+                        enabled: true,
+                        bulet_items: true,
+                        italic_items: false,
+                        name: 'bulets',
+                        items: [
+                            {
+                                text: 'bullet description',
+                            },
+                            {
+                                text: 'bullet description2',
+                            },
+                        ],
+                    },
+                },
+            ],
+        },
+        strengths: {
+            record: 'StrengthSection',
+            name: 'Strength',
+            enabled: true,
+
+            items: [
+                {
+                    enabled: true,
+                    name: 'Team Leadership',
+                    placeholder: 'Your Unique Talent',
+                    icon: 'team',
+                    show_icon: true,
+                    description: {
+                        placeholder: 'Write short description!',
+                        text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                        italic_description: false,
+                        enabled: true,
+                    },
+                },
+            ],
+        },
+        education: {
+            record: 'EducationSection',
+            name: 'Education',
+            enabled: true,
+
+            items: [
+                {
+                    enabled: true,
+                    name: 'BSC in Computer Science Engineering',
+                    placeholder: 'Degree and Field of Study!',
+
+                    institution: {
+                        name: 'Dhaka International University',
+                        placeholder: 'School / University',
+                        location: 'Dhaka',
+                        show_location: true,
+                        gpa: '',
+                        placeholder_gpa: 'CGPA',
+                        gpa_text: '',
+                        placeholder_gpa_text: '4.00',
+                        gpa_max: '',
+                        placeholder_gpa_max: '4.00',
+                    },
+                    bulets: {
+                        enabled: true,
+                        bulet_items: true,
+                        italic_items: false,
+                        name: 'bulets',
+                        items: [
+                            {
+                                text: 'bullet description',
+                            },
+                            {
+                                text: 'bullet description2',
+                            },
+                        ],
+                    },
+                },
+            ],
         },
     }
 
@@ -122,11 +259,21 @@ const ResumePage = () => {
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     {/* <ContentProvider> */}
+
                     <ResumeHeader />
                     {/* </ContentProvider> */}
 
-                    <ResumeSummery />
-                    <ExperienceSummery />
+                    <div className="grid grid-cols-5 gap-x-5">
+                        <div className="col-span-3">
+                            <ResumeSummery />
+                            <ExperienceSummery />
+                        </div>
+                        <div className="col-span-2">
+                            <SkillsSection />
+
+                            <StrengthSection />
+                        </div>
+                    </div>
 
                     <Button className="mt-10">Submit</Button>
                 </form>

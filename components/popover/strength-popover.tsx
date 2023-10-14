@@ -18,7 +18,7 @@ import { Switch } from '@/components/ui/switch'
 import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-interface ExperienceGroupPopoverProps {
+interface StrengthPopoverProps {
     fields: Record<'id', string>[]
     fieldArraykey?: string
     name: string
@@ -29,42 +29,26 @@ interface ExperienceGroupPopoverProps {
 
 const settings = [
     {
-        title: 'Show Location',
-        render: 'show_location',
-    },
-    {
-        title: 'Position Bold',
-        render: 'bold_position',
+        title: 'Show Icon',
+        render: 'show_icon',
     },
     {
         title: 'Show Description',
         render: 'description.enabled',
     },
     {
-        title: 'Description Italic',
+        title: 'Italic Description',
         render: 'description.italic_description',
-    },
-    {
-        title: 'Show Bullet Items',
-        render: 'bulets.enabled',
-    },
-    {
-        title: 'Show Bulets',
-        render: 'bulets.bulet_items',
-    },
-    {
-        title: 'Bulets Italic',
-        render: 'bulets.italic_items',
     },
 ]
 
-const ExperienceGroupPopover = ({
+const StrengthPopover = ({
     fields,
     name,
     index,
     append,
     remove,
-}: ExperienceGroupPopoverProps) => {
+}: StrengthPopoverProps) => {
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
@@ -73,19 +57,16 @@ const ExperienceGroupPopover = ({
             <Button
                 onClick={() => {
                     append({
-                        position: 'Position',
-                        workplace: 'Workplace',
-                        location: 'Location',
-                        description: 'Description',
-                        bulets: {
+                        enabled: true,
+                        name: '',
+                        placeholder: 'Your Unique Talent',
+                        icon: 'team',
+                        show_icon: true,
+                        description: {
+                            text: '',
+                            italic_description: false,
                             enabled: true,
-                            name: 'bulets',
-                            styles: 'styles',
-                            items: [
-                                {
-                                    text: 'Bullets',
-                                },
-                            ],
+                            placeholder: 'Write short description!',
                         },
                     })
                     dispatch(
@@ -104,7 +85,7 @@ const ExperienceGroupPopover = ({
                 onClick={() => {
                     dispatch(
                         showPopover({
-                            name: name + index + 1,
+                            name: name + (index + 1),
                             type: 'group__entry',
                         })
                     )
@@ -188,4 +169,4 @@ const ExperienceGroupPopover = ({
     )
 }
 
-export default ExperienceGroupPopover
+export default StrengthPopover

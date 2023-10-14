@@ -103,7 +103,7 @@ const CustomTextArea = ({
                                 })
                             )
                         }}
-                        className="flex- gap-x-2 rounded-none"
+                        className="flex- gap-x-2 rounded-none w-[130px]"
                     >
                         <Plus className="w-4 h-4" /> New Entry
                     </Button>

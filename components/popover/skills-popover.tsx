@@ -18,7 +18,7 @@ import { Switch } from '@/components/ui/switch'
 import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-interface ExperienceGroupPopoverProps {
+interface SkillsPopoverProps {
     fields: Record<'id', string>[]
     fieldArraykey?: string
     name: string
@@ -29,42 +29,38 @@ interface ExperienceGroupPopoverProps {
 
 const settings = [
     {
-        title: 'Show Location',
-        render: 'show_location',
+        title: 'Show Title',
+        render: 'show_title',
     },
     {
-        title: 'Position Bold',
-        render: 'bold_position',
+        title: 'Bold Title',
+        render: 'bold_title',
     },
     {
-        title: 'Show Description',
-        render: 'description.enabled',
+        title: 'Italic Title',
+        render: 'italic_title',
     },
     {
-        title: 'Description Italic',
-        render: 'description.italic_description',
+        title: 'Key Underline',
+        render: 'underline_key',
     },
     {
-        title: 'Show Bullet Items',
-        render: 'bulets.enabled',
+        title: 'Key Italic',
+        render: 'italic_key',
     },
     {
-        title: 'Show Bulets',
-        render: 'bulets.bulet_items',
-    },
-    {
-        title: 'Bulets Italic',
-        render: 'bulets.italic_items',
+        title: 'Key Bold',
+        render: 'bold_key',
     },
 ]
 
-const ExperienceGroupPopover = ({
+const SkillsPopover = ({
     fields,
     name,
     index,
     append,
     remove,
-}: ExperienceGroupPopoverProps) => {
+}: SkillsPopoverProps) => {
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
@@ -73,20 +69,18 @@ const ExperienceGroupPopover = ({
             <Button
                 onClick={() => {
                     append({
-                        position: 'Position',
-                        workplace: 'Workplace',
-                        location: 'Location',
-                        description: 'Description',
-                        bulets: {
-                            enabled: true,
-                            name: 'bulets',
-                            styles: 'styles',
-                            items: [
-                                {
-                                    text: 'Bullets',
-                                },
-                            ],
-                        },
+                        title: 'Language & Libraries',
+                        show_title: true,
+                        bold_title: true,
+                        italic_title: true,
+                        underline_key: true,
+                        italic_key: true,
+                        bold_key: true,
+                        keys: [
+                            {
+                                keyItem: '',
+                            },
+                        ],
                     })
                     dispatch(
                         showPopover({
@@ -104,7 +98,7 @@ const ExperienceGroupPopover = ({
                 onClick={() => {
                     dispatch(
                         showPopover({
-                            name: name + index + 1,
+                            name: name + (index + 1),
                             type: 'group__entry',
                         })
                     )
@@ -188,4 +182,4 @@ const ExperienceGroupPopover = ({
     )
 }
 
-export default ExperienceGroupPopover
+export default SkillsPopover
