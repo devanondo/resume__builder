@@ -1,7 +1,7 @@
 'use client'
 
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import CustomTextArea from '../shared/custom-text-area'
+import CustomTextArea from '@/components/shared/custom-text-area'
 
 interface NestedSummeryProps {
     index: number

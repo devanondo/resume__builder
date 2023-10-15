@@ -70,7 +70,7 @@ const StrengthSection = () => {
                                     )}
                                 />
 
-                                {watchValue[i].description.enabled && (
+                                {watchValue[i]?.description.enabled && (
                                     <Controller
                                         name={
                                             `${name}[${i}].description.text` as const

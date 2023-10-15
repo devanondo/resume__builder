@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
@@ -7,10 +8,11 @@ import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
 import ExperienceSummery from './experience/experience-summery'
-import ResumeHeader from './resume-header'
-import ResumeSummery from './resume-summery'
+import ResumeHeader from './header/resume-header'
+import ResumeSummery from './summery/resume-summery'
 import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
+import EducationItems from './education/education-items'
 
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
@@ -137,7 +139,7 @@ const ResumePage = () => {
             items: [
                 {
                     enabled: true,
-                    name: 'Full Stackweb developer',
+                    name: 'EcrypEcommerce',
                     bold_name: true,
                     link: '',
                     link_icon: true,
@@ -192,7 +194,7 @@ const ResumePage = () => {
                 },
             ],
         },
-        education: {
+        educations: {
             record: 'EducationSection',
             name: 'Education',
             enabled: true,
@@ -206,15 +208,26 @@ const ResumePage = () => {
                     institution: {
                         name: 'Dhaka International University',
                         placeholder: 'School / University',
-                        location: 'Dhaka',
-                        show_location: true,
-                        gpa: '',
+                        gpa: '4.00',
                         placeholder_gpa: 'CGPA',
-                        gpa_text: '',
-                        placeholder_gpa_text: '4.00',
-                        gpa_max: '',
+                        gpa_score: '4.00',
+                        placeholder_gpa_score: '4.00',
+                        gpa_max: '4.00',
                         placeholder_gpa_max: '4.00',
+                        enabled_gpa: true,
                     },
+                    location: 'Dhaka, Bangladesh',
+                    show_location: true,
+                    show_location_icon: true,
+                    date: {
+                        record: 'DateRange',
+                        placeholder: 'Date',
+                        from: '10/12/2023',
+                        to: '',
+                        is_present: true,
+                        date_icon: true,
+                    },
+
                     bulets: {
                         enabled: true,
                         bulet_items: true,
@@ -267,6 +280,7 @@ const ResumePage = () => {
                         <div className="col-span-3">
                             <ResumeSummery />
                             <ExperienceSummery />
+                            <EducationItems />
                         </div>
                         <div className="col-span-2">
                             <SkillsSection />

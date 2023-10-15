@@ -25,7 +25,7 @@ import {
     useFormContext,
     useWatch,
 } from 'react-hook-form'
-import { FormItem } from '../ui/form'
+import { FormItem } from '../../ui/form'
 
 const ResumeHeader = () => {
     const [editting, setEdditing] = useState<boolean>(false)
