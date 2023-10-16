@@ -1,6 +1,5 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
 import {
     Popover,
     PopoverContent,
@@ -19,13 +18,9 @@ import {
     Star,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import {
-    Controller,
-    useFieldArray,
-    useFormContext,
-    useWatch,
-} from 'react-hook-form'
-import { FormItem } from '../../ui/form'
+import { Controller, useFormContext, useWatch } from 'react-hook-form'
+
+import Text from '@/components/shared/Text'
 
 const ResumeHeader = () => {
     const [editting, setEdditing] = useState<boolean>(false)
@@ -40,11 +35,6 @@ const ResumeHeader = () => {
         extra_field: <Star className="w-4 h-4 " />,
     }
 
-    const { fields } = useFieldArray({
-        name: 'header',
-        control,
-    })
-
     const items = [
         {
             title: 'Show Title',
@@ -52,6 +42,7 @@ const ResumeHeader = () => {
             placeholder: 'Title',
             render: 'show_title',
             col: 2,
+            class: 'font-bold text-xl',
         },
         {
             title: 'Show Phone',
@@ -59,6 +50,7 @@ const ResumeHeader = () => {
             placeholder: 'Phone',
             render: 'show_phone',
             col: 1,
+            class: 'font-semibold',
         },
         {
             title: 'Show Link',
@@ -66,6 +58,7 @@ const ResumeHeader = () => {
             placeholder: 'LinkedIn/Portfolio',
             render: 'show_link',
             col: 1,
+            class: 'font-semibold',
         },
         {
             title: 'Show Extra link',
@@ -80,6 +73,7 @@ const ResumeHeader = () => {
             placeholder: 'Email',
             render: 'show_email',
             col: 1,
+            class: 'font-semibold',
         },
         {
             title: 'Show Location',
@@ -114,12 +108,11 @@ const ResumeHeader = () => {
         control,
     })
 
+    // const divRef = useRef<ElementRef<'div'>>(null)
+
     return (
         <div
-            className={cn(
-                ' w-full p-2 rounded-md flex flex-col border-0',
-                editting && 'bg-white'
-            )}
+            className={cn(' w-full p-2 rounded-md flex flex-col border-0')}
             onClick={() => {
                 setEdditing(true)
             }}
@@ -127,71 +120,55 @@ const ResumeHeader = () => {
             {editting && (
                 <div className="absolute top-[3px] left-1/2 -translate-x-1/2 bg-white border rounded-tl-lg rounded-tr-lg px-3 py-2 flex items-center gap-x-2 border-b-0">
                     <Popover>
-                        <PopoverTrigger>
+                        <PopoverTrigger asChild>
                             <div className="">
                                 <Settings className="w-4 h-4 hover:text-green-500 cursor-pointer" />
                             </div>
                         </PopoverTrigger>
 
-                        <PopoverContent>
-                            {fields.map((field: any, index) => {
-                                return (
-                                    <div key={field.name} className="">
-                                        {[...items, ...actions].map(
-                                            (action) => (
-                                                <div
-                                                    key={action.render}
-                                                    className="flex justify-between items-center py-1"
-                                                >
-                                                    <div className="text-md">
-                                                        {action.title}
-                                                    </div>
-                                                    <Controller
-                                                        name={
-                                                            `header.${index}.${action.render}` as const
-                                                        }
-                                                        control={control}
-                                                        render={({
-                                                            field: f,
-                                                        }) => (
-                                                            <Switch
-                                                                checked={
-                                                                    f.value
-                                                                }
-                                                                onCheckedChange={
-                                                                    f.onChange
-                                                                }
-                                                            />
-                                                        )}
-                                                    />
-                                                </div>
-                                            )
-                                        )}
-
-                                        <Separator className="my-4" />
-
-                                        <div className="flex justify-between items-center py-1">
-                                            <div className="text-md">
-                                                Uppercase name
-                                            </div>
-                                            <Controller
-                                                name={
-                                                    `header.${index}.uppercase_name` as const
-                                                }
-                                                control={control}
-                                                render={({ field: f }) => (
-                                                    <Switch
-                                                        checked={f.value}
-                                                        onCheckedChange={
-                                                            f.onChange
-                                                        }
-                                                    />
-                                                )}
-                                            />
+                        <PopoverContent asChild={true}>
+                            <div className="">
+                                {[...items, ...actions].map((action) => (
+                                    <div
+                                        key={action.render}
+                                        className="flex justify-between items-center py-1"
+                                    >
+                                        <div className="text-md">
+                                            {action.title}
                                         </div>
+                                        <Controller
+                                            name={
+                                                `header.${action.render}` as const
+                                            }
+                                            control={control}
+                                            render={({ field: f }) => (
+                                                <Switch
+                                                    checked={f.value}
+                                                    onCheckedChange={f.onChange}
+                                                />
+                                            )}
+                                        />
                                     </div>
-                                )
-                            })}
+                                ))}
+
+                                <Separator className="my-4" />
+
+                                <div className="flex justify-between items-center py-1">
+                                    <div className="text-md">
+                                        Uppercase name
+                                    </div>
+                                    <Controller
+                                        name={`header.uppercase_name` as const}
+                                        control={control}
+                                        render={({ field: f }) => (
+                                            <Switch
+                                                checked={f.value}
+                                                onCheckedChange={f.onChange}
+                                            />
+                                        )}
+                                    />
+                                </div>
+                            </div>
                         </PopoverContent>
                     </Popover>
                     <div className="">
@@ -200,69 +177,62 @@ const ResumeHeader = () => {
                 </div>
             )}
 
-            <FormItem>
-                <div className="flex gap-x-10">
-                    {fields.map((field: any, index) => {
+            <div className="flex gap-x-10 justify-between items-start">
+                <div className="flex-1 grid grid-cols-2 gap-x-1 ">
+                    <div className="col-span-2">
+                        <Controller
+                            name={`header.name` as const}
+                            control={control}
+                            render={({ field }) => (
+                                <Text
+                                    className={cn(
+                                        'w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black'
+                                    )}
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </div>
+
+                    {items.map((item) => {
+                        if (!watchingValue?.[item.render]) return
                         return (
                             <div
-                                className="grid grid-cols-2 w-full border"
-                                key={field.id}
+                                className={`col-span-${item.col}`}
+                                key={item.name}
                             >
-                                <div className="col-span-2">
-                                    <Controller
-                                        name={`header.${index}.name` as const}
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Input
-                                                {...field}
-                                                placeholder="Write Your Name"
-                                                className={cn(
-                                                    'text-3xl font-bold',
-                                                    watchingValue?.[index]
-                                                        ?.uppercase_name
-                                                        ? 'uppercase'
-                                                        : 'lowercase'
-                                                )}
-                                            />
-                                        )}
-                                    />
-                                </div>
-
-                                {items.map((item) => {
-                                    if (!watchingValue?.[index]?.[item.render])
-                                        return
-                                    return (
-                                        <div
-                                            className={`col-span-${item.col}`}
-                                            key={item.name}
-                                        >
-                                            {
-                                                <div className="flex gap-x-1 items-center">
-                                                    {iconMap[item.name]}
-                                                    <Controller
-                                                        name={
-                                                            `header.${index}.${item.name}` as const
-                                                        }
-                                                        control={control}
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                placeholder={
-                                                                    item.placeholder
-                                                                }
-                                                                {...field}
-                                                            />
-                                                        )}
-                                                    />
-                                                </div>
+                                {
+                                    <div className="flex gap-x-2 items-center">
+                                        {iconMap[item.name]}
+                                        <Controller
+                                            name={
+                                                `header.${item.name}` as const
                                             }
-                                        </div>
-                                    )
-                                })}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <Text
+                                                    placeholder={
+                                                        item.placeholder
+                                                    }
+                                                    {...field}
+                                                    className={cn(
+                                                        'text-sm',
+                                                        item.class && item.class
+                                                    )}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                }
                             </div>
                         )
                     })}
                 </div>
-            </FormItem>
+
+                <div className="photo w-[140px] h-[150px] rounded flex items-center justify-center border">
+                    photo
+                </div>
+            </div>
         </div>
     )
 }

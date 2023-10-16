@@ -17,41 +17,39 @@ import EducationItems from './education/education-items'
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
     const data = {
-        header: [
-            {
-                name: 'ANONDO BORMON123',
-                title: 'Full Stack Developer',
-                email: 'dev.abormon28@gmail.com',
-                location: 'Dhaka, Bangladesh',
-                phone: '+88 01790-841023',
-                link: 'github.com/devanondo',
-                extra_link: '<b>dev-abormon.vercel.app<br></b>',
-                extra_field: 'linkedin.com/in/anondo-bormon',
-                show_title: false,
-                show_phone: true,
-                show_link: true,
-                show_email: false,
-                show_location: true,
-                show_extraLink: true,
-                show_extraField: true,
-                show_photo: true,
-                uppercase_name: true,
-                photo_style: 'rect',
-                height: 139,
-            },
-        ],
-        summerySection: [
-            {
-                name: 'Summery',
-                record: 'SummerySection',
-                enabled: true,
-                text: [
-                    {
-                        summery: '',
-                    },
-                ],
-            },
-        ],
+        header: {
+            name: 'ANONDO BORMON123',
+            title: 'Full Stack Developer',
+            email: 'dev.abormon28@gmail.com',
+            location: 'Dhaka, Bangladesh',
+            phone: '+88 01790-841023',
+            link: 'github.com/devanondo',
+            extra_link: 'dev-abormon.vercel.app',
+            extra_field: 'linkedin.com/in/anondo-bormon',
+            show_title: false,
+            show_phone: true,
+            show_link: true,
+            show_email: false,
+            show_location: true,
+            show_extraLink: true,
+            show_extraField: true,
+            show_photo: true,
+            uppercase_name: true,
+            photo_style: 'rect',
+            height: 139,
+        },
+        summerySection: {
+            name: 'Summery',
+            record: 'SummerySection',
+            enabled: true,
+            text: [
+                {
+                    summery:
+                        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, fuga magnam atque ipsum et vero corrupti odit facere quibusdam impedit similique, asperiores commodi voluptatibus tempore facilis vel nisi porro eaque repudiandae odio nemo consectetur? Ducimus a, provident dolor officiis quia distinctio nihil quasi recusandae neque doloribus deserunt quis natus nesciunt?',
+                },
+            ],
+        },
+
         experienceSummary: {
             record: 'ExperienceSection',
             name: 'Experience',
@@ -115,7 +113,7 @@ const ResumePage = () => {
                             keyItem: 'java',
                         },
                         {
-                            keyItem: 'jvascript',
+                            keyItem: '',
                         },
 
                         {
@@ -208,7 +206,7 @@ const ResumePage = () => {
                     institution: {
                         name: 'Dhaka International University',
                         placeholder: 'School / University',
-                        gpa: '4.00',
+                        gpa: 'CGPA',
                         placeholder_gpa: 'CGPA',
                         gpa_score: '4.00',
                         placeholder_gpa_score: '4.00',
@@ -285,7 +283,7 @@ const ResumePage = () => {
                         <div className="col-span-2">
                             <SkillsSection />
 
-                            <StrengthSection />
+                            {/* <StrengthSection /> */}
                         </div>
                     </div>
 

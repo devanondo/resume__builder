@@ -12,3 +12,11 @@ export function popkey(name: string, index: number) {
 
     return finalkey
 }
+
+export function focusKey(name: string, index: number) {
+    const brokenName = name.split('.')
+    brokenName[brokenName.length - 2] = `${index}`
+    const finalkey = brokenName.join('.')
+
+    return finalkey
+}

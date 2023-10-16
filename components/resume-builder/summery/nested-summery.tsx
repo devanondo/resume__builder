@@ -1,36 +1,33 @@
 'use client'
 
-import { useFieldArray, useFormContext } from 'react-hook-form'
 import CustomTextArea from '@/components/shared/custom-text-area'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
-interface NestedSummeryProps {
-    index: number
-}
-
-const NestedSummery = ({ index }: NestedSummeryProps) => {
+const NestedSummery = () => {
     const { control } = useFormContext()
 
     const { fields, append, remove } = useFieldArray({
-        name: `summerySection[${index}].text`,
+        name: `summerySection.text`,
         control,
     })
 
     return (
-        <div>
+        <>
             {fields?.map((tex, i: number) => {
                 return (
                     <CustomTextArea
                         key={tex.id}
-                        name={`summerySection.${index}.text.${i}.summery`}
+                        name={`summerySection.text.${i}.summery`}
                         fields={fields}
                         index={i}
                         append={append}
                         remove={remove}
                         fieldTitle="summery"
+                        className="text-justify"
                     />
                 )
             })}
-        </div>
+        </>
     )
 }
 

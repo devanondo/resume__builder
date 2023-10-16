@@ -5,7 +5,7 @@ import { GraduationCap } from 'lucide-react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 
 import EducationPopover from '@/components/popover/education-popover'
-import { Input } from '@/components/ui/input'
+import Text from '@/components/shared/Text'
 import { cn } from '@/lib/utils'
 import { showPopover } from '@/redux/slices/pop-slice'
 
@@ -32,8 +32,8 @@ const EducationItems = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: f }) => (
-                    <Input
-                        className="text-3xl font-bold uppercase border-b-[5px] border-black"
+                    <Text
+                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
                         {...f}
                     />
                 )}
@@ -42,7 +42,7 @@ const EducationItems = () => {
                 {fields.map((field: any, i) => (
                     <div className="relative" key={field.id + i}>
                         <div
-                            className="w-full flex items-center"
+                            className="w-full flex px-2"
                             onClick={() => {
                                 dispatch(
                                     showPopover({
@@ -59,7 +59,7 @@ const EducationItems = () => {
                                     control={control}
                                     defaultValue=""
                                     render={({ field: f }) => (
-                                        <Input
+                                        <Text
                                             placeholder={
                                                 field.placeholder || ''
                                             }
@@ -79,12 +79,14 @@ const EducationItems = () => {
                                         control={control}
                                         defaultValue=""
                                         render={({ field: f }) => (
-                                            <Input
+                                            <Text
                                                 placeholder={
                                                     field.institution
                                                         ?.placeholder || ''
                                                 }
-                                                className={cn('text-sm')}
+                                                className={cn(
+                                                    'text-sm font-bold -mt-2'
+                                                )}
                                                 {...f}
                                             />
                                         )}
@@ -92,7 +94,7 @@ const EducationItems = () => {
                                 </div>
                                 {/* )} */}
 
-                                <div className="flex">
+                                <div className="flex items-center">
                                     <div className="">
                                         <Controller
                                             name={
@@ -101,12 +103,14 @@ const EducationItems = () => {
                                             control={control}
                                             defaultValue=""
                                             render={({ field: f }) => (
-                                                <Input
+                                                <Text
                                                     placeholder={
                                                         field.date
                                                             ?.placeholder || ''
                                                     }
-                                                    className={cn('text-sm')}
+                                                    className={cn(
+                                                        'text-sm italic font-semibold'
+                                                    )}
                                                     {...f}
                                                 />
                                             )}
@@ -118,15 +122,17 @@ const EducationItems = () => {
                                             control={control}
                                             defaultValue=""
                                             render={({ field: f }) => (
-                                                <Input
+                                                <Text
                                                     placeholder="Location"
-                                                    className={cn('text-sm')}
+                                                    className={cn(
+                                                        'text-sm -mt-2'
+                                                    )}
                                                     {...f}
                                                 />
                                             )}
                                         />
                                     </div>
-                                    <div className="">
+                                    <div className=" border-l border-[#9d9d9d] w-[200px]">
                                         <Controller
                                             name={
                                                 `${name}[${i}].institution.gpa` as const
@@ -134,18 +140,20 @@ const EducationItems = () => {
                                             control={control}
                                             defaultValue=""
                                             render={({ field: f }) => (
-                                                <Input
+                                                <Text
                                                     placeholder={
                                                         field.institution
                                                             ?.placeholder_gpa ||
                                                         ''
                                                     }
-                                                    className={cn('text-sm')}
+                                                    className={cn(
+                                                        'text-md text-center italic font-semibold uppercase'
+                                                    )}
                                                     {...f}
                                                 />
                                             )}
                                         />
-                                        <div className="flex">
+                                        <div className="flex items-center">
                                             <Controller
                                                 name={
                                                     `${name}[${i}].institution.gpa_score` as const
@@ -153,20 +161,23 @@ const EducationItems = () => {
                                                 control={control}
                                                 defaultValue=""
                                                 render={({ field: f }) => (
-                                                    <Input
+                                                    <Text
                                                         placeholder={
                                                             field.institution
                                                                 ?.placeholder_gpa_score ||
                                                             ''
                                                         }
                                                         className={cn(
-                                                            'text-sm'
+                                                            'text-sm text-right'
                                                         )}
                                                         {...f}
                                                     />
                                                 )}
                                             />
-                                            /
+                                            <div className="flex items-center justify-center -mt-2">
+                                                /
+                                            </div>
+
                                             <Controller
                                                 name={
                                                     `${name}[${i}].institution.gpa_max` as const
@@ -174,7 +185,7 @@ const EducationItems = () => {
                                                 control={control}
                                                 defaultValue=""
                                                 render={({ field: f }) => (
-                                                    <Input
+                                                    <Text
                                                         placeholder={
                                                             field.institution
                                                                 ?.placeholder_gpa_max ||

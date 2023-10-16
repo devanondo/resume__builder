@@ -1,8 +1,7 @@
 'use client'
 
-import SkillsPopover from '@/components/popover/skills-popover'
-import { Input } from '@/components/ui/input'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import Text from '@/components/shared/Text'
+import { useAppDispatch } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { Fragment } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
@@ -11,9 +10,9 @@ import SkillsKeys from './skills-keys'
 const SkillsSection = () => {
     const { control } = useFormContext()
     const dispatch = useAppDispatch()
-    const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    // const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
-    const { fields, append, remove } = useFieldArray({
+    const { fields } = useFieldArray({
         name: 'skills.items',
         control,
     })
@@ -27,8 +26,8 @@ const SkillsSection = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: f }) => (
-                    <Input
-                        className="text-3xl font-bold uppercase border-b-[5px] border-black"
+                    <Text
+                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
                         {...f}
                     />
                 )}
@@ -53,7 +52,7 @@ const SkillsSection = () => {
                                 control={control}
                                 defaultValue=""
                                 render={({ field: f }) => (
-                                    <Input
+                                    <Text
                                         className="text-md font-semibold "
                                         {...f}
                                     />
@@ -63,7 +62,7 @@ const SkillsSection = () => {
                             <SkillsKeys name={`${name}.${i}.keys`} />
                         </div>
 
-                        {groupPopoverKey === name + i && (
+                        {/* {groupPopoverKey === name + i && (
                             <SkillsPopover
                                 append={append}
                                 fields={fields}
@@ -71,7 +70,7 @@ const SkillsSection = () => {
                                 name={name}
                                 remove={remove}
                             />
-                        )}
+                        )} */}
                     </Fragment>
                 ))}
             </div>

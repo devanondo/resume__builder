@@ -1,64 +1,92 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Plus, X } from 'lucide-react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { cn, focusKey } from '@/lib/utils'
+import { useEffect, useState } from 'react'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
 interface SkillsKeysProps {
     name: string
 }
 
 const SkillsKeys = ({ name }: SkillsKeysProps) => {
-    const { control } = useFormContext()
+    const { control, setFocus, setValue } = useFormContext()
+    const [focusField, setFocusField] = useState('')
 
     const { fields, append, remove } = useFieldArray({
         name,
         control,
     })
 
+    const { watchValue } = useWatchForm({ name })
+
+    const [content, setContent] = useState('')
+
+    const handleContentChange = (e: any, index: number) => {
+        setValue(`${name}.${index}.keyItem`, e.target.innerHTML)
+    }
+
+    const handleKeyDown = (e: any, index: number) => {
+        setValue(`${name}.${index}.keyItem`, e.target.innerHTML)
+        switch (e.key) {
+            case 'Enter':
+                e.preventDefault()
+                append({ keyItem: '' })
+                setFocusField(focusKey(name, fields.length))
+                setContent('')
+
+                break
+
+            case 'Backspace':
+                if (!e.target?.innerHTML?.length) {
+                    setFocusField(focusKey(name, index))
+                    remove(index)
+                }
+
+                break
+
+            default:
+                break
+        }
+    }
+    useEffect(() => {
+        setFocus(focusField)
+    }, [setFocus, focusField])
+
     return (
-        <div className="flex gap-3 w-full overflow-hidden flex-wrap">
-            {fields.map((field, index: number) => (
-                <div className="relative group" key={field.id}>
-                    <Controller
-                        name={`${name}.${index}.keyItem` as const}
-                        control={control}
-                        render={({ field: f }) => (
-                            <Input
-                                {...f}
-                                className="max-w-[150px] w-fit text-center"
-                            />
+        <div className="flex gap-x-3 gap-y-2 capitalize w-full overflow-hidden flex-wrap">
+            {fields.map((field: any, index: number) => (
+                <div className="relative flex flex-wrap group" key={field.id}>
+                    <div className="relative">
+                        <div
+                            suppressContentEditableWarning={true}
+                            contentEditable
+                            onInput={(e) => handleContentChange(e, index)}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            data-placeholder="Key"
+                            className={cn(
+                                'w-fit px-3 border-b-2 pb-1 border-gray-400 outline-none overflow-hidden text-center font-semibold',
+                                !content &&
+                                    !watchValue[index]?.keyItem &&
+                                    'min-w-[170px]'
+                            )}
+                        >
+                            {field.keyItem}
+                        </div>
+
+                        {!content && !watchValue[index]?.keyItem && (
+                            <div
+                                contentEditable={false}
+                                className="placehoder__text top-0 left-0 -z-10 absolute w-full text-gray-400 font-semibold text-center"
+                            >
+                                Tools / Technology
+                            </div>
                         )}
-                    />
-                    <div
-                        onClick={() => remove(index)}
-                        className="top-0 right-0 w-[20px] h-[20px] cursor-pointer absolute items-center justify-center rounded-full hidden group-hover:flex bg-black"
-                    >
-                        <X className="w-3 h-3 text-white" />
                     </div>
                 </div>
             ))}
-
-            <Button
-                onClick={() =>
-                    append({
-                        keyItem: '',
-                    })
-                }
-            >
-                <Plus className="w-4 h-4" /> ADD
-            </Button>
         </div>
     )
 }
 
 export default SkillsKeys
-// {fields.map((item: Record<string, unknown>, index: number) => (
-//     <div
-//         className="font-semibold border-b-2 border-black px-2 py-1"
-//         key={index}
-//     >
-//         {item.keyItem as string}
-//     </div>
-// ))}

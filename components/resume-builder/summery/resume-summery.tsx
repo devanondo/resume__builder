@@ -1,37 +1,28 @@
 'use client'
 
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
-import { Input } from '@/components/ui/input'
+import Text from '@/components/shared/Text'
+import { Controller, useFormContext } from 'react-hook-form'
 import NestedSummery from './nested-summery'
 
 const ResumeSummery = () => {
     const { control } = useFormContext()
-    const { fields } = useFieldArray({
-        name: 'summerySection',
-        control,
-    })
 
     return (
-        <div>
-            {fields?.map((field: any, index) => {
-                return (
-                    <div key={field.name}>
-                        <Controller
-                            name={`summerySection.${index}.name` as const}
-                            control={control}
-                            render={({ field: f }) => (
-                                <Input
-                                    className="text-3xl font-bold uppercase border-b-[5px] border-black"
-                                    {...f}
-                                />
-                            )}
-                        />
+        <>
+            <Controller
+                name={`summerySection.name` as const}
+                control={control}
+                render={({ field: f }) => (
+                    <Text
+                        placeholder="Summery"
+                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
+                        {...f}
+                    />
+                )}
+            />
 
-                        <NestedSummery index={index} />
-                    </div>
-                )
-            })}
-        </div>
+            <NestedSummery />
+        </>
     )
 }
 

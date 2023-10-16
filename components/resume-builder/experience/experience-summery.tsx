@@ -1,6 +1,6 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
+import Text from '@/components/shared/Text'
 import { Controller, useFormContext } from 'react-hook-form'
 import ExperienceItem from './experience-items'
 
@@ -8,21 +8,21 @@ const ExperienceSummery = () => {
     const { control } = useFormContext()
 
     return (
-        <div className="border border-red-500">
+        <>
             <Controller
                 name={`experienceSummary.name` as const}
                 control={control}
                 defaultValue=""
                 render={({ field: f }) => (
-                    <Input
-                        className="text-3xl font-bold uppercase border-b-[5px] border-black"
+                    <Text
+                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
                         {...f}
                     />
                 )}
             />
 
             <ExperienceItem name="experienceSummary.items" />
-        </div>
+        </>
     )
 }
 

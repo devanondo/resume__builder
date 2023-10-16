@@ -2,8 +2,7 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ExperienceGroupPopover from '@/components/popover/experience-popover'
-import TextAreaCommon from '@/components/shared/common-text-area'
-import { Input } from '@/components/ui/input'
+import Text from '@/components/shared/Text'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
@@ -27,16 +26,8 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
 
     const { watchValue } = useWatchForm({ name })
 
-    // const divRef = useRef<ElementRef<'div'>>(null)
-    // useHidePopover({
-    //     divRef,
-    //     disMount: () => {
-    //         dispatch(showPopover(null))
-    //     },
-    // }).
-
     return (
-        <div className="border border-green-500 mt-1">
+        <>
             {fields.map((field, i) => (
                 <div key={field.id} className="relative">
                     <div
@@ -48,7 +39,6 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                 })
                             )
                         }}
-                        // ref={divRef}
                         className=""
                     >
                         <Controller
@@ -56,12 +46,11 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             control={control}
                             defaultValue=""
                             render={({ field: f }) => (
-                                <Input
+                                <Text
                                     className={cn(
                                         'text-xl',
-
                                         watchValue[i]?.bold_position &&
-                                            'font-bold'
+                                            'font-semibold'
                                     )}
                                     {...f}
                                 />
@@ -72,37 +61,34 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             control={control}
                             defaultValue=""
                             render={({ field: f }) => (
-                                <Input className="text-xl" {...f} />
+                                <Text
+                                    className="text-md font-bold -mt-3 italic"
+                                    {...f}
+                                />
                             )}
                         />
-                        <div className="flex items-center pl-3">
+                        <div className="flex items-center pl-3 -mt-3">
                             {watchValue[i]?.show_location && (
-                                <div className="flex items-center gap-x-2">
+                                <div className="flex items-center gap-x-1">
                                     <Calendar className="w-4 h-4" />{' '}
                                     <Controller
                                         name={`${name}.${i}.location` as const}
                                         control={control}
                                         defaultValue=""
                                         render={({ field: f }) => (
-                                            <Input
-                                                className="text-sm font-bold"
-                                                {...f}
-                                            />
+                                            <Text className="text-sm" {...f} />
                                         )}
                                     />
                                 </div>
                             )}
-                            <div className="flex items-center gap-x-2">
+                            <div className="flex items-center gap-x-1">
                                 <MapIcon className="w-4 h-4" />
                                 <Controller
                                     name={`${name}.${i}.location` as const}
                                     control={control}
                                     defaultValue=""
                                     render={({ field: f }) => (
-                                        <Input
-                                            className="text-sm font-bold"
-                                            {...f}
-                                        />
+                                        <Text className="text-sm" {...f} />
                                     )}
                                 />
                             </div>
@@ -113,11 +99,10 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                 control={control}
                                 defaultValue=""
                                 render={({ field: f }) => (
-                                    <TextAreaCommon
-                                        field={f}
-                                        fields={fields}
+                                    <Text
+                                        {...f}
                                         className={cn(
-                                            'text-sm',
+                                            'text-sm text-justify text-[#74767E] -mt-2',
                                             watchValue[i].description
                                                 .italic_description && 'italic'
                                         )}
@@ -140,7 +125,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                     )}
                 </div>
             ))}
-        </div>
+        </>
     )
 }
 

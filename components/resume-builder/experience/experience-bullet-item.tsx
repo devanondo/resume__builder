@@ -21,13 +21,13 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
     const { watchValue } = useWatchForm({ name })
 
     return (
-        <>
+        <div className="-mt-2">
             {watchValue.enabled &&
                 fields?.map((field, i) => {
                     return (
                         <div
                             key={field.id}
-                            className="flex items-center gap-x-1 pl-3 w-full"
+                            className="flex items-center gap-x-1 pl-1 w-full"
                         >
                             {watchValue.bulet_items && (
                                 <Dot className="w-4 h-4" />
@@ -48,7 +48,7 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
                         </div>
                     )
                 })}
-        </>
+        </div>
     )
 }
 
