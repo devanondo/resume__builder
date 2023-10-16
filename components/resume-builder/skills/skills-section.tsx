@@ -1,23 +1,27 @@
 'use client'
 
+import SkillsPopover from '@/components/popover/skills-popover'
 import Text from '@/components/shared/Text'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { Fragment } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import SkillsKeys from './skills-keys'
+import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { cn } from '@/lib/utils'
 
 const SkillsSection = () => {
     const { control } = useFormContext()
     const dispatch = useAppDispatch()
-    // const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
-    const { fields } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         name: 'skills.items',
         control,
     })
 
     const name = 'skills.items'
+
+    const { watchValue } = useWatchForm({ name })
 
     return (
         <div>
@@ -32,20 +36,20 @@ const SkillsSection = () => {
                     />
                 )}
             />
-            <div className="relative">
-                {fields.map((field, i) => (
-                    <Fragment key={field.id}>
-                        <div
-                            className="w-full"
-                            onClick={() => {
-                                dispatch(
-                                    showPopover({
-                                        name: name + i,
-                                        type: 'group__entry',
-                                    })
-                                )
-                            }}
-                        >
+            {fields.map((field, i) => (
+                <div key={field.id} className="relative pb-3">
+                    <div
+                        className="w-full"
+                        onClick={() => {
+                            dispatch(
+                                showPopover({
+                                    name: name + i,
+                                    type: 'group__entry',
+                                })
+                            )
+                        }}
+                    >
+                        {watchValue[i].show_title && (
                             <Controller
                                 key={field.id}
                                 name={`${name}[${i}].title` as const}
@@ -53,27 +57,36 @@ const SkillsSection = () => {
                                 defaultValue=""
                                 render={({ field: f }) => (
                                     <Text
-                                        className="text-md font-semibold "
+                                        className={cn(
+                                            'text-md font-semibold ',
+
+                                            watchValue[i].bold_title &&
+                                                'font-bold',
+                                            watchValue[i].italic_title &&
+                                                'italic'
+                                        )}
                                         {...f}
                                     />
                                 )}
                             />
+                        )}
+                        <SkillsKeys
+                            name={`${name}.${i}.keys`}
+                            parentKey={`${name}.${i}`}
+                        />
+                    </div>
 
-                            <SkillsKeys name={`${name}.${i}.keys`} />
-                        </div>
-
-                        {/* {groupPopoverKey === name + i && (
-                            <SkillsPopover
-                                append={append}
-                                fields={fields}
-                                index={i}
-                                name={name}
-                                remove={remove}
-                            />
-                        )} */}
-                    </Fragment>
-                ))}
-            </div>
+                    {groupPopoverKey === name + i && (
+                        <SkillsPopover
+                            append={append}
+                            fields={fields}
+                            index={i}
+                            name={name}
+                            remove={remove}
+                        />
+                    )}
+                </div>
+            ))}
         </div>
     )
 }

@@ -7,9 +7,10 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 
 interface SkillsKeysProps {
     name: string
+    parentKey: string
 }
 
-const SkillsKeys = ({ name }: SkillsKeysProps) => {
+const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
     const { control, setFocus, setValue } = useFormContext()
     const [focusField, setFocusField] = useState('')
 
@@ -19,7 +20,7 @@ const SkillsKeys = ({ name }: SkillsKeysProps) => {
     })
 
     const { watchValue } = useWatchForm({ name })
-
+    const { watchValue: watchParent } = useWatchForm({ name: parentKey })
     const [content, setContent] = useState('')
 
     const handleContentChange = (e: any, index: number) => {
@@ -65,10 +66,14 @@ const SkillsKeys = ({ name }: SkillsKeysProps) => {
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             data-placeholder="Key"
                             className={cn(
-                                'w-fit px-3 border-b-2 pb-1 border-gray-400 outline-none overflow-hidden text-center font-semibold',
+                                'w-fit px-3 pb-1 outline-none overflow-hidden text-center font-semibold',
                                 !content &&
                                     !watchValue[index]?.keyItem &&
-                                    'min-w-[170px]'
+                                    'min-w-[170px]',
+                                watchParent.underline_key &&
+                                    ' border-b-2 border-gray-400',
+                                watchParent.italic_key && ' italic',
+                                watchParent.bold_key && ' font-bold'
                             )}
                         >
                             {field.keyItem}
