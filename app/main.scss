@@ -1,0 +1,33 @@
+// #resume-bulder {
+//     background: white;
+//     transition: 0.3s ease;
+//     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+//     &:focus-within {
+//         background: #dddce0;
+//         transition: 0.3s ease;
+//     }
+
+//     .a__item {
+//         background: transparent;
+//         transition: 0.3s ease;
+//         border-radius: 5px;
+//         border: 1px solid rgba(46, 126, 255, 0);
+
+//         &:hover {
+//             border: 1px solid rgba(46, 126, 255, 0.709);
+//         }
+
+//         textarea:focus + .a__item {
+//             border: 1px solid red;
+//         }
+
+//         &:focus-within {
+//             background: white;
+//             transition: 0.3s ease;
+//         }
+//     }
+
+//     .group__item {
+//     }
+// }

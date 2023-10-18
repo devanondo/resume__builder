@@ -3,9 +3,9 @@
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ExperienceGroupPopover from '@/components/popover/experience-popover'
 import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { showPopover } from '@/redux/slices/pop-slice'
+import { useAppSelector } from '@/redux/hooks'
 import { Calendar, MapIcon } from 'lucide-react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import ExperienceBuletItem from './experience-bullet-item'
@@ -16,7 +16,6 @@ interface ExperienceItemProps {
 
 const ExperienceItem = ({ name }: ExperienceItemProps) => {
     const { control } = useFormContext()
-    const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
     const { fields, remove, append } = useFieldArray({
@@ -27,19 +26,23 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     const { watchValue } = useWatchForm({ name })
 
     return (
-        <>
+        <div>
             {fields.map((field, i) => (
-                <div key={field.id} className="relative">
+                <GroupItem
+                    popoverKey={name + i}
+                    key={field.id}
+                    className="relative a__item"
+                >
                     <div
-                        onClick={() => {
-                            dispatch(
-                                showPopover({
-                                    name: name + i,
-                                    type: 'group__entry',
-                                })
-                            )
-                        }}
-                        className=""
+                    // onClick={() => {
+                    //     dispatch(
+                    //         showPopover({
+                    //             name: name + i,
+                    //             type: 'group__entry',
+                    //         })
+                    //     )
+                    // }}
+                    // className=""
                     >
                         <Controller
                             name={`${name}.${i}.position` as const}
@@ -123,9 +126,9 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             remove={remove}
                         />
                     )}
-                </div>
+                </GroupItem>
             ))}
-        </>
+        </div>
     )
 }
 

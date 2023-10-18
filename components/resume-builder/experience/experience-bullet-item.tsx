@@ -2,7 +2,8 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import CustomTextArea from '@/components/shared/custom-text-area'
-import { cn } from '@/lib/utils'
+import { AItem } from '@/components/shared/wrapper'
+import { cn, popkey } from '@/lib/utils'
 import { Dot } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -25,7 +26,8 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
             {watchValue.enabled &&
                 fields?.map((field, i) => {
                     return (
-                        <div
+                        <AItem
+                            popoverKey={popkey(`${name}.${i}.text`, i)}
                             key={field.id}
                             className="flex items-center gap-x-1 pl-1 w-full"
                         >
@@ -45,7 +47,7 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
                                     watchValue.italic_items && 'italic'
                                 )}
                             />
-                        </div>
+                        </AItem>
                     )
                 })}
         </div>

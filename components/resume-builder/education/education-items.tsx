@@ -8,6 +8,7 @@ import EducationPopover from '@/components/popover/education-popover'
 import Text from '@/components/shared/Text'
 import { cn } from '@/lib/utils'
 import { showPopover } from '@/redux/slices/pop-slice'
+import { GroupItem } from '@/components/shared/wrapper'
 
 const EducationItems = () => {
     const name = 'educations.items'
@@ -26,7 +27,7 @@ const EducationItems = () => {
     }
 
     return (
-        <>
+        <GroupItem popoverKey="educations">
             <Controller
                 name={'educations.name' as const}
                 control={control}
@@ -40,7 +41,11 @@ const EducationItems = () => {
             />
             <div>
                 {fields.map((field: any, i) => (
-                    <div className="relative" key={field.id + i}>
+                    <GroupItem
+                        popoverKey={name + i}
+                        className="relative"
+                        key={field.id + i}
+                    >
                         <div
                             className="w-full flex px-2"
                             onClick={() => {
@@ -213,10 +218,10 @@ const EducationItems = () => {
                                 remove={remove}
                             />
                         )}
-                    </div>
+                    </GroupItem>
                 ))}
             </div>
-        </>
+        </GroupItem>
     )
 }
 

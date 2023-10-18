@@ -28,6 +28,7 @@ import {
 import MonthYearPicker from '../shared/month-year-picker'
 import { Card, CardContent } from '../ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { AItem } from '../shared/wrapper'
 
 interface EducationPopoverProps {
     fields: Record<'id', string>[]
@@ -64,7 +65,7 @@ const EducationPopover = ({
     const { control } = useFormContext()
 
     return (
-        <div className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
+        <AItem className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
             <Button
                 onClick={() => {
                     append({
@@ -262,7 +263,7 @@ const EducationPopover = ({
             >
                 <Trash className="w-4 h-4 " />
             </Button>
-        </div>
+        </AItem>
     )
 }
 

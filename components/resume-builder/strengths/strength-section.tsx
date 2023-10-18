@@ -2,7 +2,7 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import StrengthPopover from '@/components/popover/strength-popover'
-import { Input } from '@/components/ui/input'
+import Text from '@/components/shared/Text'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
@@ -22,7 +22,7 @@ const StrengthSection = () => {
     })
 
     const iconMap = {
-        team: <User2 className="w-8 h-8" />,
+        team: <User2 className="w-6 h-6 mt-1" />,
     }
     const { watchValue } = useWatchForm({ name })
 
@@ -33,8 +33,8 @@ const StrengthSection = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: f }) => (
-                    <Input
-                        className="text-3xl font-bold uppercase border-b-[5px] border-black"
+                    <Text
+                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
                         {...f}
                     />
                 )}
@@ -43,7 +43,7 @@ const StrengthSection = () => {
                 {fields.map((field: any, i) => (
                     <div className="relative" key={field.id + i}>
                         <div
-                            className="w-full flex items-center"
+                            className="w-full flex"
                             onClick={() => {
                                 dispatch(
                                     showPopover({
@@ -53,14 +53,16 @@ const StrengthSection = () => {
                                 )
                             }}
                         >
-                            <div className="mr-2">{iconMap['team']}</div>
+                            {watchValue[i]?.show_icon && (
+                                <div className="mr-1">{iconMap['team']}</div>
+                            )}
                             <div className="">
                                 <Controller
                                     name={`${name}[${i}].name` as const}
                                     control={control}
                                     defaultValue=""
                                     render={({ field: f }) => (
-                                        <Input
+                                        <Text
                                             placeholder={
                                                 field.placeholder || ''
                                             }
@@ -78,13 +80,13 @@ const StrengthSection = () => {
                                         control={control}
                                         defaultValue=""
                                         render={({ field: f }) => (
-                                            <Input
+                                            <Text
                                                 placeholder={
                                                     field.description
                                                         ?.placeholder || ''
                                                 }
                                                 className={cn(
-                                                    'text-sm',
+                                                    'text-sm -mt-3',
                                                     watchValue[i].description
                                                         .italic_description &&
                                                         'italic'

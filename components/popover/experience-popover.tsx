@@ -17,6 +17,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
 import { Controller, useFormContext } from 'react-hook-form'
+import { AItem } from '../shared/wrapper'
 
 interface ExperienceGroupPopoverProps {
     fields: Record<'id', string>[]
@@ -69,7 +70,7 @@ const ExperienceGroupPopover = ({
     const { control } = useFormContext()
 
     return (
-        <div className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
+        <AItem className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
             <Button
                 onClick={() => {
                     append({
@@ -77,6 +78,7 @@ const ExperienceGroupPopover = ({
                         workplace: 'Workplace',
                         location: 'Location',
                         description: 'Description',
+                        enabled: true,
                         bulets: {
                             enabled: true,
                             name: 'bulets',
@@ -104,7 +106,7 @@ const ExperienceGroupPopover = ({
                 onClick={() => {
                     dispatch(
                         showPopover({
-                            name: name + index + 1,
+                            name: name + (index + 1),
                             type: 'group__entry',
                         })
                     )
@@ -184,7 +186,7 @@ const ExperienceGroupPopover = ({
             >
                 <Trash className="w-4 h-4 " />
             </Button>
-        </div>
+        </AItem>
     )
 }
 

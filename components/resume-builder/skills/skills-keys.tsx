@@ -66,7 +66,7 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             data-placeholder="Key"
                             className={cn(
-                                'w-fit px-3 pb-1 outline-none overflow-hidden text-center font-semibold',
+                                'w-fit px-3 pb-1 outline-none overflow-hidden text-center font-semibold bg-transparent',
                                 !content &&
                                     !watchValue[index]?.keyItem &&
                                     'min-w-[170px]',

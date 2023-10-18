@@ -13,9 +13,17 @@ import ResumeSummery from './summery/resume-summery'
 import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
 import EducationItems from './education/education-items'
+import { useHidePopover } from '../hooks/use-hide-popover'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { showPopover } from '@/redux/slices/pop-slice'
 
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
+    const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
+        (state) => state.popover
+    )
+    const dispatch = useAppDispatch()
+
     const data = {
         header: {
             name: 'ANONDO BORMON123',
@@ -184,8 +192,7 @@ const ResumePage = () => {
                     icon: 'team',
                     show_icon: true,
                     description: {
-                        placeholder: 'Write short description!',
-                        text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                        placeholder: 'Describe your strength!',
                         italic_description: false,
                         enabled: true,
                     },
@@ -257,39 +264,48 @@ const ResumePage = () => {
         }
     }, [])
 
+    const parentClick = () => {
+        dispatch(showPopover(null))
+    }
+
     return (
         <div
             style={{
                 padding: padding,
             }}
             className={cn(
-                ` top-[100px] left-1/2  absolute -translate-x-1/2  w-[940px] border border-zinc-300 min-h-[1330px] bg-gray-100 `
+                ` top-[100px] left-1/2 absolute -translate-x-1/2  w-[940px] border border-zinc-300 h-[1330px] bg-white`,
+                summeryPopoverKey && 'bg-[#dddce0]',
+                groupPopoverKey && 'bg-[#dddce0]'
             )}
             id="resume-bulder"
+            onClick={parentClick}
         >
-            <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    {/* <ContentProvider> */}
+            <div onClick={(e) => e.stopPropagation()} className="">
+                <FormProvider {...methods}>
+                    <form onSubmit={methods.handleSubmit(onSubmit)}>
+                        {/* <ContentProvider> */}
 
-                    <ResumeHeader />
-                    {/* </ContentProvider> */}
+                        <ResumeHeader />
+                        {/* </ContentProvider> */}
 
-                    <div className="grid grid-cols-5 gap-x-5">
-                        <div className="col-span-3">
-                            <ResumeSummery />
-                            <ExperienceSummery />
-                            <EducationItems />
+                        <div className="grid grid-cols-5 gap-x-5">
+                            <div className="col-span-3">
+                                <ResumeSummery />
+                                <ExperienceSummery />
+                                <EducationItems />
+                            </div>
+                            <div className="col-span-2">
+                                <SkillsSection />
+
+                                {/* <StrengthSection /> */}
+                            </div>
                         </div>
-                        <div className="col-span-2">
-                            <SkillsSection />
 
-                            {/* <StrengthSection /> */}
-                        </div>
-                    </div>
-
-                    <Button className="mt-10">Submit</Button>
-                </form>
-            </FormProvider>
+                        <Button className="mt-10">Submit</Button>
+                    </form>
+                </FormProvider>
+            </div>
         </div>
     )
 }

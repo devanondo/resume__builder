@@ -8,23 +8,23 @@ import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import SkillsKeys from './skills-keys'
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import { cn } from '@/lib/utils'
+import { GroupItem } from '@/components/shared/wrapper'
 
 const SkillsSection = () => {
     const { control } = useFormContext()
     const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    const name = 'skills.items'
 
     const { fields, append, remove } = useFieldArray({
-        name: 'skills.items',
+        name,
         control,
     })
-
-    const name = 'skills.items'
 
     const { watchValue } = useWatchForm({ name })
 
     return (
-        <div>
+        <GroupItem popoverKey="skills">
             <Controller
                 name={'skills.name' as const}
                 control={control}
@@ -37,7 +37,11 @@ const SkillsSection = () => {
                 )}
             />
             {fields.map((field, i) => (
-                <div key={field.id} className="relative pb-3">
+                <GroupItem
+                    popoverKey={name + i}
+                    key={field.id}
+                    className="relative pb-3"
+                >
                     <div
                         className="w-full"
                         onClick={() => {
@@ -49,7 +53,7 @@ const SkillsSection = () => {
                             )
                         }}
                     >
-                        {watchValue[i].show_title && (
+                        {watchValue[i]?.show_title && (
                             <Controller
                                 key={field.id}
                                 name={`${name}[${i}].title` as const}
@@ -85,9 +89,9 @@ const SkillsSection = () => {
                             remove={remove}
                         />
                     )}
-                </div>
+                </GroupItem>
             ))}
-        </div>
+        </GroupItem>
     )
 }
 

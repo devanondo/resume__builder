@@ -3,12 +3,13 @@
 import Text from '@/components/shared/Text'
 import { Controller, useFormContext } from 'react-hook-form'
 import NestedSummery from './nested-summery'
+import { GroupItem } from '@/components/shared/wrapper'
 
 const ResumeSummery = () => {
     const { control } = useFormContext()
 
     return (
-        <>
+        <GroupItem popoverKey="summerySection">
             <Controller
                 name={`summerySection.name` as const}
                 control={control}
@@ -22,7 +23,7 @@ const ResumeSummery = () => {
             />
 
             <NestedSummery />
-        </>
+        </GroupItem>
     )
 }
 

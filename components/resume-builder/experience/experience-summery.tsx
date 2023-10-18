@@ -1,6 +1,7 @@
 'use client'
 
 import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
 import { Controller, useFormContext } from 'react-hook-form'
 import ExperienceItem from './experience-items'
 
@@ -8,7 +9,7 @@ const ExperienceSummery = () => {
     const { control } = useFormContext()
 
     return (
-        <>
+        <GroupItem popoverKey="experienceSummary.name">
             <Controller
                 name={`experienceSummary.name` as const}
                 control={control}
@@ -22,7 +23,7 @@ const ExperienceSummery = () => {
             />
 
             <ExperienceItem name="experienceSummary.items" />
-        </>
+        </GroupItem>
     )
 }
 

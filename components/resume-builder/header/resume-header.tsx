@@ -17,14 +17,17 @@ import {
     Settings,
     Star,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
 import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
+import { useAppSelector } from '@/redux/hooks'
 
 const ResumeHeader = () => {
-    const [editting, setEdditing] = useState<boolean>(false)
     const { control, watch } = useFormContext()
+
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
     const iconMap: { [key: string]: any } = {
         phone: <Phone className="w-4 h-4" />,
@@ -108,16 +111,14 @@ const ResumeHeader = () => {
         control,
     })
 
-    // const divRef = useRef<ElementRef<'div'>>(null)
-
     return (
-        <div
-            className={cn(' w-full p-2 rounded-md flex flex-col border-0')}
-            onClick={() => {
-                setEdditing(true)
-            }}
+        <GroupItem
+            popoverKey="header"
+            className={cn(
+                ' w-full rounded-md flex flex-col border-0 group__item'
+            )}
         >
-            {editting && (
+            {groupPopoverKey === 'header' && (
                 <div className="absolute top-[3px] left-1/2 -translate-x-1/2 bg-white border rounded-tl-lg rounded-tr-lg px-3 py-2 flex items-center gap-x-2 border-b-0">
                     <Popover>
                         <PopoverTrigger asChild>
@@ -177,7 +178,7 @@ const ResumeHeader = () => {
                 </div>
             )}
 
-            <div className="flex gap-x-10 justify-between items-start">
+            <div className="flex gap-x-10 justify-between items-start a__item p-2 ">
                 <div className="flex-1 grid grid-cols-2 gap-x-1 ">
                     <div className="col-span-2">
                         <Controller
@@ -233,7 +234,7 @@ const ResumeHeader = () => {
                     photo
                 </div>
             </div>
-        </div>
+        </GroupItem>
     )
 }
 
