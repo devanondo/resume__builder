@@ -3,6 +3,7 @@
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import StrengthPopover from '@/components/popover/strength-popover'
 import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
@@ -27,7 +28,7 @@ const StrengthSection = () => {
     const { watchValue } = useWatchForm({ name })
 
     return (
-        <div>
+        <GroupItem popoverKey="strengths">
             <Controller
                 name={'strengths.name' as const}
                 control={control}
@@ -41,7 +42,11 @@ const StrengthSection = () => {
             />
             <div className="">
                 {fields.map((field: any, i) => (
-                    <div className="relative" key={field.id + i}>
+                    <GroupItem
+                        popoverKey={name + i}
+                        className="relative"
+                        key={field.id + i}
+                    >
                         <div
                             className="w-full flex"
                             onClick={() => {
@@ -108,10 +113,10 @@ const StrengthSection = () => {
                                 remove={remove}
                             />
                         )}
-                    </div>
+                    </GroupItem>
                 ))}
             </div>
-        </div>
+        </GroupItem>
     )
 }
 

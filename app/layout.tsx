@@ -1,10 +1,11 @@
 import React from 'react'
 
-import './globals.css'
-import './main.scss'
+import { ModalProvider } from '@/components/provider/modal-provider'
+import ReduxProvider from '@/redux/redux-provider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import ReduxProvider from '@/redux/redux-provider'
+import './globals.css'
+import './main.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <ReduxProvider>{children}</ReduxProvider>
+                <ReduxProvider>
+                    {children}
+                    <ModalProvider />
+                </ReduxProvider>
             </body>
         </html>
     )

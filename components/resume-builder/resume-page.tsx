@@ -4,18 +4,19 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Button } from '../ui/button'
-import ExperienceSummery from './experience/experience-summery'
-import ResumeHeader from './header/resume-header'
-import ResumeSummery from './summery/resume-summery'
-import SkillsSection from './skills/skills-section'
-import StrengthSection from './strengths/strength-section'
-import EducationItems from './education/education-items'
-import { useHidePopover } from '../hooks/use-hide-popover'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
+import { useEffect, useRef, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useModal } from '../hooks/use-modal-store'
+import { Button } from '../ui/button'
+import EducationItems from './education/education-items'
+import ExperienceSummery from './experience/experience-summery'
+import ResumeHeader from './header/resume-header'
+import SkillsSection from './skills/skills-section'
+import StrengthSection from './strengths/strength-section'
+import ResumeSummery from './summery/resume-summery'
+import { IResumeLayout, ItemsComponents } from './types/resume-layout'
 
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
@@ -23,6 +24,7 @@ const ResumePage = () => {
         (state) => state.popover
     )
     const dispatch = useAppDispatch()
+    const refs = useRef<HTMLDivElement>(null)
 
     const data = {
         header: {
@@ -268,6 +270,136 @@ const ResumePage = () => {
         dispatch(showPopover(null))
     }
 
+    // const itemsComponents = [
+    //     {
+    //         title: 'Header',
+    //         key: 'header',
+    //         jsx: <ResumeHeader />,
+    //     },
+    //     {
+    //         title: 'Summery',
+    //         key: 'summerySection',
+    //         jsx: <ResumeSummery />,
+    //     },
+    //     {
+    //         title: 'Experience',
+    //         key: 'experienceSummary',
+    //         jsx: <ExperienceSummery />,
+    //     },
+    // ]
+
+    const itemsComponents: ItemsComponents = {
+        header: <ResumeHeader />,
+        summerySection: <ResumeSummery />,
+        experienceSummary: <ExperienceSummery />,
+        skills: <SkillsSection />,
+        strength: <StrengthSection />,
+        education: <EducationItems />,
+    }
+
+    // const items: IResumeLayout[] = [
+    //     {
+    //         title: 'Header',
+    //         column: 2,
+    //         key: 'header',
+    //         position: 0,
+    //     },
+    //     {
+    //         title: 'Summery',
+    //         column: 1,
+    //         key: 'summerySection',
+    //         position: 1,
+    //     },
+    //     {
+    //         title: 'Skills',
+    //         column: 1,
+    //         key: 'skills',
+    //         position: 2,
+    //     },
+    //     {
+    //         title: 'Experience',
+    //         column: 1,
+    //         key: 'experienceSummary',
+    //         position: 3,
+    //     },
+    //     {
+    //         title: 'Strength',
+    //         column: 1,
+    //         key: 'strength',
+    //         position: 4,
+    //     },
+    //     {
+    //         title: 'Educations',
+    //         column: 1,
+
+    //         key: 'education',
+    //         position: 5,
+    //     },
+    //     // {
+    //     //     title: 'Project',
+    //     //     column: 1,
+    //     //     key: 'projects',
+    //     //     position: 4,
+    //     // },
+    // ]
+
+    const allItems: IResumeLayout[] = [
+        {
+            title: 'Group-1',
+            column: 3,
+            items: [
+                {
+                    title: 'Summery',
+                    column: 1,
+                    key: 'summerySection',
+                    position: 1,
+                },
+
+                {
+                    title: 'Experience',
+                    column: 1,
+                    key: 'experienceSummary',
+                    position: 3,
+                },
+                {
+                    title: 'Educations',
+                    column: 1,
+                    key: 'education',
+                    position: 5,
+                },
+            ],
+        },
+
+        {
+            title: 'Group-2',
+            column: 2,
+            items: [
+                {
+                    title: 'Strength',
+                    column: 1,
+                    key: 'strength',
+                    position: 4,
+                },
+                {
+                    title: 'Skills',
+                    column: 1,
+                    key: 'skills',
+                    position: 2,
+                },
+            ],
+        },
+    ]
+    const [updatedItems, setUpdatedItems] = useState<IResumeLayout[]>(allItems)
+
+    // refs.current?.childNodes.forEach((child) => {
+    //     child.childNodes.forEach((child2) => {
+    //         console.log(child2.)
+    //     })
+    // })
+
+    const { onOpen } = useModal()
+    const { resumeLayout } = useAppSelector((state) => state.layout)
+
     return (
         <div
             style={{
@@ -284,12 +416,44 @@ const ResumePage = () => {
             <div onClick={(e) => e.stopPropagation()} className="">
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)}>
-                        {/* <ContentProvider> */}
-
                         <ResumeHeader />
-                        {/* </ContentProvider> */}
+                        <div ref={refs} className="grid grid-cols-5 gap-x-5">
+                            {resumeLayout?.map((item, index) => {
+                                return (
+                                    <div
+                                        className={cn(
+                                            `col-span-${item.column}`
+                                        )}
+                                        key={index}
+                                    >
+                                        {item.items.map((cont, index) => (
+                                            <div
+                                                datatype={cont.title}
+                                                key={index}
+                                            >
+                                                {itemsComponents[cont.key]}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )
+                            })}
+                        </div>
 
-                        <div className="grid grid-cols-5 gap-x-5">
+                        <Button className="mt-10">Submit</Button>
+                    </form>
+                </FormProvider>
+
+                <Button onClick={() => onOpen({ type: 'openRearrenge' })}>
+                    Rarrenge Section
+                </Button>
+            </div>
+
+            {/* <ContentProvider> */}
+
+            {/* <ResumeHeader /> */}
+            {/* </ContentProvider> */}
+
+            {/* <div className="grid grid-cols-5 gap-x-5">
                             <div className="col-span-3">
                                 <ResumeSummery />
                                 <ExperienceSummery />
@@ -298,14 +462,29 @@ const ResumePage = () => {
                             <div className="col-span-2">
                                 <SkillsSection />
 
-                                {/* <StrengthSection /> */}
+                                <StrengthSection />
                             </div>
-                        </div>
+                        </div> */}
 
-                        <Button className="mt-10">Submit</Button>
-                    </form>
-                </FormProvider>
-            </div>
+            {/* {itemsComponents?.map((item, index) => {
+                            return <div key={index}>{item.jsx}</div>
+                        })} */}
+
+            {/* <div className="grid grid-cols-2 gap-x-5">
+                          
+                            {updatedItems?.map((item, index) => {
+                                return (
+                                    <div
+                                        className={cn(
+                                            `col-span-${item.column} h-auto break-inside-avoid`
+                                        )}
+                                        key={index}
+                                    >
+                                        {itemsComponents[item.key]}
+                                    </div>
+                                )
+                            })}
+                        </div> */}
         </div>
     )
 }
