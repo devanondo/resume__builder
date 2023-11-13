@@ -424,9 +424,6 @@ const ResumePage = () => {
                                         style={{
                                             gridColumn: `span ${item.column}`,
                                         }}
-                                        // className={cn(
-                                        //     `col-span-${item.column || 12}`
-                                        // )}
                                         key={index}
                                     >
                                         {item.items.map((cont, index) => (

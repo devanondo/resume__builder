@@ -18,6 +18,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
+import { Check } from 'lucide-react'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { changeLayoutStyles } from '@/redux/slices/resume-layout-slice'
+import { getFontLevel } from '../resume-styles/utils/font-design'
 
 const colors = [
     {
@@ -61,6 +65,8 @@ const colors = [
 const ResumeStylesDrawer = () => {
     const { isOpen, onClose, type } = useModal()
 
+    const { layoutStyles } = useAppSelector((state) => state.layout)
+    const dispatch = useAppDispatch()
     const isDrawerOpen = isOpen && type === 'stylesDrawer'
     const handleClose = () => {
         onClose()
@@ -82,10 +88,18 @@ const ResumeStylesDrawer = () => {
                     <p className="text-sm font-semibold">Page Margin</p>
 
                     <Slider
-                        defaultValue={[2]}
-                        max={6}
-                        step={1}
+                        defaultValue={[20]}
+                        max={50}
+                        step={10}
                         className={cn('w-[100%] mt-5')}
+                        onValueChange={(value) => {
+                            dispatch(
+                                changeLayoutStyles({
+                                    type: 'pageMargin',
+                                    value: value[0].toLocaleString(),
+                                })
+                            )
+                        }}
                     />
                 </div>
 
@@ -112,9 +126,19 @@ const ResumeStylesDrawer = () => {
                     <p className="text-sm font-semibold">Font Size</p>
                     <Slider
                         defaultValue={[2]}
-                        max={6}
+                        max={5}
                         step={1}
                         className={cn('w-[100%] mt-5')}
+                        onValueChange={(value) => {
+                            const level = value[0]
+
+                            dispatch(
+                                changeLayoutStyles({
+                                    type: 'fontSize',
+                                    value: getFontLevel(level),
+                                })
+                            )
+                        }}
                     />
                 </div>
                 <Separator />
@@ -126,12 +150,31 @@ const ResumeStylesDrawer = () => {
                             <div
                                 key={color.primary + i}
                                 style={{ backgroundColor: color.primary }}
-                                className={`rounded-full w-full aspect-square flex items-center justify-center p-2`}
+                                className={`rounded-full w-full aspect-square flex items-center justify-center p-2 cursor-pointer`}
+                                onClick={() => {
+                                    dispatch(
+                                        changeLayoutStyles({
+                                            type: 'colors',
+                                            primaryColor: color.primary,
+                                            secondaryColor: color.secondary,
+                                        })
+                                    )
+                                }}
                             >
                                 <div
                                     style={{ backgroundColor: color.secondary }}
                                     className={`rounded-full w-full aspect-square flex items-center justify-center bg-[${color.secondary}]`}
-                                ></div>
+                                >
+                                    {layoutStyles.primaryColor ===
+                                        color.primary &&
+                                    layoutStyles.secondaryColor ===
+                                        color.secondary ? (
+                                        <Check
+                                            strokeWidth={4}
+                                            className="w-7 font-bold text-white"
+                                        />
+                                    ) : null}
+                                </div>
                             </div>
                         ))}
                     </div>

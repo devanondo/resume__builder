@@ -158,11 +158,21 @@ const layoutItems: ILayoutItems[] = [
     },
 ]
 
+const layoutStyles: Record<string, unknown> = {
+    pageMargin: '50',
+    fontFamilly: 'Robboto',
+    fontSize: 'small',
+    primaryColor: '#000',
+    secondaryColor: '#1e90ff',
+    backgroundImage: '',
+}
+
 export const resumeSlice = createSlice({
     name: 'layout',
     initialState: {
         resumeLayout: items as IResumeLayout[],
         resumeLayoutItems: layoutItems as ILayoutItems[],
+        layoutStyles: layoutStyles,
     },
     reducers: {
         setLayoutData: (state, action) => {
@@ -191,9 +201,52 @@ export const resumeSlice = createSlice({
 
             state.resumeLayoutItems = newLayouts
         },
+
+        changeLayoutStyles: (
+            state,
+            action: {
+                payload:
+                    | {
+                          type: 'colors'
+                          primaryColor: string
+                          secondaryColor: string
+                      }
+                    | {
+                          type:
+                              | 'pageMargin'
+                              | 'fontFamily'
+                              | 'fontSize'
+                              | 'backgroundImage'
+                          value: string
+                      }
+            }
+        ) => {
+            switch (action.payload.type) {
+                case 'colors':
+                    state.layoutStyles.primaryColor =
+                        action.payload.primaryColor
+                    state.layoutStyles.secondaryColor =
+                        action.payload.secondaryColor
+
+                    break
+
+                case 'pageMargin':
+                case 'fontFamily':
+                case 'fontSize':
+                case 'backgroundImage':
+                    state.layoutStyles[action.payload.type] =
+                        action.payload.value
+
+                    break
+
+                default:
+                    break
+            }
+        },
     },
 })
 
-export const { setLayoutData, setActiveLayout } = resumeSlice.actions
+export const { setLayoutData, setActiveLayout, changeLayoutStyles } =
+    resumeSlice.actions
 
 export default resumeSlice.reducer

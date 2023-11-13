@@ -85,7 +85,7 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                         style={{ gridColumn: `span ${grp.column}` }}
                         className={cn(
                             // `col-span-${grp.column | 12}`,
-                            'dnd-group'
+                            'dnd-group cursor-grab'
                         )}
                         onDragEnter={
                             dragging && !grp.items.length
