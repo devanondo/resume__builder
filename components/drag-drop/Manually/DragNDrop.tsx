@@ -82,7 +82,10 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                 {list?.map((grp: IGroup, grpI: number) => (
                     <div
                         key={grp.title + grpI}
-                        className={cn(`col-span-${grp.column}`, 'dnd-group')}
+                        className={cn(
+                            `col-span-${grp.column | 12}`,
+                            'dnd-group'
+                        )}
                         onDragEnter={
                             dragging && !grp.items.length
                                 ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
