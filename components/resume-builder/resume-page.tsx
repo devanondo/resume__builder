@@ -424,7 +424,7 @@ const ResumePage = () => {
                                 return (
                                     <div
                                         className={cn(
-                                            `col-span-${item.column}`
+                                            `col-span-${item.column || 12}`
                                         )}
                                         key={index}
                                     >
