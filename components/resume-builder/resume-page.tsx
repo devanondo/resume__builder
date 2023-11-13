@@ -400,8 +400,6 @@ const ResumePage = () => {
     const { onOpen } = useModal()
     const { resumeLayout } = useAppSelector((state) => state.layout)
 
-    console.log(resumeLayout)
-
     return (
         <div
             style={{
@@ -423,9 +421,12 @@ const ResumePage = () => {
                             {resumeLayout?.map((item, index) => {
                                 return (
                                     <div
-                                        className={cn(
-                                            `col-span-${item.column || 12}`
-                                        )}
+                                        style={{
+                                            gridColumn: `span ${item.column}`,
+                                        }}
+                                        // className={cn(
+                                        //     `col-span-${item.column || 12}`
+                                        // )}
                                         key={index}
                                     >
                                         {item.items.map((cont, index) => (

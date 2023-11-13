@@ -1,6 +1,6 @@
 'use client'
 
-import { Layout, LayoutDashboard, Plus } from 'lucide-react'
+import { Layout, LayoutDashboard, Palette, Plus } from 'lucide-react'
 import { IModalType, useModal } from '../hooks/use-modal-store'
 import ActionTooltip from '../shared/action-tooltip'
 
@@ -29,6 +29,12 @@ const icons: any = {
             size={25}
         />
     ),
+    palette: (
+        <Palette
+            className="group-hover:text-white transition text-emerald-500"
+            size={25}
+        />
+    ),
 }
 
 const actions: IAction[] = [
@@ -46,6 +52,11 @@ const actions: IAction[] = [
         title: 'Rearrange',
         icon: 'grid',
         action: 'openRearrenge',
+    },
+    {
+        title: 'Change Styles',
+        icon: 'palette',
+        action: 'stylesDrawer',
     },
 ]
 

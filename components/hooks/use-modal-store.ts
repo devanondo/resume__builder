@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { openModal } from '@/redux/slices/modal-slice'
 
-export type IModalType = 'changeLayout' | 'openRearrenge'
+export type IModalType = 'changeLayout' | 'openRearrenge' | 'stylesDrawer'
 
 export const useModal = () => {
     const dispatch = useAppDispatch()

@@ -82,8 +82,9 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                 {list?.map((grp: IGroup, grpI: number) => (
                     <div
                         key={grp.title + grpI}
+                        style={{ gridColumn: `span ${grp.column}` }}
                         className={cn(
-                            `col-span-${grp.column | 12}`,
+                            // `col-span-${grp.column | 12}`,
                             'dnd-group'
                         )}
                         onDragEnter={
