@@ -16,7 +16,7 @@ import ResumeHeader from './header/resume-header'
 import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
-import { IResumeLayout, ItemsComponents } from './types/resume-layout'
+import { IResumeLayout, ItemsComponents } from './types/resume-layout-types'
 
 const ResumePage = () => {
     const [padding, setPadding] = useState<number>(36)
@@ -400,6 +400,8 @@ const ResumePage = () => {
     const { onOpen } = useModal()
     const { resumeLayout } = useAppSelector((state) => state.layout)
 
+    console.log(resumeLayout)
+
     return (
         <div
             style={{
@@ -417,7 +419,7 @@ const ResumePage = () => {
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)}>
                         <ResumeHeader />
-                        <div ref={refs} className="grid grid-cols-5 gap-x-5">
+                        <div ref={refs} className="grid grid-cols-12 gap-x-5">
                             {resumeLayout?.map((item, index) => {
                                 return (
                                     <div
@@ -443,9 +445,14 @@ const ResumePage = () => {
                     </form>
                 </FormProvider>
 
-                <Button onClick={() => onOpen({ type: 'openRearrenge' })}>
-                    Rarrenge Section
-                </Button>
+                <div className="flex mt-2 gap-x-2">
+                    <Button onClick={() => onOpen({ type: 'openRearrenge' })}>
+                        Rarrenge Section
+                    </Button>
+                    <Button onClick={() => onOpen({ type: 'changeLayout' })}>
+                        Change Layout
+                    </Button>
+                </div>
             </div>
 
             {/* <ContentProvider> */}

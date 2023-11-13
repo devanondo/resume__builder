@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 'use client'
 
+import { IResumeLayout } from '@/components/resume-builder/types/resume-layout-types'
 import { cn } from '@/lib/utils'
 import { useRef, useState } from 'react'
 import { IGroup } from '../DragDrop'
-import { IResumeLayout } from '@/components/resume-builder/types/resume-layout'
 
 interface DragNDropProps {
     data: any[]
@@ -78,11 +78,11 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
             <div className="dnd-group">
                 <div className="dnd-item">Header</div>
             </div>
-            <div className="drag-n-drop">
+            <div className="drag-n-drop grid grid-cols-12 gap-2">
                 {list?.map((grp: IGroup, grpI: number) => (
                     <div
                         key={grp.title + grpI}
-                        className="dnd-group"
+                        className={cn(`col-span-${grp.column}`, 'dnd-group')}
                         onDragEnter={
                             dragging && !grp.items.length
                                 ? (e) => handleDragEnter(e, { grpI, itemI: 0 })

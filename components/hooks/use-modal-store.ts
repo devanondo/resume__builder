@@ -1,6 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { openModal } from '@/redux/slices/modal-slice'
 
+export type IModalType = 'changeLayout' | 'openRearrenge'
+
 export const useModal = () => {
     const dispatch = useAppDispatch()
     const { type, data, isOpen } = useAppSelector((state) => state.modal)
@@ -9,7 +11,7 @@ export const useModal = () => {
         type,
         data,
     }: {
-        type: string
+        type: IModalType
         data?: Record<string, unknown>
     }) => {
         dispatch(openModal({ type: type, data: data }))

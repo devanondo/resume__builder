@@ -21,3 +21,11 @@ export interface IResumeLayout {
     column: number
     items: IItem[]
 }
+
+export interface ILayoutItems {
+    id: string
+    title: string
+    isActive: boolean
+    imgUrl?: string
+    layout: IResumeLayout[]
+}
