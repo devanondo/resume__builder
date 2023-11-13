@@ -2,13 +2,15 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import StrengthPopover from '@/components/popover/strength-popover'
-import Text from '@/components/shared/Text'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { User2 } from 'lucide-react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import Paragraph from '../components/paragraph-section'
+import SectionTitle from '../components/section-title'
+import SubTitle from '../components/sub-title-section'
 
 const StrengthSection = () => {
     const name = 'strengths.items'
@@ -29,17 +31,8 @@ const StrengthSection = () => {
 
     return (
         <GroupItem popoverKey="strengths">
-            <Controller
-                name={'strengths.name' as const}
-                control={control}
-                defaultValue=""
-                render={({ field: f }) => (
-                    <Text
-                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
-                        {...f}
-                    />
-                )}
-            />
+            <SectionTitle name={'strengths.name' as const} />
+
             <div className="">
                 {fields.map((field: any, i) => (
                     <GroupItem
@@ -62,42 +55,24 @@ const StrengthSection = () => {
                                 <div className="mr-1">{iconMap['team']}</div>
                             )}
                             <div className="">
-                                <Controller
+                                <SubTitle
                                     name={`${name}[${i}].name` as const}
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field: f }) => (
-                                        <Text
-                                            placeholder={
-                                                field.placeholder || ''
-                                            }
-                                            className="text-md font-semibold "
-                                            {...f}
-                                        />
-                                    )}
+                                    placeholder={field.placeholder || ''}
+                                    className="text-md font-semibold "
                                 />
 
                                 {watchValue[i]?.description.enabled && (
-                                    <Controller
+                                    <Paragraph
                                         name={
                                             `${name}[${i}].description.text` as const
                                         }
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field: f }) => (
-                                            <Text
-                                                placeholder={
-                                                    field.description
-                                                        ?.placeholder || ''
-                                                }
-                                                className={cn(
-                                                    'text-sm -mt-3',
-                                                    watchValue[i].description
-                                                        .italic_description &&
-                                                        'italic'
-                                                )}
-                                                {...f}
-                                            />
+                                        placeholder={
+                                            field.description?.placeholder || ''
+                                        }
+                                        className={cn(
+                                            'text-sm -mt-3',
+                                            watchValue[i].description
+                                                .italic_description && 'italic'
                                         )}
                                     />
                                 )}

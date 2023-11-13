@@ -270,24 +270,6 @@ const ResumePage = () => {
         dispatch(showPopover(null))
     }
 
-    // const itemsComponents = [
-    //     {
-    //         title: 'Header',
-    //         key: 'header',
-    //         jsx: <ResumeHeader />,
-    //     },
-    //     {
-    //         title: 'Summery',
-    //         key: 'summerySection',
-    //         jsx: <ResumeSummery />,
-    //     },
-    //     {
-    //         title: 'Experience',
-    //         key: 'experienceSummary',
-    //         jsx: <ExperienceSummery />,
-    //     },
-    // ]
-
     const itemsComponents: ItemsComponents = {
         header: <ResumeHeader />,
         summerySection: <ResumeSummery />,
@@ -296,100 +278,6 @@ const ResumePage = () => {
         strength: <StrengthSection />,
         education: <EducationItems />,
     }
-
-    // const items: IResumeLayout[] = [
-    //     {
-    //         title: 'Header',
-    //         column: 2,
-    //         key: 'header',
-    //         position: 0,
-    //     },
-    //     {
-    //         title: 'Summery',
-    //         column: 1,
-    //         key: 'summerySection',
-    //         position: 1,
-    //     },
-    //     {
-    //         title: 'Skills',
-    //         column: 1,
-    //         key: 'skills',
-    //         position: 2,
-    //     },
-    //     {
-    //         title: 'Experience',
-    //         column: 1,
-    //         key: 'experienceSummary',
-    //         position: 3,
-    //     },
-    //     {
-    //         title: 'Strength',
-    //         column: 1,
-    //         key: 'strength',
-    //         position: 4,
-    //     },
-    //     {
-    //         title: 'Educations',
-    //         column: 1,
-
-    //         key: 'education',
-    //         position: 5,
-    //     },
-    //     // {
-    //     //     title: 'Project',
-    //     //     column: 1,
-    //     //     key: 'projects',
-    //     //     position: 4,
-    //     // },
-    // ]
-
-    const allItems: IResumeLayout[] = [
-        {
-            title: 'Group-1',
-            column: 3,
-            items: [
-                {
-                    title: 'Summery',
-                    column: 1,
-                    key: 'summerySection',
-                    position: 1,
-                },
-
-                {
-                    title: 'Experience',
-                    column: 1,
-                    key: 'experienceSummary',
-                    position: 3,
-                },
-                {
-                    title: 'Educations',
-                    column: 1,
-                    key: 'education',
-                    position: 5,
-                },
-            ],
-        },
-
-        {
-            title: 'Group-2',
-            column: 2,
-            items: [
-                {
-                    title: 'Strength',
-                    column: 1,
-                    key: 'strength',
-                    position: 4,
-                },
-                {
-                    title: 'Skills',
-                    column: 1,
-                    key: 'skills',
-                    position: 2,
-                },
-            ],
-        },
-    ]
-    const [updatedItems, setUpdatedItems] = useState<IResumeLayout[]>(allItems)
 
     // refs.current?.childNodes.forEach((child) => {
     //     child.childNodes.forEach((child2) => {
@@ -442,15 +330,6 @@ const ResumePage = () => {
                         <Button className="mt-10">Submit</Button>
                     </form>
                 </FormProvider>
-
-                <div className="flex mt-2 gap-x-2">
-                    <Button onClick={() => onOpen({ type: 'openRearrenge' })}>
-                        Rarrenge Section
-                    </Button>
-                    <Button onClick={() => onOpen({ type: 'changeLayout' })}>
-                        Change Layout
-                    </Button>
-                </div>
             </div>
 
             {/* <ContentProvider> */}
@@ -469,26 +348,6 @@ const ResumePage = () => {
 
                                 <StrengthSection />
                             </div>
-                        </div> */}
-
-            {/* {itemsComponents?.map((item, index) => {
-                            return <div key={index}>{item.jsx}</div>
-                        })} */}
-
-            {/* <div className="grid grid-cols-2 gap-x-5">
-                          
-                            {updatedItems?.map((item, index) => {
-                                return (
-                                    <div
-                                        className={cn(
-                                            `col-span-${item.column} h-auto break-inside-avoid`
-                                        )}
-                                        key={index}
-                                    >
-                                        {itemsComponents[item.key]}
-                                    </div>
-                                )
-                            })}
                         </div> */}
         </div>
     )

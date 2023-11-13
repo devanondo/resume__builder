@@ -2,12 +2,14 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ExperienceGroupPopover from '@/components/popover/experience-popover'
-import Text from '@/components/shared/Text'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import { Calendar, MapIcon } from 'lucide-react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import Paragraph from '../components/paragraph-section'
+import SubHeading from '../components/sub-heading-section'
+import SubTitle from '../components/sub-title-section'
 import ExperienceBuletItem from './experience-bullet-item'
 
 interface ExperienceItemProps {
@@ -33,83 +35,47 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                     key={field.id}
                     className="relative a__item"
                 >
-                    <div
-                    // onClick={() => {
-                    //     dispatch(
-                    //         showPopover({
-                    //             name: name + i,
-                    //             type: 'group__entry',
-                    //         })
-                    //     )
-                    // }}
-                    // className=""
-                    >
-                        <Controller
+                    <div>
+                        <SubHeading
                             name={`${name}.${i}.position` as const}
-                            control={control}
-                            defaultValue=""
-                            render={({ field: f }) => (
-                                <Text
-                                    className={cn(
-                                        'text-xl',
-                                        watchValue[i]?.bold_position &&
-                                            'font-semibold'
-                                    )}
-                                    {...f}
-                                />
+                            className={cn(
+                                'py-0',
+                                watchValue[i]?.bold_position && 'font-semibold'
                             )}
                         />
-                        <Controller
+
+                        <SubTitle
                             name={`${name}.${i}.workplace` as const}
-                            control={control}
-                            defaultValue=""
-                            render={({ field: f }) => (
-                                <Text
-                                    className="text-md font-bold -mt-3 italic"
-                                    {...f}
-                                />
-                            )}
+                            className="text-md font-bold -mt-3 italic"
                         />
-                        <div className="flex items-center pl-3 -mt-3">
+
+                        <div className="flex items-center pl-3">
                             {watchValue[i]?.show_location && (
                                 <div className="flex items-center gap-x-1">
                                     <Calendar className="w-4 h-4" />{' '}
-                                    <Controller
+                                    <SubTitle
                                         name={`${name}.${i}.location` as const}
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field: f }) => (
-                                            <Text className="text-sm" {...f} />
-                                        )}
+                                        className="text-sm"
                                     />
                                 </div>
                             )}
                             <div className="flex items-center gap-x-1">
                                 <MapIcon className="w-4 h-4" />
-                                <Controller
+
+                                <SubTitle
                                     name={`${name}.${i}.location` as const}
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field: f }) => (
-                                        <Text className="text-sm" {...f} />
-                                    )}
+                                    className="text-sm"
                                 />
                             </div>
                         </div>
+
                         {watchValue[i]?.description.enabled && (
-                            <Controller
+                            <Paragraph
                                 name={`${name}.${i}.description.text` as const}
-                                control={control}
-                                defaultValue=""
-                                render={({ field: f }) => (
-                                    <Text
-                                        {...f}
-                                        className={cn(
-                                            'text-sm text-justify text-[#74767E] -mt-2',
-                                            watchValue[i].description
-                                                .italic_description && 'italic'
-                                        )}
-                                    />
+                                className={cn(
+                                    ' text-sm text-justify mt-1 mb-1',
+                                    watchValue[i].description
+                                        .italic_description && 'italic'
                                 )}
                             />
                         )}

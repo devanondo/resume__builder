@@ -21,7 +21,7 @@ import {
 import { Check } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { changeLayoutStyles } from '@/redux/slices/resume-layout-slice'
-import { getFontLevel } from '../resume-styles/utils/font-design'
+import { getFontLevel, getFontValue } from '../resume-styles/utils/font-design'
 
 const colors = [
     {
@@ -125,7 +125,9 @@ const ResumeStylesDrawer = () => {
 
                     <p className="text-sm font-semibold">Font Size</p>
                     <Slider
-                        defaultValue={[2]}
+                        defaultValue={[
+                            getFontValue(layoutStyles.fontSize as string),
+                        ]}
                         max={5}
                         step={1}
                         className={cn('w-[100%] mt-5')}

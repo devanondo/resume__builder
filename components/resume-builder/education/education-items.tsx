@@ -2,13 +2,16 @@
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { GraduationCap } from 'lucide-react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
 import EducationPopover from '@/components/popover/education-popover'
-import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { GroupItem } from '@/components/shared/wrapper'
+import Paragraph from '../components/paragraph-section'
+import SectionTitle from '../components/section-title'
+import SubHeading from '../components/sub-heading-section'
+import SubTitle from '../components/sub-title-section'
 
 const EducationItems = () => {
     const name = 'educations.items'
@@ -28,18 +31,9 @@ const EducationItems = () => {
 
     return (
         <GroupItem popoverKey="educations">
-            <Controller
-                name={'educations.name' as const}
-                control={control}
-                defaultValue=""
-                render={({ field: f }) => (
-                    <Text
-                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
-                        {...f}
-                    />
-                )}
-            />
-            <div>
+            <SectionTitle name={'educations.name' as const} />
+
+            <div className="mt-1">
                 {fields.map((field: any, i) => (
                     <GroupItem
                         popoverKey={name + i}
@@ -59,149 +53,92 @@ const EducationItems = () => {
                         >
                             <div className="mr-2">{iconMap['team']}</div>
                             <div className="">
-                                <Controller
+                                <SubHeading
                                     name={`${name}[${i}].name` as const}
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field: f }) => (
-                                        <Text
-                                            placeholder={
-                                                field.placeholder || ''
-                                            }
-                                            className="text-md font-semibold "
-                                            {...f}
-                                        />
-                                    )}
+                                    placeholder={field.placeholder || ''}
+                                    className="text-md font-semibold "
                                 />
 
                                 {/* {watchValue[i].description.enabled && ( */}
 
                                 <div className="flex">
-                                    <Controller
+                                    <SubTitle
                                         name={
                                             `${name}[${i}].institution.name` as const
                                         }
-                                        control={control}
-                                        defaultValue=""
-                                        render={({ field: f }) => (
-                                            <Text
-                                                placeholder={
-                                                    field.institution
-                                                        ?.placeholder || ''
-                                                }
-                                                className={cn(
-                                                    'text-sm font-bold -mt-2'
-                                                )}
-                                                {...f}
-                                            />
-                                        )}
+                                        placeholder={
+                                            field.institution?.placeholder || ''
+                                        }
+                                        className={cn('text-sm font-bold')}
                                     />
                                 </div>
                                 {/* )} */}
 
                                 <div className="flex items-center">
                                     <div className="">
-                                        <Controller
+                                        <Paragraph
                                             name={
                                                 `${name}[${i}].date.from` as const
                                             }
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field: f }) => (
-                                                <Text
-                                                    placeholder={
-                                                        field.date
-                                                            ?.placeholder || ''
-                                                    }
-                                                    className={cn(
-                                                        'text-sm italic font-semibold'
-                                                    )}
-                                                    {...f}
-                                                />
+                                            placeholder={
+                                                field.date?.placeholder || ''
+                                            }
+                                            className={cn(
+                                                'text-sm italic font-semibold py-0 mt-2'
                                             )}
                                         />
-                                        <Controller
+
+                                        <Paragraph
                                             name={
                                                 `${name}[${i}].location` as const
                                             }
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field: f }) => (
-                                                <Text
-                                                    placeholder="Location"
-                                                    className={cn(
-                                                        'text-sm -mt-2'
-                                                    )}
-                                                    {...f}
-                                                />
-                                            )}
+                                            placeholder="Location"
+                                            className={cn('text-sm -mt-2')}
                                         />
                                     </div>
                                     <div className=" border-l border-[#9d9d9d] w-[200px]">
-                                        <Controller
+                                        <SubHeading
                                             name={
                                                 `${name}[${i}].institution.gpa` as const
                                             }
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field: f }) => (
-                                                <Text
-                                                    placeholder={
-                                                        field.institution
-                                                            ?.placeholder_gpa ||
-                                                        ''
-                                                    }
-                                                    className={cn(
-                                                        'text-md text-center italic font-semibold uppercase'
-                                                    )}
-                                                    {...f}
-                                                />
+                                            placeholder={
+                                                field.institution
+                                                    ?.placeholder_gpa || ''
+                                            }
+                                            className={cn(
+                                                'text-md text-center italic font-semibold uppercase'
                                             )}
                                         />
+
                                         <div className="flex items-center">
-                                            <Controller
+                                            <Paragraph
                                                 name={
                                                     `${name}[${i}].institution.gpa_score` as const
                                                 }
-                                                control={control}
-                                                defaultValue=""
-                                                render={({ field: f }) => (
-                                                    <Text
-                                                        placeholder={
-                                                            field.institution
-                                                                ?.placeholder_gpa_score ||
-                                                            ''
-                                                        }
-                                                        className={cn(
-                                                            'text-sm text-right'
-                                                        )}
-                                                        {...f}
-                                                    />
+                                                placeholder={
+                                                    field.institution
+                                                        ?.placeholder_gpa_score ||
+                                                    ''
+                                                }
+                                                className={cn(
+                                                    'text-sm text-right'
                                                 )}
                                             />
+
                                             <div className="flex items-center justify-center -mt-2">
                                                 /
                                             </div>
 
-                                            <Controller
+                                            <Paragraph
                                                 name={
                                                     `${name}[${i}].institution.gpa_max` as const
                                                 }
-                                                control={control}
-                                                defaultValue=""
-                                                render={({ field: f }) => (
-                                                    <Text
-                                                        placeholder={
-                                                            field.institution
-                                                                ?.placeholder_gpa_max ||
-                                                            ''
-                                                        }
-                                                        className={cn(
-                                                            'text-sm'
-                                                        )}
-                                                        {...f}
-                                                    />
-                                                )}
+                                                placeholder={
+                                                    field.institution
+                                                        ?.placeholder_gpa_max ||
+                                                    ''
+                                                }
+                                                className={cn('text-sm')}
                                             />
                                         </div>
                                     </div>

@@ -19,6 +19,15 @@ export const getFontSize = (level: FontSizeType) => {
                 subTitle: '15px',
                 paragraph: '14px',
             }
+
+        case 'large':
+            return {
+                heading: '28px',
+                title: '22px',
+                subHeading: '20px',
+                subTitle: '18px',
+                paragraph: '16px',
+            }
         default:
             return {
                 heading: '18px',
@@ -42,5 +51,20 @@ export const getFontLevel = (level: number) => {
             return 'extraLarge'
         default:
             return 'small'
+    }
+}
+
+export const getFontValue = (level: string) => {
+    switch (level) {
+        case 'small':
+            return 1
+        case 'medium':
+            return 2
+        case 'large':
+            return 3
+        case 'extraLarge':
+            return 4
+        default:
+            return 1
     }
 }

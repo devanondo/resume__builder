@@ -6,6 +6,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 interface TextareaAutosizeProps {
     className?: string
     placeholder?: string
+    style?: any
 }
 
 const Text = ({ className, placeholder, ...props }: TextareaAutosizeProps) => {

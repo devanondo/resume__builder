@@ -1,14 +1,15 @@
 'use client'
 
+import { useWatchForm } from '@/components/hooks/use-form-watch'
 import SkillsPopover from '@/components/popover/skills-popover'
-import Text from '@/components/shared/Text'
+import { GroupItem } from '@/components/shared/wrapper'
+import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import SectionTitle from '../components/section-title'
+import SubHeading from '../components/sub-heading-section'
 import SkillsKeys from './skills-keys'
-import { useWatchForm } from '@/components/hooks/use-form-watch'
-import { cn } from '@/lib/utils'
-import { GroupItem } from '@/components/shared/wrapper'
 
 const SkillsSection = () => {
     const { control } = useFormContext()
@@ -25,17 +26,8 @@ const SkillsSection = () => {
 
     return (
         <GroupItem popoverKey="skills">
-            <Controller
-                name={'skills.name' as const}
-                control={control}
-                defaultValue=""
-                render={({ field: f }) => (
-                    <Text
-                        className="text-2xl font-bold uppercase rounded -mb-[10px]"
-                        {...f}
-                    />
-                )}
-            />
+            <SectionTitle name={'skills.name' as const} />
+
             {fields.map((field, i) => (
                 <GroupItem
                     popoverKey={name + i}
@@ -54,23 +46,13 @@ const SkillsSection = () => {
                         }}
                     >
                         {watchValue[i]?.show_title && (
-                            <Controller
-                                key={field.id}
+                            <SubHeading
                                 name={`${name}[${i}].title` as const}
-                                control={control}
-                                defaultValue=""
-                                render={({ field: f }) => (
-                                    <Text
-                                        className={cn(
-                                            'text-md font-semibold ',
+                                className={cn(
+                                    'text-md font-semibold ',
 
-                                            watchValue[i].bold_title &&
-                                                'font-bold',
-                                            watchValue[i].italic_title &&
-                                                'italic'
-                                        )}
-                                        {...f}
-                                    />
+                                    watchValue[i].bold_title && 'font-bold',
+                                    watchValue[i].italic_title && 'italic'
                                 )}
                             />
                         )}

@@ -16,6 +16,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 import { useEffect, useState } from 'react'
 import './custom-text-area.css'
+import { FontSizeType, getFontSize } from '../resume-styles/utils/font-design'
 
 interface CustomTextAreaProps {
     fields: Record<'id', string>[]
@@ -42,6 +43,8 @@ const CustomTextArea = ({
     const dispatch = useAppDispatch()
     const { control, setFocus } = useFormContext()
     const [focusField, setFocusField] = useState('')
+
+    const { layoutStyles } = useAppSelector((state) => state.layout)
 
     useEffect(() => {
         setFocus(focusField)
@@ -81,6 +84,11 @@ const CustomTextArea = ({
         }
     }
 
+    const color = layoutStyles.secondaryColor
+    const fontSize = getFontSize(
+        layoutStyles.fontSize as FontSizeType
+    ).paragraph
+
     return (
         <div className="relative w-full flex items-center custom__textarea_component">
             {/* <div
@@ -99,14 +107,6 @@ const CustomTextArea = ({
                 control={control}
                 render={({ field }) => (
                     <TextareaAutosize
-                        // onClick={() => {
-                        // dispatch(
-                        //     showPopover({
-                        //         name: popkey(name, index),
-                        //         type: 'single__entry',
-                        //     })
-                        // )
-                        // }}
                         onKeyDown={handleKeydown}
                         spellCheck={false}
                         {...field}
@@ -115,6 +115,7 @@ const CustomTextArea = ({
                             'custom__textarea w-full py-1 px-2 focus:bg-white resize-none outline-none bg-transparent text-sm text-[#74767E]',
                             className
                         )}
+                        style={{ color: color as string, fontSize }}
                     />
                 )}
             />
