@@ -1,7 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { openModal } from '@/redux/slices/modal-slice'
 
-export type IModalType = 'changeLayout' | 'openRearrenge' | 'stylesDrawer'
+export type IModalType =
+    | 'changeLayout'
+    | 'openRearrenge'
+    | 'stylesDrawer'
+    | 'resumeAddSection'
 
 export const useModal = () => {
     const dispatch = useAppDispatch()

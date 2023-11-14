@@ -41,7 +41,7 @@ const actions: IAction[] = [
     {
         title: 'Add Section',
         icon: 'plus',
-        action: 'changeLayout',
+        action: 'resumeAddSection',
     },
     {
         title: 'Change Layout',

@@ -20,22 +20,26 @@ import {
 import { useEffect } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
-import Text from '@/components/shared/Text'
 import { GroupItem } from '@/components/shared/wrapper'
 import { useAppSelector } from '@/redux/hooks'
+import Heading from '../components/heading'
+import Paragraph from '../components/paragraph-section'
 
 const ResumeHeader = () => {
     const { control, watch } = useFormContext()
 
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    const { layoutStyles } = useAppSelector((state) => state.layout)
+
+    const color = layoutStyles.secondaryColor
 
     const iconMap: { [key: string]: any } = {
-        phone: <Phone className="w-4 h-4" />,
-        link: <Link className="w-4 h-4" />,
-        extra_link: <Link className="w-4 h-4" />,
-        email: <AtSign className="w-4 h-4" />,
-        location: <MapPin className="w-4 h-4" />,
-        extra_field: <Star className="w-4 h-4 " />,
+        phone: <Phone className="w-4 h-4" color={color as string} />,
+        link: <Link className="w-4 h-4" color={color as string} />,
+        extra_link: <Link className="w-4 h-4" color={color as string} />,
+        email: <AtSign className="w-4 h-4" color={color as string} />,
+        location: <MapPin className="w-4 h-4" color={color as string} />,
+        extra_field: <Star className="w-4 h-4 " color={color as string} />,
     }
 
     const items = [
@@ -83,6 +87,13 @@ const ResumeHeader = () => {
             name: 'location',
             placeholder: 'Location',
             render: 'show_location',
+            col: 1,
+        },
+        {
+            title: 'Show Icons',
+            name: 'icons',
+            placeholder: 'Show Icons',
+            render: 'show_icons',
             col: 1,
         },
         {
@@ -180,20 +191,12 @@ const ResumeHeader = () => {
 
             <div className="flex gap-x-10 justify-between items-start a__item p-2 ">
                 <div className="flex-1 grid grid-cols-2 gap-x-1 ">
-                    <div className="col-span-2">
-                        <Controller
-                            name={`header.name` as const}
-                            control={control}
-                            render={({ field }) => (
-                                <Text
-                                    className={cn(
-                                        'w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black'
-                                    )}
-                                    {...field}
-                                />
-                            )}
-                        />
-                    </div>
+                    <Heading
+                        name={`header.name` as const}
+                        className={cn(
+                            'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 p-0'
+                        )}
+                    />
 
                     {items.map((item) => {
                         if (!watchingValue?.[item.render]) return
@@ -203,24 +206,18 @@ const ResumeHeader = () => {
                                 key={item.name}
                             >
                                 {
-                                    <div className="flex gap-x-2 items-center">
-                                        {iconMap[item.name]}
-                                        <Controller
+                                    <div className="flex gap-x-1 items-center">
+                                        <div className="flex items-center justify-center">
+                                            {iconMap[item.name]}
+                                        </div>
+                                        <Paragraph
                                             name={
                                                 `header.${item.name}` as const
                                             }
-                                            control={control}
-                                            render={({ field }) => (
-                                                <Text
-                                                    placeholder={
-                                                        item.placeholder
-                                                    }
-                                                    {...field}
-                                                    className={cn(
-                                                        'text-sm',
-                                                        item.class && item.class
-                                                    )}
-                                                />
+                                            placeholder={item.placeholder}
+                                            className={cn(
+                                                'text-sm p-0 pt-[2px] m-0',
+                                                item.class && item.class
                                             )}
                                         />
                                     </div>
