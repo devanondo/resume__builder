@@ -9,7 +9,13 @@ import { useAppSelector } from '@/redux/hooks'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-const SectionTitle = ({ name }: { name: string }) => {
+const SectionTitle = ({
+    name,
+    placeholder,
+}: {
+    name: string
+    placeholder?: string
+}) => {
     const { control } = useFormContext()
 
     const { layoutStyles } = useAppSelector((state) => state.layout)
@@ -25,7 +31,7 @@ const SectionTitle = ({ name }: { name: string }) => {
                 control={control}
                 render={({ field: f }) => (
                     <Text
-                        placeholder="Summery"
+                        placeholder={placeholder}
                         className="text-2xl font-bold uppercase rounded -mb-[10px] focus:bg-transparent"
                         {...f}
                         style={{

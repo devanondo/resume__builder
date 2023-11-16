@@ -14,10 +14,15 @@ import {
 } from '@/redux/slices/resume-layout-slice'
 import { Check, Minus, Plus } from 'lucide-react'
 import { useModal } from '../hooks/use-modal-store'
-import { itemsComponents } from '../resume-builder/resume-page'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardTitle } from '../ui/card'
 import { ItemsComponents } from '../resume-builder/types/resume-layout-types'
+import ResumeHeader from '../resume-builder/header/resume-header'
+import ResumeSummery from '../resume-builder/summery/resume-summery'
+import ExperienceSummery from '../resume-builder/experience/experience-summery'
+import SkillsSection from '../resume-builder/skills/skills-section'
+import StrengthSection from '../resume-builder/strengths/strength-section'
+import EducationItems from '../resume-builder/education/education-items'
 
 const ResumeAddSectionDrawer = () => {
     const { isOpen, onClose, type } = useModal()
@@ -39,6 +44,15 @@ const ResumeAddSectionDrawer = () => {
             }
         }
         return false
+    }
+
+    const itemsComponents: ItemsComponents = {
+        header: <ResumeHeader />,
+        summerySection: <ResumeSummery />,
+        experienceSummary: <ExperienceSummery />,
+        skills: <SkillsSection />,
+        strength: <StrengthSection />,
+        education: <EducationItems />,
     }
 
     return (
@@ -81,7 +95,7 @@ const ResumeAddSectionDrawer = () => {
                                                         addSectionToEditor({
                                                             group: 'Group-1',
                                                             value: {
-                                                                column: 1,
+                                                                height: 1,
                                                                 key: key as keyof ItemsComponents,
                                                                 position: 1,
                                                                 title: key,

@@ -101,10 +101,6 @@ export const resumeFormData = {
                         keyItem: 'java',
                     },
                     {
-                        keyItem: '',
-                    },
-
-                    {
                         keyItem: 'javascript',
                     },
                     {
@@ -179,6 +175,24 @@ export const resumeFormData = {
             },
         ],
     },
+    languages: {
+        record: 'LanguageSection',
+        name: 'Language',
+        enabled: true,
+
+        items: [
+            {
+                name: 'English',
+                placeholder: 'Language',
+                level: 'Beginner',
+                show_label: true,
+                score: {
+                    score: 3,
+                    type: 'circle',
+                },
+            },
+        ],
+    },
     educations: {
         record: 'EducationSection',
         name: 'Education',
@@ -230,6 +244,39 @@ export const resumeFormData = {
             },
         ],
     },
+
+    declaration: {
+        record: 'DeclarationSection',
+        name: 'Application Declaration',
+        enabled: true,
+
+        items: [
+            {
+                description:
+                    'Upon reviewing and assessing this resume, I declare and certify that I have accurately and truthfully described myself and my qualifications.',
+
+                name: 'ABormon',
+            },
+        ],
+    },
+    references: {
+        record: 'ReferencesSection',
+        name: 'References',
+        enabled: true,
+
+        items: [
+            {
+                name: 'ABormon',
+                placeholder: 'Referece Name',
+                show_email: true,
+                show_phone: true,
+                show_address: true,
+                email: 'acb@example.com',
+                phone: '123-456-1234',
+                address: 'Los Angeles, LA',
+            },
+        ],
+    },
 }
 
 export const resumeLayout: IResumeLayout[] = [
@@ -239,22 +286,34 @@ export const resumeLayout: IResumeLayout[] = [
         items: [
             {
                 title: 'Summery',
-                column: 1,
+                height: 1,
                 key: 'summerySection',
                 position: 1,
             },
 
             {
                 title: 'Experience',
-                column: 1,
+                height: 1,
                 key: 'experienceSummary',
                 position: 3,
             },
             {
                 title: 'Educations',
-                column: 1,
+                height: 1,
                 key: 'education',
                 position: 5,
+            },
+            {
+                title: 'Declaration',
+                height: 1,
+                key: 'declaration',
+                position: 2,
+            },
+            {
+                title: 'References',
+                height: 1,
+                key: 'references',
+                position: 2,
             },
         ],
     },
@@ -265,14 +324,20 @@ export const resumeLayout: IResumeLayout[] = [
         items: [
             {
                 title: 'Strength',
-                column: 1,
+                height: 1,
                 key: 'strength',
                 position: 4,
             },
             {
                 title: 'Skills',
-                column: 1,
+                height: 1,
                 key: 'skills',
+                position: 2,
+            },
+            {
+                title: 'Languages',
+                height: 1,
+                key: 'languages',
                 position: 2,
             },
         ],
@@ -292,22 +357,34 @@ export const layoutItems: ILayoutItems[] = [
                 items: [
                     {
                         title: 'Summery',
-                        column: 1,
+                        height: 1,
                         key: 'summerySection',
                         position: 1,
                     },
 
                     {
                         title: 'Experience',
-                        column: 1,
+                        height: 1,
                         key: 'experienceSummary',
                         position: 3,
                     },
                     {
                         title: 'Educations',
-                        column: 1,
+                        height: 1,
                         key: 'education',
                         position: 5,
+                    },
+                    {
+                        title: 'Declaration',
+                        height: 1,
+                        key: 'declaration',
+                        position: 2,
+                    },
+                    {
+                        title: 'References',
+                        height: 1,
+                        key: 'references',
+                        position: 2,
                     },
                 ],
             },
@@ -318,14 +395,20 @@ export const layoutItems: ILayoutItems[] = [
                 items: [
                     {
                         title: 'Strength',
-                        column: 1,
+                        height: 1,
                         key: 'strength',
                         position: 4,
                     },
                     {
                         title: 'Skills',
-                        column: 1,
+                        height: 1,
                         key: 'skills',
+                        position: 2,
+                    },
+                    {
+                        title: 'Languages',
+                        height: 1,
+                        key: 'languages',
                         position: 2,
                     },
                 ],
@@ -344,22 +427,34 @@ export const layoutItems: ILayoutItems[] = [
                 items: [
                     {
                         title: 'Summery',
-                        column: 1,
+                        height: 1,
                         key: 'summerySection',
                         position: 1,
                     },
 
                     {
                         title: 'Experience',
-                        column: 1,
+                        height: 1,
                         key: 'experienceSummary',
                         position: 3,
                     },
                     {
                         title: 'Educations',
-                        column: 1,
+                        height: 1,
                         key: 'education',
                         position: 5,
+                    },
+                    {
+                        title: 'Declaration',
+                        height: 1,
+                        key: 'declaration',
+                        position: 2,
+                    },
+                    {
+                        title: 'References',
+                        height: 1,
+                        key: 'references',
+                        position: 2,
                     },
                 ],
             },
@@ -370,14 +465,20 @@ export const layoutItems: ILayoutItems[] = [
                 items: [
                     {
                         title: 'Strength',
-                        column: 1,
+                        height: 1,
                         key: 'strength',
                         position: 4,
                     },
                     {
                         title: 'Skills',
-                        column: 1,
+                        height: 1,
                         key: 'skills',
+                        position: 2,
+                    },
+                    {
+                        title: 'Languages',
+                        height: 1,
+                        key: 'languages',
                         position: 2,
                     },
                 ],
@@ -389,7 +490,7 @@ export const layoutItems: ILayoutItems[] = [
 export const layoutStyles: Record<string, unknown> = {
     pageMargin: '50',
     fontFamilly: 'Robboto',
-    fontSize: 'small',
+    fontSize: 'medium',
     primaryColor: '#000',
     secondaryColor: '#1e90ff',
     backgroundImage: '',

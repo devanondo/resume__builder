@@ -7,11 +7,14 @@ export interface ItemsComponents {
     skills: ReactNode
     strength: ReactNode
     education: ReactNode
+    languages: ReactNode
+    declaration: ReactNode
+    references: ReactNode
 }
 
 export interface IItem {
     title: string
-    column: 1 | 2
+    height?: number
     key: keyof ItemsComponents
     position: number
 }

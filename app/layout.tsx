@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ModalProvider } from '@/components/provider/modal-provider'
+import { ModalProvider } from '@/components/provider/ModalProvider'
 import ReduxProvider from '@/redux/redux-provider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
