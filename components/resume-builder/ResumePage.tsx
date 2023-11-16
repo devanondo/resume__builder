@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { useEffect, useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import IconWrapper from '../icon-picker/icon-wrapper'
 import { Button } from '../ui/button'
 import DeclarationSection from './declaration/Declaretion'
 import EducationItems from './education/education-items'
@@ -100,9 +99,6 @@ const ResumePage = () => {
                 id="resume-bulder"
                 onClick={parentClick}
             >
-                <IconWrapper />
-                <IconWrapper />
-
                 <div onClick={(e) => e.stopPropagation()} className="">
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(onSubmit)}>

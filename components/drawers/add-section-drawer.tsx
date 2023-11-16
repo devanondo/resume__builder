@@ -23,6 +23,9 @@ import ExperienceSummery from '../resume-builder/experience/experience-summery'
 import SkillsSection from '../resume-builder/skills/skills-section'
 import StrengthSection from '../resume-builder/strengths/strength-section'
 import EducationItems from '../resume-builder/education/education-items'
+import LanguageSection from '../resume-builder/languages/language-section'
+import DeclarationSection from '../resume-builder/declaration/Declaretion'
+import ReferencesSection from '../resume-builder/references/references'
 
 const ResumeAddSectionDrawer = () => {
     const { isOpen, onClose, type } = useModal()
@@ -53,6 +56,9 @@ const ResumeAddSectionDrawer = () => {
         skills: <SkillsSection />,
         strength: <StrengthSection />,
         education: <EducationItems />,
+        languages: <LanguageSection />,
+        declaration: <DeclarationSection />,
+        references: <ReferencesSection />,
     }
 
     return (
