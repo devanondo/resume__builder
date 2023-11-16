@@ -72,6 +72,8 @@ const EducationPopover = ({
                         enabled: true,
                         name: 'BSC in Computer Science Engineering',
                         placeholder: 'Degree and Field of Study!',
+                        icon: 'FcGraduationCap',
+                        show_icon: true,
 
                         institution: {
                             name: 'Dhaka International University',

@@ -165,7 +165,7 @@ export const resumeFormData = {
                 enabled: true,
                 name: 'Team Leadership',
                 placeholder: 'Your Unique Talent',
-                icon: 'team',
+                icon: 'FcApproval',
                 show_icon: true,
                 description: {
                     placeholder: 'Describe your strength!',
@@ -203,6 +203,8 @@ export const resumeFormData = {
                 enabled: true,
                 name: 'BSC in Computer Science Engineering',
                 placeholder: 'Degree and Field of Study!',
+                icon: 'FcGraduationCap',
+                show_icon: true,
 
                 institution: {
                     name: 'Dhaka International University',

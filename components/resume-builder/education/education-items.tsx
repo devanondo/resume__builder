@@ -1,9 +1,9 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { GraduationCap } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
+import Icon from '@/components/icon-picker/icon-wrapper'
 import EducationPopover from '@/components/popover/education-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
@@ -25,10 +25,6 @@ const EducationItems = () => {
         control,
     })
 
-    const iconMap = {
-        team: <GraduationCap className="w-8 h-8" />,
-    }
-
     return (
         <GroupItem popoverKey="educations">
             <SectionTitle name={'educations.name' as const} />
@@ -41,7 +37,7 @@ const EducationItems = () => {
                         key={field.id + i}
                     >
                         <div
-                            className="w-full flex px-2"
+                            className="w-full flex items-start px-2"
                             onClick={() => {
                                 dispatch(
                                     showPopover({
@@ -51,7 +47,8 @@ const EducationItems = () => {
                                 )
                             }}
                         >
-                            <div className="mr-2">{iconMap['team']}</div>
+                            <Icon name={`${name}[${i}].icon` as const} />
+
                             <div className="">
                                 <SubHeading
                                     name={`${name}[${i}].name` as const}

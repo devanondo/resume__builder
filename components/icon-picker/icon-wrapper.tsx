@@ -1,30 +1,29 @@
 /* eslint-disable no-unused-vars */
 'use client'
 
+import { cn } from '@/lib/utils'
 import { useState } from 'react'
-import { Button } from '../ui/button'
+import { Controller, useFormContext } from 'react-hook-form'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Separator } from '../ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { circumIcons, colorIcon } from './icons'
-import { cn } from '@/lib/utils'
 
 interface IconWrapperProps {
     icon?: string
     onChange?: (value: any) => void
-    rounded?: boolean
-    radius?: number
-    background?: boolean
-    backgroundColor?: string
+    className?: string
+}
+
+interface IconProps {
+    name: string
+    className?: string
 }
 
 const IconWrapper = ({
     icon = 'FcAcceptDatabase',
     onChange = () => {},
-    rounded = false,
-    radius = 0,
-    background = false,
-    backgroundColor = '#000',
+    className,
 }: IconWrapperProps) => {
     const [selectIcon, setSelectIcon] = useState(icon)
 
@@ -32,14 +31,7 @@ const IconWrapper = ({
 
     return (
         <Popover>
-            <PopoverTrigger
-                className={cn(
-                    'text-3xl',
-                    rounded && 'rounded-full',
-                    radius && `rounded-[${radius}]`,
-                    background && `bg-[${backgroundColor}]`
-                )}
-            >
+            <PopoverTrigger className={cn('text-3xl px-2', className)}>
                 {icons[selectIcon]}
             </PopoverTrigger>
             <PopoverContent className="p-0">
@@ -88,4 +80,24 @@ const IconWrapper = ({
     )
 }
 
-export default IconWrapper
+const Icon = ({ name, className }: IconProps) => {
+    const { control } = useFormContext()
+
+    return (
+        <Controller
+            name={name}
+            control={control}
+            render={({ field: f }) => {
+                return (
+                    <IconWrapper
+                        icon={f.value}
+                        className={className}
+                        onChange={f.onChange}
+                    />
+                )
+            }}
+        />
+    )
+}
+
+export default Icon

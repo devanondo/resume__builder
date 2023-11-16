@@ -1,12 +1,12 @@
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
+import Icon from '@/components/icon-picker/icon-wrapper'
 import StrengthPopover from '@/components/popover/strength-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { User2 } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import Paragraph from '../components/paragraph-section'
 import SectionTitle from '../components/section-title'
@@ -24,9 +24,6 @@ const StrengthSection = () => {
         control,
     })
 
-    const iconMap = {
-        team: <User2 className="w-6 h-6 mt-1" />,
-    }
     const { watchValue } = useWatchForm({ name })
 
     return (
@@ -52,7 +49,9 @@ const StrengthSection = () => {
                             }}
                         >
                             {watchValue[i]?.show_icon && (
-                                <div className="mr-1">{iconMap['team']}</div>
+                                <Icon name={`${name}[${i}].icon` as const} />
+
+                                // <div className="mr-1">{iconMap['team']}</div>
                             )}
                             <div className="">
                                 <SubTitle
@@ -61,7 +60,7 @@ const StrengthSection = () => {
                                     className="text-md font-semibold "
                                 />
 
-                                {watchValue[i]?.description.enabled && (
+                                {watchValue[i]?.description?.enabled && (
                                     <Paragraph
                                         name={
                                             `${name}[${i}].description.text` as const

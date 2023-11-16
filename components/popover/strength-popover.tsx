@@ -60,7 +60,7 @@ const StrengthPopover = ({
                         enabled: true,
                         name: '',
                         placeholder: 'Your Unique Talent',
-                        icon: 'team',
+                        icon: 'FcApproval',
                         show_icon: true,
                         description: {
                             text: '',
