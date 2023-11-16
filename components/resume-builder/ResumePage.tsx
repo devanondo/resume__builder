@@ -9,17 +9,18 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { useEffect, useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import IconWrapper from '../icon-picker/icon-wrapper'
 import { Button } from '../ui/button'
 import DeclarationSection from './declaration/Declaretion'
 import EducationItems from './education/education-items'
 import ExperienceSummery from './experience/experience-summery'
 import ResumeHeader from './header/resume-header'
 import LanguageSection from './languages/language-section'
+import ReferencesSection from './references/references'
 import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
 import { ItemsComponents } from './types/resume-layout-types'
-import ReferencesSection from './references/references'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -57,8 +58,36 @@ const ResumePage = () => {
     }
 
     const { resumeLayout } = useAppSelector((state) => state.layout)
+    // const [pages, setPages] = useState([
+    //     {
+    //         page: 1,
+    //         layout: resumeLayout,
+    //         nodes: [],
+    //         height: 0,
+    //     },
+    // ])
 
-    console.log(resumeLayout)
+    // const pagefn = () => {
+    //     refs.current?.childNodes.forEach((child) => {
+    //         let height = 0
+
+    //         child.childNodes.forEach((node) => {
+    //             height = height + node.offsetHeight
+    //             console.log(height)
+    //             if (height > 1000) {
+    //                 const pageData = pages[0]
+    //                 pageData.nodes.push(node)
+    //                 console.log(pageData)
+    //             }
+    //         })
+    //     })
+    // }
+
+    // useEffect(() => {
+    //     pagefn()
+
+    //     return () => {}
+    // })
 
     return (
         <>
@@ -71,6 +100,9 @@ const ResumePage = () => {
                 id="resume-bulder"
                 onClick={parentClick}
             >
+                <IconWrapper />
+                <IconWrapper />
+
                 <div onClick={(e) => e.stopPropagation()} className="">
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(onSubmit)}>

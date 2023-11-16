@@ -41,7 +41,7 @@ const ReferencesSection = () => {
                         key={field.id + i}
                     >
                         <div
-                            className="w-full flex px-2 py-2"
+                            className="w-full flex px-2 py-2 flex-col"
                             onClick={() => {
                                 dispatch(
                                     showPopover({
