@@ -6,16 +6,14 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { ChevronDown, ChevronUp, Plus, Trash } from 'lucide-react'
 import {
-    Controller,
     FieldValues,
     UseFieldArrayAppend,
     UseFieldArrayRemove,
     useFormContext,
 } from 'react-hook-form'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import { useEffect, useState } from 'react'
-import './custom-text-area.css'
+import TextBox from '../resume-builder-editable-div/components/Editable'
 import { FontSizeType, getFontSize } from '../resume-styles/utils/font-design'
 
 interface CustomTextAreaProps {
@@ -27,6 +25,7 @@ interface CustomTextAreaProps {
     remove: UseFieldArrayRemove
     fieldTitle: string
     className?: string
+    placeholder?: string
 }
 
 const CustomTextArea = ({
@@ -37,11 +36,12 @@ const CustomTextArea = ({
     remove,
     fieldTitle,
     className,
+    placeholder,
 }: CustomTextAreaProps) => {
     const { summeryPopoverKey } = useAppSelector((state) => state.popover)
 
     const dispatch = useAppDispatch()
-    const { control, setFocus } = useFormContext()
+    const { setFocus } = useFormContext()
     const [focusField, setFocusField] = useState('')
 
     const { layoutStyles } = useAppSelector((state) => state.layout)
@@ -54,7 +54,7 @@ const CustomTextArea = ({
         switch (e.key) {
             case 'Enter':
                 e.preventDefault()
-                append({ [fieldTitle]: '' })
+                append({ [fieldTitle]: '', placeholder })
                 setFocusField(focusKey(name, fields.length))
                 dispatch(
                     showPopover({
@@ -66,7 +66,7 @@ const CustomTextArea = ({
                 break
 
             case 'Backspace':
-                if (!e.target.value.length) {
+                if (!e.target?.value?.length) {
                     setFocusField(focusKey(name, index - 1))
                     remove(index)
                     dispatch(
@@ -84,42 +84,23 @@ const CustomTextArea = ({
         }
     }
 
-    const color = layoutStyles.secondaryColor
     const fontSize = getFontSize(
         layoutStyles.fontSize as FontSizeType
     ).paragraph
 
     return (
         <div className="relative w-full flex items-center custom__textarea_component">
-            {/* <div
-                onClick={() => {
-                    dispatch(
-                        showPopover({
-                            name: popkey(name, index),
-                            type: 'single__entry',
-                        })
-                    )
-                }}
-                className="w-full flex items-center"
-            > */}
-            <Controller
+            <TextBox
                 name={name}
-                control={control}
-                render={({ field }) => (
-                    <TextareaAutosize
-                        onKeyDown={handleKeydown}
-                        spellCheck={false}
-                        {...field}
-                        placeholder="What's the one thing that makes you that best candidate for this job?"
-                        className={cn(
-                            'custom__textarea w-full py-1 px-2 focus:bg-white resize-none outline-none bg-transparent text-sm text-[#74767E]',
-                            className
-                        )}
-                        style={{ color: color as string, fontSize }}
-                    />
+                onKeyDown={handleKeydown}
+                spellCheck={false}
+                placeholder={placeholder}
+                className={cn(
+                    'custom__textarea w-full py-1 px-2 focus:bg-white resize-none outline-none bg-transparent text-sm text-[#74767E]',
+                    className
                 )}
+                style={{ fontSize }}
             />
-            {/* </div> */}
 
             {summeryPopoverKey === name + index && (
                 <div
@@ -128,7 +109,7 @@ const CustomTextArea = ({
                 >
                     <Button
                         onClick={() => {
-                            append({ [fieldTitle]: '' })
+                            append({ [fieldTitle]: '', placeholder })
                             dispatch(
                                 showPopover({
                                     name: popkey(name, fields.length),
@@ -206,80 +187,6 @@ const CustomTextArea = ({
                     </Button>
                 </div>
             )}
-
-            {/* {summeryPopoverKey === name + index && (
-                <div className="textarea__modal p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
-                    <Button
-                        onClick={() => {
-                            append({ [fieldTitle]: '' })
-                            dispatch(
-                                showPopover({
-                                    name: popkey(name, fields.length),
-                                    type: 'single__entry',
-                                })
-                            )
-                        }}
-                        className="flex- gap-x-2 rounded-none w-[130px]"
-                    >
-                        <Plus className="w-4 h-4" /> New Entry
-                    </Button>
-
-                    <Button
-                        onClick={() => {
-                            dispatch(
-                                showPopover({
-                                    name: popkey(name, index + 1),
-                                    type: 'single__entry',
-                                })
-                            )
-                        }}
-                        className="flex- gap-x-2 rounded-none"
-                        disabled={index === fields.length - 1}
-                    >
-                        <ChevronDown className="w-4 h-4" />
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            dispatch(
-                                showPopover({
-                                    name: popkey(name, index - 1),
-                                    type: 'single__entry',
-                                })
-                            )
-                        }}
-                        disabled={index === 0}
-                        className="flex- gap-x-2 rounded-none"
-                    >
-                        <ChevronUp className="w-4 h-4" />
-                    </Button>
-
-                    <Button
-                        onClick={() => {
-                            remove(index)
-                            if (fields.length - 1 === index) {
-                                dispatch(
-                                    showPopover({
-                                        name: popkey(name, index - 1),
-                                        type: 'single__entry',
-                                    })
-                                )
-                            } else {
-                                dispatch(
-                                    showPopover({
-                                        name: popkey(name, index),
-                                        type: 'single__entry',
-                                    })
-                                )
-                            }
-                        }}
-                        className="rounded-none"
-                        variant="secondary"
-                        type="button"
-                    >
-                        <Trash className="w-4 h-4 " />
-                    </Button>
-                </div>
-            )} */}
         </div>
     )
 }

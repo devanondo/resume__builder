@@ -21,6 +21,7 @@ import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
 import { ItemsComponents } from './types/resume-layout-types'
 
+import { useReactToPrint } from 'react-to-print'
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
         (state) => state.popover
@@ -58,61 +59,43 @@ const ResumePage = () => {
 
     const { resumeLayout } = useAppSelector((state) => state.layout)
 
-    // const [pages, setPages] = useState([
-    //     {
-    //         page: 1,
-    //         layout: resumeLayout,
-    //         nodes: [],
-    //         height: 0,
-    //     },
-    // ])
+    const divRef = useRef<HTMLDivElement>(null)
 
-    // const pagefn = () => {
-    //     refs.current?.childNodes.forEach((child) => {
-    //         let height = 0
+    const handleButtonClick = () => {
+        handlePrint()
+    }
 
-    //         child.childNodes.forEach((node) => {
-    //             height = height + node.offsetHeight
-    //             console.log(height)
-    //             if (height > 1000) {
-    //                 const pageData = pages[0]
-    //                 pageData.nodes.push(node)
-    //                 console.log(pageData)
-    //             }
-    //         })
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     pagefn()
-
-    //     return () => {}
-    // })
+    const handlePrint = useReactToPrint({
+        content: () => divRef.current!,
+    })
 
     return (
-        <>
-            <div
-                className={cn(
-                    ` top-[100px] left-1/2 p-12 absolute -translate-x-1/2  w-[940px] border border-zinc-300 h-[1330px] bg-white`,
-                    summeryPopoverKey && 'bg-[#dddce0]',
-                    groupPopoverKey && 'bg-[#dddce0]'
-                )}
-                id="resume-bulder"
-                onClick={parentClick}
-            >
-                <p className="">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Laboriosam ipsam quia commodi repellat ex sapiente officia.
-                    Eveniet eum dolore commodi ab assumenda temporibus nesciunt
-                    nihil ut amet nam. Ea eveniet eligendi accusamus fugit vero
-                    explicabo magni laborum soluta consectetur qui! Vero
-                    similique sapiente repellendus qui provident quidem adipisci
-                    mollitia ad?
-                </p>
+        <div>
+            <div onClick={(e) => e.stopPropagation()} className="w-full">
+                <FormProvider {...methods}>
+                    <form onSubmit={methods.handleSubmit(onSubmit)}>
+                        <div className="flex items-center gap-x-5 mb-5">
+                            <Button className="">Submit</Button>
 
-                <div onClick={(e) => e.stopPropagation()} className="">
-                    <FormProvider {...methods}>
-                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                            <Button
+                                onClick={() => {
+                                    handleButtonClick()
+                                }}
+                                type="button"
+                            >
+                                download
+                            </Button>
+                        </div>
+                        <div
+                            className={cn(
+                                ` p-16 w-[940px] border  h-[1325px] bg-white`,
+                                summeryPopoverKey && 'bg-[#dddce0]',
+                                groupPopoverKey && 'bg-[#dddce0]'
+                            )}
+                            id="resume-builder"
+                            onClick={parentClick}
+                            ref={divRef}
+                        >
                             <ResumeHeader />
 
                             <div
@@ -140,17 +123,17 @@ const ResumePage = () => {
                                     )
                                 })}
                             </div>
-                            <Button className="mt-10">Submit</Button>
-                        </form>
-                    </FormProvider>
-                </div>
+                        </div>
+                    </form>
+                </FormProvider>
+            </div>
 
-                {/* <ContentProvider> */}
+            {/* <ContentProvider> */}
 
-                {/* <ResumeHeader /> */}
-                {/* </ContentProvider> */}
+            {/* <ResumeHeader /> */}
+            {/* </ContentProvider> */}
 
-                {/* <div className="grid grid-cols-5 gap-x-5">
+            {/* <div className="grid grid-cols-5 gap-x-5">
                             <div className="col-span-3">
                                 <ResumeSummery />
                                 <ExperienceSummery />
@@ -162,8 +145,7 @@ const ResumePage = () => {
                                 <StrengthSection />
                             </div>
                         </div> */}
-            </div>
-        </>
+        </div>
     )
 }
 

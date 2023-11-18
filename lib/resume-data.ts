@@ -30,10 +30,11 @@ export const resumeFormData = {
         name: 'Summery',
         record: 'SummerySection',
         enabled: true,
-        text: [
+        items: [
             {
                 summery:
                     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, fuga magnam atque ipsum et vero corrupti odit facere quibusdam impedit similique, asperiores commodi voluptatibus tempore facilis vel nisi porro eaque repudiandae odio nemo consectetur? Ducimus a, provident dolor officiis quia distinctio nihil quasi recusandae neque doloribus deserunt quis natus nesciunt?',
+                placeholder: 'Write something about yourself!',
             },
         ],
     },
@@ -71,9 +72,8 @@ export const resumeFormData = {
                     items: [
                         {
                             text: 'bullet description',
-                        },
-                        {
-                            text: 'bullet description2',
+                            placeholder:
+                                'Whats the one thing that makes you best candidate for this job?',
                         },
                     ],
                 },
@@ -87,6 +87,7 @@ export const resumeFormData = {
         items: [
             {
                 title: 'Language & Libraries',
+                placeholder: 'Language & Libraries',
                 show_title: true,
                 bold_title: true,
                 italic_title: true,

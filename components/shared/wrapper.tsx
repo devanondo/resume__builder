@@ -34,9 +34,9 @@ const GroupItem = ({ children, popoverKey, className }: GroupItemProps) => {
                 }
             }}
             className={cn(
-                'rounded border border-[transparent] hover:border-green-500',
+                'rounded border border-[transparent] pt-1',
                 className,
-                groupPopoverKey === popoverKey && 'bg-white'
+                groupPopoverKey === popoverKey && 'bg-white border-green-500'
             )}
         >
             {children}
