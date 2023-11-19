@@ -1,14 +1,12 @@
 import React from 'react'
 
+import NavigationSidebar from '@/components/navigation/navigation-sidebar'
 import { ModalProvider } from '@/components/provider/ModalProvider'
+import { bitter } from '@/lib/font'
 import ReduxProvider from '@/redux/redux-provider'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import './main.scss'
-import NavigationSidebar from '@/components/navigation/navigation-sidebar'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'Resume Builder',
@@ -22,7 +20,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={` ${bitter.className}  `}>
                 <ReduxProvider>
                     <div className="h-full">
                         <div className="hidden md:!flex h-full w-[72px] z-30 flex-col fixed inset-y-0">

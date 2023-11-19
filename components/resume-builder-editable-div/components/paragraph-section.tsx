@@ -7,6 +7,7 @@ import {
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
+import { roboto } from '@/lib/font'
 
 const Paragraph = ({
     name,
@@ -27,8 +28,12 @@ const Paragraph = ({
         <>
             <TextBox
                 name={name}
-                className={cn('px-2', className)}
                 style={{ fontSize }}
+                className={cn(
+                    'px-2 text-[14px] leading-[17px] text-[#384347]',
+                    roboto.className,
+                    className
+                )}
                 placeholder={placeholder}
             />
         </>

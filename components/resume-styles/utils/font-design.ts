@@ -14,8 +14,8 @@ export const getFontSize = (level: FontSizeType) => {
         case 'medium':
             return {
                 heading: '22px',
-                title: '18px',
-                subHeading: '16px',
+                title: '22px',
+                subHeading: '18px',
                 subTitle: '15px',
                 paragraph: '14px',
             }

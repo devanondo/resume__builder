@@ -14,10 +14,10 @@ export const resumeFormData = {
         link: 'github.com/devanondo',
         extra_link: 'dev-abormon.vercel.app',
         extra_field: 'linkedin.com/in/anondo-bormon',
-        show_title: false,
+        show_title: true,
         show_phone: true,
         show_link: true,
-        show_email: false,
+        show_email: true,
         show_location: true,
         show_extraLink: true,
         show_extraField: true,
@@ -33,7 +33,7 @@ export const resumeFormData = {
         items: [
             {
                 summery:
-                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, fuga magnam atque ipsum et vero corrupti odit facere quibusdam impedit similique, asperiores commodi voluptatibus tempore facilis vel nisi porro eaque repudiandae odio nemo consectetur? Ducimus a, provident dolor officiis quia distinctio nihil quasi recusandae neque doloribus deserunt quis natus nesciunt?',
+                    'Analytical and precise professional with 2 years of hands-on experience in both frontend web development and backend web development. The full-Stack web developer is proficient in fundamental front-end and server-side languages, with an in-depth understanding of user interface design, data rendering, and backend logic implementation. Eager to tackle web development design challenges to improve user experience. Ability to work independently and in a team environment.',
                 placeholder: 'Write something about yourself!',
             },
         ],
@@ -49,7 +49,7 @@ export const resumeFormData = {
                 enabled: true,
                 position: 'Full Stackweb developer',
                 bold_position: true,
-                workplace: 'Fiverr',
+                workplace: '<a href="www.google.com">Fiverr</a>',
                 location: 'San Fransisco, CA',
                 show_location: false,
 
@@ -147,9 +147,6 @@ export const resumeFormData = {
                     items: [
                         {
                             text: 'bullet description',
-                        },
-                        {
-                            text: 'bullet description2',
                         },
                     ],
                 },

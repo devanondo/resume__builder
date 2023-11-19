@@ -96,11 +96,22 @@ const CustomTextArea = ({
                 spellCheck={false}
                 placeholder={placeholder}
                 className={cn(
-                    'custom__textarea w-full py-1 px-2 focus:bg-white resize-none outline-none bg-transparent text-sm text-[#74767E]',
+                    'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
                     className
                 )}
                 style={{ fontSize }}
             />
+
+            {/* <URL
+                className={cn(
+                    'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
+                    className
+                )}
+                placeholder={placeholder}
+                name={name}
+                onKeyDown={handleKeydown}
+                spellCheck={false}
+            /> */}
 
             {summeryPopoverKey === name + index && (
                 <div

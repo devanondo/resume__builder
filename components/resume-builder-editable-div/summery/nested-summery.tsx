@@ -18,7 +18,7 @@ const NestedSummery = () => {
             {fields?.map((field: any, i: number) => {
                 return (
                     <AItem
-                        popoverKey={`${name}.${i}.summery0`}
+                        popoverKey={`${name}.${i}.summery${i}`}
                         key={field.id}
                         className="a_item"
                     >
@@ -29,7 +29,7 @@ const NestedSummery = () => {
                             append={append}
                             remove={remove}
                             fieldTitle="summery"
-                            className="text-justify"
+                            className="text-justify text-[#384347] text-[14px] leading-[17px]"
                             placeholder={field.placeholder}
                         />
                     </AItem>

@@ -40,7 +40,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             name={`${name}.${i}.position` as const}
                             className={cn(
                                 'py-0 px-2',
-                                watchValue[i]?.bold_position && 'font-semibold'
+                                watchValue[i]?.bold_position && 'font-normal'
                             )}
                             placeholder="Position"
                         />
