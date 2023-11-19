@@ -7,6 +7,8 @@ import { Controller, useFormContext } from 'react-hook-form'
 interface EditableDivProps extends HTMLAttributes<HTMLDivElement> {
     value: string
     className?: string
+    link?: boolean
+    href?: string
 }
 
 const EditableDiv = ({
@@ -15,6 +17,9 @@ const EditableDiv = ({
     onBlur = () => {},
     className,
     placeholder,
+    link,
+    href,
+
     ...props
 }: EditableDivProps) => {
     const [content, setContent] = useState(value)
@@ -59,26 +64,52 @@ const EditableDiv = ({
     }
 
     return (
-        <div
-            dangerouslySetInnerHTML={{ __html: content }}
-            contentEditable={true}
-            placeholder={placeholder}
-            onInput={onchange}
-            onBlur={onblur}
-            className={className}
-            ref={contentEditableRef}
-            onClick={handleClick}
-            {...props}
-        />
+        <>
+            {!link ? (
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: content,
+                    }}
+                    contentEditable={true}
+                    placeholder={placeholder}
+                    onInput={onchange}
+                    onBlur={onblur}
+                    className={className}
+                    ref={contentEditableRef}
+                    onClick={handleClick}
+                    {...props}
+                />
+            ) : (
+                <a
+                    onClick={(e) => e.preventDefault()}
+                    href={href ? `mailto:${content}` : `https:${content}`}
+                    style={{ textDecoration: 'none', cursor: 'auto' }}
+                >
+                    <div
+                        dangerouslySetInnerHTML={{ __html: content }}
+                        contentEditable={true}
+                        placeholder={placeholder}
+                        onInput={onchange}
+                        onBlur={onblur}
+                        className={className}
+                        ref={contentEditableRef}
+                        onClick={handleClick}
+                        {...props}
+                    />
+                </a>
+            )}
+        </>
     )
 }
 
 interface TextBoxProps extends HTMLAttributes<HTMLDivElement> {
     name: string
     className?: string
+    link?: boolean
+    href?: string
 }
 
-const TextBox = ({ name, className, ...props }: TextBoxProps) => {
+const TextBox = ({ name, className, link, href, ...props }: TextBoxProps) => {
     const { control } = useFormContext()
 
     return (
@@ -91,6 +122,8 @@ const TextBox = ({ name, className, ...props }: TextBoxProps) => {
                         className={className}
                         onChange={field.onChange}
                         value={field.value}
+                        href={href}
+                        link={link}
                         {...props}
                     />
                 )
