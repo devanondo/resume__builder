@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from 'react'
 import TextBox from '../resume-builder-editable-div/components/Editable'
 import { FontSizeType, getFontSize } from '../resume-styles/utils/font-design'
+import { roboto } from '@/lib/font'
 
 interface CustomTextAreaProps {
     fields: Record<'id', string>[]
@@ -96,11 +97,23 @@ const CustomTextArea = ({
                 spellCheck={false}
                 placeholder={placeholder}
                 className={cn(
-                    'custom__textarea w-full py-1 px-2 focus:bg-white resize-none outline-none bg-transparent text-sm text-[#74767E]',
-                    className
+                    'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
+                    className,
+                    roboto.className
                 )}
                 style={{ fontSize }}
             />
+
+            {/* <URL
+                className={cn(
+                    'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
+                    className
+                )}
+                placeholder={placeholder}
+                name={name}
+                onKeyDown={handleKeydown}
+                spellCheck={false}
+            /> */}
 
             {summeryPopoverKey === name + index && (
                 <div

@@ -113,3 +113,10 @@ div[contenteditable='true'] {
         rgba(0, 0, 0, 0.3) 0px 19px 38px,
         rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
+
+#resume-builder * {
+    transition: 0.3s ease;
+}
+a {
+    text-decoration: underline;
+}

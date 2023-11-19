@@ -40,7 +40,7 @@ const StrengthSection = () => {
                     key={field.id + i}
                 >
                     <div
-                        className="w-full flex"
+                        className="w-full flex pb-1"
                         onClick={() => {
                             dispatch(
                                 showPopover({
@@ -52,8 +52,6 @@ const StrengthSection = () => {
                     >
                         {watchValue[i]?.show_icon && (
                             <Icon name={`${name}[${i}].icon` as const} />
-
-                            // <div className="mr-1">{iconMap['team']}</div>
                         )}
                         <div className="">
                             <SubTitle
@@ -77,6 +75,12 @@ const StrengthSection = () => {
                             )}
                         </div>
                     </div>
+
+                    {fields.length - 1 !== i ? (
+                        <div className="w-full px-2">
+                            <div className="border-b w-full border-dashed"></div>
+                        </div>
+                    ) : null}
 
                     {groupPopoverKey === name + i && (
                         <StrengthPopover

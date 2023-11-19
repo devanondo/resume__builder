@@ -22,9 +22,10 @@ const SectionTitle = ({
         <>
             <TextBox
                 name={name}
-                className="text-2xl px-2 font-bold uppercase rounded focus:bg-transparent"
+                className="px-2 font-bold uppercase rounded focus:bg-transparent"
                 style={{
                     fontSize,
+                    lineHeight: '26px',
                     color: color as string,
                 }}
                 placeholder={placeholder}
@@ -32,7 +33,7 @@ const SectionTitle = ({
             <div className="w-full px-2">
                 <div
                     style={{
-                        borderBottom: `3px solid ${color}`,
+                        borderBottom: `2.5px solid ${color}`,
                     }}
                     className=""
                 ></div>

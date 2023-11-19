@@ -69,6 +69,18 @@ const ResumePage = () => {
         content: () => divRef.current!,
     })
 
+    useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                parentClick()
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyPress)
+
+        return () => document.removeEventListener('keydown', handleKeyPress)
+    })
+
     return (
         <div>
             <div onClick={(e) => e.stopPropagation()} className="w-full">
@@ -86,9 +98,10 @@ const ResumePage = () => {
                                 download
                             </Button>
                         </div>
+
                         <div
                             className={cn(
-                                ` p-16 w-[940px] border  h-[1325px] bg-white`,
+                                ` p-12 w-[940px] border  h-[1325px] bg-white`,
                                 summeryPopoverKey && 'bg-[#dddce0]',
                                 groupPopoverKey && 'bg-[#dddce0]'
                             )}
@@ -101,7 +114,7 @@ const ResumePage = () => {
                             <div
                                 ref={refs}
                                 onClick={parentClick}
-                                className="grid grid-cols-12 gap-x-5"
+                                className="grid grid-cols-12 gap-x-2"
                             >
                                 {resumeLayout?.map((item, index) => {
                                     return (
@@ -127,24 +140,6 @@ const ResumePage = () => {
                     </form>
                 </FormProvider>
             </div>
-
-            {/* <ContentProvider> */}
-
-            {/* <ResumeHeader /> */}
-            {/* </ContentProvider> */}
-
-            {/* <div className="grid grid-cols-5 gap-x-5">
-                            <div className="col-span-3">
-                                <ResumeSummery />
-                                <ExperienceSummery />
-                                <EducationItems />
-                            </div>
-                            <div className="col-span-2">
-                                <SkillsSection />
-
-                                <StrengthSection />
-                            </div>
-                        </div> */}
         </div>
     )
 }

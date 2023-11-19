@@ -12,6 +12,7 @@ import Paragraph from '../components/paragraph-section'
 import SectionTitle from '../components/section-title'
 import SubHeading from '../components/sub-heading-section'
 import SubTitle from '../components/sub-title-section'
+import { useWatchForm } from '@/components/hooks/use-form-watch'
 
 const EducationItems = () => {
     const name = 'educations.items'
@@ -25,6 +26,8 @@ const EducationItems = () => {
         control,
     })
 
+    const { watchValue } = useWatchForm({ name })
+
     return (
         <GroupItem popoverKey="educations">
             <SectionTitle
@@ -35,11 +38,11 @@ const EducationItems = () => {
             {fields.map((field: any, i) => (
                 <GroupItem
                     popoverKey={name + i}
-                    className="relative"
+                    className="relative w-full"
                     key={field.id + i}
                 >
                     <div
-                        className="w-full flex items-start px-2  border-dashed border-b"
+                        className="w-full flex items-start"
                         onClick={() => {
                             dispatch(
                                 showPopover({
@@ -58,23 +61,17 @@ const EducationItems = () => {
                                 className="text-md font-semibold "
                             />
 
-                            {/* {watchValue[i].description.enabled && ( */}
-
-                            <div className="flex">
-                                <SubTitle
-                                    name={
-                                        `${name}[${i}].institution.name` as const
-                                    }
-                                    placeholder={
-                                        field.institution?.placeholder || ''
-                                    }
-                                    className={cn('text-sm font-bold')}
-                                />
-                            </div>
-                            {/* )} */}
-
-                            <div className="flex items-start gap-x-3 justify-between ">
+                            <div className="flex items-start gap-x-3 justify-between  py-2">
                                 <div className="">
+                                    <SubTitle
+                                        name={
+                                            `${name}[${i}].institution.name` as const
+                                        }
+                                        placeholder={
+                                            field.institution?.placeholder || ''
+                                        }
+                                        className={cn('text-sm font-bold')}
+                                    />
                                     <Paragraph
                                         name={
                                             `${name}[${i}].date.from` as const
@@ -93,52 +90,63 @@ const EducationItems = () => {
                                         className={cn('text-sm p-0')}
                                     />
                                 </div>
-                                <div className=" border-l border-[#9d9d9d] w-fit">
-                                    <SubHeading
-                                        name={
-                                            `${name}[${i}].institution.gpa` as const
-                                        }
-                                        placeholder={
-                                            field.institution
-                                                ?.placeholder_gpa || ''
-                                        }
-                                        className={cn(
-                                            'text-md text-center italic font-semibold uppercase'
-                                        )}
-                                    />
-
-                                    <div className="flex items-center">
-                                        <Paragraph
+                                {watchValue[i]?.show__institution && (
+                                    <div className="border-l-2 border-[#74767E] w-fit px-3 py-2">
+                                        <SubHeading
                                             name={
-                                                `${name}[${i}].institution.gpa_score` as const
+                                                `${name}[${i}].institution.gpa` as const
                                             }
                                             placeholder={
                                                 field.institution
-                                                    ?.placeholder_gpa_score ||
-                                                ''
+                                                    ?.placeholder_gpa || 'GPA'
                                             }
-                                            className={cn('text-sm text-right')}
+                                            className={cn(
+                                                'text-md text-center italic font-semibold uppercase  !text-[#74767E]'
+                                            )}
                                         />
+                                        <div className="flex items-center -mt-2">
+                                            <Paragraph
+                                                name={
+                                                    `${name}[${i}].institution.gpa_score` as const
+                                                }
+                                                placeholder={
+                                                    field.institution
+                                                        ?.placeholder_gpa_score ||
+                                                    '4.00'
+                                                }
+                                                className={cn(
+                                                    'text-sm text-right text-[#74767E]'
+                                                )}
+                                            />
 
-                                        <div className="flex items-center justify-center -mt-2">
-                                            /
+                                            <div className="flex items-center justify-center ">
+                                                /
+                                            </div>
+
+                                            <Paragraph
+                                                name={
+                                                    `${name}[${i}].institution.gpa_max` as const
+                                                }
+                                                placeholder={
+                                                    field.institution
+                                                        ?.placeholder_gpa_max ||
+                                                    '4.00'
+                                                }
+                                                className={cn(
+                                                    'text-sm text-[#74767E]'
+                                                )}
+                                            />
                                         </div>
-
-                                        <Paragraph
-                                            name={
-                                                `${name}[${i}].institution.gpa_max` as const
-                                            }
-                                            placeholder={
-                                                field.institution
-                                                    ?.placeholder_gpa_max || ''
-                                            }
-                                            className={cn('text-sm')}
-                                        />
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
+                    {fields.length - 1 !== i ? (
+                        <div className="w-full px-2">
+                            <div className="border-b w-full border-dashed"></div>
+                        </div>
+                    ) : null}
 
                     {groupPopoverKey === name + i && (
                         <EducationPopover

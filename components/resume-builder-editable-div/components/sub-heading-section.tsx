@@ -7,16 +7,18 @@ import {
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
+import { HTMLAttributes } from 'react'
+
+interface SubHeadingProps extends HTMLAttributes<HTMLDivElement> {
+    name: string
+}
 
 const SubHeading = ({
     name,
     className,
     placeholder,
-}: {
-    name: string
-    className?: string
-    placeholder: string
-}) => {
+    ...props
+}: SubHeadingProps) => {
     const { layoutStyles } = useAppSelector((state) => state.layout)
 
     const fontSize = getFontSize(
@@ -38,6 +40,7 @@ const SubHeading = ({
                     color: color as string,
                 }}
                 placeholder={placeholder || ''}
+                {...props}
             />
         </>
     )

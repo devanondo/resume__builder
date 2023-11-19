@@ -41,6 +41,10 @@ interface EducationPopoverProps {
 
 const settings = [
     {
+        title: 'Show Institution',
+        render: 'show__institution',
+    },
+    {
         title: 'Show Location',
         render: 'show_location',
     },
@@ -78,7 +82,7 @@ const EducationPopover = ({
                         institution: {
                             name: 'Dhaka International University',
                             placeholder: 'School / University',
-                            gpa: '4.00',
+                            gpa: 'CGPA',
                             placeholder_gpa: 'CGPA',
                             gpa_score: '4.00',
                             placeholder_gpa_score: '4.00',
@@ -89,6 +93,8 @@ const EducationPopover = ({
                         location: 'Dhaka, Bangladesh',
                         show_location: true,
                         show_location_icon: true,
+                        show__institution: true,
+
                         date: {
                             record: 'DateRange',
                             placeholder: 'Date',

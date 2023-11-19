@@ -69,6 +69,8 @@ const ExperienceGroupPopover = ({
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
+    console.log(fields.length, 'form experience')
+
     return (
         <AItem className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
             <Button
@@ -180,6 +182,7 @@ const ExperienceGroupPopover = ({
                         )
                     }
                 }}
+                disabled={fields.length < 2}
                 className="rounded-none"
                 variant="secondary"
                 type="button"
