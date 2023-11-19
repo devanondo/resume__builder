@@ -33,13 +33,13 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                 <GroupItem
                     popoverKey={name + i}
                     key={field.id}
-                    className="relative a__item"
+                    className="relative a__item "
                 >
                     <div>
                         <SubHeading
                             name={`${name}.${i}.position` as const}
                             className={cn(
-                                'py-0 px-2',
+                                'py-0 px-2 leading-[26px]',
                                 watchValue[i]?.bold_position && 'font-normal'
                             )}
                             placeholder="Position"
@@ -74,7 +74,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             <Paragraph
                                 name={`${name}.${i}.description.text` as const}
                                 className={cn(
-                                    ' text-sm text-justify mt-1 mb-1',
+                                    ' text-sm text-justify mt-1 mb-1 font-[14px] leading-[17px] pb-1',
                                     watchValue[i].description
                                         .italic_description && 'italic'
                                 )}

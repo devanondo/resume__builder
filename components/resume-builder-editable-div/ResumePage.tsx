@@ -114,7 +114,7 @@ const ResumePage = () => {
                             <div
                                 ref={refs}
                                 onClick={parentClick}
-                                className="grid grid-cols-12 gap-x-5"
+                                className="grid grid-cols-12 gap-x-2"
                             >
                                 {resumeLayout?.map((item, index) => {
                                     return (

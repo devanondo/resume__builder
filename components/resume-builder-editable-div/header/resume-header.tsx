@@ -138,7 +138,7 @@ const ResumeHeader = () => {
         <GroupItem
             popoverKey="header"
             className={cn(
-                ' w-full rounded-md flex flex-col border-0 group__item relative'
+                ' w-full rounded-md flex flex-col border-0 group__item relative p-0'
             )}
         >
             {groupPopoverKey === 'header' && (
@@ -216,7 +216,14 @@ const ResumeHeader = () => {
             )}
 
             <div className="flex gap-x-10 justify-between items-start a__item p-2 ">
-                <div className="flex-1 grid grid-cols-2 gap-x-1 ">
+                <div
+                    className="flex-1 grid  gap-x-1 "
+                    style={{
+                        gridTemplateColumns: `repeat(${
+                            watchingValue?.show_photo ? 2 : 3
+                        }, 1fr)`,
+                    }}
+                >
                     <Heading
                         name={`header.name` as const}
                         className={cn(
@@ -228,7 +235,9 @@ const ResumeHeader = () => {
                         <SubHeading
                             name="header.title"
                             placeholder="The role you are playing for?"
-                            className="col-span-2 font-extrabold"
+                            className={`col-span-${
+                                watchingValue?.show_photo ? 2 : 3
+                            } font-extrabold`}
                         />
                     ) : null}
 
@@ -260,9 +269,11 @@ const ResumeHeader = () => {
                     })}
                 </div>
 
-                <div className="photo w-[140px] h-[150px] rounded flex items-center justify-center border">
-                    photo
-                </div>
+                {watchingValue?.show_photo ? (
+                    <div className="photo w-[140px] h-[150px] rounded flex items-center justify-center border">
+                        photo
+                    </div>
+                ) : null}
             </div>
         </GroupItem>
     )

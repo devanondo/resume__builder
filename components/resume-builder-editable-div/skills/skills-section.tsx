@@ -51,8 +51,7 @@ const SkillsSection = () => {
                                 name={`${name}[${i}].title` as const}
                                 className={cn(
                                     'text-md font-semibold px-2',
-
-                                    watchValue[i].bold_title && 'font-bold',
+                                    watchValue[i].bold_title && 'font-semibold',
                                     watchValue[i].italic_title && 'italic'
                                 )}
                             />

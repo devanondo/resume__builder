@@ -71,7 +71,7 @@ export const resumeFormData = {
                     name: 'bulets',
                     items: [
                         {
-                            text: 'bullet description',
+                            text: 'Bullet description',
                             placeholder:
                                 'Whats the one thing that makes you best candidate for this job?',
                         },
@@ -92,23 +92,23 @@ export const resumeFormData = {
                 bold_title: true,
                 italic_title: true,
                 underline_key: true,
-                italic_key: true,
+                italic_key: false,
                 bold_key: true,
                 keys: [
                     {
-                        keyItem: 'javaript',
+                        keyItem: 'LEAN Manufactureing',
                     },
                     {
-                        keyItem: 'java',
+                        keyItem: 'Root Cause Analysis',
                     },
                     {
-                        keyItem: 'javascript',
+                        keyItem: 'Scheduling',
                     },
                     {
-                        keyItem: 'javat',
+                        keyItem: 'Process Modeling',
                     },
                     {
-                        keyItem: 'javascript',
+                        keyItem: 'Design of Experients',
                     },
                 ],
             },
@@ -218,6 +218,7 @@ export const resumeFormData = {
                 location: 'Dhaka, Bangladesh',
                 show_location: true,
                 show_location_icon: true,
+                show__institution: true,
                 date: {
                     record: 'DateRange',
                     placeholder: 'Date',

@@ -48,9 +48,9 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
     }, [setFocus, focusField])
 
     return (
-        <div className="flex gap-x-3 gap-y-2 capitalize w-full overflow-hidden flex-wrap">
+        <div className="flex gap-x-2 gap-y-2 capitalize w-full overflow-hidden flex-wrap px-2">
             {fields.map((field: any, index: number) => (
-                <div className="relative flex flex-wrap group" key={field.id}>
+                <div className="relative flex flex-wrap group " key={field.id}>
                     <div className="relative">
                         <TextBox
                             onKeyDown={(e) => handleKeyDown(e, index)}
@@ -59,10 +59,14 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                             className={cn(
                                 'w-fit px-2 pb-1',
 
-                                watchParent.italic_key && ' italic',
-                                watchParent.underline_key && 'border',
+                                watchParent.italic_key && 'italic',
+                                watchParent.underline_key &&
+                                    '!border-b-2 !border-zinc-500',
                                 watchParent.bold_key && ' font-bold'
                             )}
+                            style={{
+                                borderBottom: `2px solid red`,
+                            }}
                         />
                     </div>
                 </div>
