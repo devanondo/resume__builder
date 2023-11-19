@@ -66,6 +66,7 @@ const ResumeHeader = () => {
             render: 'show_phone',
             col: 1,
             class: 'font-semibold',
+            link: false,
         },
         {
             title: 'Show Link',
@@ -74,6 +75,7 @@ const ResumeHeader = () => {
             render: 'show_link',
             col: 1,
             class: 'font-semibold',
+            link: true,
         },
         {
             title: 'Show Extra link',
@@ -82,6 +84,7 @@ const ResumeHeader = () => {
             render: 'show_extraLink',
             class: 'font-semibold',
             col: 1,
+            link: true,
         },
         {
             title: 'Show Email',
@@ -90,6 +93,8 @@ const ResumeHeader = () => {
             render: 'show_email',
             col: 1,
             class: 'font-semibold',
+            link: false,
+            href: 'mailto',
         },
         {
             title: 'Show Location',
@@ -98,6 +103,7 @@ const ResumeHeader = () => {
             render: 'show_location',
             class: 'font-semibold',
             col: 1,
+            link: false,
         },
         {
             title: 'Show Icons',
@@ -261,6 +267,8 @@ const ResumeHeader = () => {
                                             className={cn(
                                                 item.class && item.class
                                             )}
+                                            link={item?.link}
+                                            href={item.href}
                                         />
                                     </div>
                                 }

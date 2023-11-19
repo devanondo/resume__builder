@@ -8,16 +8,16 @@ import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
 import { roboto } from '@/lib/font'
+import { CommonSectionProps } from './types'
 
 const Paragraph = ({
     name,
     className,
     placeholder,
-}: {
-    name: string
-    className?: string
-    placeholder?: string
-}) => {
+    link,
+    href,
+    ...props
+}: CommonSectionProps) => {
     const { layoutStyles } = useAppSelector((state) => state.layout)
 
     const fontSize = getFontSize(
@@ -35,6 +35,9 @@ const Paragraph = ({
                     className
                 )}
                 placeholder={placeholder}
+                {...props}
+                href={href}
+                link={link}
             />
         </>
     )

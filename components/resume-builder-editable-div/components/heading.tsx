@@ -4,16 +4,9 @@ import Text from '@/components/shared/Text'
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import { Controller, useFormContext } from 'react-hook-form'
+import { CommonSectionProps } from './types'
 
-const Heading = ({
-    name,
-    className,
-    placeholder,
-}: {
-    name: string
-    className?: string
-    placeholder?: string
-}) => {
+const Heading = ({ name, className, placeholder }: CommonSectionProps) => {
     const { control } = useFormContext()
 
     const { layoutStyles } = useAppSelector((state) => state.layout)

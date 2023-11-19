@@ -7,16 +7,16 @@ import {
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
+import { CommonSectionProps } from './types'
 
 const SubTitle = ({
     name,
     className,
     placeholder,
-}: {
-    name: string
-    className?: string
-    placeholder?: string
-}) => {
+    link,
+    href,
+    ...props
+}: CommonSectionProps) => {
     const { layoutStyles } = useAppSelector((state) => state.layout)
     const fontSize = getFontSize(layoutStyles.fontSize as FontSizeType).subTitle
     const color = layoutStyles.primaryColor
@@ -31,6 +31,9 @@ const SubTitle = ({
                 )}
                 placeholder={placeholder}
                 style={{ fontSize, color: color as string }}
+                href={href}
+                link={link}
+                {...props}
             />
         </>
     )

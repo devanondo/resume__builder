@@ -7,18 +7,16 @@ import {
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
-import { HTMLAttributes } from 'react'
-
-interface SubHeadingProps extends HTMLAttributes<HTMLDivElement> {
-    name: string
-}
+import { CommonSectionProps } from './types'
 
 const SubHeading = ({
     name,
     className,
     placeholder,
+    link,
+    href,
     ...props
-}: SubHeadingProps) => {
+}: CommonSectionProps) => {
     const { layoutStyles } = useAppSelector((state) => state.layout)
 
     const fontSize = getFontSize(
@@ -40,6 +38,8 @@ const SubHeading = ({
                     color: color as string,
                 }}
                 placeholder={placeholder || ''}
+                href={href}
+                link={link}
                 {...props}
             />
         </>

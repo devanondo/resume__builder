@@ -6,14 +6,15 @@ import {
 } from '@/components/resume-styles/utils/font-design'
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
+import { CommonSectionProps } from './types'
 
 const SectionTitle = ({
     name,
     placeholder,
-}: {
-    name: string
-    placeholder: string
-}) => {
+    link,
+    href,
+    ...props
+}: CommonSectionProps) => {
     const { layoutStyles } = useAppSelector((state) => state.layout)
     const fontSize = getFontSize(layoutStyles.fontSize as FontSizeType).title
     const color = layoutStyles.primaryColor
@@ -29,6 +30,9 @@ const SectionTitle = ({
                     color: color as string,
                 }}
                 placeholder={placeholder}
+                href={href}
+                link={link}
+                {...props}
             />
             <div className="w-full px-2">
                 <div
