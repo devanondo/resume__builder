@@ -20,6 +20,7 @@ import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
 import { ItemsComponents } from './types/resume-layout-types'
+import ProjectsItems from '../resume-builder-editable-div/projects/projects'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -36,6 +37,7 @@ const ResumePage = () => {
         languages: <LanguageSection />,
         declaration: <DeclarationSection />,
         references: <ReferencesSection />,
+        projects: <ProjectsItems />,
     }
     const dispatch = useAppDispatch()
     const refs = useRef<HTMLDivElement>(null)
