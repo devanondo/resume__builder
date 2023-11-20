@@ -6,7 +6,7 @@ import {
 // Form Data
 export const resumeFormData = {
     header: {
-        name: 'ANONDO BORMON123',
+        name: 'ANONDO BORMON',
         title: 'Full Stack Developer',
         email: 'dev.abormon28@gmail.com',
         location: 'Dhaka, Bangladesh',
@@ -21,9 +21,12 @@ export const resumeFormData = {
         show_location: true,
         show_extraLink: true,
         show_extraField: true,
-        show_photo: true,
         uppercase_name: true,
+
+        show_photo: true,
         photo_style: 'rect',
+        photoUrl:
+            'https://utfs.io/f/362a2295-445c-4511-a8ee-58c83bc37232-5482fr.jpg',
         height: 139,
     },
     summerySection: {

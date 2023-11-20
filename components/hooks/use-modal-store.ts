@@ -6,6 +6,7 @@ export type IModalType =
     | 'openRearrenge'
     | 'stylesDrawer'
     | 'resumeAddSection'
+    | 'uploadImage'
 
 export const useModal = () => {
     const dispatch = useAppDispatch()

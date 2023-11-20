@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import { Controller, useFormContext } from 'react-hook-form'
 import { CommonSectionProps } from './types'
+import { bitter } from '@/lib/font'
 
 const Heading = ({ name, className, placeholder }: CommonSectionProps) => {
     const { control } = useFormContext()
@@ -23,7 +24,8 @@ const Heading = ({ name, className, placeholder }: CommonSectionProps) => {
                         placeholder={placeholder || ''}
                         className={cn(
                             'font-bold rounded -mb-[10px] focus:bg-transparent',
-                            className
+                            className,
+                            bitter.className
                         )}
                         {...f}
                         style={{

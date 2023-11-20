@@ -7,6 +7,8 @@ import {
 import { useAppSelector } from '@/redux/hooks'
 import TextBox from './Editable'
 import { CommonSectionProps } from './types'
+import { cn } from '@/lib/utils'
+import { bitter } from '@/lib/font'
 
 const SectionTitle = ({
     name,
@@ -23,7 +25,10 @@ const SectionTitle = ({
         <>
             <TextBox
                 name={name}
-                className="px-2 font-bold uppercase rounded focus:bg-transparent"
+                className={cn(
+                    'px-2 font-bold uppercase rounded focus:bg-transparent',
+                    bitter.className
+                )}
                 style={{
                     fontSize,
                     lineHeight: '26px',
