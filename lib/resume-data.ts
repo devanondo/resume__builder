@@ -124,20 +124,24 @@ export const resumeFormData = {
 
         items: [
             {
-                enabled: true,
                 name: 'EcrypEcommerce',
                 bold_name: true,
-                link: '',
+                show_link: true,
+                link: 'https://',
                 link_icon: true,
+
+                extra_link: 'https://',
+                show_extra_link: true,
+
                 date: {
                     record: 'DateRange',
-                    from: '',
-                    to: '',
+                    from: '09/2023',
+                    to: '09/2023',
                     is_present: true,
                     date_icon: true,
                 },
                 description: {
-                    text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                    text: 'Program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
                     italic_description: false,
                     enabled: true,
                 },
@@ -149,7 +153,7 @@ export const resumeFormData = {
                     name: 'bulets',
                     items: [
                         {
-                            text: 'bullet description',
+                            text: 'Describe by points!',
                         },
                     ],
                 },
@@ -319,6 +323,12 @@ export const resumeLayout: IResumeLayout[] = [
                 key: 'references',
                 position: 2,
             },
+            {
+                title: 'Projects',
+                height: 1,
+                key: 'projects',
+                position: 2,
+            },
         ],
     },
 
@@ -390,6 +400,12 @@ export const layoutItems: ILayoutItems[] = [
                         key: 'references',
                         position: 2,
                     },
+                    {
+                        title: 'Projects',
+                        height: 1,
+                        key: 'projects',
+                        position: 2,
+                    },
                 ],
             },
 
@@ -458,6 +474,12 @@ export const layoutItems: ILayoutItems[] = [
                         title: 'References',
                         height: 1,
                         key: 'references',
+                        position: 2,
+                    },
+                    {
+                        title: 'Projects',
+                        height: 1,
+                        key: 'projects',
                         position: 2,
                     },
                 ],

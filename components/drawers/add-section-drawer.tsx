@@ -26,6 +26,7 @@ import EducationItems from '../resume-builder/education/education-items'
 import LanguageSection from '../resume-builder/languages/language-section'
 import DeclarationSection from '../resume-builder/declaration/Declaretion'
 import ReferencesSection from '../resume-builder/references/references'
+import ProjectsItems from '../resume-builder-editable-div/projects/projects'
 
 const ResumeAddSectionDrawer = () => {
     const { isOpen, onClose, type } = useModal()
@@ -59,6 +60,7 @@ const ResumeAddSectionDrawer = () => {
         languages: <LanguageSection />,
         declaration: <DeclarationSection />,
         references: <ReferencesSection />,
+        projects: <ProjectsItems />,
     }
 
     return (

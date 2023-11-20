@@ -19,7 +19,7 @@ import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { AItem } from '../shared/wrapper'
 
-interface ExperienceGroupPopoverProps {
+interface ProjectsGroupPopoverProps {
     fields: Record<'id', string>[]
     fieldArraykey?: string
     name: string
@@ -30,19 +30,27 @@ interface ExperienceGroupPopoverProps {
 
 const settings = [
     {
-        title: 'Show Location',
-        render: 'show_location',
+        title: 'Bold Name',
+        render: 'bold_name',
     },
     {
-        title: 'Position Bold',
-        render: 'bold_position',
+        title: 'Show Link',
+        render: 'show_link',
+    },
+    {
+        title: 'Link Icon',
+        render: 'link_icon',
+    },
+    {
+        title: 'Extra Link',
+        render: 'show_extra_link',
     },
     {
         title: 'Show Description',
         render: 'description.enabled',
     },
     {
-        title: 'Description Italic',
+        title: 'Italic Description',
         render: 'description.italic_description',
     },
     {
@@ -50,7 +58,7 @@ const settings = [
         render: 'bulets.enabled',
     },
     {
-        title: 'Show Bulets',
+        title: 'Show Point',
         render: 'bulets.bulet_items',
     },
     {
@@ -59,13 +67,13 @@ const settings = [
     },
 ]
 
-const ExperienceGroupPopover = ({
+const ProjectsGroupPopover = ({
     fields,
     name,
     index,
     append,
     remove,
-}: ExperienceGroupPopoverProps) => {
+}: ProjectsGroupPopoverProps) => {
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
@@ -74,20 +82,24 @@ const ExperienceGroupPopover = ({
             <Button
                 onClick={() => {
                     append({
-                        enabled: true,
-                        position: 'Full Stackweb developer',
-                        bold_position: true,
-                        workplace: '<a href="www.google.com">Fiverr</a>',
-                        location: 'San Fransisco, CA',
-                        show_location: false,
+                        name: 'EcrypEcommerce',
+                        bold_name: true,
+                        show_link: true,
+                        link: 'https://',
+                        link_icon: true,
+
+                        extra_link: 'https://',
+                        show_extra_link: true,
 
                         date: {
-                            from: '',
-                            to: '',
+                            record: 'DateRange',
+                            from: '09/2023',
+                            to: '09/2023',
                             is_present: true,
+                            date_icon: true,
                         },
                         description: {
-                            text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                            text: 'Program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
                             italic_description: false,
                             enabled: true,
                         },
@@ -99,9 +111,7 @@ const ExperienceGroupPopover = ({
                             name: 'bulets',
                             items: [
                                 {
-                                    text: 'Bullet description',
-                                    placeholder:
-                                        'Whats the one thing that makes you best candidate for this job?',
+                                    text: 'Describe by points!',
                                 },
                             ],
                         },
@@ -207,4 +217,4 @@ const ExperienceGroupPopover = ({
     )
 }
 
-export default ExperienceGroupPopover
+export default ProjectsGroupPopover
