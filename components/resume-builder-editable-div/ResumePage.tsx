@@ -7,7 +7,7 @@ import { resumeFormData } from '@/lib/resume-data'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
 import DeclarationSection from './declaration/Declaretion'
@@ -26,6 +26,12 @@ const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
         (state) => state.popover
     )
+
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     const itemsComponents: ItemsComponents = {
         header: <ResumeHeader />,
@@ -81,6 +87,7 @@ const ResumePage = () => {
         return () => document.removeEventListener('keydown', handleKeyPress)
     })
 
+    if (!isMounted) return null
     return (
         <div>
             <div onClick={(e) => e.stopPropagation()} className="w-full">
