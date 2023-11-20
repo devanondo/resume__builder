@@ -10,6 +10,7 @@ export interface ItemsComponents {
     languages: ReactNode
     declaration: ReactNode
     references: ReactNode
+    projects: ReactNode
 }
 
 export interface IItem {

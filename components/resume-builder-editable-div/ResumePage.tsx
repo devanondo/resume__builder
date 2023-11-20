@@ -37,6 +37,7 @@ import {
     ContextMenuSubTrigger,
     ContextMenuTrigger,
 } from '../ui/context-menu'
+import ProjectsItems from './projects/projects'
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
         (state) => state.popover
@@ -58,6 +59,7 @@ const ResumePage = () => {
         languages: <LanguageSection />,
         declaration: <DeclarationSection />,
         references: <ReferencesSection />,
+        projects: <ProjectsItems />,
     }
     const dispatch = useAppDispatch()
     const refs = useRef<HTMLDivElement>(null)

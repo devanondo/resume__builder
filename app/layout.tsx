@@ -1,6 +1,5 @@
 import React from 'react'
 
-import NavigationSidebar from '@/components/navigation/navigation-sidebar'
 import { ModalProvider } from '@/components/provider/ModalProvider'
 
 import ReduxProvider from '@/redux/redux-provider'
@@ -47,15 +46,7 @@ export default function RootLayout({
             <html lang="en">
                 <body className={` ${roboto.className}  `}>
                     <ReduxProvider>
-                        <div className="h-full">
-                            <div className="hidden md:!flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
-                                <NavigationSidebar />
-                            </div>
-
-                            <main className="md:pl-[72px] h-full">
-                                {children}
-                            </main>
-                        </div>
+                        <div className="h-full">{children}</div>
                         <ModalProvider />
                     </ReduxProvider>
                 </body>
