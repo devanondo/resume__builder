@@ -67,7 +67,7 @@ const CustomTextArea = ({
                 break
 
             case 'Backspace':
-                if (!e.target?.value?.length) {
+                if (!e.target?.innerHTML?.length && index !== 0) {
                     setFocusField(focusKey(name, index - 1))
                     remove(index)
                     dispatch(
@@ -94,7 +94,6 @@ const CustomTextArea = ({
             <TextBox
                 name={name}
                 onKeyDown={handleKeydown}
-                spellCheck={false}
                 placeholder={placeholder}
                 className={cn(
                     'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
@@ -192,6 +191,7 @@ const CustomTextArea = ({
                             }
                             remove(index)
                         }}
+                        disabled={fields.length < 2}
                         className="rounded-none"
                         variant="secondary"
                         type="button"

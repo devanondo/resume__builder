@@ -13,9 +13,9 @@ import { useFormContext } from 'react-hook-form'
 
 const UploadImageModal = () => {
     const { isOpen, onClose, type } = useModal()
-    const isModalOpen = isOpen && type === 'uploadImage'
+    const value = useFormContext()
 
-    const { setValue } = useFormContext()
+    const isModalOpen = isOpen && type === 'uploadImage'
 
     const [url, setUrl] = useState<string>()
 
@@ -59,6 +59,7 @@ const UploadImageModal = () => {
                             </div>
                             <Button
                                 onClick={() => {
+                                    const { setValue } = value
                                     setValue('header.photoUrl', url)
                                     // should be add server action to save url to the server
                                     handleClose()
