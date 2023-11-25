@@ -46,6 +46,7 @@
         "html2pdf.js": "^0.10.1",
         "jspdf": "^2.5.1",
         "lucide-react": "^0.284.0",
+        "mongoose": "^8.0.1",
         "next": "13.5.4",
         "react": "^18",
         "react-day-picker": "^8.9.0",
