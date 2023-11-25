@@ -2,7 +2,7 @@ import {
     IItem,
     ILayoutItems,
     IResumeLayout,
-} from '@/components/resume-builder/types/resume-layout-types'
+} from '@/components/resume-builder-editable-div/types/resume-layout-types'
 import { layoutItems, layoutStyles, resumeLayout } from '@/lib/resume-data'
 import { createSlice } from '@reduxjs/toolkit'
 

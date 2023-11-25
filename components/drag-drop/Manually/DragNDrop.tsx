@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 'use client'
 
-import { IResumeLayout } from '@/components/resume-builder/types/resume-layout-types'
+import { IResumeLayout } from '@/components/resume-builder-editable-div/types/resume-layout-types'
 import { cn } from '@/lib/utils'
 import { useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
