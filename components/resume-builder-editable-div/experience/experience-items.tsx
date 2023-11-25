@@ -5,11 +5,10 @@ import ExperienceGroupPopover from '@/components/popover/experience-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
-import { Calendar, MapIcon } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import Paragraph from '../components/paragraph-section'
-import SubHeading from '../components/sub-heading-section'
-import SubTitle from '../components/sub-title-section'
+import { BsCalendar2DateFill } from 'react-icons/bs'
+import { MdShareLocation } from 'react-icons/md'
+import { TypographyInput } from '../components/Typography'
 import ExperienceBuletItem from './experience-bullet-item'
 
 interface ExperienceItemProps {
@@ -36,53 +35,77 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                     className="relative a__item "
                 >
                     <div>
-                        <SubHeading
+                        <TypographyInput
                             name={`${name}.${i}.position` as const}
                             className={cn(
-                                'py-0 px-2 leading-[26px]',
+                                'py-0 px-2',
                                 watchValue[i]?.bold_position && 'font-normal'
                             )}
                             placeholder="Position"
+                            type="subheading"
                         />
 
-                        <SubTitle
+                        <TypographyInput
                             name={`${name}.${i}.workplace` as const}
-                            className="text-md font-bold px-2 italic"
+                            placeholder="Workplace"
+                            type="subtitle"
                         />
 
                         <div className="flex items-center px-2 w-full gap-x-4">
+                            <div className="flex items-center">
+                                <BsCalendar2DateFill className="w-3 h-3" />
+
+                                <div className="flex items-center">
+                                    <TypographyInput
+                                        name={`${name}.${i}.date.from` as const}
+                                        className="w-fit !text-xs"
+                                        placeholder="From"
+                                        type="paragraph"
+                                    />
+                                    -
+                                    <TypographyInput
+                                        name={`${name}.${i}.date.to` as const}
+                                        className="w-fit !text-xs"
+                                        placeholder="To"
+                                        type="paragraph"
+                                    />
+                                </div>
+                            </div>
+
                             {watchValue[i]?.show_location && (
-                                <div className="flex items-center gap-x-1">
-                                    <Calendar className="w-4 h-4" />{' '}
-                                    <SubTitle
+                                <div className="flex items-center">
+                                    {/* <Calendar className="w-4 h-4" />{' '} */}
+                                    <MdShareLocation className="w-3 h-3" />
+                                    <TypographyInput
                                         name={`${name}.${i}.location` as const}
-                                        className="text-sm"
+                                        placeholder="Address"
+                                        className="w-fit !text-xs"
+                                        type="paragraph"
                                     />
                                 </div>
                             )}
-                            <div className="flex items-center gap-x-1">
-                                <MapIcon className="w-4 h-4" />
-
-                                <SubTitle
-                                    name={`${name}.${i}.location` as const}
-                                    className="text-sm"
-                                />
-                            </div>
                         </div>
 
                         {watchValue[i]?.description.enabled && (
-                            <Paragraph
+                            <TypographyInput
                                 name={`${name}.${i}.description.text` as const}
                                 className={cn(
-                                    ' text-sm text-justify mt-1 mb-1 font-[14px] leading-[17px] pb-1',
+                                    'text-justify mt-1 mb-1 pb-1',
                                     watchValue[i].description
                                         .italic_description && 'italic'
                                 )}
+                                type="paragraph"
                             />
                         )}
                     </div>
 
                     <ExperienceBuletItem name={`${name}.${i}.bulets`} />
+
+                    {fields.length - 1 !== i ? (
+                        <div className="w-full px-2">
+                            <div className="border-b w-full border-dashed"></div>
+                        </div>
+                    ) : null}
 
                     {groupPopoverKey === name + i && (
                         <ExperienceGroupPopover

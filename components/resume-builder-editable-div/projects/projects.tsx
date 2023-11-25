@@ -4,15 +4,12 @@ import { useWatchForm } from '@/components/hooks/use-form-watch'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import Paragraph from '../components/paragraph-section'
-import SectionTitle from '../components/section-title'
-import SubHeading from '../components/sub-heading-section'
 
 import ProjectsGroupPopover from '@/components/popover/projects-popover'
 import { useAppSelector } from '@/redux/hooks'
 import { Calendar } from 'lucide-react'
 import { RiLink } from 'react-icons/ri'
-import SubTitle from '../components/sub-title-section'
+import { TypographyInput } from '../components/Typography'
 import ProjectsBulletsItem from './project-bullets'
 
 const ProjectsItems = () => {
@@ -30,9 +27,10 @@ const ProjectsItems = () => {
 
     return (
         <GroupItem popoverKey="projects" className="pb-1">
-            <SectionTitle
+            <TypographyInput
                 placeholder="Projects"
                 name={`projects.name` as const}
+                type="title"
             />
 
             {fields?.map((field, i: number) => {
@@ -43,7 +41,7 @@ const ProjectsItems = () => {
                         className="relative a__item"
                     >
                         <div>
-                            <SubHeading
+                            <TypographyInput
                                 name={`${name}.${i}.name` as const}
                                 className={cn(
                                     'py-0 px-2 leading-[26px]',
@@ -51,30 +49,31 @@ const ProjectsItems = () => {
                                         'font-normal'
                                 )}
                                 placeholder="Position"
+                                type="subheading"
                             />
                             <div className="flex items-center px-2 w-full gap-x-1 text-zinc-600">
-                                <div className="flex items-center gap-x-1">
-                                    <Calendar className="w-3 h-3 text-zinc-600" />
-                                    <SubTitle
+                                <div className="flex items-center">
+                                    <Calendar className="w-3 h-3" />
+                                    <TypographyInput
                                         name={`${name}.${i}.date.from` as const}
-                                        className="text-sm  text-zinc-600"
+                                        className="!text-xs "
                                         placeholder="Form"
+                                        type="paragraph"
                                     />
                                 </div>
                                 -
                                 {watchValue?.[i]?.date.is_present ? (
-                                    <p className="italic text-sm font-bold">
-                                        Present
-                                    </p>
+                                    <p className="pl-1 text-xs">Present</p>
                                 ) : (
                                     <div className="flex items-center gap-x-1">
                                         <Calendar className="w-3 h-3" />
-                                        <SubTitle
+                                        <TypographyInput
                                             name={
                                                 `${name}.${i}.date.to` as const
                                             }
-                                            className="text-sm"
+                                            className="!text-xs"
                                             placeholder="To"
+                                            type="paragraph"
                                         />
                                     </div>
                                 )}
@@ -84,11 +83,12 @@ const ProjectsItems = () => {
                                     <div className="flex items-center px-2">
                                         <RiLink className="w-3 h-3" />
 
-                                        <Paragraph
+                                        <TypographyInput
                                             link={true}
                                             name={`${name}.${i}.link` as const}
-                                            className="text-xs px-2 italic underline text-zinc-500"
+                                            className="!text-xs px-2 italic underline text-zinc-500"
                                             placeholder="Insert url!"
+                                            type="paragraph"
                                         />
                                     </div>
                                 )}
@@ -97,26 +97,28 @@ const ProjectsItems = () => {
                                     <div className="flex items-center px-2">
                                         <RiLink className="w-3 h-3" />
 
-                                        <Paragraph
+                                        <TypographyInput
                                             link={true}
                                             name={
                                                 `${name}.${i}.extra_link` as const
                                             }
-                                            className="text-xs px-2 italic underline text-zinc-500"
+                                            className="!text-xs px-2 italic underline text-zinc-500"
                                             placeholder="Insert url!"
+                                            type="paragraph"
                                         />
                                     </div>
                                 )}
                             </div>
 
                             {watchValue?.[i]?.description?.enabled && (
-                                <Paragraph
+                                <TypographyInput
                                     link={true}
                                     name={
                                         `${name}.${i}.description.text` as const
                                     }
                                     className=""
                                     placeholder="Describe your Project!!"
+                                    type="paragraph"
                                 />
                             )}
 

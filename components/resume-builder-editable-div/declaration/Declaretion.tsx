@@ -4,9 +4,7 @@ import { GroupItem } from '@/components/shared/wrapper'
 import { useAppDispatch } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import Paragraph from '../components/paragraph-section'
-import SectionTitle from '../components/section-title'
-import SubHeading from '../components/sub-heading-section'
+import { TypographyInput } from '../components/Typography'
 
 const DeclarationSection = () => {
     const { control } = useFormContext()
@@ -20,9 +18,10 @@ const DeclarationSection = () => {
 
     return (
         <GroupItem popoverKey="declaration">
-            <SectionTitle
+            <TypographyInput
                 name={'declaration.name' as const}
                 placeholder="Declaration"
+                type="title"
             />
 
             {fields.map((field: any, i) => (
@@ -42,14 +41,16 @@ const DeclarationSection = () => {
                             )
                         }}
                     >
-                        <Paragraph
+                        <TypographyInput
                             name={`${name}[${i}].description` as const}
-                            className="py-0"
+                            className="py-0 !text-sm"
+                            type="subtitle"
                         />
-                        <SubHeading
+                        <TypographyInput
                             placeholder={field.placeholder || ''}
                             name={`${name}[${i}].name` as const}
-                            className="pt-0 px-2"
+                            className="pt-0 px-2 !text-xs"
+                            type="paragraph"
                         />
                     </div>
                 </GroupItem>

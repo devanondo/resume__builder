@@ -1,15 +1,16 @@
 'use client'
 
 import { GroupItem } from '@/components/shared/wrapper'
-import SectionTitle from '../components/section-title'
+import { TypographyInput } from '../components/Typography'
 import ExperienceItem from './experience-items'
 
 const ExperienceSummery = () => {
     return (
         <GroupItem popoverKey="experienceSummary.name">
-            <SectionTitle
+            <TypographyInput
                 name={`experienceSummary.name` as const}
                 placeholder="Experience"
+                type="title"
             />
 
             <ExperienceItem name="experienceSummary.items" />

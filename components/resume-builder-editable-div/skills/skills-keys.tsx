@@ -1,7 +1,7 @@
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
-import TextBox from '@/components/resume-builder/components/Editable'
+import TextBox from '@/components/resume-builder-editable-div/components/Editable'
 import { cn, focusKey } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -65,7 +65,7 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                                 watchParent.bold_key && ' font-bold'
                             )}
                             style={{
-                                borderBottom: `2px solid red`,
+                                borderBottom: `2px solid transparent`,
                             }}
                         />
                     </div>

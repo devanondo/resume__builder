@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 'use client'
 
-import { IResumeLayout } from '../resume-builder/types/resume-layout-types'
+import { IResumeLayout } from '../resume-builder-editable-div/types/resume-layout-types'
 import DragNDrop from './Manually/DragNDrop'
 import './Style.scss'
 

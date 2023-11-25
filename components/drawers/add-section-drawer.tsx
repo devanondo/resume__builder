@@ -7,47 +7,30 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import {
-    addSectionToEditor,
-    removeSectionFromEditor,
-} from '@/redux/slices/resume-layout-slice'
 import { Check, Minus, Plus } from 'lucide-react'
+import { useWatchForm } from '../hooks/use-form-watch'
 import { useModal } from '../hooks/use-modal-store'
+import ProjectsItems from '../resume-builder-editable-div/projects/projects'
+import DeclarationSection from '../resume-builder-editable-div/declaration/Declaretion'
+import EducationItems from '../resume-builder-editable-div/education/education-items'
+import ExperienceSummery from '../resume-builder-editable-div/experience/experience-summery'
+import ResumeHeader from '../resume-builder-editable-div/header/resume-header'
+import LanguageSection from '../resume-builder-editable-div/languages/language-section'
+import ReferencesSection from '../resume-builder-editable-div/references/references'
+import SkillsSection from '../resume-builder-editable-div/skills/skills-section'
+import StrengthSection from '../resume-builder-editable-div/strengths/strength-section'
+import ResumeSummery from '../resume-builder-editable-div/summery/resume-summery'
+import { ItemsComponents } from '../resume-builder-editable-div/types/resume-layout-types'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardTitle } from '../ui/card'
-import { ItemsComponents } from '../resume-builder/types/resume-layout-types'
-import ResumeHeader from '../resume-builder/header/resume-header'
-import ResumeSummery from '../resume-builder/summery/resume-summery'
-import ExperienceSummery from '../resume-builder/experience/experience-summery'
-import SkillsSection from '../resume-builder/skills/skills-section'
-import StrengthSection from '../resume-builder/strengths/strength-section'
-import EducationItems from '../resume-builder/education/education-items'
-import LanguageSection from '../resume-builder/languages/language-section'
-import DeclarationSection from '../resume-builder/declaration/Declaretion'
-import ReferencesSection from '../resume-builder/references/references'
-import ProjectsItems from '../resume-builder-editable-div/projects/projects'
+import { useFormContext } from 'react-hook-form'
 
 const ResumeAddSectionDrawer = () => {
     const { isOpen, onClose, type } = useModal()
 
-    const { resumeLayout } = useAppSelector((state) => state.layout)
-    const dispatch = useAppDispatch()
-
     const isDrawerOpen = isOpen && type === 'resumeAddSection'
     const handleClose = () => {
         onClose()
-    }
-
-    function isExixtSection(key: string) {
-        for (const group of resumeLayout) {
-            for (const item of group?.items) {
-                if (item.key === key) {
-                    return true
-                }
-            }
-        }
-        return false
     }
 
     const itemsComponents: ItemsComponents = {
@@ -55,12 +38,57 @@ const ResumeAddSectionDrawer = () => {
         summerySection: <ResumeSummery />,
         experienceSummary: <ExperienceSummery />,
         skills: <SkillsSection />,
-        strength: <StrengthSection />,
-        education: <EducationItems />,
+        strengths: <StrengthSection />,
+        educations: <EducationItems />,
         languages: <LanguageSection />,
         declaration: <DeclarationSection />,
         references: <ReferencesSection />,
         projects: <ProjectsItems />,
+    }
+
+    const AddRemoveButtons = ({ field }: { field: string }) => {
+        const { watchValue: values } = useWatchForm({ name: field })
+
+        const { setValue } = useFormContext()
+
+        const changeAddRemove = (field: string, value: boolean) => {
+            const name = `${field}.enabled`
+            setValue(name, value)
+        }
+
+        return (
+            <Card className=" border rounded-md overflow-hidden transition-all duration-300 shadow-md">
+                <CardContent className="w-full h-[160px] relative group p-0">
+                    <div className="top-0 left-0 w-full h-full bg-black bg-opacity-40 opacity-0 flex items-center justify-center absolute   transition-all duration-300 cursor-pointer invisible group-hover:visible group-hover:opacity-100">
+                        {values?.enabled ? (
+                            <Button
+                                onClick={() => changeAddRemove(field, false)}
+                                disabled={field === 'header'}
+                            >
+                                <Minus /> Remove form Resume
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => changeAddRemove(field, true)}
+                                disabled={field === 'header'}
+                            >
+                                <Plus /> Add to resume
+                            </Button>
+                        )}
+                    </div>
+
+                    {values?.enabled && (
+                        <div className="w-14 h-14 -top-7 -right-7 bg-emerald-500 absolute z-10 rotate-45 flex items-end justify-center text-white">
+                            <Check className="-rotate-45 w-4" strokeWidth={4} />
+                        </div>
+                    )}
+                </CardContent>
+
+                <CardTitle className="w-full bg-emerald-500 text-white text-center py-2 text-lg font-[500] capitalize">
+                    {field}
+                </CardTitle>
+            </Card>
+        )
     }
 
     return (
@@ -77,62 +105,7 @@ const ResumeAddSectionDrawer = () => {
 
                 <div className=" mt-5 flex flex-col gap-y-2">
                     {Object.keys(itemsComponents).map((key, i: number) => {
-                        return (
-                            <Card
-                                key={key + i}
-                                className=" border rounded-md overflow-hidden transition-all duration-300 shadow-md"
-                            >
-                                <CardContent className="w-full h-[160px] relative group p-0">
-                                    <div className="top-0 left-0 w-full h-full bg-black bg-opacity-40 opacity-0 flex items-center justify-center absolute   transition-all duration-300 cursor-pointer invisible group-hover:visible group-hover:opacity-100">
-                                        {isExixtSection(key) ? (
-                                            <Button
-                                                onClick={() => {
-                                                    dispatch(
-                                                        removeSectionFromEditor(
-                                                            { key: key }
-                                                        )
-                                                    )
-                                                }}
-                                            >
-                                                <Minus /> Remove form Resume
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                onClick={() => {
-                                                    dispatch(
-                                                        addSectionToEditor({
-                                                            group: 'Group-1',
-                                                            value: {
-                                                                height: 1,
-                                                                key: key as keyof ItemsComponents,
-                                                                position: 1,
-                                                                title: key,
-                                                            },
-                                                        })
-                                                    )
-                                                }}
-                                                disabled={key === 'header'}
-                                            >
-                                                <Plus /> Add to resume
-                                            </Button>
-                                        )}
-                                    </div>
-
-                                    {isExixtSection(key) && (
-                                        <div className="w-14 h-14 -top-7 -right-7 bg-emerald-500 absolute z-10 rotate-45 flex items-end justify-center text-white">
-                                            <Check
-                                                className="-rotate-45 w-4"
-                                                strokeWidth={4}
-                                            />
-                                        </div>
-                                    )}
-                                </CardContent>
-
-                                <CardTitle className="w-full bg-emerald-500 text-white text-center py-2 text-lg font-[500] capitalize">
-                                    {key}
-                                </CardTitle>
-                            </Card>
-                        )
+                        return <AddRemoveButtons key={key + i} field={key} />
                     })}
                 </div>
             </SheetContent>

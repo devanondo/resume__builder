@@ -3,14 +3,16 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
+import { useWatchForm } from '@/components/hooks/use-form-watch'
+import ReferencesPopover from '@/components/popover/reference-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { showPopover } from '@/redux/slices/pop-slice'
-import Paragraph from '../components/paragraph-section'
-import SectionTitle from '../components/section-title'
-import SubHeading from '../components/sub-heading-section'
-import ReferencesPopover from '@/components/popover/reference-popover'
-import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { MdShareLocation } from 'react-icons/md'
+
+import { SlCalender } from 'react-icons/sl'
+import { TypographyInput } from '../components/Typography'
+import { HiOutlineMail } from 'react-icons/hi'
 
 const ReferencesSection = () => {
     const name = 'references.items'
@@ -28,9 +30,10 @@ const ReferencesSection = () => {
 
     return (
         <GroupItem popoverKey="references">
-            <SectionTitle
+            <TypographyInput
                 name={'references.name' as const}
                 placeholder="References"
+                type="title"
             />
 
             <div className="grid grid-cols-2">
@@ -51,37 +54,58 @@ const ReferencesSection = () => {
                                 )
                             }}
                         >
-                            <SubHeading
+                            <TypographyInput
                                 name={`${name}[${i}].name` as const}
                                 placeholder={field.placeholder || ''}
-                                className="text-md font-semibold pb-0 pt-0"
+                                className="pb-0 pt-0"
+                                type="subheading"
                             />
 
                             <div className="flex flex-col">
                                 {watchValue[i]?.show_email ? (
-                                    <Paragraph
-                                        name={`${name}[${i}].email` as const}
-                                        placeholder={field.email}
-                                        className={cn(
-                                            'text-sm italic font-semibold p-0'
-                                        )}
-                                    />
+                                    <div className="flex items-center gap-x-1">
+                                        <HiOutlineMail className="w-3 h-3" />
+                                        <TypographyInput
+                                            name={
+                                                `${name}[${i}].email` as const
+                                            }
+                                            placeholder={field.email}
+                                            className={cn(
+                                                '!text-xs italic !font-semibold p-0'
+                                            )}
+                                            link={true}
+                                            href="mailto"
+                                            type="paragraph"
+                                        />
+                                    </div>
                                 ) : null}
 
                                 {watchValue[i]?.show_phone ? (
-                                    <Paragraph
-                                        name={`${name}[${i}].phone` as const}
-                                        placeholder={field.phone}
-                                        className={cn('text-sm p-0')}
-                                    />
+                                    <div className="flex items-center gap-x-1">
+                                        <SlCalender className="w-3 h-3" />
+                                        <TypographyInput
+                                            name={
+                                                `${name}[${i}].phone` as const
+                                            }
+                                            placeholder={field.phone}
+                                            className={cn('!text-xs p-0')}
+                                            type="paragraph"
+                                        />
+                                    </div>
                                 ) : null}
 
                                 {watchValue[i]?.show_address ? (
-                                    <Paragraph
-                                        name={`${name}[${i}].address` as const}
-                                        placeholder={field.address}
-                                        className={cn('text-sm p-0')}
-                                    />
+                                    <div className="flex items-center gap-x-1">
+                                        <MdShareLocation className="w-3 h-3" />
+                                        <TypographyInput
+                                            name={
+                                                `${name}[${i}].address` as const
+                                            }
+                                            placeholder={field.address}
+                                            className={cn('!text-xs p-0')}
+                                            type="paragraph"
+                                        />
+                                    </div>
                                 ) : null}
                             </div>
                         </div>

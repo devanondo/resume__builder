@@ -2,7 +2,7 @@ import {
     IItem,
     ILayoutItems,
     IResumeLayout,
-} from '@/components/resume-builder/types/resume-layout-types'
+} from '@/components/resume-builder-editable-div/types/resume-layout-types'
 import { layoutItems, layoutStyles, resumeLayout } from '@/lib/resume-data'
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -12,6 +12,7 @@ export const resumeSlice = createSlice({
         resumeLayout: resumeLayout as IResumeLayout[],
         resumeLayoutItems: layoutItems as ILayoutItems[],
         layoutStyles: layoutStyles,
+        layoutWithStyles: layoutItems.find((item) => item.isActive),
     },
     reducers: {
         setLayoutData: (state, action) => {
@@ -36,52 +37,53 @@ export const resumeSlice = createSlice({
             )
             if (activeLayout) {
                 state.resumeLayout = activeLayout?.layout
+                state.layoutWithStyles = activeLayout
             }
 
             state.resumeLayoutItems = newLayouts
         },
 
-        changeLayoutStyles: (
-            state,
-            action: {
-                payload:
-                    | {
-                          type: 'colors'
-                          primaryColor: string
-                          secondaryColor: string
-                      }
-                    | {
-                          type:
-                              | 'pageMargin'
-                              | 'fontFamily'
-                              | 'fontSize'
-                              | 'backgroundImage'
-                          value: string
-                      }
-            }
-        ) => {
-            switch (action.payload.type) {
-                case 'colors':
-                    state.layoutStyles.primaryColor =
-                        action.payload.primaryColor
-                    state.layoutStyles.secondaryColor =
-                        action.payload.secondaryColor
+        // changeLayoutStyles: (
+        //     state,
+        //     action: {
+        //         payload:
+        //             | {
+        //                   type: 'colors'
+        //                   primaryColor: string
+        //                   secondaryColor: string
+        //               }
+        //             | {
+        //                   type:
+        //                       | 'pageMargin'
+        //                       | 'fontFamily'
+        //                       | 'fontSize'
+        //                       | 'backgroundImage'
+        //                   value: string
+        //               }
+        //     }
+        // ) => {
+        //     switch (action.payload.type) {
+        //         case 'colors':
+        //             state.layoutStyles.primaryColor =
+        //                 action.payload.primaryColor
+        //             state.layoutStyles.secondaryColor =
+        //                 action.payload.secondaryColor
 
-                    break
+        //             break
 
-                case 'pageMargin':
-                case 'fontFamily':
-                case 'fontSize':
-                case 'backgroundImage':
-                    state.layoutStyles[action.payload.type] =
-                        action.payload.value
+        //         case 'pageMargin':
+        //         case 'fontFamily':
+        //         case 'fontSize':
+        //         case 'backgroundImage':
+        //             state.layoutStyles[action.payload.type] =
+        //                 action.payload.value
 
-                    break
+        //             break
 
-                default:
-                    break
-            }
-        },
+        //         default:
+        //             break
+        //     }
+        // },
 
         //Add section to the resume editor
         addSectionToEditor: (
@@ -126,7 +128,7 @@ export const resumeSlice = createSlice({
 export const {
     setLayoutData,
     setActiveLayout,
-    changeLayoutStyles,
+    // changeLayoutStyles,
     addSectionToEditor,
     removeSectionFromEditor,
 } = resumeSlice.actions

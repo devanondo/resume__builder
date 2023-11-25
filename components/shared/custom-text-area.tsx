@@ -13,9 +13,7 @@ import {
 } from 'react-hook-form'
 
 import { useEffect, useState } from 'react'
-import TextBox from '../resume-builder-editable-div/components/Editable'
-import { FontSizeType, getFontSize } from '../resume-styles/utils/font-design'
-import { roboto } from '@/lib/font'
+import { TypographyInput } from '../resume-builder-editable-div/components/Typography'
 
 interface CustomTextAreaProps {
     fields: Record<'id', string>[]
@@ -44,8 +42,6 @@ const CustomTextArea = ({
     const dispatch = useAppDispatch()
     const { setFocus } = useFormContext()
     const [focusField, setFocusField] = useState('')
-
-    const { layoutStyles } = useAppSelector((state) => state.layout)
 
     useEffect(() => {
         setFocus(focusField)
@@ -85,22 +81,14 @@ const CustomTextArea = ({
         }
     }
 
-    const fontSize = getFontSize(
-        layoutStyles.fontSize as FontSizeType
-    ).paragraph
-
     return (
         <div className="relative w-full flex items-center custom__textarea_component">
-            <TextBox
+            <TypographyInput
                 name={name}
                 onKeyDown={handleKeydown}
                 placeholder={placeholder}
-                className={cn(
-                    'custom__textarea w-full py-1 px-2 focus:bg-white rounded resize-none outline-none bg-transparent text-sm text-[#74767E]',
-                    className,
-                    roboto.className
-                )}
-                style={{ fontSize }}
+                className={cn('py-1 px-2 ', className)}
+                type="paragraph"
             />
 
             {/* <URL

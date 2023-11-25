@@ -7,10 +7,13 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet'
-import { useModal } from '../hooks/use-modal-store'
-import { Slider } from '../ui/slider'
+import { bitter, lato, roboto } from '@/lib/font'
+import { colors } from '@/lib/resume-data'
 import { cn } from '@/lib/utils'
-import { Separator } from '../ui/separator'
+import { Check } from 'lucide-react'
+import { useFormContext } from 'react-hook-form'
+import { useModal } from '../hooks/use-modal-store'
+import { getFontLevel, getFontValue } from '../resume-styles/utils/font-design'
 import {
     Select,
     SelectContent,
@@ -18,55 +21,14 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
-import { Check } from 'lucide-react'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { changeLayoutStyles } from '@/redux/slices/resume-layout-slice'
-import { getFontLevel, getFontValue } from '../resume-styles/utils/font-design'
-
-const colors = [
-    {
-        primary: '#000',
-        secondary: '#1e90ff',
-    },
-    {
-        primary: '#000',
-        secondary: '#6f7878',
-    },
-    {
-        primary: '#124f44',
-        secondary: '#3cb371',
-    },
-    {
-        primary: '#8a0202',
-        secondary: '#f96b07',
-    },
-    {
-        primary: '#002b7f',
-        secondary: '#56acf2',
-    },
-    {
-        primary: '#19273c',
-        secondary: '#3c6df0',
-    },
-    {
-        primary: '#501e58',
-        secondary: '#951dc4',
-    },
-    {
-        primary: '#343334',
-        secondary: '#00b6cb',
-    },
-    {
-        primary: '#19273c',
-        secondary: '#c4881c',
-    },
-]
+import { Separator } from '../ui/separator'
+import { Slider } from '../ui/slider'
 
 const ResumeStylesDrawer = () => {
     const { isOpen, onClose, type } = useModal()
 
-    const { layoutStyles } = useAppSelector((state) => state.layout)
-    const dispatch = useAppDispatch()
+    const { watch, setValue } = useFormContext()
+
     const isDrawerOpen = isOpen && type === 'stylesDrawer'
     const handleClose = () => {
         onClose()
@@ -88,17 +50,12 @@ const ResumeStylesDrawer = () => {
                     <p className="text-sm font-semibold">Page Margin</p>
 
                     <Slider
-                        defaultValue={[20]}
-                        max={50}
-                        step={10}
+                        defaultValue={[watch('style.pageMarginOption')]}
+                        max={60}
+                        step={20}
                         className={cn('w-[100%] mt-5')}
                         onValueChange={(value) => {
-                            dispatch(
-                                changeLayoutStyles({
-                                    type: 'pageMargin',
-                                    value: value[0].toLocaleString(),
-                                })
-                            )
+                            setValue('style.pageMarginOption', value[0])
                         }}
                     />
                 </div>
@@ -108,38 +65,44 @@ const ResumeStylesDrawer = () => {
                 <div className="py-5">
                     <p className="text-sm font-semibold">Font Familly</p>
 
-                    <Select defaultValue="billing">
+                    <Select
+                        defaultValue={watch('style.fontHeading')}
+                        onValueChange={(value) => {
+                            setValue('style.fontHeading', value)
+                        }}
+                    >
                         <SelectTrigger className="my-3" id="area">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="team">Team</SelectItem>
-                            <SelectItem value="billing">Billing</SelectItem>
-                            <SelectItem value="account">Account</SelectItem>
-                            <SelectItem value="deployments">
-                                Deployments
+                            <SelectItem
+                                className={bitter.className}
+                                value="bitter"
+                            >
+                                Bitter
                             </SelectItem>
-                            <SelectItem value="support">Support</SelectItem>
+                            <SelectItem
+                                className={roboto.className}
+                                value="roboto"
+                            >
+                                Roboto
+                            </SelectItem>
+                            <SelectItem className={lato.className} value="lato">
+                                Lato
+                            </SelectItem>
                         </SelectContent>
                     </Select>
 
                     <p className="text-sm font-semibold">Font Size</p>
                     <Slider
-                        defaultValue={[
-                            getFontValue(layoutStyles.fontSize as string),
-                        ]}
-                        max={5}
+                        defaultValue={[getFontValue(watch('style.fontSize'))]}
+                        max={4}
                         step={1}
                         className={cn('w-[100%] mt-5')}
                         onValueChange={(value) => {
                             const level = value[0]
 
-                            dispatch(
-                                changeLayoutStyles({
-                                    type: 'fontSize',
-                                    value: getFontLevel(level),
-                                })
-                            )
+                            setValue('style.fontSize', getFontLevel(level))
                         }}
                     />
                 </div>
@@ -154,22 +117,17 @@ const ResumeStylesDrawer = () => {
                                 style={{ backgroundColor: color.primary }}
                                 className={`rounded-full w-full aspect-square flex items-center justify-center p-2 cursor-pointer`}
                                 onClick={() => {
-                                    dispatch(
-                                        changeLayoutStyles({
-                                            type: 'colors',
-                                            primaryColor: color.primary,
-                                            secondaryColor: color.secondary,
-                                        })
-                                    )
+                                    setValue('style.colors.0', color.primary)
+                                    setValue('style.colors.1', color.secondary)
                                 }}
                             >
                                 <div
                                     style={{ backgroundColor: color.secondary }}
                                     className={`rounded-full w-full aspect-square flex items-center justify-center bg-[${color.secondary}]`}
                                 >
-                                    {layoutStyles.primaryColor ===
+                                    {watch('style.colors.0') ===
                                         color.primary &&
-                                    layoutStyles.secondaryColor ===
+                                    watch('style.colors.1') ===
                                         color.secondary ? (
                                         <Check
                                             strokeWidth={4}
