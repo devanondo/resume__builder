@@ -5,8 +5,8 @@ export interface ItemsComponents {
     summerySection: ReactNode
     experienceSummary: ReactNode
     skills: ReactNode
-    strength: ReactNode
-    education: ReactNode
+    strengths: ReactNode
+    educations: ReactNode
     languages: ReactNode
     declaration: ReactNode
     references: ReactNode
@@ -31,21 +31,26 @@ export interface IResumeLayout {
     items: IItem[]
 }
 
+export type ILayoutStyle = 'double' | 'single' | 'onethird'
+
 export interface ILayoutItems {
     id: string
     title: string
     isActive: boolean
     imgUrl?: string
+    layoutStyle: ILayoutStyle
     layout: IResumeLayout[]
+    typo: any
 }
 
 export interface ILayoutStyles {
-    style: string
-    fontFamilly: string
-    heading: ITypoStyle
-    titleTypo: ITypoStyle
-    subHeading: ITypoStyle
-    subTitle: ITypoStyle
-    paragraph: ITypoStyle
-    colorPallate: string
+    layout: ILayoutStyle
+    typo: any
+    // colorPallate: string
 }
+
+// heading: ITypoStyle
+//     titleTypo: ITypoStyle
+//     subHeading: ITypoStyle
+//     subTitle: ITypoStyle
+//     paragraph: ITypoStyle

@@ -15,9 +15,6 @@ import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { GroupItem } from '@/components/shared/wrapper'
 import { useAppSelector } from '@/redux/hooks'
 import { PiPhoneCallFill } from 'react-icons/pi'
-import Heading from '../components/heading'
-import Paragraph from '../components/paragraph-section'
-import SubHeading from '../components/sub-heading-section'
 
 import { Button } from '@/components/ui/button'
 import { ImLocation } from 'react-icons/im'
@@ -27,19 +24,19 @@ import { RiLink } from 'react-icons/ri'
 import { MdOutlineCloudUpload } from 'react-icons/md'
 import { TiTrash } from 'react-icons/ti'
 
-import { RxPerson } from 'react-icons/rx'
 import { useModal } from '@/components/hooks/use-modal-store'
-import Image from 'next/image'
 import UploadImageModal from '@/components/modals/image-upload'
+import Image from 'next/image'
+import { RxPerson } from 'react-icons/rx'
+import { TypographyInput } from '../components/Typography'
 
 const ResumeHeader = () => {
     const { control, watch } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
-    const { layoutStyles } = useAppSelector((state) => state.layout)
 
     const { onOpen } = useModal()
 
-    const color = layoutStyles.secondaryColor
+    const color = watch('style.colors.1')
 
     const iconMap: { [key: string]: any } = {
         phone: <PiPhoneCallFill className="w-3 h-3" color={color as string} />,
@@ -75,7 +72,7 @@ const ResumeHeader = () => {
             placeholder: 'Phone',
             render: 'show_phone',
             col: 1,
-            class: 'font-semibold',
+            class: '!font-medium',
             link: false,
         },
         {
@@ -84,7 +81,7 @@ const ResumeHeader = () => {
             placeholder: 'LinkedIn/Portfolio',
             render: 'show_link',
             col: 1,
-            class: 'font-semibold',
+            class: '!font-medium',
             link: true,
         },
         {
@@ -92,7 +89,7 @@ const ResumeHeader = () => {
             name: 'extra_link',
             placeholder: 'Extra Link',
             render: 'show_extraLink',
-            class: 'font-semibold',
+            class: '!font-medium',
             col: 1,
             link: true,
         },
@@ -102,7 +99,7 @@ const ResumeHeader = () => {
             placeholder: 'Email',
             render: 'show_email',
             col: 1,
-            class: 'font-semibold',
+            class: '!font-medium',
             link: false,
             href: 'mailto',
         },
@@ -111,7 +108,7 @@ const ResumeHeader = () => {
             name: 'location',
             placeholder: 'Location',
             render: 'show_location',
-            class: 'font-semibold',
+            class: '!font-medium',
             col: 1,
             link: false,
         },
@@ -120,7 +117,7 @@ const ResumeHeader = () => {
             name: 'icons',
             placeholder: 'Show Icons',
             render: 'show_icons',
-            class: 'font-semibold',
+            class: '!font-medium',
             col: 1,
         },
         {
@@ -128,7 +125,7 @@ const ResumeHeader = () => {
             name: 'extra_field',
             placeholder: 'Extra Field',
             render: 'show_extraField',
-            class: 'font-semibold',
+            class: '!font-medium',
             col: 1,
         },
     ]
@@ -242,20 +239,22 @@ const ResumeHeader = () => {
                         }, 1fr)`,
                     }}
                 >
-                    <Heading
+                    <TypographyInput
                         name={`header.name` as const}
                         className={cn(
                             'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 p-0'
                         )}
+                        type="heading"
                     />
 
                     {watchingValue?.show_title ? (
-                        <SubHeading
+                        <TypographyInput
                             name="header.title"
                             placeholder="The role you are playing for?"
-                            className={`col-span-${
+                            className={`mb-1 col-span-${
                                 watchingValue?.show_photo ? 2 : 3
                             } font-extrabold`}
+                            type="subheading"
                         />
                     ) : null}
 
@@ -271,16 +270,19 @@ const ResumeHeader = () => {
                                         <div className="flex items-center justify-center">
                                             {iconMap[item.name]}
                                         </div>
-                                        <Paragraph
+
+                                        <TypographyInput
                                             name={
                                                 `header.${item.name}` as const
                                             }
                                             placeholder={item.placeholder}
                                             className={cn(
+                                                'pl-1',
                                                 item.class && item.class
                                             )}
                                             link={item?.link}
                                             href={item.href}
+                                            type="paragraph"
                                         />
                                     </div>
                                 }
@@ -290,11 +292,11 @@ const ResumeHeader = () => {
                 </div>
 
                 {watchingValue?.show_photo ? (
-                    <div className="photo relative w-[140px] h-[150px] rounded flex items-center justify-center border group gap-x-2 bg-zinc-100 hover:bg-zinc-300 transition delay-200 cursor-pointer">
+                    <div className="photo relative w-[125px] h-[140px] rounded flex items-center justify-center border group gap-x-2 bg-zinc-100  hover:bg-zinc-300 hover:bg-opacity-50 transition delay-200 cursor-pointer">
                         {watchingValue?.photoUrl ? (
                             <Image
-                                width={150}
-                                height={150}
+                                width={140}
+                                height={140}
                                 src={watchingValue?.photoUrl}
                                 className="w-full h-full rounded object-cover border"
                                 alt="Server Image"
@@ -303,7 +305,7 @@ const ResumeHeader = () => {
                             <RxPerson className="w-10 h-10 text-zinc-500" />
                         )}
 
-                        <div className="flex items-center justify-center gap-x-2 w-full h-full top-0 left-0 absolute invisible opacity-0 group-hover:visible group-hover:opacity-100 transition delay-75 bg-zinc-300">
+                        <div className="flex items-center justify-center gap-x-2 w-full h-full top-0 left-0 absolute invisible opacity-0 group-hover:visible group-hover:opacity-100 transition delay-75 bg-zinc-300 bg-opacity-50">
                             <Button
                                 size="sm"
                                 className="bg-emerald-500 p-2"

@@ -7,8 +7,7 @@ import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import SectionTitle from '../components/section-title'
-import SubHeading from '../components/sub-heading-section'
+import { TypographyInput } from '../components/Typography'
 import SkillsKeys from './skills-keys'
 
 const SkillsSection = () => {
@@ -26,7 +25,11 @@ const SkillsSection = () => {
 
     return (
         <GroupItem popoverKey="skills">
-            <SectionTitle placeholder="Skills" name={'skills.name' as const} />
+            <TypographyInput
+                placeholder="Skills"
+                name={'skills.name' as const}
+                type="title"
+            />
 
             {fields.map((field: any, i) => (
                 <GroupItem
@@ -46,20 +49,23 @@ const SkillsSection = () => {
                         }}
                     >
                         {watchValue[i]?.show_title && (
-                            <SubHeading
+                            <TypographyInput
                                 placeholder={field.placeholder}
                                 name={`${name}[${i}].title` as const}
                                 className={cn(
-                                    'text-md font-semibold px-2',
+                                    'px-2',
                                     watchValue[i].bold_title && 'font-semibold',
                                     watchValue[i].italic_title && 'italic'
                                 )}
+                                type="subheading"
                             />
                         )}
-                        <SkillsKeys
-                            name={`${name}.${i}.keys`}
-                            parentKey={`${name}.${i}`}
-                        />
+                        <div className="pt-2">
+                            <SkillsKeys
+                                name={`${name}.${i}.keys`}
+                                parentKey={`${name}.${i}`}
+                            />
+                        </div>
                     </div>
 
                     {groupPopoverKey === name + i && (

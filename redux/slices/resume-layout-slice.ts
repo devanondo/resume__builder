@@ -3,12 +3,7 @@ import {
     ILayoutItems,
     IResumeLayout,
 } from '@/components/resume-builder/types/resume-layout-types'
-import {
-    layoutItems,
-    layoutStyles,
-    layoutWithStyles,
-    resumeLayout,
-} from '@/lib/resume-data'
+import { layoutItems, layoutStyles, resumeLayout } from '@/lib/resume-data'
 import { createSlice } from '@reduxjs/toolkit'
 
 export const resumeSlice = createSlice({
@@ -17,7 +12,7 @@ export const resumeSlice = createSlice({
         resumeLayout: resumeLayout as IResumeLayout[],
         resumeLayoutItems: layoutItems as ILayoutItems[],
         layoutStyles: layoutStyles,
-        layoutWithStyles: layoutWithStyles,
+        layoutWithStyles: layoutItems.find((item) => item.isActive),
     },
     reducers: {
         setLayoutData: (state, action) => {
@@ -42,74 +37,53 @@ export const resumeSlice = createSlice({
             )
             if (activeLayout) {
                 state.resumeLayout = activeLayout?.layout
+                state.layoutWithStyles = activeLayout
             }
 
             state.resumeLayoutItems = newLayouts
         },
 
-        changeLayout: (state, action) => {
-            const layouts = state.resumeLayoutItems
-            const newLayouts = layouts.map((layout) => {
-                if (layout.id === action.payload) {
-                    layout.isActive = true
-                } else {
-                    layout.isActive = false
-                }
-                return layout
-            })
+        // changeLayoutStyles: (
+        //     state,
+        //     action: {
+        //         payload:
+        //             | {
+        //                   type: 'colors'
+        //                   primaryColor: string
+        //                   secondaryColor: string
+        //               }
+        //             | {
+        //                   type:
+        //                       | 'pageMargin'
+        //                       | 'fontFamily'
+        //                       | 'fontSize'
+        //                       | 'backgroundImage'
+        //                   value: string
+        //               }
+        //     }
+        // ) => {
+        //     switch (action.payload.type) {
+        //         case 'colors':
+        //             state.layoutStyles.primaryColor =
+        //                 action.payload.primaryColor
+        //             state.layoutStyles.secondaryColor =
+        //                 action.payload.secondaryColor
 
-            //find the active layout and set to the layout page
-            const activeLayout = newLayouts.find(
-                (layout) => layout.id === action.payload
-            )
-            if (activeLayout) {
-                state.resumeLayout = activeLayout?.layout
-            }
+        //             break
 
-            state.resumeLayoutItems = newLayouts
-        },
+        //         case 'pageMargin':
+        //         case 'fontFamily':
+        //         case 'fontSize':
+        //         case 'backgroundImage':
+        //             state.layoutStyles[action.payload.type] =
+        //                 action.payload.value
 
-        changeLayoutStyles: (
-            state,
-            action: {
-                payload:
-                    | {
-                          type: 'colors'
-                          primaryColor: string
-                          secondaryColor: string
-                      }
-                    | {
-                          type:
-                              | 'pageMargin'
-                              | 'fontFamily'
-                              | 'fontSize'
-                              | 'backgroundImage'
-                          value: string
-                      }
-            }
-        ) => {
-            switch (action.payload.type) {
-                case 'colors':
-                    state.layoutStyles.primaryColor =
-                        action.payload.primaryColor
-                    state.layoutStyles.secondaryColor =
-                        action.payload.secondaryColor
+        //             break
 
-                    break
-
-                case 'pageMargin':
-                case 'fontFamily':
-                case 'fontSize':
-                case 'backgroundImage':
-                    state.layoutStyles[action.payload.type] =
-                        action.payload.value
-
-                    break
-
-                default:
-                    break
-            }
-        },
+        //         default:
+        //             break
+        //     }
+        // },
 
         //Add section to the resume editor
         addSectionToEditor: (
@@ -154,10 +128,9 @@ export const resumeSlice = createSlice({
 export const {
     setLayoutData,
     setActiveLayout,
-    changeLayoutStyles,
+    // changeLayoutStyles,
     addSectionToEditor,
     removeSectionFromEditor,
-    changeLayout,
 } = resumeSlice.actions
 
 export default resumeSlice.reducer

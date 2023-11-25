@@ -7,10 +7,12 @@ import { setActiveLayout } from '@/redux/slices/resume-layout-slice'
 import { useModal } from '../hooks/use-modal-store'
 import { Card, CardContent, CardTitle } from '../ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog'
+import { useFormContext } from 'react-hook-form'
 
 const ChangeLayoutModal = () => {
     const { isOpen, onClose, type } = useModal()
     const { resumeLayoutItems } = useAppSelector((state) => state.layout)
+    const { setValue } = useFormContext()
     const dispatch = useAppDispatch()
     const isModalOpen = isOpen && type === 'changeLayout'
 
@@ -35,6 +37,7 @@ const ChangeLayoutModal = () => {
                                 key={index}
                                 onClick={() => {
                                     dispatch(setActiveLayout(item.id))
+                                    setValue('style.layout', item.layoutStyle)
                                 }}
                             >
                                 <CardContent className="p-2">

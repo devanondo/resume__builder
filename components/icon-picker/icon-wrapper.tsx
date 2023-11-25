@@ -2,7 +2,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { CSSProperties, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Separator } from '../ui/separator'
@@ -13,17 +13,20 @@ interface IconWrapperProps {
     icon?: string
     onChange?: (value: any) => void
     className?: string
+    style?: CSSProperties
 }
 
 interface IconProps {
     name: string
     className?: string
+    style?: CSSProperties
 }
 
 const IconWrapper = ({
     icon = 'FcAcceptDatabase',
     onChange = () => {},
     className,
+    style,
 }: IconWrapperProps) => {
     const [selectIcon, setSelectIcon] = useState(icon)
 
@@ -31,7 +34,10 @@ const IconWrapper = ({
 
     return (
         <Popover>
-            <PopoverTrigger className={cn('text-3xl px-2', className)}>
+            <PopoverTrigger
+                className={cn('text-3xl px-2', className)}
+                style={style}
+            >
                 {icons[selectIcon]}
             </PopoverTrigger>
             <PopoverContent className="p-0">
@@ -65,7 +71,7 @@ const IconWrapper = ({
                                         onChange(icon)
                                         setSelectIcon(icon)
                                     }}
-                                    className="text-3xl"
+                                    className="text-3xl  "
                                 >
                                     {circumIcons[icon]}
                                 </p>
@@ -80,8 +86,10 @@ const IconWrapper = ({
     )
 }
 
-const Icon = ({ name, className }: IconProps) => {
-    const { control } = useFormContext()
+const Icon = ({ name, className, style }: IconProps) => {
+    const { control, watch } = useFormContext()
+
+    const color = watch('style.colors.1')
 
     return (
         <Controller
@@ -93,6 +101,7 @@ const Icon = ({ name, className }: IconProps) => {
                         icon={f.value}
                         className={className}
                         onChange={f.onChange}
+                        style={{ color }}
                     />
                 )
             }}

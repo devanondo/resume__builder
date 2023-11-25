@@ -19,3 +19,5 @@ export const lato = Lato({
     subsets: ['latin'],
     variable: '--font-lato',
 })
+
+export const Font: any = { roboto, bitter, lato }

@@ -45,6 +45,10 @@ const settings = [
         render: 'show__institution',
     },
     {
+        title: 'Show GPA',
+        render: 'institution.enabled_gpa',
+    },
+    {
         title: 'Show Location',
         render: 'show_location',
     },

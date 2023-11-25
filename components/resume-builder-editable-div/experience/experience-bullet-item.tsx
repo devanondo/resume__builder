@@ -31,7 +31,7 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
                         <AItem
                             popoverKey={popkey(`${fieldName}.${i}.text`, i)}
                             key={field.id}
-                            className="flex items-center gap-x-1 w-full"
+                            className="flex items-center w-full"
                         >
                             {watchValue.bulet_items && (
                                 <Dot className="w-4 h-4" />

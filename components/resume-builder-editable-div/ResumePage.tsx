@@ -36,6 +36,7 @@ import {
     ContextMenuTrigger,
 } from '../ui/context-menu'
 import ProjectsItems from './projects/projects'
+
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
         (state) => state.popover
@@ -53,8 +54,8 @@ const ResumePage = () => {
         summerySection: <ResumeSummery />,
         experienceSummary: <ExperienceSummery />,
         skills: <SkillsSection />,
-        strength: <StrengthSection />,
-        education: <EducationItems />,
+        strengths: <StrengthSection />,
+        educations: <EducationItems />,
         languages: <LanguageSection />,
         declaration: <DeclarationSection />,
         references: <ReferencesSection />,
@@ -96,8 +97,6 @@ const ResumePage = () => {
     return (
         <div>
             <div onClick={(e) => e.stopPropagation()} className="w-full pt-16">
-                {/* <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)}> */}
                 <ContextMenu>
                     <ContextMenuTrigger
                         onContextMenu={() => {
@@ -109,13 +108,16 @@ const ResumePage = () => {
                     >
                         <div
                             className={cn(
-                                ` p-12 w-[940px] border  h-[1325px] bg-white z-0`,
+                                `w-[940px] border  h-[1325px] bg-white z-0`,
                                 summeryPopoverKey && 'bg-[#dddce0]',
                                 groupPopoverKey && 'bg-[#dddce0]'
                             )}
                             id="resume-builder"
                             onClick={parentClick}
                             ref={divRef}
+                            style={{
+                                padding: `${watch('style.pageMarginOption')}px`,
+                            }}
                         >
                             <ResumeHeader />
 
@@ -133,7 +135,6 @@ const ResumePage = () => {
                                             key={index}
                                         >
                                             {item.items.map((cont, index) => {
-                                                console.log(watch(cont.key))
                                                 if (
                                                     !watch(
                                                         `${cont.key}.enabled`
@@ -151,9 +152,6 @@ const ResumePage = () => {
                                                                 cont.key
                                                             ]
                                                         }
-                                                        {/* <ResumeSections
-                                                            field={cont.key}
-                                                        /> */}
                                                     </div>
                                                 )
                                             })}
@@ -224,9 +222,6 @@ const ResumePage = () => {
                         </ContextMenuRadioGroup>
                     </ContextMenuContent>
                 </ContextMenu>
-                {/* <UploadImageModal /> */}
-                {/* </form>
-                </FormProvider> */}
             </div>
         </div>
     )

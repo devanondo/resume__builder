@@ -1,18 +1,18 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { useFieldArray, useFormContext } from 'react-hook-form'
 
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { SlCalender } from 'react-icons/sl'
+import { MdShareLocation } from 'react-icons/md'
+
+import { useWatchForm } from '@/components/hooks/use-form-watch'
 import Icon from '@/components/icon-picker/icon-wrapper'
 import EducationPopover from '@/components/popover/education-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { showPopover } from '@/redux/slices/pop-slice'
-import Paragraph from '../components/paragraph-section'
-import SectionTitle from '../components/section-title'
-import SubHeading from '../components/sub-heading-section'
-import SubTitle from '../components/sub-title-section'
-import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { TypographyInput } from '../components/Typography'
 
 const EducationItems = () => {
     const name = 'educations.items'
@@ -30,9 +30,10 @@ const EducationItems = () => {
 
     return (
         <GroupItem popoverKey="educations">
-            <SectionTitle
+            <TypographyInput
                 placeholder="Education"
                 name={'educations.name' as const}
+                type="title"
             />
 
             {fields.map((field: any, i) => (
@@ -55,44 +56,68 @@ const EducationItems = () => {
                         <Icon name={`${name}[${i}].icon` as const} />
 
                         <div className="w-full">
-                            <SubHeading
+                            <TypographyInput
                                 name={`${name}[${i}].name` as const}
                                 placeholder={field.placeholder || ''}
-                                className="text-md font-semibold "
+                                className=""
+                                type="subheading"
                             />
 
                             <div className="flex items-start gap-x-3 justify-between  py-2">
                                 <div className="">
-                                    <SubTitle
+                                    <TypographyInput
                                         name={
                                             `${name}[${i}].institution.name` as const
                                         }
                                         placeholder={
                                             field.institution?.placeholder || ''
                                         }
-                                        className={cn('text-sm font-bold')}
-                                    />
-                                    <Paragraph
-                                        name={
-                                            `${name}[${i}].date.from` as const
-                                        }
-                                        placeholder={
-                                            field.date?.placeholder || ''
-                                        }
-                                        className={cn(
-                                            'text-sm italic font-semibold p-0'
-                                        )}
+                                        className={cn('text-sm font-bold pl-0')}
+                                        type="subtitle"
                                     />
 
-                                    <Paragraph
-                                        name={`${name}[${i}].location` as const}
-                                        placeholder="Location"
-                                        className={cn('text-sm p-0')}
-                                    />
+                                    <div className="flex items-center">
+                                        <div className="flex items-center">
+                                            <SlCalender className="w-3 h-3" />
+
+                                            <div className="flex items-center">
+                                                <TypographyInput
+                                                    name={
+                                                        `${name}.${i}.date.from` as const
+                                                    }
+                                                    className="w-fit !text-xs pl-1"
+                                                    placeholder="From"
+                                                    type="paragraph"
+                                                />
+                                                -
+                                                <TypographyInput
+                                                    name={
+                                                        `${name}.${i}.date.to` as const
+                                                    }
+                                                    className="w-fit !text-xs "
+                                                    placeholder="To"
+                                                    type="paragraph"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center">
+                                            <MdShareLocation className="w-3 h-3" />
+
+                                            <TypographyInput
+                                                name={
+                                                    `${name}[${i}].location` as const
+                                                }
+                                                placeholder="Location"
+                                                className={cn('!text-xs')}
+                                                type="paragraph"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                {watchValue[i]?.show__institution && (
-                                    <div className="border-l-2 border-[#74767E] w-fit px-3 py-2">
-                                        <SubHeading
+                                {watchValue[i]?.institution?.enabled_gpa && (
+                                    <div className="border-l border-[#74767E] w-fit px-2 py-1">
+                                        <TypographyInput
                                             name={
                                                 `${name}[${i}].institution.gpa` as const
                                             }
@@ -101,11 +126,12 @@ const EducationItems = () => {
                                                     ?.placeholder_gpa || 'GPA'
                                             }
                                             className={cn(
-                                                'text-md text-center italic font-semibold uppercase  !text-[#74767E]'
+                                                '!text-xs text-center mb-1'
                                             )}
+                                            type="paragraph"
                                         />
                                         <div className="flex items-center -mt-2">
-                                            <Paragraph
+                                            <TypographyInput
                                                 name={
                                                     `${name}[${i}].institution.gpa_score` as const
                                                 }
@@ -115,15 +141,16 @@ const EducationItems = () => {
                                                     '4.00'
                                                 }
                                                 className={cn(
-                                                    'text-sm text-right text-[#74767E]'
+                                                    '!text-xs !font-bold text-right px-1'
                                                 )}
+                                                type="subtitle"
                                             />
 
                                             <div className="flex items-center justify-center ">
                                                 /
                                             </div>
 
-                                            <Paragraph
+                                            <TypographyInput
                                                 name={
                                                     `${name}[${i}].institution.gpa_max` as const
                                                 }
@@ -133,8 +160,9 @@ const EducationItems = () => {
                                                     '4.00'
                                                 }
                                                 className={cn(
-                                                    'text-sm text-[#74767E]'
+                                                    '!text-xs !font-bold px-1'
                                                 )}
+                                                type="paragraph"
                                             />
                                         </div>
                                     </div>

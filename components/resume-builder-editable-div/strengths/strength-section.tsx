@@ -8,11 +8,9 @@ import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { useFieldArray, useFormContext } from 'react-hook-form'
-import Paragraph from '../components/paragraph-section'
-import SectionTitle from '../components/section-title'
-import SubTitle from '../components/sub-title-section'
 import { useEffect, useRef, useState } from 'react'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { TypographyInput } from '../components/Typography'
 
 const StrengthSection = () => {
     const name = 'strengths.items'
@@ -38,9 +36,10 @@ const StrengthSection = () => {
 
     return (
         <GroupItem popoverKey="strengths">
-            <SectionTitle
+            <TypographyInput
                 placeholder="Strength"
                 name={'strengths.name' as const}
+                type="title"
             />
 
             <div
@@ -70,15 +69,16 @@ const StrengthSection = () => {
                             {watchValue[i]?.show_icon && (
                                 <Icon name={`${name}[${i}].icon` as const} />
                             )}
-                            <div className="">
-                                <SubTitle
+                            <div className="flex flex-col justify-center">
+                                <TypographyInput
                                     name={`${name}[${i}].name` as const}
                                     placeholder={field.placeholder}
-                                    className="text-md font-semibold "
+                                    className="pl-0"
+                                    type="subtitle"
                                 />
 
                                 {watchValue[i]?.description?.enabled && (
-                                    <Paragraph
+                                    <TypographyInput
                                         name={
                                             `${name}[${i}].description.text` as const
                                         }
@@ -90,6 +90,7 @@ const StrengthSection = () => {
                                             watchValue[i].description
                                                 .italic_description && 'italic'
                                         )}
+                                        type="paragraph"
                                     />
                                 )}
                             </div>

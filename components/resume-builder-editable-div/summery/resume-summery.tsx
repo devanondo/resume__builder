@@ -1,15 +1,16 @@
 'use client'
 
 import { GroupItem } from '@/components/shared/wrapper'
-import SectionTitle from '../components/section-title'
+import { TypographyInput } from '../components/Typography'
 import NestedSummery from './nested-summery'
 
 const ResumeSummery = () => {
     return (
         <GroupItem popoverKey="summerySection">
-            <SectionTitle
+            <TypographyInput
                 placeholder="Summery"
                 name={`summerySection.name` as const}
+                type="title"
             />
 
             <NestedSummery />

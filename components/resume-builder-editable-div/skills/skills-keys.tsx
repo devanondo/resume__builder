@@ -65,7 +65,7 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                                 watchParent.bold_key && ' font-bold'
                             )}
                             style={{
-                                borderBottom: `2px solid red`,
+                                borderBottom: `2px solid transparent`,
                             }}
                         />
                     </div>

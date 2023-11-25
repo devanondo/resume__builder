@@ -2,11 +2,22 @@ import {
     ILayoutItems,
     ILayoutStyles,
     IResumeLayout,
-} from '@/components/resume-builder/types/resume-layout-types'
+} from '@/components/resume-builder-editable-div/types/resume-layout-types'
 
 // Form Data
 export const resumeFormData = {
-    template: 'rain_maker',
+    style: {
+        record: 'ResumeStyle',
+        layout: 'double',
+        colors: ['#000', '#6f7878'],
+        background: 'b05',
+        fontBody: 'roboto',
+        fontHeading: 'bitter',
+        fontSize: 'medium',
+        isMetaDataDisabled: false,
+        marginOption: 1,
+        pageMarginOption: 50,
+    },
     header: {
         enabled: true,
         name: 'ANONDO BORMON',
@@ -44,7 +55,6 @@ export const resumeFormData = {
             },
         ],
     },
-
     experienceSummary: {
         record: 'ExperienceSection',
         name: 'Experience',
@@ -55,7 +65,7 @@ export const resumeFormData = {
                 enabled: true,
                 position: 'Full Stackweb developer',
                 bold_position: true,
-                workplace: '<a href="www.google.com">Fiverr</a>',
+                workplace: 'Fiverr',
                 location: 'San Fransisco, CA',
                 show_location: false,
 
@@ -123,7 +133,7 @@ export const resumeFormData = {
     projects: {
         record: 'ProjectSection',
         name: 'Projects',
-        enabled: true,
+        enabled: false,
 
         items: [
             {
@@ -173,7 +183,7 @@ export const resumeFormData = {
                 enabled: true,
                 name: 'Team Leadership',
                 placeholder: 'Your Unique Talent',
-                icon: 'FcApproval',
+                icon: 'CiMicrochip',
                 show_icon: true,
                 description: {
                     placeholder: 'Describe your strength!',
@@ -255,11 +265,10 @@ export const resumeFormData = {
             },
         ],
     },
-
     declaration: {
         record: 'DeclarationSection',
         name: 'Application Declaration',
-        enabled: true,
+        enabled: false,
 
         items: [
             {
@@ -273,7 +282,7 @@ export const resumeFormData = {
     references: {
         record: 'ReferencesSection',
         name: 'References',
-        enabled: true,
+        enabled: false,
 
         items: [
             {
@@ -290,36 +299,233 @@ export const resumeFormData = {
     },
 }
 
+// Layout styles sould be come form the DB
 export const layoutWithStyles: ILayoutStyles[] = [
     {
-        style: 'Gogo Lis',
-        fontFamilly: 'Bitter',
-        heading: {
-            fontSize: '28px',
-            lineHeight: '32px',
-            fontWeight: 500,
+        layout: 'double',
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '30px',
+                    lineHeight: '32px',
+                    fontWeight: 700,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
         },
-        titleTypo: {
-            fontSize: '22px',
-            lineHeight: '26px',
-            fontWeight: 600,
+    },
+    {
+        layout: 'single',
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
         },
-        subHeading: {
-            fontSize: '18px',
-            lineHeight: '22px',
-            fontWeight: 400,
-        },
-        subTitle: {
-            fontSize: '16px',
-            lineHeight: '19px',
-            fontWeight: 400,
-        },
-        paragraph: {
-            fontSize: '14px',
-            lineHeight: '17px',
-            fontWeight: 400,
-        },
-        colorPallate: 'blackwhite',
     },
 ]
 
@@ -395,7 +601,7 @@ export const resumeLayout: IResumeLayout[] = [
             {
                 title: 'Educations',
                 height: 1,
-                key: 'education',
+                key: 'educations',
                 position: 5,
             },
             {
@@ -426,7 +632,7 @@ export const resumeLayout: IResumeLayout[] = [
             {
                 title: 'Strength',
                 height: 1,
-                key: 'strength',
+                key: 'strengths',
                 position: 4,
             },
             {
@@ -451,7 +657,7 @@ export const layoutItems: ILayoutItems[] = [
         title: 'Rain Maker',
         isActive: true,
         imgUrl: 'https://i.ibb.co/B3cbpyd/Screenshot-from-2023-11-12-23-29-35.png',
-
+        layoutStyle: 'double',
         layout: [
             {
                 title: 'Group-1',
@@ -473,7 +679,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Educations',
                         height: 1,
-                        key: 'education',
+                        key: 'educations',
                         position: 5,
                     },
                     {
@@ -504,7 +710,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Strength',
                         height: 1,
-                        key: 'strength',
+                        key: 'strengths',
                         position: 4,
                     },
                     {
@@ -522,13 +728,123 @@ export const layoutItems: ILayoutItems[] = [
                 ],
             },
         ],
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '30px',
+                    lineHeight: '32px',
+                    fontWeight: 700,
+                },
+                title: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '15px',
+                    lineHeight: '18px',
+                    fontWeight: 700,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+        },
     },
     {
         id: '355as1d51aea1dee1a5c',
         title: 'Steam Roller',
         isActive: false,
         imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
-
+        layoutStyle: 'single',
         layout: [
             {
                 title: 'Group-1',
@@ -550,7 +866,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Educations',
                         height: 1,
-                        key: 'education',
+                        key: 'educations',
                         position: 5,
                     },
                     {
@@ -581,7 +897,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Strength',
                         height: 1,
-                        key: 'strength',
+                        key: 'strengths',
                         position: 4,
                     },
                     {
@@ -599,6 +915,116 @@ export const layoutItems: ILayoutItems[] = [
                 ],
             },
         ],
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+        },
     },
 
     {
@@ -606,7 +1032,7 @@ export const layoutItems: ILayoutItems[] = [
         title: 'Narrow Roller',
         isActive: false,
         imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
-
+        layoutStyle: 'onethird',
         layout: [
             {
                 title: 'Group-1',
@@ -628,7 +1054,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Educations',
                         height: 1,
-                        key: 'education',
+                        key: 'educations',
                         position: 5,
                     },
                     {
@@ -659,7 +1085,7 @@ export const layoutItems: ILayoutItems[] = [
                     {
                         title: 'Strength',
                         height: 1,
-                        key: 'strength',
+                        key: 'strengths',
                         position: 4,
                     },
                     {
@@ -671,6 +1097,116 @@ export const layoutItems: ILayoutItems[] = [
                 ],
             },
         ],
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 500,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+        },
     },
 ]
 
