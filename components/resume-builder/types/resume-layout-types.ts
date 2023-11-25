@@ -20,6 +20,11 @@ export interface IItem {
     position: number
 }
 
+export interface ITypoStyle {
+    fontSize: string
+    lineHeight: string
+    fontWeight: number
+}
 export interface IResumeLayout {
     title: string
     column: number
@@ -32,4 +37,15 @@ export interface ILayoutItems {
     isActive: boolean
     imgUrl?: string
     layout: IResumeLayout[]
+}
+
+export interface ILayoutStyles {
+    style: string
+    fontFamilly: string
+    heading: ITypoStyle
+    titleTypo: ITypoStyle
+    subHeading: ITypoStyle
+    subTitle: ITypoStyle
+    paragraph: ITypoStyle
+    colorPallate: string
 }

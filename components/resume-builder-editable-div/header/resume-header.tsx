@@ -310,7 +310,6 @@ const ResumeHeader = () => {
                                 variant="secondary"
                                 onClick={() => {
                                     onOpen({ type: 'uploadImage' })
-                                    console.log('licked')
                                 }}
                                 type="button"
                             >

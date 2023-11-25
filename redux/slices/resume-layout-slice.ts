@@ -3,7 +3,12 @@ import {
     ILayoutItems,
     IResumeLayout,
 } from '@/components/resume-builder/types/resume-layout-types'
-import { layoutItems, layoutStyles, resumeLayout } from '@/lib/resume-data'
+import {
+    layoutItems,
+    layoutStyles,
+    layoutWithStyles,
+    resumeLayout,
+} from '@/lib/resume-data'
 import { createSlice } from '@reduxjs/toolkit'
 
 export const resumeSlice = createSlice({
@@ -12,6 +17,7 @@ export const resumeSlice = createSlice({
         resumeLayout: resumeLayout as IResumeLayout[],
         resumeLayoutItems: layoutItems as ILayoutItems[],
         layoutStyles: layoutStyles,
+        layoutWithStyles: layoutWithStyles,
     },
     reducers: {
         setLayoutData: (state, action) => {
@@ -20,6 +26,28 @@ export const resumeSlice = createSlice({
 
         // SetActivelayout should be removed after backend integration
         setActiveLayout: (state, action) => {
+            const layouts = state.resumeLayoutItems
+            const newLayouts = layouts.map((layout) => {
+                if (layout.id === action.payload) {
+                    layout.isActive = true
+                } else {
+                    layout.isActive = false
+                }
+                return layout
+            })
+
+            //find the active layout and set to the layout page
+            const activeLayout = newLayouts.find(
+                (layout) => layout.id === action.payload
+            )
+            if (activeLayout) {
+                state.resumeLayout = activeLayout?.layout
+            }
+
+            state.resumeLayoutItems = newLayouts
+        },
+
+        changeLayout: (state, action) => {
             const layouts = state.resumeLayoutItems
             const newLayouts = layouts.map((layout) => {
                 if (layout.id === action.payload) {
@@ -129,6 +157,7 @@ export const {
     changeLayoutStyles,
     addSectionToEditor,
     removeSectionFromEditor,
+    changeLayout,
 } = resumeSlice.actions
 
 export default resumeSlice.reducer

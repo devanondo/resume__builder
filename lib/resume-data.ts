@@ -1,11 +1,14 @@
 import {
     ILayoutItems,
+    ILayoutStyles,
     IResumeLayout,
 } from '@/components/resume-builder/types/resume-layout-types'
 
 // Form Data
 export const resumeFormData = {
+    template: 'rain_maker',
     header: {
+        enabled: true,
         name: 'ANONDO BORMON',
         title: 'Full Stack Developer',
         email: 'dev.abormon28@gmail.com',
@@ -287,6 +290,90 @@ export const resumeFormData = {
     },
 }
 
+export const layoutWithStyles: ILayoutStyles[] = [
+    {
+        style: 'Gogo Lis',
+        fontFamilly: 'Bitter',
+        heading: {
+            fontSize: '28px',
+            lineHeight: '32px',
+            fontWeight: 500,
+        },
+        titleTypo: {
+            fontSize: '22px',
+            lineHeight: '26px',
+            fontWeight: 600,
+        },
+        subHeading: {
+            fontSize: '18px',
+            lineHeight: '22px',
+            fontWeight: 400,
+        },
+        subTitle: {
+            fontSize: '16px',
+            lineHeight: '19px',
+            fontWeight: 400,
+        },
+        paragraph: {
+            fontSize: '14px',
+            lineHeight: '17px',
+            fontWeight: 400,
+        },
+        colorPallate: 'blackwhite',
+    },
+]
+
+export const colors = [
+    {
+        colorPallate: 'blackWhite',
+        primary: '#000',
+        secondary: '#1e90ff',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#000',
+        secondary: '#6f7878',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#124f44',
+        secondary: '#3cb371',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#8a0202',
+        secondary: '#f96b07',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#002b7f',
+        secondary: '#56acf2',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#19273c',
+        secondary: '#3c6df0',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#501e58',
+        secondary: '#951dc4',
+        paragraph: '#000',
+    },
+    {
+        colorPallate: 'blackWhite',
+        primary: '#19273c',
+        secondary: '#c4881c',
+        paragraph: '#000',
+    },
+]
+
 export const resumeLayout: IResumeLayout[] = [
     {
         title: 'Group-1',
@@ -364,6 +451,7 @@ export const layoutItems: ILayoutItems[] = [
         title: 'Rain Maker',
         isActive: true,
         imgUrl: 'https://i.ibb.co/B3cbpyd/Screenshot-from-2023-11-12-23-29-35.png',
+
         layout: [
             {
                 title: 'Group-1',
@@ -440,6 +528,7 @@ export const layoutItems: ILayoutItems[] = [
         title: 'Steam Roller',
         isActive: false,
         imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
+
         layout: [
             {
                 title: 'Group-1',
@@ -500,6 +589,78 @@ export const layoutItems: ILayoutItems[] = [
                         height: 1,
                         key: 'skills',
                         position: 2,
+                    },
+                    {
+                        title: 'Languages',
+                        height: 1,
+                        key: 'languages',
+                        position: 2,
+                    },
+                ],
+            },
+        ],
+    },
+
+    {
+        id: '355as1d51aea1dee1a5e',
+        title: 'Narrow Roller',
+        isActive: false,
+        imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
+
+        layout: [
+            {
+                title: 'Group-1',
+                column: 8,
+                items: [
+                    {
+                        title: 'Summery',
+                        height: 1,
+                        key: 'summerySection',
+                        position: 1,
+                    },
+
+                    {
+                        title: 'Experience',
+                        height: 1,
+                        key: 'experienceSummary',
+                        position: 3,
+                    },
+                    {
+                        title: 'Educations',
+                        height: 1,
+                        key: 'education',
+                        position: 5,
+                    },
+                    {
+                        title: 'Declaration',
+                        height: 1,
+                        key: 'declaration',
+                        position: 2,
+                    },
+                ],
+            },
+
+            {
+                title: 'Group-2',
+                column: 4,
+                items: [
+                    {
+                        title: 'Skills',
+                        height: 1,
+                        key: 'skills',
+                        position: 2,
+                    },
+                    {
+                        title: 'Projects',
+                        height: 1,
+                        key: 'projects',
+                        position: 2,
+                    },
+                    {
+                        title: 'Strength',
+                        height: 1,
+                        key: 'strength',
+                        position: 4,
                     },
                     {
                         title: 'Languages',

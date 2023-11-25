@@ -4,6 +4,7 @@
 import { IResumeLayout } from '@/components/resume-builder/types/resume-layout-types'
 import { cn } from '@/lib/utils'
 import { useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { IGroup } from '../DragDrop'
 
 interface DragNDropProps {
@@ -35,7 +36,7 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
         }, 0)
     }
 
-    const handleDragEnd = () => {
+    const handleDragEnd = (e: any) => {
         setDragging(false)
         dragNode.current?.removeEventListener('dragend', handleDragEnd)
         dragItem.current = null
@@ -73,6 +74,8 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
         return 'dnd-item'
     }
 
+    const { watch } = useFormContext()
+
     return (
         <>
             <div className="dnd-group">
@@ -93,34 +96,37 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                                 : () => {}
                         }
                     >
-                        {grp.items.map((item: any, itemI: number) => (
-                            <div
-                                key={item + itemI}
-                                draggable
-                                onDragStart={(e) => {
-                                    handleDragStart(e, { grpI, itemI })
-                                }}
-                                onDragEnter={
-                                    dragging
-                                        ? (e) =>
-                                              handleDragEnter(e, {
-                                                  grpI,
-                                                  itemI,
-                                              })
-                                        : () => {}
-                                }
-                                className={cn(
-                                    dragging
-                                        ? getStyles({ grpI, itemI })
-                                        : 'dnd-item'
-                                )}
-                                onDragEnd={(e) => {
-                                    dragEnd(e, list)
-                                }}
-                            >
-                                {item?.title}
-                            </div>
-                        ))}
+                        {grp.items.map((item: any, itemI: number) => {
+                            if (!watch(`${item.key}.enabled`)) return
+                            return (
+                                <div
+                                    key={item + itemI}
+                                    draggable
+                                    onDragStart={(e) => {
+                                        handleDragStart(e, { grpI, itemI })
+                                    }}
+                                    onDragEnter={
+                                        dragging
+                                            ? (e) =>
+                                                  handleDragEnter(e, {
+                                                      grpI,
+                                                      itemI,
+                                                  })
+                                            : () => {}
+                                    }
+                                    className={cn(
+                                        dragging
+                                            ? getStyles({ grpI, itemI })
+                                            : 'dnd-item'
+                                    )}
+                                    onDragEnd={(e) => {
+                                        dragEnd(e, list)
+                                    }}
+                                >
+                                    {item?.title}
+                                </div>
+                            )
+                        })}
                     </div>
                 ))}
             </div>

@@ -22,45 +22,7 @@ import { Check } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { changeLayoutStyles } from '@/redux/slices/resume-layout-slice'
 import { getFontLevel, getFontValue } from '../resume-styles/utils/font-design'
-
-const colors = [
-    {
-        primary: '#000',
-        secondary: '#1e90ff',
-    },
-    {
-        primary: '#000',
-        secondary: '#6f7878',
-    },
-    {
-        primary: '#124f44',
-        secondary: '#3cb371',
-    },
-    {
-        primary: '#8a0202',
-        secondary: '#f96b07',
-    },
-    {
-        primary: '#002b7f',
-        secondary: '#56acf2',
-    },
-    {
-        primary: '#19273c',
-        secondary: '#3c6df0',
-    },
-    {
-        primary: '#501e58',
-        secondary: '#951dc4',
-    },
-    {
-        primary: '#343334',
-        secondary: '#00b6cb',
-    },
-    {
-        primary: '#19273c',
-        secondary: '#c4881c',
-    },
-]
+import { colors } from '@/lib/resume-data'
 
 const ResumeStylesDrawer = () => {
     const { isOpen, onClose, type } = useModal()
