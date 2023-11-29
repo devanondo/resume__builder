@@ -21,18 +21,19 @@ export const TypographyInput = ({
     const { watch } = useFormContext()
 
     const style = watch('style')
-    const fontStyle = layoutWithStyles?.typo[style.fontSize][type!]
+
+    const fontStyle = style && layoutWithStyles?.typo[style?.fontSize][type]
 
     const getFontFamilly = (key: TypeProps) => {
         switch (key) {
             case 'heading':
             case 'subheading':
             case 'title':
-                return Font[style.fontHeading]
+                return Font[style?.fontHeading]
 
             case 'paragraph':
             case 'subtitle':
-                return Font[style.fontBody]
+                return Font[style?.fontBody]
         }
     }
 
@@ -41,12 +42,12 @@ export const TypographyInput = ({
             case 'heading':
             case 'subheading':
             case 'title':
-                return style.colors[0]
+                return style?.colors[0]
 
             case 'paragraph':
                 return 'px-2 text-[14px] leading-[17px] text-[#384347]'
             case 'subtitle':
-                return style.colors[1]
+                return style?.colors[1]
         }
     }
 
@@ -74,7 +75,7 @@ export const TypographyInput = ({
                 className={cn(
                     commonStyles(),
                     className,
-                    getFontFamilly(type as TypeProps).className
+                    getFontFamilly(type as TypeProps)?.className
                 )}
                 style={{ ...fontStyle, color: getColors(type as TypeProps) }}
                 placeholder={placeholder}

@@ -11,5 +11,5 @@ export interface CommonSectionProps extends HTMLAttributes<HTMLDivElement> {
     name: string
     link?: boolean
     href?: string
-    type?: TypeProps
+    type: TypeProps
 }

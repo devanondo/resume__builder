@@ -58,7 +58,7 @@ const LanguagePopover = ({
     const { control } = useFormContext()
 
     return (
-        <AItem className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-10 -translate-x-1/2 z-10 absolute bg-white">
+        <AItem className="p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-11 -translate-x-1/2 z-10 absolute bg-white">
             <Button
                 onClick={() => {
                     append({

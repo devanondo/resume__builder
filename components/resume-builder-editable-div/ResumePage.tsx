@@ -17,7 +17,8 @@ import SkillsSection from './skills/skills-section'
 import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
 import { ItemsComponents } from './types/resume-layout-types'
-
+import { toast } from 'sonner'
+import { debounce } from 'lodash'
 import { useFormContext } from 'react-hook-form'
 import { useReactToPrint } from 'react-to-print'
 import {
@@ -36,6 +37,9 @@ import {
     ContextMenuTrigger,
 } from '../ui/context-menu'
 import ProjectsItems from './projects/projects'
+
+import axios from 'axios'
+import { layoutItems } from '@/lib/resume-data'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -68,7 +72,11 @@ const ResumePage = () => {
         dispatch(showPopover(null))
     }
 
-    const { resumeLayout } = useAppSelector((state) => state.layout)
+    // const { resumeLayout } = useAppSelector((state) => state.layout)
+    const resumeLayout = layoutItems.find(
+        (layout) => layout.layoutStyle === watch('style.layout')
+    )
+    console.log(resumeLayout)
     const divRef = useRef<HTMLDivElement>(null)
 
     const handleButtonClick = () => {
@@ -79,6 +87,15 @@ const ResumePage = () => {
     const handlePrint = useReactToPrint({
         content: () => divRef.current!,
     })
+
+    const saveToServer = async (values: any) => {
+        try {
+            await axios.patch('/api/resume', values)
+            return 'Updated successfully!'
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
@@ -91,6 +108,33 @@ const ResumePage = () => {
 
         return () => document.removeEventListener('keydown', handleKeyPress)
     })
+
+    const debouncedUpdate = debounce(async () => {
+        console.log(
+            'User stopped typing for 5 seconds. Do something with form data:'
+        )
+        const data = watch()
+
+        console.log(data)
+
+        try {
+            await toast.promise(saveToServer(data), {
+                loading: 'Loading...',
+                success: (data: any) => {
+                    return data
+                },
+                error: 'Error',
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }, 5000)
+
+    useEffect(() => {
+        debouncedUpdate()
+
+        return debouncedUpdate.cancel
+    }, [watch, debouncedUpdate])
 
     if (!isMounted) return null
 
@@ -126,7 +170,7 @@ const ResumePage = () => {
                                 onClick={parentClick}
                                 className="grid grid-cols-12 gap-x-2"
                             >
-                                {resumeLayout?.map((item, index) => {
+                                {resumeLayout?.layout?.map((item, index) => {
                                     return (
                                         <div
                                             style={{
