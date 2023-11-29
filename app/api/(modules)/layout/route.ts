@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NextResponse } from 'next/server'
 import { connectToDB } from '@/app/lib/dbconfig'
 

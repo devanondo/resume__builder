@@ -12,7 +12,7 @@ import { useFormContext } from 'react-hook-form'
 const ChangeLayoutModal = () => {
     const { isOpen, onClose, type } = useModal()
     const { resumeLayoutItems } = useAppSelector((state) => state.layout)
-    const { setValue } = useFormContext()
+    const { setValue, watch } = useFormContext()
     const dispatch = useAppDispatch()
     const isModalOpen = isOpen && type === 'changeLayout'
 
@@ -51,7 +51,11 @@ const ChangeLayoutModal = () => {
                                 <CardTitle
                                     className={cn(
                                         'flex items-center justify-center bg-zinc-500 px-2 py-2 text-white text-sm',
-                                        item.isActive && 'bg-green-600'
+
+                                        watch('style.layout') ===
+                                            item.layoutStyle && 'bg-green-600'
+
+                                        // item.isActive
                                     )}
                                 >
                                     {item.title}

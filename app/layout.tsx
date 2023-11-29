@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { ModalProvider } from '@/components/provider/ModalProvider'
-
+import { Toaster } from 'sonner'
 import ReduxProvider from '@/redux/redux-provider'
 import type { Metadata } from 'next'
 import './globals.css'
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 }
 
 import { Bitter, Lato, Roboto } from 'next/font/google'
+import Loading from './loading'
 
 export const roboto = Roboto({
     weight: ['300', '400', '500', '700', '900'],
@@ -46,9 +47,13 @@ export default function RootLayout({
             <html lang="en">
                 <body className={` ${roboto.className}  `}>
                     <ReduxProvider>
-                        <div className="h-full">{children}</div>
-                        <ModalProvider />
+                        <Suspense fallback={<Loading />}>
+                            <div className="h-full">{children}</div>
+                            <ModalProvider />
+                        </Suspense>
                     </ReduxProvider>
+
+                    <Toaster position="top-center" />
                 </body>
             </html>
         </ClerkProvider>

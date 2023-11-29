@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
+import Loading from '@/app/(routes)/resume-builder/[userId]/loading'
 import { useGetResumeQuery } from '@/redux/apis/resume.api'
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -46,7 +47,7 @@ const ResumePagewrapper = () => {
     }, [resumeData.data])
 
     if (!resumeData.data) {
-        return <>Loading...</>
+        return <Loading />
     }
 
     return (

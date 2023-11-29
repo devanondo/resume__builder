@@ -8,7 +8,14 @@ const resumeApi = api.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        updateResume: builder.mutation({
+            query: (body) => ({
+                url: 'resume',
+                method: 'PATCH',
+                body,
+            }),
+        }),
     }),
 })
 
-export const { useGetResumeQuery } = resumeApi
+export const { useGetResumeQuery, useUpdateResumeMutation } = resumeApi

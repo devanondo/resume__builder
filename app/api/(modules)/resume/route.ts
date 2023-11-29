@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import { Resume } from './resume-model'
@@ -14,6 +15,21 @@ export async function GET() {
         )
 
         return NextResponse.json(resume)
+    } catch (error) {
+        console.log('[SERVERS_POST] Error', error)
+        return new NextResponse('Internal Error', { status: 500 })
+    }
+}
+
+export async function PATCH(req: Request) {
+    try {
+        const { userId } = auth()
+
+        const values = await req.json()
+
+        await Resume.updateOne({ uid: userId }, values)
+
+        return NextResponse.json('Saved')
     } catch (error) {
         console.log('[SERVERS_POST] Error', error)
         return new NextResponse('Internal Error', { status: 500 })

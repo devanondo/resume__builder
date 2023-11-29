@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mongoose from 'mongoose'
 
 interface ConnectionStatus {
@@ -9,7 +10,7 @@ export const connectToDB = async (): Promise<void> => {
     try {
         if (connection?.isConnected) return
 
-        const db = await mongoose.connect('mongodb://localhost:27017/resume')
+        const db = await mongoose.connect(process.env.DATABASE_URL as string)
 
         connection.isConnected = db.connections[0].readyState
         console.log('DB Connected!')
