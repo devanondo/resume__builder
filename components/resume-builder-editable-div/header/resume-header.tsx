@@ -245,6 +245,7 @@ const ResumeHeader = () => {
                             'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 p-0'
                         )}
                         type="heading"
+                        placeholder="Your Name"
                     />
 
                     {watchingValue?.show_title ? (
