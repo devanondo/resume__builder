@@ -2,23 +2,25 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { setActiveLayout } from '@/redux/slices/resume-layout-slice'
+import { useUpdateLayoutMutation } from '@/redux/apis/layout.api'
+import { useAppSelector } from '@/redux/hooks'
+import { useFormContext } from 'react-hook-form'
 import { useModal } from '../hooks/use-modal-store'
 import { Card, CardContent, CardTitle } from '../ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog'
-import { useFormContext } from 'react-hook-form'
 
 const ChangeLayoutModal = () => {
     const { isOpen, onClose, type } = useModal()
     const { resumeLayoutItems } = useAppSelector((state) => state.layout)
     const { setValue, watch } = useFormContext()
-    const dispatch = useAppDispatch()
+
     const isModalOpen = isOpen && type === 'changeLayout'
 
     const handleClose = () => {
         onClose()
     }
+
+    const [updateLayout] = useUpdateLayoutMutation()
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -36,8 +38,19 @@ const ChangeLayoutModal = () => {
                                 className="col-span-1 overflow-hidden cursor-pointer group"
                                 key={index}
                                 onClick={() => {
-                                    dispatch(setActiveLayout(item.id))
+                                    // dispatch(setActiveLayout(item.id))
                                     setValue('style.layout', item.layoutStyle)
+
+                                    const keys = item.layout.map((itm) => {
+                                        return {
+                                            title: itm.title,
+                                            column: itm.column,
+                                        }
+                                    })
+
+                                    updateLayout({
+                                        key: keys,
+                                    })
                                 }}
                             >
                                 <CardContent className="p-2">

@@ -6,7 +6,7 @@ import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { BsCalendar2DateFill } from 'react-icons/bs'
+import { SlCalender } from 'react-icons/sl'
 import { MdShareLocation } from 'react-icons/md'
 import { TypographyInput } from '../components/Typography'
 import ExperienceBuletItem from './experience-bullet-item'
@@ -53,7 +53,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
 
                         <div className="flex items-center px-2 w-full gap-x-4">
                             <div className="flex items-center">
-                                <BsCalendar2DateFill className="w-3 h-3" />
+                                <SlCalender className="w-3 h-3" />
 
                                 <div className="flex items-center">
                                     <TypographyInput

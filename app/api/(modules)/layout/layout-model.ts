@@ -1,76 +1,22 @@
-import { Schema, model } from 'mongoose'
-import {
-    ILayout,
-    ILayoutModel,
-    Item,
-    LayoutGroup,
-    TextStyle,
-    Typo,
-} from './layout-interface'
+import { Schema, model, models } from 'mongoose'
+import { ILayout, ILayoutModel } from './layout-interface'
 
-const TextStyleSchema = new Schema<TextStyle>({
-    fontSize: String,
-    lineHeight: String,
-    fontWeight: { type: Schema.Types.Mixed },
+const itemSchema = new Schema({
+    title: { type: String, required: true },
+    key: { type: String, required: true },
 })
 
-const ItemSchema = new Schema<Item>({
-    title: String,
-    height: Number,
-    key: String,
-    position: Number,
+const itemsSchema = new Schema({
+    title: { type: String, required: true },
+    column: { type: Number, required: true },
+    items: [itemSchema],
 })
 
-const LayoutGroupSchema = new Schema<LayoutGroup>({
-    title: String,
-    column: Number,
-    items: [ItemSchema],
-})
-
-const TypoSchema = new Schema<Typo>({
-    small: {
-        heading: TextStyleSchema,
-        title: TextStyleSchema,
-        subheading: TextStyleSchema,
-        subtitle: TextStyleSchema,
-        paragraph: TextStyleSchema,
-    },
-    medium: {
-        heading: TextStyleSchema,
-        title: TextStyleSchema,
-        subheading: TextStyleSchema,
-        subtitle: TextStyleSchema,
-        paragraph: TextStyleSchema,
-    },
-    large: {
-        heading: TextStyleSchema,
-        title: TextStyleSchema,
-        subheading: TextStyleSchema,
-        subtitle: TextStyleSchema,
-        paragraph: TextStyleSchema,
-    },
-    extralarge: {
-        heading: TextStyleSchema,
-        title: TextStyleSchema,
-        subheading: TextStyleSchema,
-        subtitle: TextStyleSchema,
-        paragraph: TextStyleSchema,
-    },
-})
-
-const LayoutSchema = new Schema<ILayout, ILayoutModel>(
+const layoutSchema = new Schema(
     {
-        title: String,
-        isActive: {
-            type: Boolean,
-            default: false,
-        },
-        imgUrl: String,
-        layoutStyle: String,
-        layout: [LayoutGroupSchema],
-        typo: TypoSchema,
+        uid: { type: String, required: true },
+        sections: [itemsSchema],
     },
-
     {
         timestamps: true,
         toJSON: {
@@ -79,4 +25,5 @@ const LayoutSchema = new Schema<ILayout, ILayoutModel>(
     }
 )
 
-export const Layout = model<ILayout, ILayoutModel>('User', LayoutSchema)
+export const Layout =
+    models['layout'] || model<ILayout, ILayoutModel>('layout', layoutSchema)

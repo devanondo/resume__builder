@@ -10,10 +10,11 @@ import NavigationSidebar from '../navigation/navigation-sidebar'
 import { BuilderModalDraweProvider } from '../provider/builder-modal-drawer-provider'
 import ResumePage from './ResumePage'
 import Navigation from './navbar/navigation-bar'
+import { useGetLayoutQuery } from '@/redux/apis/layout.api'
 
 const ResumePagewrapper = () => {
     const methods = useForm()
-
+    useGetLayoutQuery(undefined)
     const resumeData = useGetResumeQuery(undefined)
 
     function onSubmit(values: any) {

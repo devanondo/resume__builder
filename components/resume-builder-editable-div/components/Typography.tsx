@@ -56,7 +56,7 @@ export const TypographyInput = ({
             case 'heading':
                 return ''
             case 'subheading':
-                return 'text-2xl font-bold rounded  focus:bg-transparent'
+                return ''
 
             case 'title':
                 return 'px-2 font-bold uppercase rounded focus:bg-transparent'

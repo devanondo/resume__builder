@@ -252,9 +252,12 @@ const ResumeHeader = () => {
                         <TypographyInput
                             name="header.title"
                             placeholder="The role you are playing for?"
-                            className={`mb-1 col-span-${
-                                watchingValue?.show_photo ? 2 : 3
-                            } font-extrabold`}
+                            className={cn(
+                                `mb-1 !font-semibold`,
+                                watchingValue?.show_photo
+                                    ? 'col-span-2'
+                                    : 'col-span-3'
+                            )}
                             type="subheading"
                         />
                     ) : null}

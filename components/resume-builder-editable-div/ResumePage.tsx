@@ -6,19 +6,8 @@
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
-import { useEffect, useRef, useState } from 'react'
-import DeclarationSection from './declaration/Declaretion'
-import EducationItems from './education/education-items'
-import ExperienceSummery from './experience/experience-summery'
-import ResumeHeader from './header/resume-header'
-import LanguageSection from './languages/language-section'
-import ReferencesSection from './references/references'
-import SkillsSection from './skills/skills-section'
-import StrengthSection from './strengths/strength-section'
-import ResumeSummery from './summery/resume-summery'
-import { ItemsComponents } from './types/resume-layout-types'
-import { toast } from 'sonner'
 import { debounce } from 'lodash'
+import { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useReactToPrint } from 'react-to-print'
 import {
@@ -36,10 +25,20 @@ import {
     ContextMenuSubTrigger,
     ContextMenuTrigger,
 } from '../ui/context-menu'
+import DeclarationSection from './declaration/Declaretion'
+import EducationItems from './education/education-items'
+import ExperienceSummery from './experience/experience-summery'
+import ResumeHeader from './header/resume-header'
+import LanguageSection from './languages/language-section'
 import ProjectsItems from './projects/projects'
+import ReferencesSection from './references/references'
+import SkillsSection from './skills/skills-section'
+import StrengthSection from './strengths/strength-section'
+import ResumeSummery from './summery/resume-summery'
+import { ItemsComponents } from './types/resume-layout-types'
 
 import axios from 'axios'
-import { layoutItems } from '@/lib/resume-data'
+import { toast } from 'sonner'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -72,11 +71,8 @@ const ResumePage = () => {
         dispatch(showPopover(null))
     }
 
-    // const { resumeLayout } = useAppSelector((state) => state.layout)
-    const resumeLayout = layoutItems.find(
-        (layout) => layout.layoutStyle === watch('style.layout')
-    )
-    console.log(resumeLayout)
+    const { resumeLayout } = useAppSelector((state) => state.layout)
+
     const divRef = useRef<HTMLDivElement>(null)
 
     const handleButtonClick = () => {
@@ -91,7 +87,7 @@ const ResumePage = () => {
     const saveToServer = async (values: any) => {
         try {
             await axios.patch('/api/resume', values)
-            return 'Updated successfully!'
+            return 'Saved successfully!'
         } catch (error) {
             console.log(error)
         }
@@ -114,8 +110,6 @@ const ResumePage = () => {
             'User stopped typing for 5 seconds. Do something with form data:'
         )
         const data = watch()
-
-        console.log(data)
 
         try {
             await toast.promise(saveToServer(data), {
@@ -170,7 +164,7 @@ const ResumePage = () => {
                                 onClick={parentClick}
                                 className="grid grid-cols-12 gap-x-2"
                             >
-                                {resumeLayout?.layout?.map((item, index) => {
+                                {resumeLayout?.map((item, index) => {
                                     return (
                                         <div
                                             style={{

@@ -48,7 +48,7 @@ export const getFontLevel = (level: number) => {
         case 3:
             return 'large'
         case 4:
-            return 'extraLarge'
+            return 'extralarge'
         default:
             return 'small'
     }

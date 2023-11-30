@@ -46,7 +46,7 @@ const StrengthSection = () => {
                 ref={ref}
                 className={cn(
                     'grid',
-                    width > 350 ? 'grid-cols-2' : 'grid-cols-1'
+                    width > 370 ? 'grid-cols-2' : 'grid-cols-1'
                 )}
             >
                 {fields.map((field: any, i) => (
@@ -67,7 +67,14 @@ const StrengthSection = () => {
                             }}
                         >
                             {watchValue[i]?.show_icon && (
-                                <Icon name={`${name}[${i}].icon` as const} />
+                                <Icon
+                                    name={`${name}[${i}].icon` as const}
+                                    className={cn(
+                                        'text-xl',
+                                        watchValue[i]?.description?.enabled &&
+                                            'text-2xl'
+                                    )}
+                                />
                             )}
                             <div className="flex flex-col justify-center">
                                 <TypographyInput
