@@ -87,7 +87,7 @@ const CustomTextArea = ({
                 name={name}
                 onKeyDown={handleKeydown}
                 placeholder={placeholder}
-                className={cn('py-1 px-2 ', className)}
+                className={cn('py-[1px] px-2', className)}
                 type="paragraph"
             />
 

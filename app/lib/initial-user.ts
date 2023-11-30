@@ -1,6 +1,7 @@
 import { currentUser, redirectToSignIn } from '@clerk/nextjs'
 import { User } from '../api/(modules)/user/user-model'
 import { Resume } from '../api/(modules)/resume/resume-model'
+import { Layout } from '../api/(modules)/layout/layout-model'
 
 export const initialUser = async () => {
     const user = await currentUser()
@@ -9,12 +10,6 @@ export const initialUser = async () => {
         return redirectToSignIn()
     }
     const profile = await User.findOne({ uid: user.id })
-
-    // const resumeData = await Resume.findOne({ uid: user.id })
-
-    // if (profile && resumeData) {
-    //     return { profile, resumeData }
-    // }
 
     if (profile) {
         return profile
@@ -27,10 +22,13 @@ export const initialUser = async () => {
         email: user.emailAddresses[0].emailAddress,
     })
 
-    // Inital the resume
+    // Initailize the resume
     const resume = await Resume.create({ ...resumeFormData, uid: user.id })
 
-    return { newUser, resume }
+    // Initialize the layout
+    const layout = await Layout.create({ uid: user.id, sections: layoutData })
+
+    return { newUser, resume, layout }
 }
 
 export const resumeFormData = {
@@ -325,3 +323,73 @@ export const resumeFormData = {
         ],
     },
 }
+const layoutData = [
+    {
+        title: 'Group-1',
+        column: 7,
+        items: [
+            {
+                title: 'Summery',
+                height: 1,
+                key: 'summerySection',
+                position: 1,
+            },
+
+            {
+                title: 'Experience',
+                height: 1,
+                key: 'experienceSummary',
+                position: 3,
+            },
+            {
+                title: 'Educations',
+                height: 1,
+                key: 'educations',
+                position: 5,
+            },
+            {
+                title: 'Declaration',
+                height: 1,
+                key: 'declaration',
+                position: 2,
+            },
+            {
+                title: 'References',
+                height: 1,
+                key: 'references',
+                position: 2,
+            },
+            {
+                title: 'Projects',
+                height: 1,
+                key: 'projects',
+                position: 2,
+            },
+        ],
+    },
+
+    {
+        title: 'Group-2',
+        column: 5,
+        items: [
+            {
+                title: 'Strength',
+                height: 1,
+                key: 'strengths',
+                position: 4,
+            },
+            {
+                title: 'Skills',
+                height: 1,
+                key: 'skills',
+                position: 2,
+            },
+            {
+                title: 'Languages',
+                height: 1,
+                key: 'languages',
+                position: 2,
+            },
+        ],
+    },
+]

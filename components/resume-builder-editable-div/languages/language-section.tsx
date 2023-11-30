@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { useEffect, useRef, useState } from 'react'
-import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { TypographyInput } from '../components/Typography'
 import Rating from '../components/rating'
 
@@ -25,6 +25,7 @@ const LanguageSection = () => {
         name,
         control,
     })
+
     const { watchValue } = useWatchForm({ name })
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const LanguageSection = () => {
                 ref={ref}
                 className={cn(
                     'grid',
-                    width > 350 ? 'grid-cols-2' : 'grid-cols-1'
+                    width > 370 ? 'grid-cols-2' : 'grid-cols-1'
                 )}
             >
                 {fields.map((field: any, i) => (
@@ -53,7 +54,7 @@ const LanguageSection = () => {
                         className="relative"
                     >
                         <div
-                            className="w-full"
+                            className="w-full pb-1"
                             onClick={() => {
                                 dispatch(
                                     showPopover({
@@ -68,21 +69,37 @@ const LanguageSection = () => {
                                     <TypographyInput
                                         placeholder={field.placeholder}
                                         name={`${name}[${i}].name` as const}
-                                        className="pb-0 px-2"
+                                        className=" px-2"
                                         type="subtitle"
                                     />
 
-                                    <TypographyInput
-                                        placeholder={'Native'}
-                                        name={`${name}[${i}].level` as const}
-                                        className="py-0"
-                                        type="paragraph"
-                                    />
+                                    {watchValue[i]?.show_label && (
+                                        <TypographyInput
+                                            placeholder={'Native'}
+                                            name={
+                                                `${name}[${i}].level` as const
+                                            }
+                                            className="py-0"
+                                            type="paragraph"
+                                        />
+                                    )}
                                 </div>
 
-                                <Rating
-                                    type={watchValue[i]?.score?.type}
-                                    value={watchValue[i]?.score?.score}
+                                <Controller
+                                    name={`${name}[${i}].score.count` as const}
+                                    control={control}
+                                    render={({ field: f }) => (
+                                        <Rating
+                                            type={
+                                                watchValue[i]?.score?.slide_type
+                                            }
+                                            value={watchValue[i]?.score?.count}
+                                            // value={f.value}
+                                            onChange={(v) => {
+                                                f.onChange(v)
+                                            }}
+                                        />
+                                    )}
                                 />
                             </div>
                         </div>

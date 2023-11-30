@@ -63,7 +63,7 @@ const EducationItems = () => {
                                 type="subheading"
                             />
 
-                            <div className="flex items-start gap-x-3 justify-between  py-2">
+                            <div className="flex items-start gap-x-3 justify-between pb-2 pt-[1.5px]">
                                 <div className="">
                                     <TypographyInput
                                         name={

@@ -42,8 +42,8 @@ const settings = [
         render: 'show_label',
     },
     {
-        title: 'Score Type',
-        render: 'score.type',
+        title: 'Score Slide',
+        render: 'score.slide_type',
     },
 ]
 
@@ -145,7 +145,9 @@ const LanguagePopover = ({
 
                         <div className="w-[140px]">
                             <Controller
-                                name={`${name}.${index}.score.type` as const}
+                                name={
+                                    `${name}.${index}.score.slide_type` as const
+                                }
                                 control={control}
                                 render={({ field: f }) => (
                                     <Select

@@ -97,6 +97,7 @@ const ResumeStylesDrawer = () => {
                     <Slider
                         defaultValue={[getFontValue(watch('style.fontSize'))]}
                         max={4}
+                        min={1}
                         step={1}
                         className={cn('w-[100%] mt-5')}
                         onValueChange={(value) => {
