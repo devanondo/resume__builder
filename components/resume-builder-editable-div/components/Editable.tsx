@@ -82,7 +82,8 @@ const EditableDiv = ({
             ) : (
                 <a
                     onClick={(e) => e.preventDefault()}
-                    href={href ? `mailto:${content}` : `https:${content}`}
+                    href={href ? `mailto:${content}` : `https://${content}`}
+                    target="_blank"
                     style={{ textDecoration: 'none', cursor: 'auto' }}
                 >
                     <div

@@ -1,25 +1,23 @@
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
-import ExperienceGroupPopover from '@/components/popover/experience-popover'
-import { GroupItem } from '@/components/shared/wrapper'
-import { cn } from '@/lib/utils'
-import { useAppSelector } from '@/redux/hooks'
+import ProjectsGroupPopover from '@/components/popover/projects-popover'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import React, { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { SlCalender } from 'react-icons/sl'
-import { MdShareLocation } from 'react-icons/md'
+import ProjectsBulletsItem from './project-bullets'
 import { TypographyInput } from '../components/Typography'
-import ExperienceBuletItem from './experience-bullet-item'
-import { useEffect, useRef, useState } from 'react'
+import { RiLink } from 'react-icons/ri'
+import { Calendar } from 'lucide-react'
+import { GroupItem } from '@/components/shared/wrapper'
 import { debounce } from 'lodash'
+import { cn } from '@/lib/utils'
+import { showPopover } from '@/redux/slices/pop-slice'
 
-interface ExperienceItemProps {
-    name: string
-}
-
-const ExperienceItem = ({ name }: ExperienceItemProps) => {
+const ProjectItems = ({ name }: { name: string }) => {
     const { control, setValue } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    const dispatch = useAppDispatch()
 
     const { fields, remove, append } = useFieldArray({
         name,
@@ -44,6 +42,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     }, [])
 
     const handleDragStart = (e: any, index: number) => {
+        dispatch(showPopover(null))
         nodeItem.current = index
         node.current = e.target
         node?.current?.addEventListener('dragend', handleDragEnd)
@@ -92,20 +91,19 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     }
 
     if (!mounted) return null
-
     return (
         <div>
             {fields.map((field, i) => (
                 <div
-                    aria-disabled={false}
+                    // aria-disabled={false}
                     aria-roledescription="sortable"
                     draggable
                     key={field.id}
                     onDragStart={(e) => handleDragStart(e, i)}
                     onDragEnter={(e) => handleDragEnter(e, i)}
                     className={cn(
-                        dragging ? getStyles(i) : 'w-full',
-                        'rounded'
+                        'rounded',
+                        dragging ? getStyles(i) : 'w-full'
                     )}
                     onDragEnd={() => {
                         updateData()
@@ -113,92 +111,102 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                 >
                     <GroupItem
                         popoverKey={name + i}
-                        className="relative a__item "
+                        key={field.id}
+                        className="relative a__item"
                     >
                         <div>
                             <TypographyInput
-                                name={`${name}.${i}.position` as const}
+                                name={`${name}.${i}.name` as const}
                                 className={cn(
-                                    'py-0 px-2',
+                                    'py-0 px-2 leading-[26px]',
                                     watchValue[i]?.bold_position &&
                                         'font-normal'
                                 )}
                                 placeholder="Position"
                                 type="subheading"
                             />
-
-                            <TypographyInput
-                                name={`${name}.${i}.workplace` as const}
-                                placeholder="Workplace"
-                                type="subtitle"
-                            />
-
-                            <div className="flex items-center px-2 w-full gap-x-4">
+                            <div className="flex items-center px-2 w-full gap-x-1 text-zinc-600">
                                 <div className="flex items-center">
-                                    <SlCalender className="w-3 h-3" />
-
-                                    <div className="flex items-center">
-                                        <TypographyInput
-                                            name={
-                                                `${name}.${i}.date.from` as const
-                                            }
-                                            className="w-fit !text-xs"
-                                            placeholder="From"
-                                            type="paragraph"
-                                        />
-                                        -
+                                    <Calendar className="w-3 h-3" />
+                                    <TypographyInput
+                                        name={`${name}.${i}.date.from` as const}
+                                        className="!text-xs pt-[3px]"
+                                        placeholder="Form"
+                                        type="paragraph"
+                                    />
+                                </div>
+                                -
+                                {watchValue?.[i]?.date.is_present ? (
+                                    <p className="pl-1 text-xs">Present</p>
+                                ) : (
+                                    <div className="flex items-center pl-1">
+                                        <Calendar className="w-3 h-3" />
                                         <TypographyInput
                                             name={
                                                 `${name}.${i}.date.to` as const
                                             }
-                                            className="w-fit !text-xs"
+                                            className="!text-xs pt-[3px]"
                                             placeholder="To"
                                             type="paragraph"
                                         />
                                     </div>
-                                </div>
+                                )}
+                            </div>
+                            <div className="w-full flex items-center gap-x-4 text-zinc-500">
+                                {watchValue?.[i]?.show_link && (
+                                    <div className="flex items-center px-2">
+                                        <RiLink className="w-3 h-3" />
 
-                                {watchValue[i]?.show_location && (
-                                    <div className="flex items-center">
-                                        {/* <Calendar className="w-4 h-4" />{' '} */}
-                                        <MdShareLocation className="w-3 h-3" />
                                         <TypographyInput
+                                            link={true}
+                                            name={`${name}.${i}.link` as const}
+                                            className="!text-xs px-2 italic underline text-zinc-500"
+                                            placeholder="Insert url!"
+                                            type="paragraph"
+                                        />
+                                    </div>
+                                )}
+
+                                {watchValue?.[i]?.show_extra_link && (
+                                    <div className="flex items-center px-2">
+                                        <RiLink className="w-3 h-3" />
+
+                                        <TypographyInput
+                                            link={true}
                                             name={
-                                                `${name}.${i}.location` as const
+                                                `${name}.${i}.extra_link` as const
                                             }
-                                            placeholder="Address"
-                                            className="w-fit !text-xs"
+                                            className="!text-xs px-2 italic underline text-zinc-500"
+                                            placeholder="Insert url!"
                                             type="paragraph"
                                         />
                                     </div>
                                 )}
                             </div>
 
-                            {watchValue[i]?.description?.enabled && (
+                            {watchValue?.[i]?.description?.enabled && (
                                 <TypographyInput
+                                    link={true}
                                     name={
                                         `${name}.${i}.description.text` as const
                                     }
-                                    className={cn(
-                                        'text-justify mt-1 mb-1 pb-1',
-                                        watchValue[i].description
-                                            ?.italic_description && 'italic'
-                                    )}
+                                    className=""
+                                    placeholder="Describe your Project!!"
                                     type="paragraph"
+                                />
+                            )}
+
+                            {watchValue?.[i]?.bulets?.enabled && (
+                                <ProjectsBulletsItem
+                                    name={`${name}.${i}.bulets`}
                                 />
                             )}
                         </div>
 
-                        <ExperienceBuletItem name={`${name}.${i}.bulets`} />
-
-                        {fields.length - 1 !== i ? (
-                            <div className="w-full px-2">
-                                <div className="border-b w-full border-dashed"></div>
-                            </div>
-                        ) : null}
+                        {/* <ExperienceBuletItem name={`${name}.${i}.bulets`} /> */}
 
                         {groupPopoverKey === name + i && (
-                            <ExperienceGroupPopover
+                            <ProjectsGroupPopover
                                 append={append}
                                 fields={fields}
                                 index={i}
@@ -213,4 +221,4 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     )
 }
 
-export default ExperienceItem
+export default ProjectItems

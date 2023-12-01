@@ -65,6 +65,10 @@ const settings = [
         title: 'Bulets Italic',
         render: 'bulets.italic_items',
     },
+    {
+        title: 'Is Present',
+        render: 'date.is_present',
+    },
 ]
 
 const ProjectsGroupPopover = ({

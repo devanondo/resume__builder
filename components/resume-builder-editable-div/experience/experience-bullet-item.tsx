@@ -25,7 +25,7 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
 
     return (
         <div className="-mt-1">
-            {watchValue.enabled &&
+            {watchValue?.enabled &&
                 fields?.map((field: any, i) => {
                     return (
                         <AItem

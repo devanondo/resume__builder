@@ -47,3 +47,9 @@
 .current {
     background-color: #282c34;
 }
+
+.dnd_section_current {
+    background: #b3b3b3;
+    color: transparent !important;
+    transition: transform 200ms ease 0s;
+}

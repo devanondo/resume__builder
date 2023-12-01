@@ -127,6 +127,7 @@ const ResumeHeader = () => {
             render: 'show_extraField',
             class: '!font-medium',
             col: 1,
+            link: true,
         },
     ]
 

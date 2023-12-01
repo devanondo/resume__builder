@@ -106,9 +106,6 @@ const ResumePage = () => {
     })
 
     const debouncedUpdate = debounce(async () => {
-        console.log(
-            'User stopped typing for 5 seconds. Do something with form data:'
-        )
         const data = watch()
 
         try {

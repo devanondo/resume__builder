@@ -46,7 +46,7 @@ const ProjectsBulletsItem = ({ name }: ProjectsBulletsItemProps) => {
                                 remove={remove}
                                 fieldTitle="text"
                                 className={cn(
-                                    'text-sm py-1',
+                                    'text-sm',
                                     watchValue.italic_items && 'italic'
                                 )}
                             />
