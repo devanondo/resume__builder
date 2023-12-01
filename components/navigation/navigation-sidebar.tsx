@@ -14,25 +14,25 @@ const icons: any = {
     layout: (
         <Layout
             className="group-hover:text-white transition text-emerald-500"
-            size={25}
+            size={20}
         />
     ),
     plus: (
         <Plus
             className="group-hover:text-white transition text-emerald-500"
-            size={25}
+            size={20}
         />
     ),
     grid: (
         <LayoutDashboard
             className="group-hover:text-white transition text-emerald-500"
-            size={25}
+            size={20}
         />
     ),
     palette: (
         <Palette
             className="group-hover:text-white transition text-emerald-500"
-            size={25}
+            size={20}
         />
     ),
 }
@@ -54,7 +54,7 @@ const actions: IAction[] = [
         action: 'openRearrenge',
     },
     {
-        title: 'Change Styles',
+        title: 'Design',
         icon: 'palette',
         action: 'stylesDrawer',
     },
@@ -64,7 +64,7 @@ const NavigationSidebar = () => {
     const { onOpen } = useModal()
 
     return (
-        <div className="h-full text-primary w-full bg-[#E3E5E8] py-3 flex flex-col items-center gap-y-4">
+        <div className="h-full text-primary w-full bg-[#E3E5E8]  flex flex-col items-center rounded overflow-hidden">
             {actions?.map((action) => (
                 <ActionTooltip
                     key={action.title}
@@ -73,13 +73,17 @@ const NavigationSidebar = () => {
                     label={action.title}
                 >
                     <button
-                        className="group flex items-center"
-                        onClick={() => {
+                        className="group flex items-center w-full"
+                        onClick={(e) => {
+                            e.preventDefault()
                             onOpen({ type: action.action })
                         }}
                     >
-                        <div className="flex mx-3 h-[40px] cursor-pointer w-[40px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden items-center justify-center bg-background dark:bg-neutral-700 group-hover:bg-emerald-500">
-                            {icons[action.icon]}
+                        <div className="flex  w-full cursor-pointer p-2 transition-all overflow-hidden items-center gap-x-2  group-hover:bg-emerald-500 group-hover:text-white">
+                            {icons[action.icon]}{' '}
+                            <span className="hidden xl:block">
+                                {action.title}
+                            </span>
                         </div>
                     </button>
                 </ActionTooltip>
