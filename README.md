@@ -2,7 +2,7 @@
 
 This documentation provides an overview of the Resume Builder app, a web application designed to assist users in creating and managing professional resumes. The app is built using modern web technologies, including React, TypeScript, Tailwind CSS, and utilizes various components for a user-friendly experience.
 
-<!-- ![Screenshots](https://i.ibb.co/DMb3qyP/Screenshot-from-2023-11-05-11-54-21.png) -->
+![Screenshots](https://i.ibb.co/hDp7rKC/Screenshot-from-2023-12-02-00-10-24.png)
 
 ## Table of content
 
@@ -33,7 +33,7 @@ Before you begin, ensure you have met the following requirements:
 
 -   **User-Friendly Interface:** Intuitive design for easy navigation and use.
 -   **Dynamic Resume Building:** Users can add, edit, and rearrange sections of their resume.
--   **Preview Functionality:** Utilizes DND-Kit for drag-and-drop functionality.
+-   **Preview Functionality:** Utilizes drag-and-drop functionality.
 -   **Responsive Design:** !The app is designed to work on desktop and mobile devices.
 -   **Export Options:** Resumes can be exported in different formats (e.g., PDF).
 
@@ -99,3 +99,7 @@ To run this project, you will need to add the following environment variables to
 If you have any questions or need assistance, please don't hesitate to contact us at [dev.abormon28@gmail.com].
 
 Happy image gallery management!
+
+![Screenshots](https://i.ibb.co/RSX80hJ/Screenshot-from-2023-12-02-00-10-08.png)
+![Screenshots](https://i.ibb.co/W0tKn1P/Screenshot-from-2023-12-02-00-10-36.png)
+![Screenshots](https://i.ibb.co/WFLrYjN/Screenshot-from-2023-12-02-00-10-49.png)
