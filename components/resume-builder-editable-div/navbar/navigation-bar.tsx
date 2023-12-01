@@ -16,9 +16,9 @@ export default function Navigation() {
 
     return (
         <div className={cn(roboto.className, 'fixed top-0 left-0 w-full z-10')}>
-            <div className="hidden flex-col md:flex bg-white">
-                <div className="border-b pl-20 z-50">
-                    <div className="flex h-16 items-center px-4">
+            <div className="hidden flex-col  md:flex bg-[#E3E5E8]">
+                <div className="border-b  z-50">
+                    <div className="flex container h-16 items-center px-4">
                         <div className="relative z-20 flex items-center text-lg font-medium">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

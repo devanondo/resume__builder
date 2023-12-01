@@ -57,11 +57,11 @@ const ResumePagewrapper = () => {
                 <form
                 // onSubmit={methods.handleSubmit(onSubmit)}
                 >
-                    <div className="hidden md:!flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+                    <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">
                         <NavigationSidebar />
                     </div>
 
-                    <div className="md:pl-[72px] h-full">
+                    <div className=" h-full">
                         <Navigation />
                         <div className="relative flex items-start justify-center py-16">
                             <ResumePage />
