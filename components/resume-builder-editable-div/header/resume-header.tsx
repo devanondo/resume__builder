@@ -225,7 +225,11 @@ const ResumeHeader = () => {
                             </div>
                         </PopoverContent>
                     </Popover>
-                    <div className="">
+                    <div
+                        onClick={() => {
+                            onOpen({ type: 'uploadImage' })
+                        }}
+                    >
                         <Camera className="w-4 h-4 hover:text-green-500 cursor-pointer" />
                     </div>
                 </div>
@@ -259,7 +263,7 @@ const ResumeHeader = () => {
                                     ? 'col-span-2'
                                     : 'col-span-3'
                             )}
-                            type="subheading"
+                            type="role"
                         />
                     ) : null}
 

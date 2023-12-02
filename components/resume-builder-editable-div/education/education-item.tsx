@@ -117,7 +117,7 @@ const EducationItem = ({ name }: { name: string }) => {
                     onDragStart={(e) => handleDragStart(e, i)}
                     onDragEnter={(e) => handleDragEnter(e, i)}
                     className={cn(
-                        'rounded',
+                        'rounded cursor-move',
                         dragging ? getStyles(i) : 'w-full'
                     )}
                     onDragEnd={() => {

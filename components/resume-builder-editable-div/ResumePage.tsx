@@ -106,6 +106,8 @@ const ResumePage = () => {
     const debouncedUpdate = debounce(async () => {
         const data = watch()
 
+        console.log(data)
+
         try {
             await toast.promise(saveToServer(data), {
                 loading: 'Loading...',
@@ -117,7 +119,7 @@ const ResumePage = () => {
         } catch (error) {
             console.log(error)
         }
-    }, 5000)
+    }, 20000)
 
     useEffect(() => {
         debouncedUpdate()

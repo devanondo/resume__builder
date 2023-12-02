@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { debounce } from 'lodash'
 import { HTMLAttributes, useEffect, useRef, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -166,7 +167,7 @@ const TextBox = ({ name, className, link, href, ...props }: TextBoxProps) => {
             render={({ field }) => {
                 return (
                     <EditableDiv
-                        className={className}
+                        className={cn(className, 'cursor-auto')}
                         onChange={field.onChange}
                         value={field.value}
                         href={href}

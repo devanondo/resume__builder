@@ -16,7 +16,12 @@ export default function Navigation() {
 
     return (
         <div className={cn(roboto.className, 'fixed top-0 left-0 w-full z-10')}>
-            <div className="hidden flex-col  md:flex bg-[#E3E5E8]">
+            <div
+                className="hidden flex-col bg-white md:flex "
+                style={{
+                    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 7px 20px 0',
+                }}
+            >
                 <div className="border-b  z-50">
                     <div className="flex container h-16 items-center px-4">
                         <div className="relative z-20 flex items-center text-lg font-medium">

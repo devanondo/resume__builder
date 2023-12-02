@@ -3,6 +3,7 @@
 
 import { cn } from '@/lib/utils'
 import React, { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 interface RatingProps {
     type?: 'circle' | 'box' | 'flatbox'
@@ -16,6 +17,7 @@ const Rating = ({
     onChange = () => {},
 }: RatingProps) => {
     const [rating, setRating] = useState<number>(value)
+    const { watch } = useFormContext()
 
     switch (type) {
         case 'circle':
@@ -25,9 +27,13 @@ const Rating = ({
                         return (
                             <div
                                 className={cn(
-                                    'w-5 h-5 rounded-full bg-zinc-200 cursor-pointer',
-                                    index + 1 <= rating && 'bg-zinc-500'
+                                    'w-5 h-5 rounded-full bg-zinc-200 cursor-pointer'
                                 )}
+                                style={{
+                                    background:
+                                        index + 1 <= rating &&
+                                        watch('style.colors.1'),
+                                }}
                                 key={index}
                                 onClick={() => {
                                     setRating(index + 1)
@@ -46,9 +52,13 @@ const Rating = ({
                         return (
                             <div
                                 className={cn(
-                                    'w-5 h-5 bg-zinc-200 cursor-pointer',
-                                    index + 1 <= rating && 'bg-zinc-500'
+                                    'w-5 h-5 bg-zinc-200 cursor-pointer'
                                 )}
+                                style={{
+                                    background:
+                                        index + 1 <= rating &&
+                                        watch('style.colors.1'),
+                                }}
                                 key={index}
                                 onClick={() => {
                                     setRating(index + 1)
@@ -67,9 +77,13 @@ const Rating = ({
                         return (
                             <div
                                 className={cn(
-                                    'w-6 h-5 bg-zinc-200 cursor-pointer',
-                                    index + 1 <= rating && 'bg-zinc-500'
+                                    'w-6 h-5 bg-zinc-200 cursor-pointer'
                                 )}
+                                style={{
+                                    background:
+                                        index + 1 <= rating &&
+                                        watch('style.colors.1'),
+                                }}
                                 key={index}
                                 onClick={() => {
                                     setRating(index + 1)

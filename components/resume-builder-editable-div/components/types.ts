@@ -6,6 +6,7 @@ export type TypeProps =
     | 'subheading'
     | 'subtitle'
     | 'paragraph'
+    | 'role'
 
 export interface CommonSectionProps extends HTMLAttributes<HTMLDivElement> {
     name: string

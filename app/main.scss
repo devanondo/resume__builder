@@ -36,7 +36,7 @@
     & > div {
         .bord_b_2,
         .bord_b_1 {
-            border-bottom: 1.5px dashed #b9b9b9;
+            border-bottom: 1.25px dashed #dcdcdc;
         }
 
         &:nth-last-child(1) {
@@ -52,7 +52,7 @@
                 border-bottom: none;
             }
             .bord_b_1 {
-                border-bottom: 1.5px dashed #b9b9b9;
+                border-bottom: 1.25px dashed #dcdcdc;
             }
         }
     }

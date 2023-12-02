@@ -3,17 +3,17 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ProjectsGroupPopover from '@/components/popover/projects-popover'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import React, { useEffect, useRef, useState } from 'react'
-import { useFieldArray, useFormContext } from 'react-hook-form'
-import ProjectsBulletsItem from './project-bullets'
-import { TypographyInput } from '../components/Typography'
-import { RiLink } from 'react-icons/ri'
-import { Calendar } from 'lucide-react'
 import { GroupItem } from '@/components/shared/wrapper'
-import { debounce } from 'lodash'
 import { cn } from '@/lib/utils'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
+import { debounce } from 'lodash'
+import { Calendar } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { RiLink } from 'react-icons/ri'
+import { TypographyInput } from '../components/Typography'
+import ProjectsBulletsItem from './project-bullets'
 
 const ProjectItems = ({ name }: { name: string }) => {
     const { control, setValue } = useFormContext()
@@ -91,27 +91,19 @@ const ProjectItems = ({ name }: { name: string }) => {
         return 'w-full'
     }
 
-    const [width, setWidth] = useState<number>(0)
-    const ref = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        setWidth(ref.current?.offsetWidth!)
-        return () => {}
-    })
-
     if (!mounted) return null
     return (
         <div className={cn('group__item__border')}>
             {fields.map((field, i) => (
                 <div
-                    // aria-disabled={false}
+                    aria-disabled={false}
                     aria-roledescription="sortable"
                     draggable
                     key={field.id}
                     onDragStart={(e) => handleDragStart(e, i)}
                     onDragEnter={(e) => handleDragEnter(e, i)}
                     className={cn(
-                        'rounded',
+                        'rounded cursor-move',
                         dragging ? getStyles(i) : 'w-full'
                     )}
                     onDragEnd={() => {
@@ -213,12 +205,7 @@ const ProjectItems = ({ name }: { name: string }) => {
                         </div>
 
                         <div className="w-full px-2">
-                            <div
-                                className={cn(
-                                    'w-full pt-1',
-                                    width > 370 ? 'bord_b_2' : 'bord_b_1'
-                                )}
-                            ></div>
+                            <div className={cn('w-full pt-1 bord_b_1')}></div>
                         </div>
 
                         {/* <ExperienceBuletItem name={`${name}.${i}.bulets`} /> */}
