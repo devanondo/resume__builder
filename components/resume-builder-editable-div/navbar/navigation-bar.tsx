@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { UserNav } from './user-nav'
 
+import { FaExclamationCircle } from 'react-icons/fa'
+
 export default function Navigation() {
     const [isMuted, setIsMuted] = useState(false)
 
@@ -38,6 +40,13 @@ export default function Navigation() {
                                 <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
                             </svg>
                             AMRCV.in
+                        </div>
+
+                        <div className="pl-3 flex items-center gap-x-2 text-sm">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-zinc-100">
+                                <FaExclamationCircle className="text-red-500 w-5 h-5" />
+                            </div>
+                            This app is not convenient for small device!
                         </div>
 
                         <div className="ml-auto flex items-center space-x-4">
