@@ -126,7 +126,7 @@ const EducationItem = ({ name }: { name: string }) => {
                 >
                     <GroupItem
                         popoverKey={name + i}
-                        className="relative w-full"
+                        className="relative w-full "
                         key={field.id + i}
                     >
                         <div
@@ -166,11 +166,12 @@ const EducationItem = ({ name }: { name: string }) => {
                                             type="subtitle"
                                         />
 
-                                        <div className="flex items-center">
-                                            <div className="flex items-center">
-                                                <SlCalender className="w-3 h-3" />
-
-                                                <div className="flex items-center">
+                                        <div className="flex items-center w-full flex-wrap">
+                                            <div className="flex items-center w-full ">
+                                                <div className="w-4">
+                                                    <SlCalender className="w-3 h-3" />
+                                                </div>
+                                                <div className="flex pl-1 items-center gap-x-1">
                                                     <TypographyInput
                                                         name={
                                                             `${name}.${i}.date.from` as const
@@ -200,8 +201,8 @@ const EducationItem = ({ name }: { name: string }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center">
-                                                <MdShareLocation className="w-3 h-3" />
+                                            <div className="flex items-center w-full ">
+                                                <MdShareLocation className="w-3 h-3 mr-2" />
 
                                                 <TypographyInput
                                                     name={
@@ -216,7 +217,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                     </div>
                                     {watchValue[i]?.institution
                                         ?.enabled_gpa && (
-                                        <div className="border-l border-[#74767E] w-fit px-2 py-1">
+                                        <div className="border-l border-[#74767E] px-2 py-1 min-w-[80px]">
                                             <TypographyInput
                                                 name={
                                                     `${name}[${i}].institution.gpa` as const

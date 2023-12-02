@@ -27,11 +27,12 @@ const EditableDiv = ({
 
     // const onchange = (e: any) => {
     //     // setContent(e.target.innerHTML)
+    //     debouncedUpdate(e)
     // }
 
     const debouncedUpdate = debounce((e) => {
         onChange(e.target.innerHTML)
-    }, 50)
+    }, 200)
 
     useEffect(() => {
         setContent(value)
@@ -142,6 +143,7 @@ const EditableDiv = ({
                         className={className}
                         ref={contentEditableRef}
                         // onClick={handleClick}
+
                         {...props}
                     />
                 </a>
@@ -167,7 +169,10 @@ const TextBox = ({ name, className, link, href, ...props }: TextBoxProps) => {
             render={({ field }) => {
                 return (
                     <EditableDiv
-                        className={cn(className, 'cursor-auto')}
+                        className={cn(
+                            className,
+                            'cursor-auto px-2 editable__div__st'
+                        )}
                         onChange={field.onChange}
                         value={field.value}
                         href={href}
