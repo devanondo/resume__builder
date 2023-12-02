@@ -15,9 +15,6 @@ import {
     ContextMenuCheckboxItem,
     ContextMenuContent,
     ContextMenuItem,
-    ContextMenuLabel,
-    ContextMenuRadioGroup,
-    ContextMenuRadioItem,
     ContextMenuSeparator,
     ContextMenuShortcut,
     ContextMenuSub,
@@ -39,12 +36,13 @@ import { ItemsComponents } from './types/resume-layout-types'
 
 import axios from 'axios'
 import { toast } from 'sonner'
+import { useModal } from '../hooks/use-modal-store'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
         (state) => state.popover
     )
-
+    const { onOpen } = useModal()
     const [isMounted, setIsMounted] = useState(false)
     const { watch } = useFormContext()
 
@@ -197,7 +195,7 @@ const ResumePage = () => {
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenuContent className="w-64">
-                        <ContextMenuItem inset>
+                        <ContextMenuItem inset disabled>
                             Back
                             <ContextMenuShortcut>⌘[</ContextMenuShortcut>
                         </ContextMenuItem>
@@ -205,7 +203,12 @@ const ResumePage = () => {
                             Forward
                             <ContextMenuShortcut>⌘]</ContextMenuShortcut>
                         </ContextMenuItem>
-                        <ContextMenuItem inset>
+                        <ContextMenuItem
+                            onClick={() => {
+                                window.location.reload()
+                            }}
+                            inset
+                        >
                             Reload
                             <ContextMenuShortcut>⌘R</ContextMenuShortcut>
                         </ContextMenuItem>
@@ -214,29 +217,39 @@ const ResumePage = () => {
                                 More Tools
                             </ContextMenuSubTrigger>
                             <ContextMenuSubContent className="w-48">
-                                <ContextMenuItem>
-                                    Save Page As...
-                                    <ContextMenuShortcut>
-                                        ⇧⌘S
-                                    </ContextMenuShortcut>
+                                <ContextMenuItem
+                                    onClick={() => {
+                                        onOpen({ type: 'resumeAddSection' })
+                                    }}
+                                >
+                                    Add Section
                                 </ContextMenuItem>
-                                <ContextMenuItem>
-                                    Create Shortcut...
+                                <ContextMenuItem
+                                    onClick={() => {
+                                        onOpen({ type: 'changeLayout' })
+                                    }}
+                                >
+                                    Templates
                                 </ContextMenuItem>
-                                <ContextMenuItem>
-                                    Name Window...
+                                <ContextMenuItem
+                                    onClick={() => {
+                                        onOpen({ type: 'openRearrenge' })
+                                    }}
+                                >
+                                    Rearrange
                                 </ContextMenuItem>
                                 <ContextMenuSeparator />
-                                <ContextMenuItem>
-                                    Developer Tools
+                                <ContextMenuItem
+                                    onClick={() => {
+                                        onOpen({ type: 'stylesDrawer' })
+                                    }}
+                                >
+                                    Colors & Designs
                                 </ContextMenuItem>
                             </ContextMenuSubContent>
                         </ContextMenuSub>
                         <ContextMenuSeparator />
-                        <ContextMenuCheckboxItem checked>
-                            Show Bookmarks Bar
-                            <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
-                        </ContextMenuCheckboxItem>
+
                         <ContextMenuCheckboxItem
                             onClick={() => {
                                 handleButtonClick()
@@ -245,16 +258,20 @@ const ResumePage = () => {
                             Download
                         </ContextMenuCheckboxItem>
                         <ContextMenuSeparator />
-                        <ContextMenuRadioGroup value="pedro">
-                            <ContextMenuLabel inset>People</ContextMenuLabel>
-                            <ContextMenuSeparator />
-                            <ContextMenuRadioItem value="pedro">
-                                Pedro Duarte
-                            </ContextMenuRadioItem>
-                            <ContextMenuRadioItem value="colm">
-                                Colm Tuite
-                            </ContextMenuRadioItem>
-                        </ContextMenuRadioGroup>
+                        <ContextMenuCheckboxItem
+                            onClick={() => {
+                                onOpen({ type: 'openRearrenge' })
+                            }}
+                        >
+                            Rearrange
+                        </ContextMenuCheckboxItem>
+                        <ContextMenuCheckboxItem
+                            onClick={() => {
+                                onOpen({ type: 'stylesDrawer' })
+                            }}
+                        >
+                            Design & Colors
+                        </ContextMenuCheckboxItem>
                     </ContextMenuContent>
                 </ContextMenu>
             </div>

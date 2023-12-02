@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
@@ -90,9 +91,17 @@ const ProjectItems = ({ name }: { name: string }) => {
         return 'w-full'
     }
 
+    const [width, setWidth] = useState<number>(0)
+    const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        setWidth(ref.current?.offsetWidth!)
+        return () => {}
+    })
+
     if (!mounted) return null
     return (
-        <div>
+        <div className={cn('group__item__border')}>
             {fields.map((field, i) => (
                 <div
                     // aria-disabled={false}
@@ -201,6 +210,15 @@ const ProjectItems = ({ name }: { name: string }) => {
                                     name={`${name}.${i}.bulets`}
                                 />
                             )}
+                        </div>
+
+                        <div className="w-full px-2">
+                            <div
+                                className={cn(
+                                    'w-full pt-1',
+                                    width > 370 ? 'bord_b_2' : 'bord_b_1'
+                                )}
+                            ></div>
                         </div>
 
                         {/* <ExperienceBuletItem name={`${name}.${i}.bulets`} /> */}

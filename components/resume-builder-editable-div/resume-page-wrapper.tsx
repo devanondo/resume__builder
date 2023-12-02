@@ -17,9 +17,9 @@ const ResumePagewrapper = () => {
     useGetLayoutQuery(undefined)
     const resumeData = useGetResumeQuery(undefined)
 
-    // function onSubmit(values: any) {
-    //     console.log(values)
-    // }
+    function onSubmit(values: any) {
+        console.log(values)
+    }
 
     const setNestedFormValues = (fieldValues: any, prefix = '') => {
         fieldValues = fieldValues ?? {}
@@ -54,9 +54,7 @@ const ResumePagewrapper = () => {
     return (
         <div className="h-full">
             <FormProvider {...methods}>
-                <form
-                // onSubmit={methods.handleSubmit(onSubmit)}
-                >
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">
                         <NavigationSidebar />
                     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
@@ -88,9 +89,23 @@ const LanguageItems = ({ name }: { name: string }) => {
         return 'w-full'
     }
 
+    const [width, setWidth] = useState<number>(0)
+    const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        setWidth(ref.current?.offsetWidth!)
+        return () => {}
+    })
+
     if (!mounted) return null
     return (
-        <div>
+        <div
+            ref={ref}
+            className={cn('grid', 'group__item__border')}
+            style={{
+                gridTemplateColumns: width > 370 ? '1fr 1fr' : '1fr',
+            }}
+        >
             {fields.map((field: any, i) => (
                 <div
                     // aria-disabled={false}
@@ -162,11 +177,14 @@ const LanguageItems = ({ name }: { name: string }) => {
                                 />
                             </div>
                         </div>
-                        {fields.length - 1 !== i ? (
-                            <div className="w-full px-2">
-                                <div className="border-b w-full border-dashed"></div>
-                            </div>
-                        ) : null}
+                        <div className="w-full px-2">
+                            <div
+                                className={cn(
+                                    'w-full',
+                                    width > 370 ? 'bord_b_2' : 'bord_b_1'
+                                )}
+                            ></div>
+                        </div>
 
                         {groupPopoverKey === name + i && (
                             <LanguagePopover
