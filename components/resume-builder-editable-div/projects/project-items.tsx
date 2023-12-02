@@ -123,7 +123,7 @@ const ProjectItems = ({ name }: { name: string }) => {
                                     watchValue[i]?.bold_position &&
                                         'font-normal'
                                 )}
-                                placeholder="Position"
+                                placeholder="Identify Your Project!"
                                 type="subheading"
                             />
                             <div className="flex items-center px-2 w-full gap-x-1 text-zinc-600">
@@ -141,12 +141,11 @@ const ProjectItems = ({ name }: { name: string }) => {
                                     <p className="pl-1 text-xs">Present</p>
                                 ) : (
                                     <div className="flex items-center pl-1">
-                                        <Calendar className="w-3 h-3" />
                                         <TypographyInput
                                             name={
                                                 `${name}.${i}.date.to` as const
                                             }
-                                            className="!text-xs pt-[3px]"
+                                            className="!text-xs"
                                             placeholder="To"
                                             type="paragraph"
                                         />

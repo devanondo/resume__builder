@@ -106,8 +106,6 @@ const ResumePage = () => {
     const debouncedUpdate = debounce(async () => {
         const data = watch()
 
-        console.log(data)
-
         try {
             await toast.promise(saveToServer(data), {
                 loading: 'Loading...',

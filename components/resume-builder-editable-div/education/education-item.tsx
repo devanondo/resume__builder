@@ -180,14 +180,23 @@ const EducationItem = ({ name }: { name: string }) => {
                                                         type="paragraph"
                                                     />
                                                     -
-                                                    <TypographyInput
-                                                        name={
-                                                            `${name}.${i}.date.to` as const
-                                                        }
-                                                        className="w-fit !text-xs "
-                                                        placeholder="To"
-                                                        type="paragraph"
-                                                    />
+                                                    {watchValue?.[i]?.date
+                                                        .is_present ? (
+                                                        <p className="pl-1 text-xs">
+                                                            Present
+                                                        </p>
+                                                    ) : (
+                                                        <div className="flex items-center pl-1">
+                                                            <TypographyInput
+                                                                name={
+                                                                    `${name}.${i}.date.to` as const
+                                                                }
+                                                                className="!text-xs"
+                                                                placeholder="To"
+                                                                type="paragraph"
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
 
