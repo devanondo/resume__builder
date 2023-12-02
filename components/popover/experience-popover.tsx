@@ -57,6 +57,10 @@ const settings = [
         title: 'Bulets Italic',
         render: 'bulets.italic_items',
     },
+    {
+        title: 'Is Present',
+        render: 'date.is_present',
+    },
 ]
 
 const ExperienceGroupPopover = ({
@@ -75,9 +79,9 @@ const ExperienceGroupPopover = ({
                 onClick={() => {
                     append({
                         enabled: true,
-                        position: 'Full Stackweb developer',
+                        position: '',
                         bold_position: true,
-                        workplace: '<a href="www.google.com">Fiverr</a>',
+                        workplace: '',
                         location: 'San Fransisco, CA',
                         show_location: false,
 
@@ -87,19 +91,19 @@ const ExperienceGroupPopover = ({
                             is_present: true,
                         },
                         description: {
-                            text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                            text: '',
                             italic_description: false,
                             enabled: true,
                         },
 
                         bulets: {
                             enabled: true,
-                            bulet_items: true,
+                            bulet_items: false,
                             italic_items: false,
                             name: 'bulets',
                             items: [
                                 {
-                                    text: 'Bullet description',
+                                    text: '',
                                     placeholder:
                                         'Whats the one thing that makes you best candidate for this job?',
                                 },

@@ -16,6 +16,38 @@ interface AItemProps {
     popoverKey?: string
 }
 
+const GroupItemWrapper = ({
+    children,
+    popoverKey,
+    className,
+}: GroupItemProps) => {
+    const dispatch = useAppDispatch()
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
+
+    return (
+        <div
+            onClick={(e) => {
+                e.stopPropagation()
+                if (popoverKey) {
+                    dispatch(
+                        showPopover({
+                            name: popoverKey,
+                            type: 'group__entry',
+                        })
+                    )
+                }
+            }}
+            className={cn(
+                'rounded border border-[transparent] pt-1',
+                className,
+                groupPopoverKey === popoverKey && 'bg-white border-emerald-500'
+            )}
+        >
+            {children}
+        </div>
+    )
+}
+
 const GroupItem = ({ children, popoverKey, className }: GroupItemProps) => {
     const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
@@ -73,4 +105,4 @@ const AItem = ({ children, className, popoverKey, ...props }: AItemProps) => {
     )
 }
 
-export { GroupItem, AItem }
+export { GroupItem, AItem, GroupItemWrapper }

@@ -86,24 +86,23 @@ const ProjectsGroupPopover = ({
             <Button
                 onClick={() => {
                     append({
-                        name: 'EcrypEcommerce',
-                        bold_name: true,
-                        show_link: true,
-                        link: 'https://',
+                        name: '',
+                        bold_name: false,
+                        show_link: false,
+                        link: '',
                         link_icon: true,
-
-                        extra_link: 'https://',
-                        show_extra_link: true,
+                        extra_link: '',
+                        show_extra_link: false,
 
                         date: {
                             record: 'DateRange',
                             from: '09/2023',
                             to: '09/2023',
-                            is_present: true,
+                            is_present: false,
                             date_icon: true,
                         },
                         description: {
-                            text: 'Program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                            text: '',
                             italic_description: false,
                             enabled: true,
                         },
@@ -115,7 +114,7 @@ const ProjectsGroupPopover = ({
                             name: 'bulets',
                             items: [
                                 {
-                                    text: 'Describe by points!',
+                                    text: '',
                                 },
                             ],
                         },

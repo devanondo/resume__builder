@@ -310,6 +310,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -336,6 +341,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     fontSize: '30px',
                     lineHeight: '32px',
                     fontWeight: 700,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -364,6 +374,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -390,6 +405,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -423,6 +443,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -449,6 +474,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -477,6 +507,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -503,6 +538,11 @@ export const layoutWithStyles: ILayoutStyles[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -728,12 +768,18 @@ export const layoutItems: ILayoutItems[] = [
                 ],
             },
         ],
+
         typo: {
             small: {
                 heading: {
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -762,6 +808,11 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 700,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '20px',
                     lineHeight: '24px',
@@ -789,6 +840,11 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -815,6 +871,11 @@ export const layoutItems: ILayoutItems[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -922,6 +983,12 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -948,6 +1015,11 @@ export const layoutItems: ILayoutItems[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -976,6 +1048,11 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -1002,6 +1079,11 @@ export const layoutItems: ILayoutItems[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -1104,6 +1186,11 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -1130,6 +1217,11 @@ export const layoutItems: ILayoutItems[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',
@@ -1158,6 +1250,11 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '32px',
                     fontWeight: 500,
                 },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -1184,6 +1281,11 @@ export const layoutItems: ILayoutItems[] = [
                     fontSize: '28px',
                     lineHeight: '32px',
                     fontWeight: 500,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
                 },
                 title: {
                     fontSize: '22px',

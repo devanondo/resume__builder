@@ -64,7 +64,12 @@ const NavigationSidebar = () => {
     const { onOpen } = useModal()
 
     return (
-        <div className="h-full text-primary w-full bg-[#E3E5E8]  flex flex-col items-center rounded overflow-hidden">
+        <div
+            className="h-full text-primary w-full  flex flex-col items-center rounded overflow-hidden"
+            style={{
+                boxShadow: 'rgba(100, 100, 111, 0.4) 0px 7px 29px 0px',
+            }}
+        >
             {actions?.map((action) => (
                 <ActionTooltip
                     key={action.title}

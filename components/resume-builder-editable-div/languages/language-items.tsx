@@ -108,14 +108,14 @@ const LanguageItems = ({ name }: { name: string }) => {
         >
             {fields.map((field: any, i) => (
                 <div
-                    // aria-disabled={false}
+                    aria-disabled={false}
                     aria-roledescription="sortable"
                     draggable
                     key={field.id}
                     onDragStart={(e) => handleDragStart(e, i)}
                     onDragEnter={(e) => handleDragEnter(e, i)}
                     className={cn(
-                        'rounded',
+                        'rounded cursor-move',
                         dragging ? getStyles(i) : 'w-full'
                     )}
                     onDragEnd={() => {

@@ -94,7 +94,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     if (!mounted) return null
 
     return (
-        <div>
+        <div className={cn('group__item__border')}>
             {fields.map((field, i) => (
                 <div
                     aria-disabled={false}
@@ -105,7 +105,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                     onDragEnter={(e) => handleDragEnter(e, i)}
                     className={cn(
                         dragging ? getStyles(i) : 'w-full',
-                        'rounded'
+                        'rounded cursor-move'
                     )}
                     onDragEnd={() => {
                         updateData()
@@ -147,14 +147,22 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                             type="paragraph"
                                         />
                                         -
-                                        <TypographyInput
-                                            name={
-                                                `${name}.${i}.date.to` as const
-                                            }
-                                            className="w-fit !text-xs"
-                                            placeholder="To"
-                                            type="paragraph"
-                                        />
+                                        {watchValue?.[i]?.date.is_present ? (
+                                            <p className="pl-1 text-xs">
+                                                Present
+                                            </p>
+                                        ) : (
+                                            <div className="flex items-center pl-1">
+                                                <TypographyInput
+                                                    name={
+                                                        `${name}.${i}.date.to` as const
+                                                    }
+                                                    className="!text-xs pt-[3px]"
+                                                    placeholder="To"
+                                                    type="paragraph"
+                                                />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
@@ -191,11 +199,9 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
 
                         <ExperienceBuletItem name={`${name}.${i}.bulets`} />
 
-                        {fields.length - 1 !== i ? (
-                            <div className="w-full px-2">
-                                <div className="border-b w-full border-dashed"></div>
-                            </div>
-                        ) : null}
+                        <div className="w-full px-2">
+                            <div className={cn('w-full pt-1 bord_b_1')}></div>
+                        </div>
 
                         {groupPopoverKey === name + i && (
                             <ExperienceGroupPopover

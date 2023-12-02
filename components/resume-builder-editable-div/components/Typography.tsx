@@ -29,6 +29,7 @@ export const TypographyInput = ({
             case 'heading':
             case 'subheading':
             case 'title':
+            case 'role':
                 return Font[style?.fontHeading]
 
             case 'paragraph':
@@ -47,6 +48,7 @@ export const TypographyInput = ({
             case 'paragraph':
                 return 'px-2 text-[14px] leading-[17px] text-[#384347]'
             case 'subtitle':
+            case 'role':
                 return style?.colors[1]
         }
     }
@@ -55,14 +57,14 @@ export const TypographyInput = ({
         switch (type) {
             case 'heading':
                 return ''
+            case 'role':
+                return ''
             case 'subheading':
                 return ''
-
             case 'title':
                 return 'px-2 font-bold uppercase rounded focus:bg-transparent'
-
             case 'paragraph':
-                return 'px-2 text-[14px] leading-[17px] text-[#384347]'
+                return 'px-2 text-[14px] leading-[16px] text-[#384347]'
             case 'subtitle':
                 return 'text-2xl font-bold rounded px-2  focus:bg-transparent'
         }

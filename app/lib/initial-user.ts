@@ -74,8 +74,7 @@ export const resumeFormData = {
         enabled: true,
         items: [
             {
-                summery:
-                    'Analytical and precise professional with 2 years of hands-on experience in both frontend web development and backend web development. The full-Stack web developer is proficient in fundamental front-end and server-side languages, with an in-depth understanding of user interface design, data rendering, and backend logic implementation. Eager to tackle web development design challenges to improve user experience. Ability to work independently and in a team environment.',
+                summery: '',
                 placeholder: 'Write something about yourself!',
             },
         ],
@@ -88,10 +87,10 @@ export const resumeFormData = {
         items: [
             {
                 enabled: true,
-                position: 'Full Stackweb developer',
+                position: '',
                 bold_position: true,
-                workplace: 'Fiverr',
-                location: 'San Fransisco, CA',
+                workplace: '',
+                location: '',
                 show_location: false,
 
                 date: {
@@ -100,7 +99,7 @@ export const resumeFormData = {
                     is_present: true,
                 },
                 description: {
-                    text: 'Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                    text: '',
                     italic_description: false,
                     enabled: true,
                 },
@@ -112,7 +111,7 @@ export const resumeFormData = {
                     name: 'bulets',
                     items: [
                         {
-                            text: 'Bullet description',
+                            text: '',
                             placeholder:
                                 'Whats the one thing that makes you best candidate for this job?',
                         },
@@ -127,7 +126,7 @@ export const resumeFormData = {
         enabled: true,
         items: [
             {
-                title: 'Language & Libraries',
+                title: '',
                 placeholder: 'Language & Libraries',
                 show_title: true,
                 bold_title: true,
@@ -145,12 +144,6 @@ export const resumeFormData = {
                     {
                         keyItem: 'Scheduling',
                     },
-                    {
-                        keyItem: 'Process Modeling',
-                    },
-                    {
-                        keyItem: 'Design of Experients',
-                    },
                 ],
             },
         ],
@@ -162,7 +155,7 @@ export const resumeFormData = {
 
         items: [
             {
-                name: 'EcrypEcommerce',
+                name: '',
                 bold_name: true,
                 show_link: true,
                 link: 'https://',
@@ -179,7 +172,7 @@ export const resumeFormData = {
                     date_icon: true,
                 },
                 description: {
-                    text: 'Program that offers unique and fun rewards at the places you love. Lauzon is a universal digital loyalty program that offers unique and fun rewards at the places you love.',
+                    text: '',
                     italic_description: false,
                     enabled: true,
                 },
@@ -206,7 +199,7 @@ export const resumeFormData = {
         items: [
             {
                 enabled: true,
-                name: 'Team Leadership',
+                name: '',
                 placeholder: 'Your Unique Talent',
                 icon: 'CiMicrochip',
                 show_icon: true,
@@ -225,7 +218,7 @@ export const resumeFormData = {
 
         items: [
             {
-                name: 'English',
+                name: '',
                 placeholder: 'Language',
                 level: 'Beginner',
                 show_label: true,
@@ -244,13 +237,13 @@ export const resumeFormData = {
         items: [
             {
                 enabled: true,
-                name: 'BSC in Computer Science Engineering',
+                name: '',
                 placeholder: 'Degree and Field of Study!',
                 icon: 'FcGraduationCap',
                 show_icon: true,
 
                 institution: {
-                    name: 'Dhaka International University',
+                    name: '',
                     placeholder: 'School / University',
                     gpa: 'CGPA',
                     placeholder_gpa: 'CGPA',
@@ -260,7 +253,7 @@ export const resumeFormData = {
                     placeholder_gpa_max: '4.00',
                     enabled_gpa: true,
                 },
-                location: 'Dhaka, Bangladesh',
+                location: '',
                 show_location: true,
                 show_location_icon: true,
                 show__institution: true,
@@ -280,10 +273,7 @@ export const resumeFormData = {
                     name: 'bulets',
                     items: [
                         {
-                            text: 'bullet description',
-                        },
-                        {
-                            text: 'bullet description2',
+                            text: '',
                         },
                     ],
                 },
@@ -297,10 +287,9 @@ export const resumeFormData = {
 
         items: [
             {
-                description:
-                    'Upon reviewing and assessing this resume, I declare and certify that I have accurately and truthfully described myself and my qualifications.',
+                description: '',
 
-                name: 'ABormon',
+                name: '',
             },
         ],
     },
@@ -311,7 +300,7 @@ export const resumeFormData = {
 
         items: [
             {
-                name: 'ABormon',
+                name: '',
                 placeholder: 'Referece Name',
                 show_email: true,
                 show_phone: true,
@@ -330,40 +319,28 @@ const layoutData = [
         items: [
             {
                 title: 'Summery',
-                height: 1,
                 key: 'summerySection',
-                position: 1,
             },
 
             {
                 title: 'Experience',
-                height: 1,
                 key: 'experienceSummary',
-                position: 3,
             },
             {
                 title: 'Educations',
-                height: 1,
                 key: 'educations',
-                position: 5,
             },
             {
                 title: 'Declaration',
-                height: 1,
                 key: 'declaration',
-                position: 2,
             },
             {
                 title: 'References',
-                height: 1,
                 key: 'references',
-                position: 2,
             },
             {
                 title: 'Projects',
-                height: 1,
                 key: 'projects',
-                position: 2,
             },
         ],
     },
@@ -374,21 +351,15 @@ const layoutData = [
         items: [
             {
                 title: 'Strength',
-                height: 1,
                 key: 'strengths',
-                position: 4,
             },
             {
                 title: 'Skills',
-                height: 1,
                 key: 'skills',
-                position: 2,
             },
             {
                 title: 'Languages',
-                height: 1,
                 key: 'languages',
-                position: 2,
             },
         ],
     },

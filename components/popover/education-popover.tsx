@@ -60,6 +60,10 @@ const settings = [
         title: 'Show Bullets',
         render: 'bulets.enabled',
     },
+    {
+        title: 'Is Present',
+        render: 'date.is_present',
+    },
 ]
 
 const EducationPopover = ({
@@ -78,13 +82,13 @@ const EducationPopover = ({
                 onClick={() => {
                     append({
                         enabled: true,
-                        name: 'BSC in Computer Science Engineering',
+                        name: '',
                         placeholder: 'Degree and Field of Study!',
                         icon: 'FcGraduationCap',
                         show_icon: true,
 
                         institution: {
-                            name: 'Dhaka International University',
+                            name: '',
                             placeholder: 'School / University',
                             gpa: 'CGPA',
                             placeholder_gpa: 'CGPA',
@@ -92,9 +96,9 @@ const EducationPopover = ({
                             placeholder_gpa_score: '4.00',
                             gpa_max: '4.00',
                             placeholder_gpa_max: '4.00',
-                            enabled_gpa: true,
+                            enabled_gpa: false,
                         },
-                        location: 'Dhaka, Bangladesh',
+                        location: '',
                         show_location: true,
                         show_location_icon: true,
                         show__institution: true,
@@ -102,9 +106,9 @@ const EducationPopover = ({
                         date: {
                             record: 'DateRange',
                             placeholder: 'Date',
-                            from: '10/12/2023',
-                            to: '',
-                            is_present: true,
+                            from: '2023',
+                            to: '2024',
+                            is_present: false,
                             date_icon: true,
                         },
 
@@ -115,10 +119,7 @@ const EducationPopover = ({
                             name: 'bulets',
                             items: [
                                 {
-                                    text: 'bullet description',
-                                },
-                                {
-                                    text: 'bullet description2',
+                                    text: '',
                                 },
                             ],
                         },

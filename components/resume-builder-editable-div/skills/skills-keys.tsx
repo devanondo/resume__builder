@@ -12,7 +12,7 @@ interface SkillsKeysProps {
 }
 
 const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
-    const { control, setFocus } = useFormContext()
+    const { control, setFocus, watch } = useFormContext()
     const [focusField, setFocusField] = useState('')
 
     const { fields, append, remove } = useFieldArray({
@@ -48,7 +48,7 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
     }, [setFocus, focusField])
 
     return (
-        <div className="flex gap-x-2 gap-y-2 capitalize w-full overflow-hidden flex-wrap px-2">
+        <div className="flex gap-x-2 gap-y-1 capitalize w-full overflow-hidden flex-wrap px-2">
             {fields.map((field: any, index: number) => (
                 <div className="relative flex flex-wrap group " key={field.id}>
                     <div className="relative">
@@ -58,14 +58,13 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                             placeholder="Tools / Technology"
                             className={cn(
                                 'w-fit px-2 pb-1',
-
                                 watchParent.italic_key && 'italic',
-                                watchParent.underline_key &&
-                                    '!border-b-2 !border-zinc-500',
                                 watchParent.bold_key && ' font-bold'
                             )}
                             style={{
-                                borderBottom: `2px solid transparent`,
+                                borderBottom: watchParent.underline_key
+                                    ? `2px solid ${watch('style.colors.1')}`
+                                    : 'none',
                             }}
                         />
                     </div>
