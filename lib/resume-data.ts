@@ -656,7 +656,7 @@ export const layoutItems: ILayoutItems[] = [
         id: '355as1d51aea1dee1a5d',
         title: 'Rain Maker',
         isActive: true,
-        imgUrl: 'https://i.ibb.co/B3cbpyd/Screenshot-from-2023-11-12-23-29-35.png',
+        imgUrl: 'https://utfs.io/f/792beefb-c09f-49b9-948f-65af2c19fb19-bcf9ow.png',
         layoutStyle: 'double',
         layout: [
             {
@@ -843,7 +843,7 @@ export const layoutItems: ILayoutItems[] = [
         id: '355as1d51aea1dee1a5c',
         title: 'Steam Roller',
         isActive: false,
-        imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
+        imgUrl: 'https://utfs.io/f/72c1e7e2-83ca-44e4-b1c4-08de229a3924-i987gm.png',
         layoutStyle: 'single',
         layout: [
             {
@@ -1031,7 +1031,7 @@ export const layoutItems: ILayoutItems[] = [
         id: '355as1d51aea1dee1a5e',
         title: 'Narrow Roller',
         isActive: false,
-        imgUrl: 'https://i.ibb.co/G7NNbc5/Screenshot-from-2023-11-12-23-30-21.png',
+        imgUrl: 'https://utfs.io/f/05afe5a5-6931-4984-bcdc-7bf1e51105bb-1sak5p.png',
         layoutStyle: 'onethird',
         layout: [
             {

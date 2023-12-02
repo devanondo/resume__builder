@@ -31,3 +31,29 @@
 //     .group__item {
 //     }
 // }
+
+.group__item__border {
+    & > div {
+        .bord_b_2,
+        .bord_b_1 {
+            border-bottom: 1.5px dashed #b9b9b9;
+        }
+
+        &:nth-last-child(1) {
+            .bord_b_2 {
+                border-bottom: none;
+            }
+            .bord_b_1 {
+                border-bottom: none;
+            }
+        }
+        &:nth-last-child(2) {
+            .bord_b_2 {
+                border-bottom: none;
+            }
+            .bord_b_1 {
+                border-bottom: 1.5px dashed #b9b9b9;
+            }
+        }
+    }
+}

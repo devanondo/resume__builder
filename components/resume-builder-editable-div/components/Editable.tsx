@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
 'use client'
 
-import React, { HTMLAttributes, useEffect, useRef, useState } from 'react'
+import { debounce } from 'lodash'
+import { HTMLAttributes, useEffect, useRef, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 interface EditableDivProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,7 +14,6 @@ interface EditableDivProps extends HTMLAttributes<HTMLDivElement> {
 const EditableDiv = ({
     value,
     onChange = () => {},
-    onBlur = () => {},
     className,
     placeholder,
     link,
@@ -23,60 +22,107 @@ const EditableDiv = ({
     ...props
 }: EditableDivProps) => {
     const [content, setContent] = useState(value)
+    const contentEditableRef = useRef(null)
 
-    const onchange = (e: any) => {
-        setContent(e.target.innerHTML)
+    // const onchange = (e: any) => {
+    //     // setContent(e.target.innerHTML)
+    // }
+
+    const debouncedUpdate = debounce((e) => {
         onChange(e.target.innerHTML)
-    }
+    }, 50)
 
     useEffect(() => {
         setContent(value)
 
-        handleClick()
+        // handleClick(contentEditableRef)
         return () => {}
     }, [value])
 
     const onblur = (e: any) => {
-        setContent(e.target.innerHTML)
-        onBlur(e.target.innerHTML)
+        debouncedUpdate(e)
+        // onBlur(e.target.innerHTML)
     }
 
-    const contentEditableRef = useRef<HTMLDivElement>(null)
+    // const handleClick = () => {
+    //     const contentEditableNode = contentEditableRef.current
 
-    const handleClick = () => {
-        const contentEditableNode = contentEditableRef.current
+    //     if (!contentEditableNode) {
+    //         return
+    //     }
 
-        if (!contentEditableNode) {
-            return
-        }
+    //     contentEditableNode.focus()
 
-        contentEditableNode.focus()
+    //     // Move the cursor to the end of the content
+    //     const selection = window.getSelection()
+    //     if (selection) {
+    //         selection.removeAllRanges()
+    //         const range = document.createRange()
+    //         range.selectNodeContents(contentEditableNode)
+    //         range.collapse(false)
+    //         selection.addRange(range)
+    //     }
+    // }
+    // const handleClick = (el: HTMLElement) => {
+    //     // Place the caret at the end of the element
 
-        // Move the cursor to the end of the content
-        const selection = window.getSelection()
-        if (selection) {
-            selection.removeAllRanges()
-            const range = document.createRange()
-            range.selectNodeContents(contentEditableNode)
-            range.collapse(false)
-            selection.addRange(range)
-        }
-    }
+    //     if (!el) return
+    //     const target = document.createTextNode('')
+    //     el.appendChild(target)
+    //     // do not move caret if element was not focused
+    //     const isTargetFocused = document.activeElement === el
+    //     if (target !== null && target.nodeValue !== null && isTargetFocused) {
+    //         var sel = window.getSelection()
+    //         if (sel !== null) {
+    //             var range = document.createRange()
+    //             range.setStart(target, target.nodeValue.length)
+    //             range.collapse(true)
+    //             sel.removeAllRanges()
+    //             sel.addRange(range)
+    //         }
+    //         if (el instanceof HTMLElement) el.focus()
+    //     }
+    // }
+    // function handleClick(el: HTMLElement | null): void {
+    //     if (!el) return
 
+    //     // Place the caret at the end of the element
+    //     const target = document.createTextNode('')
+
+    //     // console.log(el)
+
+    //     // Append the target text node
+    //     // el.appendChild(target)
+
+    //     // do not move caret if element was not focused
+    //     const isTargetFocused = document.activeElement === el
+    //     if (target !== null && target.nodeValue !== null && isTargetFocused) {
+    //         const sel = window.getSelection()
+    //         if (sel !== null) {
+    //             const range = document.createRange()
+    //             range.setStart(target, target.nodeValue.length)
+    //             range.collapse(true)
+    //             sel.removeAllRanges()
+    //             sel.addRange(range)
+    //         }
+    //         if (el instanceof HTMLElement) el.focus()
+    //     }
+    // }
     return (
         <>
             {!link ? (
                 <div
-                    dangerouslySetInnerHTML={{
-                        __html: content,
-                    }}
                     contentEditable={true}
                     placeholder={placeholder}
-                    onInput={onchange}
+                    // onInput={onchange}
                     onBlur={onblur}
                     className={className}
                     ref={contentEditableRef}
-                    onClick={handleClick}
+                    dangerouslySetInnerHTML={{
+                        __html: content,
+                    }}
+                    // onClick={() => handleClick(contentEditableRef)}
+                    suppressContentEditableWarning={true}
                     {...props}
                 />
             ) : (
@@ -90,11 +136,11 @@ const EditableDiv = ({
                         dangerouslySetInnerHTML={{ __html: content }}
                         contentEditable={true}
                         placeholder={placeholder}
-                        onInput={onchange}
+                        // onInput={onchange}
                         onBlur={onblur}
                         className={className}
                         ref={contentEditableRef}
-                        onClick={handleClick}
+                        // onClick={handleClick}
                         {...props}
                     />
                 </a>
