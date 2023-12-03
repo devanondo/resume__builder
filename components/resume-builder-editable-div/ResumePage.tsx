@@ -37,6 +37,9 @@ import { ItemsComponents } from './types/resume-layout-types'
 import axios from 'axios'
 import { toast } from 'sonner'
 import { useModal } from '../hooks/use-modal-store'
+import NavigationSidebar from '../navigation/navigation-sidebar'
+import Navigation from './navbar/navigation-bar'
+import { BuilderModalDraweProvider } from '../provider/builder-modal-drawer-provider'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -128,154 +131,201 @@ const ResumePage = () => {
     if (!isMounted) return null
 
     return (
-        <div>
-            <div onClick={(e) => e.stopPropagation()} className="w-full pt-16">
-                <ContextMenu>
-                    <ContextMenuTrigger
-                        onContextMenu={() => {
-                            if (summeryPopoverKey || groupPopoverKey) {
-                                parentClick()
-                            }
-                        }}
-                        className="bg-red-100"
-                    >
-                        <div
-                            className={cn(
-                                `w-[940px] border  h-[1325px] bg-white z-0`,
-                                summeryPopoverKey && 'bg-[#dddce0]',
-                                groupPopoverKey && 'bg-[#dddce0]'
-                            )}
-                            id="resume-builder"
-                            onClick={parentClick}
-                            ref={divRef}
-                            style={{
-                                padding: `${watch('style.pageMarginOption')}px`,
-                            }}
-                        >
-                            <ResumeHeader />
-
-                            <div
-                                ref={refs}
-                                onClick={parentClick}
-                                className="grid grid-cols-12 gap-x-2"
-                            >
-                                {resumeLayout?.map((item, index) => {
-                                    return (
-                                        <div
-                                            style={{
-                                                gridColumn: `span ${item.column}`,
-                                            }}
-                                            key={index}
-                                        >
-                                            {item.items.map((cont, index) => {
-                                                if (
-                                                    !watch(
-                                                        `${cont.key}.enabled`
-                                                    )
-                                                )
-                                                    return
-
-                                                return (
-                                                    <div
-                                                        datatype={cont.title}
-                                                        key={index}
-                                                    >
-                                                        {
-                                                            itemsComponents[
-                                                                cont.key
-                                                            ]
-                                                        }
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </ContextMenuTrigger>
-                    <ContextMenuContent className="w-64">
-                        <ContextMenuItem inset disabled>
-                            Back
-                            <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem inset disabled>
-                            Forward
-                            <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuItem
-                            onClick={() => {
-                                window.location.reload()
-                            }}
-                            inset
-                        >
-                            Reload
-                            <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-                        </ContextMenuItem>
-                        <ContextMenuSub>
-                            <ContextMenuSubTrigger inset>
-                                More Tools
-                            </ContextMenuSubTrigger>
-                            <ContextMenuSubContent className="w-48">
-                                <ContextMenuItem
-                                    onClick={() => {
-                                        onOpen({ type: 'resumeAddSection' })
-                                    }}
-                                >
-                                    Add Section
-                                </ContextMenuItem>
-                                <ContextMenuItem
-                                    onClick={() => {
-                                        onOpen({ type: 'changeLayout' })
-                                    }}
-                                >
-                                    Templates
-                                </ContextMenuItem>
-                                <ContextMenuItem
-                                    onClick={() => {
-                                        onOpen({ type: 'openRearrenge' })
-                                    }}
-                                >
-                                    Rearrange
-                                </ContextMenuItem>
-                                <ContextMenuSeparator />
-                                <ContextMenuItem
-                                    onClick={() => {
-                                        onOpen({ type: 'stylesDrawer' })
-                                    }}
-                                >
-                                    Colors & Designs
-                                </ContextMenuItem>
-                            </ContextMenuSubContent>
-                        </ContextMenuSub>
-                        <ContextMenuSeparator />
-
-                        <ContextMenuCheckboxItem
-                            onClick={() => {
-                                handleButtonClick()
-                            }}
-                        >
-                            Download
-                        </ContextMenuCheckboxItem>
-                        <ContextMenuSeparator />
-                        <ContextMenuCheckboxItem
-                            onClick={() => {
-                                onOpen({ type: 'openRearrenge' })
-                            }}
-                        >
-                            Rearrange
-                        </ContextMenuCheckboxItem>
-                        <ContextMenuCheckboxItem
-                            onClick={() => {
-                                onOpen({ type: 'stylesDrawer' })
-                            }}
-                        >
-                            Design & Colors
-                        </ContextMenuCheckboxItem>
-                    </ContextMenuContent>
-                </ContextMenu>
+        <>
+            <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">
+                <NavigationSidebar onSave={handleButtonClick} />
             </div>
-        </div>
+
+            <div className=" h-full">
+                <Navigation />
+                <div className="relative flex items-start justify-center py-16">
+                    <div>
+                        <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full pt-16"
+                        >
+                            <ContextMenu>
+                                <ContextMenuTrigger
+                                    onContextMenu={() => {
+                                        if (
+                                            summeryPopoverKey ||
+                                            groupPopoverKey
+                                        ) {
+                                            parentClick()
+                                        }
+                                    }}
+                                    className="bg-red-100"
+                                >
+                                    <div
+                                        className={cn(
+                                            `w-[940px] border  h-[1325px] bg-white z-0`,
+                                            summeryPopoverKey && 'bg-[#dddce0]',
+                                            groupPopoverKey && 'bg-[#dddce0]'
+                                        )}
+                                        id="resume-builder"
+                                        onClick={parentClick}
+                                        ref={divRef}
+                                        style={{
+                                            padding: `${watch(
+                                                'style.pageMarginOption'
+                                            )}px`,
+                                        }}
+                                    >
+                                        <ResumeHeader />
+
+                                        <div
+                                            ref={refs}
+                                            onClick={parentClick}
+                                            className="grid grid-cols-12 gap-x-2"
+                                        >
+                                            {resumeLayout?.map(
+                                                (item, index) => {
+                                                    return (
+                                                        <div
+                                                            style={{
+                                                                gridColumn: `span ${item.column}`,
+                                                            }}
+                                                            key={index}
+                                                        >
+                                                            {item.items.map(
+                                                                (
+                                                                    cont,
+                                                                    index
+                                                                ) => {
+                                                                    if (
+                                                                        !watch(
+                                                                            `${cont.key}.enabled`
+                                                                        )
+                                                                    )
+                                                                        return
+
+                                                                    return (
+                                                                        <div
+                                                                            datatype={
+                                                                                cont.title
+                                                                            }
+                                                                            key={
+                                                                                index
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                itemsComponents[
+                                                                                    cont
+                                                                                        .key
+                                                                                ]
+                                                                            }
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                </ContextMenuTrigger>
+                                <ContextMenuContent className="w-64">
+                                    <ContextMenuItem inset disabled>
+                                        Back
+                                        <ContextMenuShortcut>
+                                            ⌘[
+                                        </ContextMenuShortcut>
+                                    </ContextMenuItem>
+                                    <ContextMenuItem inset disabled>
+                                        Forward
+                                        <ContextMenuShortcut>
+                                            ⌘]
+                                        </ContextMenuShortcut>
+                                    </ContextMenuItem>
+                                    <ContextMenuItem
+                                        onClick={() => {
+                                            window.location.reload()
+                                        }}
+                                        inset
+                                    >
+                                        Reload
+                                        <ContextMenuShortcut>
+                                            ⌘R
+                                        </ContextMenuShortcut>
+                                    </ContextMenuItem>
+                                    <ContextMenuSub>
+                                        <ContextMenuSubTrigger inset>
+                                            More Tools
+                                        </ContextMenuSubTrigger>
+                                        <ContextMenuSubContent className="w-48">
+                                            <ContextMenuItem
+                                                onClick={() => {
+                                                    onOpen({
+                                                        type: 'resumeAddSection',
+                                                    })
+                                                }}
+                                            >
+                                                Add Section
+                                            </ContextMenuItem>
+                                            <ContextMenuItem
+                                                onClick={() => {
+                                                    onOpen({
+                                                        type: 'changeLayout',
+                                                    })
+                                                }}
+                                            >
+                                                Templates
+                                            </ContextMenuItem>
+                                            <ContextMenuItem
+                                                onClick={() => {
+                                                    onOpen({
+                                                        type: 'openRearrenge',
+                                                    })
+                                                }}
+                                            >
+                                                Rearrange
+                                            </ContextMenuItem>
+                                            <ContextMenuSeparator />
+                                            <ContextMenuItem
+                                                onClick={() => {
+                                                    onOpen({
+                                                        type: 'stylesDrawer',
+                                                    })
+                                                }}
+                                            >
+                                                Colors & Designs
+                                            </ContextMenuItem>
+                                        </ContextMenuSubContent>
+                                    </ContextMenuSub>
+                                    <ContextMenuSeparator />
+
+                                    <ContextMenuCheckboxItem
+                                        onClick={() => {
+                                            handleButtonClick()
+                                        }}
+                                    >
+                                        Download
+                                    </ContextMenuCheckboxItem>
+                                    <ContextMenuSeparator />
+                                    <ContextMenuCheckboxItem
+                                        onClick={() => {
+                                            onOpen({ type: 'openRearrenge' })
+                                        }}
+                                    >
+                                        Rearrange
+                                    </ContextMenuCheckboxItem>
+                                    <ContextMenuCheckboxItem
+                                        onClick={() => {
+                                            onOpen({ type: 'stylesDrawer' })
+                                        }}
+                                    >
+                                        Design & Colors
+                                    </ContextMenuCheckboxItem>
+                                </ContextMenuContent>
+                            </ContextMenu>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <BuilderModalDraweProvider />
+        </>
     )
 }
 

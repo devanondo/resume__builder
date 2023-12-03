@@ -1,17 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn, focusKey, popkey } from '@/lib/utils'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { showPopover } from '@/redux/slices/pop-slice'
-import { ChevronDown, ChevronUp, Plus, Trash } from 'lucide-react'
+import { cn, focusKey } from '@/lib/utils'
 import {
     FieldValues,
     UseFieldArrayAppend,
     UseFieldArrayRemove,
-    useFormContext,
 } from 'react-hook-form'
 
+import { debounce } from 'lodash'
 import { useEffect, useState } from 'react'
 import { TypographyInput } from '../resume-builder-editable-div/components/Typography'
 
@@ -37,41 +34,36 @@ const CustomTextArea = ({
     className,
     placeholder,
 }: CustomTextAreaProps) => {
-    const { summeryPopoverKey } = useAppSelector((state) => state.popover)
-
-    const dispatch = useAppDispatch()
-    const { setFocus } = useFormContext()
     const [focusField, setFocusField] = useState('')
 
     useEffect(() => {
-        setFocus(focusField)
-    }, [setFocus, focusField])
+        if (focusField) {
+            focusOnLastField()
+        }
+    }, [focusField])
+
+    const focusOnLastField = () => {
+        const ele = document.getElementById(focusField)
+        ele?.focus()
+    }
 
     const handleKeydown = (e: any) => {
         switch (e.key) {
             case 'Enter':
                 e.preventDefault()
                 append({ [fieldTitle]: '', placeholder })
-                setFocusField(focusKey(name, fields.length))
-                dispatch(
-                    showPopover({
-                        name: popkey(name, fields.length),
-                        type: 'single__entry',
-                    })
-                )
-
+                debounce(() => {
+                    setFocusField(focusKey(name, fields.length))
+                }, 50)()
                 break
 
             case 'Backspace':
                 if (!e.target?.innerHTML?.length && index !== 0) {
                     setFocusField(focusKey(name, index - 1))
-                    remove(index)
-                    dispatch(
-                        showPopover({
-                            name: popkey(name, index - 1),
-                            type: 'single__entry',
-                        })
-                    )
+
+                    debounce(() => {
+                        remove(index)
+                    }, 50)()
                 }
 
                 break
@@ -89,6 +81,7 @@ const CustomTextArea = ({
                 placeholder={placeholder}
                 className={cn('py-[1px] px-2', className)}
                 type="paragraph"
+                id={name}
             />
 
             {/* <URL
@@ -102,7 +95,7 @@ const CustomTextArea = ({
                 spellCheck={false}
             /> */}
 
-            {summeryPopoverKey === name + index && (
+            {/* {summeryPopoverKey === name + index && (
                 <div
                     onClick={(e) => e.stopPropagation()}
                     className="textarea__modal p-0 rounded-[50px] overflow-hidden flex items-center w-fit border left-1/2 -top-11 -translate-x-1/2 z-10 absolute bg-white"
@@ -187,7 +180,7 @@ const CustomTextArea = ({
                         <Trash className="w-4 h-4 " />
                     </Button>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }

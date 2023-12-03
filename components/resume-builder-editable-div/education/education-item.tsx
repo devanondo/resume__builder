@@ -14,6 +14,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { MdShareLocation } from 'react-icons/md'
 import { SlCalender } from 'react-icons/sl'
 import { TypographyInput } from '../components/Typography'
+import { TiMinus } from 'react-icons/ti'
 
 const EducationItem = ({ name }: { name: string }) => {
     const { control, setValue } = useFormContext()
@@ -166,28 +167,28 @@ const EducationItem = ({ name }: { name: string }) => {
                                             type="subtitle"
                                         />
 
-                                        <div className="flex items-center w-full flex-wrap">
-                                            <div className="flex items-center w-full ">
-                                                <div className="w-4">
+                                        <div className="flex items-center w-full gap-x-2 flex-wrap">
+                                            <div className="flex items-center w-fit ">
+                                                <div className="mr-1">
                                                     <SlCalender className="w-3 h-3" />
                                                 </div>
-                                                <div className="flex pl-1 items-center gap-x-1">
+                                                <div className="flex items-center">
                                                     <TypographyInput
                                                         name={
                                                             `${name}.${i}.date.from` as const
                                                         }
-                                                        className="w-fit !text-xs pl-1"
+                                                        className="w-fit !text-xs !px-0"
                                                         placeholder="From"
                                                         type="paragraph"
                                                     />
-                                                    -
+                                                    <TiMinus />
                                                     {watchValue?.[i]?.date
                                                         .is_present ? (
-                                                        <p className="pl-1 text-xs">
+                                                        <p className="pl-2 text-xs">
                                                             Present
                                                         </p>
                                                     ) : (
-                                                        <div className="flex items-center pl-1">
+                                                        <div className="min-w-[50px]">
                                                             <TypographyInput
                                                                 name={
                                                                     `${name}.${i}.date.to` as const
@@ -201,15 +202,17 @@ const EducationItem = ({ name }: { name: string }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center w-full ">
-                                                <MdShareLocation className="w-3 h-3 mr-2" />
+                                            <div className="flex items-center w-fit ">
+                                                <MdShareLocation className="w-3 h-3 mr-1" />
 
                                                 <TypographyInput
                                                     name={
                                                         `${name}[${i}].location` as const
                                                     }
                                                     placeholder="Location"
-                                                    className={cn('!text-xs')}
+                                                    className={cn(
+                                                        '!text-xs !px-0'
+                                                    )}
                                                     type="paragraph"
                                                 />
                                             </div>

@@ -3,14 +3,11 @@
 'use client'
 
 import Loading from '@/app/(routes)/resume-builder/[userId]/loading'
+import { useGetLayoutQuery } from '@/redux/apis/layout.api'
 import { useGetResumeQuery } from '@/redux/apis/resume.api'
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import NavigationSidebar from '../navigation/navigation-sidebar'
-import { BuilderModalDraweProvider } from '../provider/builder-modal-drawer-provider'
 import ResumePage from './ResumePage'
-import Navigation from './navbar/navigation-bar'
-import { useGetLayoutQuery } from '@/redux/apis/layout.api'
 
 const ResumePagewrapper = () => {
     const methods = useForm()
@@ -55,18 +52,7 @@ const ResumePagewrapper = () => {
         <div className="h-full">
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">
-                        <NavigationSidebar />
-                    </div>
-
-                    <div className=" h-full">
-                        <Navigation />
-                        <div className="relative flex items-start justify-center py-16">
-                            <ResumePage />
-                        </div>
-                    </div>
-
-                    <BuilderModalDraweProvider />
+                    <ResumePage />
                 </form>
             </FormProvider>
         </div>

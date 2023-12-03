@@ -14,6 +14,7 @@ export const TypographyInput = ({
     link,
     href,
     type,
+    ref,
     ...props
 }: CommonSectionProps) => {
     const { layoutWithStyles } = useAppSelector((state) => state.layout)
@@ -83,6 +84,7 @@ export const TypographyInput = ({
                 placeholder={placeholder}
                 href={href}
                 link={link}
+                ref={ref}
                 {...props}
             />
             {type === 'title' && (

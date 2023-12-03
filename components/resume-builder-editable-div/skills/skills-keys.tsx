@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import TextBox from '@/components/resume-builder-editable-div/components/Editable'
 import { cn, focusKey } from '@/lib/utils'
+import { debounce } from 'lodash'
 import { useEffect, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -13,7 +15,6 @@ interface SkillsKeysProps {
 
 const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
     const { control, setFocus, watch } = useFormContext()
-    const [focusField, setFocusField] = useState('')
 
     const { fields, append, remove } = useFieldArray({
         name,
@@ -22,19 +23,37 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
 
     const { watchValue: watchParent } = useWatchForm({ name: parentKey })
 
-    const handleKeyDown = (e: any, index: number) => {
+    const [focusField, setFocusField] = useState('')
+
+    useEffect(() => {
+        if (focusField) {
+            focusOnLastField()
+        }
+    }, [focusField])
+
+    const focusOnLastField = () => {
+        const ele = document.getElementById(focusField)
+        ele?.focus()
+    }
+
+    const handleKeyDown = (e: any, name: string, index: number) => {
         switch (e.key) {
             case 'Enter':
                 e.preventDefault()
                 append({ keyItem: '' })
-                setFocusField(focusKey(name, fields.length))
+                debounce(() => {
+                    setFocusField(focusKey(name, fields.length))
+                }, 50)()
 
                 break
 
             case 'Backspace':
                 if (!e.target?.innerHTML?.length) {
-                    setFocusField(focusKey(name, index))
-                    remove(index)
+                    setFocusField(focusKey(name, index - 1))
+
+                    debounce(() => {
+                        remove(index)
+                    }, 50)()
                 }
 
                 break
@@ -53,8 +72,15 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                 <div className="relative flex flex-wrap group " key={field.id}>
                     <div className="relative">
                         <TextBox
-                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            onKeyDown={(e) =>
+                                handleKeyDown(
+                                    e,
+                                    `${name}.${index}.keyItem`,
+                                    index
+                                )
+                            }
                             name={`${name}.${index}.keyItem`}
+                            id={`${name}.${index}.keyItem`}
                             placeholder="Tools / Technology"
                             className={cn(
                                 'w-fit px-2 pb-1',

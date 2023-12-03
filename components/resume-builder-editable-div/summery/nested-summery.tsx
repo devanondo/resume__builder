@@ -1,7 +1,6 @@
 'use client'
 
 import CustomTextArea from '@/components/shared/custom-text-area'
-import { AItem } from '@/components/shared/wrapper'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
 const NestedSummery = () => {
@@ -17,8 +16,8 @@ const NestedSummery = () => {
         <>
             {fields?.map((field: any, i: number) => {
                 return (
-                    <AItem
-                        popoverKey={`${name}.${i}.summery${i}`}
+                    <div
+                        // popoverKey={`${name}.${i}.summery${i}`}
                         key={field.id}
                         className="a_item"
                     >
@@ -32,7 +31,7 @@ const NestedSummery = () => {
                             className="text-justify text-[#384347] text-[14px] leading-[17px]"
                             placeholder={field.placeholder}
                         />
-                    </AItem>
+                    </div>
                 )
             })}
         </>
