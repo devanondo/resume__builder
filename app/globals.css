@@ -130,3 +130,24 @@ div[contenteditable='true'] {
 a {
     text-decoration: underline;
 }
+
+.editable__div__st {
+    word-wrap: break-word;
+    text-size-adjust: none;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    display: block;
+    letter-spacing: normal;
+    list-style: none;
+    margin: 0;
+    min-height: 10px;
+    outline: none;
+    overflow-wrap: break-word;
+    position: relative;
+    resize: none;
+    white-space: pre-wrap;
+    width: 100%;
+    word-break: break-word;
+    z-index: 1;
+}

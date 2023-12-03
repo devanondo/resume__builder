@@ -50,6 +50,7 @@ export default function Navigation() {
                         </div>
 
                         <div className="ml-auto flex items-center space-x-4">
+                            <button type="submit">Submit</button>
                             <UserNav />
                         </div>
                     </div>

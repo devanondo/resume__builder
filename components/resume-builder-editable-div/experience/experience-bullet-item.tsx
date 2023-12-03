@@ -2,9 +2,9 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import CustomTextArea from '@/components/shared/custom-text-area'
-import { AItem } from '@/components/shared/wrapper'
-import { cn, popkey } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { Dot } from 'lucide-react'
+import { useRef } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
 interface ExperienceBuletItemProps {
@@ -23,13 +23,15 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
 
     const { watchValue } = useWatchForm({ name })
 
+    const parentRef = useRef(null)
+
     return (
-        <div className="-mt-1">
+        <div ref={parentRef} className="-mt-1">
             {watchValue?.enabled &&
                 fields?.map((field: any, i) => {
                     return (
-                        <AItem
-                            popoverKey={popkey(`${fieldName}.${i}.text`, i)}
+                        <div
+                            // popoverKey={popkey(`${fieldName}.${i}.text`, i)}
                             key={field.id}
                             className="flex items-center w-full"
                         >
@@ -50,7 +52,7 @@ const ExperienceBuletItem = ({ name }: ExperienceBuletItemProps) => {
                                     watchValue.italic_items && 'italic'
                                 )}
                             />
-                        </AItem>
+                        </div>
                     )
                 })}
         </div>
