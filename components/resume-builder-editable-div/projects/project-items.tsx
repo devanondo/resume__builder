@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
@@ -14,9 +15,11 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { RiLink } from 'react-icons/ri'
 import { TypographyInput } from '../components/Typography'
 import ProjectsBulletsItem from './project-bullets'
+import { SlCalender } from 'react-icons/sl'
+import { TiMinus } from 'react-icons/ti'
 
 const ProjectItems = ({ name }: { name: string }) => {
-    const { control, setValue } = useFormContext()
+    const { control, setValue, watch } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
     const dispatch = useAppDispatch()
 
@@ -73,13 +76,27 @@ const ProjectItems = ({ name }: { name: string }) => {
                 )
 
                 nodeItem.current = index
+                setValue(name, newList)
                 return newList
             })
         }
     }
 
+    const debouncedUpdate = debounce(async () => {
+        const data = watch(name)
+        setList(data)
+    }, 10)
+
+    useEffect(() => {
+        if (!dragging) {
+            debouncedUpdate()
+        }
+
+        return debouncedUpdate.cancel
+    }, [watch, debouncedUpdate])
+
     const updateData = debounce(() => {
-        setValue(name, list)
+        // setValue(name, list)
     }, 100)
 
     const getStyles = (params: number) => {
@@ -94,7 +111,7 @@ const ProjectItems = ({ name }: { name: string }) => {
     if (!mounted) return null
     return (
         <div className={cn('group__item__border')}>
-            {fields.map((field, i) => (
+            {fields.map((field: any, i: number) => (
                 <div
                     aria-disabled={false}
                     aria-roledescription="sortable"
@@ -126,33 +143,35 @@ const ProjectItems = ({ name }: { name: string }) => {
                                 placeholder="Identify Your Project!"
                                 type="subheading"
                             />
-                            <div className="flex items-center px-2 w-full gap-x-1 text-zinc-600">
+                            <div className="flex items-center w-fit px-2">
+                                <div className="mr-1">
+                                    <SlCalender className="w-3 h-3" />
+                                </div>
                                 <div className="flex items-center">
-                                    <Calendar className="w-3 h-3" />
                                     <TypographyInput
                                         name={`${name}.${i}.date.from` as const}
-                                        className="!text-xs pt-[3px]"
-                                        placeholder="Form"
+                                        className="w-fit !text-xs !px-0"
+                                        placeholder="From"
                                         type="paragraph"
                                     />
+                                    <TiMinus />
+                                    {watchValue?.[i]?.date.is_present ? (
+                                        <p className="pl-2 text-xs">Present</p>
+                                    ) : (
+                                        <div className="min-w-[80px]">
+                                            <TypographyInput
+                                                name={
+                                                    `${name}.${i}.date.to` as const
+                                                }
+                                                className="!text-xs"
+                                                placeholder="To"
+                                                type="paragraph"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
-                                -
-                                {watchValue?.[i]?.date.is_present ? (
-                                    <p className="pl-1 text-xs">Present</p>
-                                ) : (
-                                    <div className="flex items-center pl-1">
-                                        <TypographyInput
-                                            name={
-                                                `${name}.${i}.date.to` as const
-                                            }
-                                            className="!text-xs"
-                                            placeholder="To"
-                                            type="paragraph"
-                                        />
-                                    </div>
-                                )}
                             </div>
-                            <div className="w-full flex items-center gap-x-4 text-zinc-500">
+                            <div className="w-full flex items-center gap-x-4 text-zinc-500 flex-wrap">
                                 {watchValue?.[i]?.show_link && (
                                     <div className="flex items-center px-2">
                                         <RiLink className="w-3 h-3" />
@@ -161,7 +180,7 @@ const ProjectItems = ({ name }: { name: string }) => {
                                             link={true}
                                             name={`${name}.${i}.link` as const}
                                             className="!text-xs px-2 italic underline text-zinc-500"
-                                            placeholder="Insert url!"
+                                            placeholder="https://"
                                             type="paragraph"
                                         />
                                     </div>
@@ -177,7 +196,7 @@ const ProjectItems = ({ name }: { name: string }) => {
                                                 `${name}.${i}.extra_link` as const
                                             }
                                             className="!text-xs px-2 italic underline text-zinc-500"
-                                            placeholder="Insert url!"
+                                            placeholder="https://"
                                             type="paragraph"
                                         />
                                     </div>

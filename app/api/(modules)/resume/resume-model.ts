@@ -162,6 +162,7 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
                         placeholder: String,
                         italic_description: Boolean,
                         enabled: Boolean,
+                        text: String,
                     },
                 },
             ],

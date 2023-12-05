@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
@@ -14,7 +15,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { TypographyInput } from '../components/Typography'
 
 const StrengthItem = ({ name }: { name: string }) => {
-    const { control, setValue } = useFormContext()
+    const { control, setValue, watch } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
     const dispatch = useAppDispatch()
 
@@ -71,13 +72,27 @@ const StrengthItem = ({ name }: { name: string }) => {
                 )
 
                 nodeItem.current = index
+                setValue(name, newList)
                 return newList
             })
         }
     }
 
+    const debouncedUpdate = debounce(async () => {
+        const data = watch(name)
+        setList(data)
+    }, 10)
+
+    useEffect(() => {
+        if (!dragging) {
+            debouncedUpdate()
+        }
+
+        return debouncedUpdate.cancel
+    }, [watch, debouncedUpdate])
+
     const updateData = debounce(() => {
-        setValue(name, list)
+        // setValue(name, list)
     }, 100)
 
     const getStyles = (params: number) => {
@@ -106,7 +121,7 @@ const StrengthItem = ({ name }: { name: string }) => {
                 gridTemplateColumns: width > 370 ? '1fr 1fr' : '1fr',
             }}
         >
-            {fields.map((field: any, i) => (
+            {fields.map((field: any, i: number) => (
                 <div
                     aria-disabled={false}
                     aria-roledescription="sortable"

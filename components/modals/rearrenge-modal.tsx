@@ -9,10 +9,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog'
 import { debounce } from 'lodash'
 import { useSaveLayoutMutation } from '@/redux/apis/layout.api'
 import { toast } from 'sonner'
+import { useEffect, useState } from 'react'
+import { IResumeLayout } from '../resume-builder-editable-div/types/resume-layout-types'
 
 const RearrengeModal = () => {
     const { isOpen, onClose, type } = useModal()
     const { resumeLayout } = useAppSelector((state) => state.layout)
+    const [values, setValues] = useState<IResumeLayout[] | null>(null)
 
     const dispatch = useAppDispatch()
     const isModalOpen = isOpen && type === 'openRearrenge'
@@ -21,9 +24,16 @@ const RearrengeModal = () => {
         onClose()
     }
 
-    const [saveLayout] = useSaveLayoutMutation()
+    const [saveLayout, response] = useSaveLayoutMutation()
 
-    const debouncedUpdate = debounce(async (values) => {
+    useEffect(() => {
+        if (response.isSuccess) {
+            setValues(null)
+        }
+    }, [response.isSuccess])
+
+    const debouncedUpdate = debounce(async () => {
+        console.log('Mounting...')
         try {
             await toast.promise(saveLayout({ layoutKeys: values }), {
                 loading: 'Loading...',
@@ -37,6 +47,14 @@ const RearrengeModal = () => {
         }
     }, 5000)
 
+    useEffect(() => {
+        if (values) {
+            debouncedUpdate()
+        }
+
+        return debouncedUpdate.cancel
+    }, [values, debouncedUpdate])
+
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden max-h-full">
@@ -49,7 +67,7 @@ const RearrengeModal = () => {
                 <DragDrop
                     dragEnd={(_, items) => {
                         dispatch(setLayoutData(items))
-                        debouncedUpdate(items)
+                        setValues(items)
                     }}
                     items={resumeLayout}
                 />

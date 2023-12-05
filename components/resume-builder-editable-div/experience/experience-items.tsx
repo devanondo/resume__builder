@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import ExperienceGroupPopover from '@/components/popover/experience-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
-import { useAppSelector } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { SlCalender } from 'react-icons/sl'
 import { MdShareLocation } from 'react-icons/md'
@@ -12,15 +14,18 @@ import { TypographyInput } from '../components/Typography'
 import ExperienceBuletItem from './experience-bullet-item'
 import { useEffect, useRef, useState } from 'react'
 import { debounce } from 'lodash'
+import { showPopover } from '@/redux/slices/pop-slice'
+import { TiMinus } from 'react-icons/ti'
 
 interface ExperienceItemProps {
     name: string
 }
 
 const ExperienceItem = ({ name }: ExperienceItemProps) => {
-    const { control, setValue } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
+    const dispatch = useAppDispatch()
 
+    const { control, setValue, watch } = useFormContext()
     const { fields, remove, append } = useFieldArray({
         name,
         control,
@@ -44,6 +49,7 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
     }, [])
 
     const handleDragStart = (e: any, index: number) => {
+        dispatch(showPopover(null))
         nodeItem.current = index
         node.current = e.target
         node?.current?.addEventListener('dragend', handleDragEnd)
@@ -73,13 +79,28 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                 )
 
                 nodeItem.current = index
+                setValue(name, newList)
+
                 return newList
             })
         }
     }
 
+    const debouncedUpdate = debounce(async () => {
+        const data = watch(name)
+        setList(data)
+    }, 10)
+
+    useEffect(() => {
+        if (!dragging) {
+            debouncedUpdate()
+        }
+
+        return debouncedUpdate.cancel
+    }, [watch, debouncedUpdate])
+
     const updateData = debounce(() => {
-        setValue(name, list)
+        // setValue(name, list)
     }, 100)
 
     const getStyles = (params: number) => {
@@ -134,30 +155,31 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                             />
 
                             <div className="flex items-center px-2 w-full gap-x-4">
-                                <div className="flex items-center">
-                                    <SlCalender className="w-3 h-3" />
-
+                                <div className="flex items-center w-fit ">
+                                    <div className="mr-1">
+                                        <SlCalender className="w-3 h-3" />
+                                    </div>
                                     <div className="flex items-center">
                                         <TypographyInput
                                             name={
                                                 `${name}.${i}.date.from` as const
                                             }
-                                            className="w-fit !text-xs"
+                                            className="w-fit !text-xs !px-0"
                                             placeholder="From"
                                             type="paragraph"
                                         />
-                                        -
+                                        <TiMinus />
                                         {watchValue?.[i]?.date.is_present ? (
-                                            <p className="pl-1 text-xs">
+                                            <p className="pl-2 text-xs">
                                                 Present
                                             </p>
                                         ) : (
-                                            <div className="flex items-center pl-1">
+                                            <div className="min-w-[50px]">
                                                 <TypographyInput
                                                     name={
                                                         `${name}.${i}.date.to` as const
                                                     }
-                                                    className="!text-xs pt-[3px]"
+                                                    className="!text-xs"
                                                     placeholder="To"
                                                     type="paragraph"
                                                 />
