@@ -57,3 +57,20 @@
         }
     }
 }
+
+.react-datepicker-popper {
+    transition: 0s !important;
+    background: #fff;
+    z-index: 111 !important;
+}
+
+.react-datepicker-wrapper {
+    max-width: 100px;
+
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+    }
+}

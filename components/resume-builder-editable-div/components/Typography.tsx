@@ -3,9 +3,10 @@
 import { Font } from '@/lib/font'
 import { cn } from '@/lib/utils'
 import { useAppSelector } from '@/redux/hooks'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import TextBox from './Editable'
 import { CommonSectionProps, TypeProps } from './types'
+import PickDate from '@/components/shared/date-picker'
 
 export const TypographyInput = ({
     name,
@@ -15,11 +16,13 @@ export const TypographyInput = ({
     href,
     type,
     ref,
+    datePicker,
+    year,
     ...props
 }: CommonSectionProps) => {
     const { layoutWithStyles } = useAppSelector((state) => state.layout)
 
-    const { watch } = useFormContext()
+    const { watch, control } = useFormContext()
 
     const style = watch('style')
 
@@ -73,20 +76,41 @@ export const TypographyInput = ({
 
     return (
         <>
-            <TextBox
-                name={name}
-                className={cn(
-                    commonStyles(),
-                    className,
-                    getFontFamilly(type as TypeProps)?.className
-                )}
-                style={{ ...fontStyle, color: getColors(type as TypeProps) }}
-                placeholder={placeholder}
-                href={href}
-                link={link}
-                ref={ref}
-                {...props}
-            />
+            {datePicker ? (
+                <Controller
+                    name={name}
+                    control={control}
+                    render={({ field }) => {
+                        return (
+                            <PickDate
+                                className={className}
+                                year={year}
+                                value={field.value}
+                                onChange={field.onChange}
+                                {...props}
+                            />
+                        )
+                    }}
+                />
+            ) : (
+                <TextBox
+                    name={name}
+                    className={cn(
+                        commonStyles(),
+                        className,
+                        getFontFamilly(type as TypeProps)?.className
+                    )}
+                    style={{
+                        ...fontStyle,
+                        color: getColors(type as TypeProps),
+                    }}
+                    placeholder={placeholder}
+                    href={href}
+                    link={link}
+                    ref={ref}
+                    {...props}
+                />
+            )}
             {type === 'title' && (
                 <div className="w-full px-2">
                     <div

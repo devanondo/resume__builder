@@ -150,22 +150,26 @@ const ProjectItems = ({ name }: { name: string }) => {
                                 <div className="flex items-center">
                                     <TypographyInput
                                         name={`${name}.${i}.date.from` as const}
-                                        className="w-fit !text-xs !px-0"
+                                        className="w-fit !text-xs !px-0 max-w-[50px]"
                                         placeholder="From"
                                         type="paragraph"
+                                        year={false}
+                                        datePicker={true}
                                     />
-                                    <TiMinus />
+                                    -
                                     {watchValue?.[i]?.date.is_present ? (
                                         <p className="pl-2 text-xs">Present</p>
                                     ) : (
-                                        <div className="min-w-[80px]">
+                                        <div className="min-w-[50px]">
                                             <TypographyInput
                                                 name={
                                                     `${name}.${i}.date.to` as const
                                                 }
-                                                className="!text-xs"
+                                                className="!text-xs pl-1 max-w-[50px]"
                                                 placeholder="To"
                                                 type="paragraph"
+                                                year={false}
+                                                datePicker={true}
                                             />
                                         </div>
                                     )}

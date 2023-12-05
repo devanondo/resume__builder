@@ -16,6 +16,7 @@ import { MdShareLocation } from 'react-icons/md'
 import { SlCalender } from 'react-icons/sl'
 import { TypographyInput } from '../components/Typography'
 import { TiMinus } from 'react-icons/ti'
+import PickDate from '@/components/shared/date-picker'
 
 const EducationItem = ({ name }: { name: string }) => {
     const { control, setValue, watch } = useFormContext()
@@ -163,7 +164,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                 <TypographyInput
                                     name={`${name}[${i}].name` as const}
                                     placeholder={field?.placeholder || ''}
-                                    className=""
+                                    className="!pl-0"
                                     type="subheading"
                                 />
 
@@ -178,7 +179,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                                     ?.placeholder || ''
                                             }
                                             className={cn(
-                                                'text-sm font-bold pl-0'
+                                                'text-sm font-bold !pl-0'
                                             )}
                                             type="subtitle"
                                         />
@@ -193,11 +194,13 @@ const EducationItem = ({ name }: { name: string }) => {
                                                         name={
                                                             `${name}.${i}.date.from` as const
                                                         }
-                                                        className="w-fit !text-xs !px-0"
+                                                        className="w-fit !text-xs !px-0 max-w-[30px]"
                                                         placeholder="From"
                                                         type="paragraph"
+                                                        year={true}
+                                                        datePicker={true}
                                                     />
-                                                    <TiMinus />
+                                                    -
                                                     {watchValue?.[i]?.date
                                                         .is_present ? (
                                                         <p className="pl-2 text-xs">
@@ -209,9 +212,13 @@ const EducationItem = ({ name }: { name: string }) => {
                                                                 name={
                                                                     `${name}.${i}.date.to` as const
                                                                 }
-                                                                className="!text-xs"
+                                                                className="!text-xs pl-1"
                                                                 placeholder="To"
                                                                 type="paragraph"
+                                                                year={true}
+                                                                datePicker={
+                                                                    true
+                                                                }
                                                             />
                                                         </div>
                                                     )}

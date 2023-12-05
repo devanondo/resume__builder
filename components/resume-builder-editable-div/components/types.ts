@@ -14,4 +14,6 @@ export interface CommonSectionProps extends HTMLAttributes<HTMLDivElement> {
     href?: string
     ref?: any
     type: TypeProps
+    datePicker?: boolean
+    year?: boolean
 }
