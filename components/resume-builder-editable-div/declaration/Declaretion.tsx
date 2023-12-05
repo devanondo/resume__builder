@@ -45,9 +45,10 @@ const DeclarationSection = () => {
                             name={`${name}[${i}].description` as const}
                             className="py-0 !text-sm"
                             type="subtitle"
+                            placeholder="Write about your informations!"
                         />
                         <TypographyInput
-                            placeholder={field.placeholder || ''}
+                            placeholder={field.placeholder || 'Your Name'}
                             name={`${name}[${i}].name` as const}
                             className="pt-0 px-2 !text-xs"
                             type="paragraph"

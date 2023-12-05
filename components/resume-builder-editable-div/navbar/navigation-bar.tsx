@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { UserNav } from './user-nav'
 
 import { FaExclamationCircle } from 'react-icons/fa'
+import Link from 'next/link'
 
 export default function Navigation() {
     const [isMuted, setIsMuted] = useState(false)
@@ -26,21 +27,23 @@ export default function Navigation() {
             >
                 <div className="border-b  z-50">
                     <div className="flex container h-16 items-center px-4">
-                        <div className="relative z-20 flex items-center text-lg font-medium">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="mr-2 h-6 w-6"
-                            >
-                                <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-                            </svg>
-                            AMRCV.in
-                        </div>
+                        <Link href="/" className="no-underline">
+                            <div className="relative z-20 flex items-center text-lg font-bold ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="mr-2 h-6 w-6"
+                                >
+                                    <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+                                </svg>
+                                AMRCV.in
+                            </div>
+                        </Link>
 
                         <div className="pl-3 flex items-center gap-x-2 text-sm">
                             <div className="w-8 h-8 rounded-full flex items-center justify-center bg-zinc-100">

@@ -106,8 +106,8 @@ const EducationPopover = ({
                         date: {
                             record: 'DateRange',
                             placeholder: 'Date',
-                            from: '2023',
-                            to: '2024',
+                            from: new Date(),
+                            to: new Date(),
                             is_present: false,
                             date_icon: true,
                         },

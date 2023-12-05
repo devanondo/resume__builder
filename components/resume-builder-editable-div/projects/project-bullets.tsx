@@ -2,8 +2,7 @@
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
 import CustomTextArea from '@/components/shared/custom-text-area'
-import { AItem } from '@/components/shared/wrapper'
-import { cn, popkey } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { Dot } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -28,10 +27,10 @@ const ProjectsBulletsItem = ({ name }: ProjectsBulletsItemProps) => {
             {watchValue.enabled &&
                 fields?.map((field: any, i) => {
                     return (
-                        <AItem
-                            popoverKey={popkey(`${fieldName}.${i}.text`, i)}
+                        <div
+                            // popoverKey={popkey(`${fieldName}.${i}.text`, i)}
                             key={field.id}
-                            className="flex items-center gap-x-1 w-full"
+                            className="flex items-start gap-x-1 w-full"
                         >
                             {watchValue.bulet_items && (
                                 <Dot className="w-4 h-4" />
@@ -50,7 +49,7 @@ const ProjectsBulletsItem = ({ name }: ProjectsBulletsItemProps) => {
                                     watchValue.italic_items && 'italic'
                                 )}
                             />
-                        </AItem>
+                        </div>
                     )
                 })}
         </div>
