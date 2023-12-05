@@ -7,15 +7,14 @@ import ExperienceGroupPopover from '@/components/popover/experience-popover'
 import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { showPopover } from '@/redux/slices/pop-slice'
+import { debounce } from 'lodash'
+import { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { SlCalender } from 'react-icons/sl'
 import { MdShareLocation } from 'react-icons/md'
+import { SlCalender } from 'react-icons/sl'
 import { TypographyInput } from '../components/Typography'
 import ExperienceBuletItem from './experience-bullet-item'
-import { useEffect, useRef, useState } from 'react'
-import { debounce } from 'lodash'
-import { showPopover } from '@/redux/slices/pop-slice'
-import { TiMinus } from 'react-icons/ti'
 
 interface ExperienceItemProps {
     name: string
@@ -164,11 +163,13 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                             name={
                                                 `${name}.${i}.date.from` as const
                                             }
-                                            className="w-fit !text-xs !px-0"
+                                            className="w-fit !text-xs !px-0 max-w-[50px]"
                                             placeholder="From"
                                             type="paragraph"
+                                            year={false}
+                                            datePicker={true}
                                         />
-                                        <TiMinus />
+                                        -
                                         {watchValue?.[i]?.date.is_present ? (
                                             <p className="pl-2 text-xs">
                                                 Present
@@ -179,9 +180,11 @@ const ExperienceItem = ({ name }: ExperienceItemProps) => {
                                                     name={
                                                         `${name}.${i}.date.to` as const
                                                     }
-                                                    className="!text-xs"
+                                                    className="!text-xs pl-1 max-w-[50px]"
                                                     placeholder="To"
                                                     type="paragraph"
+                                                    year={false}
+                                                    datePicker={true}
                                                 />
                                             </div>
                                         )}

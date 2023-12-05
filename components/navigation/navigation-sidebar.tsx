@@ -1,6 +1,13 @@
 'use client'
 
-import { Download, Layout, LayoutDashboard, Palette, Plus } from 'lucide-react'
+import {
+    Download,
+    Layout,
+    LayoutDashboard,
+    Palette,
+    Plus,
+    Share,
+} from 'lucide-react'
 import { IModalType, useModal } from '../hooks/use-modal-store'
 import ActionTooltip from '../shared/action-tooltip'
 import { Separator } from '../ui/separator'
@@ -102,7 +109,6 @@ const NavigationSidebar = ({ onSave }: { onSave: () => void }) => {
                     className="group flex items-center w-full"
                     onClick={(e) => {
                         e.preventDefault()
-                        // onOpen({ type: action.action })
                         onSave()
                     }}
                 >
@@ -112,6 +118,17 @@ const NavigationSidebar = ({ onSave }: { onSave: () => void }) => {
                             size={20}
                         />
                         <span className="hidden xl:block">Download</span>
+                    </div>
+                </button>
+            </ActionTooltip>
+            <ActionTooltip side="right" align="center" label={'Share'}>
+                <button className="group flex items-center w-full">
+                    <div className="flex  w-full cursor-pointer p-2 transition-all overflow-hidden items-center gap-x-2  group-hover:bg-emerald-500 group-hover:text-white">
+                        <Share
+                            className="group-hover:text-white transition text-emerald-500"
+                            size={20}
+                        />
+                        <span className="hidden xl:block">Share</span>
                     </div>
                 </button>
             </ActionTooltip>

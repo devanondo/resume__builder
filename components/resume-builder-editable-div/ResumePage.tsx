@@ -120,7 +120,7 @@ const ResumePage = () => {
         } catch (error) {
             console.log(error)
         }
-    }, 20000)
+    }, 10000)
 
     useEffect(() => {
         debouncedUpdate()

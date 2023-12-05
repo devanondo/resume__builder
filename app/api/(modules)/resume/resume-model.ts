@@ -62,8 +62,14 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
                     location: String,
                     show_location: Boolean,
                     date: {
-                        from: String,
-                        to: String,
+                        from: {
+                            type: Date,
+                            default: Date.now(),
+                        },
+                        to: {
+                            type: Date,
+                            default: Date.now(),
+                        },
                         is_present: Boolean,
                     },
                     description: {
@@ -123,8 +129,14 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
                     show_extra_link: Boolean,
                     date: {
                         record: String,
-                        from: String,
-                        to: String,
+                        from: {
+                            type: Date,
+                            default: Date.now(),
+                        },
+                        to: {
+                            type: Date,
+                            default: Date.now(),
+                        },
                         is_present: Boolean,
                         date_icon: Boolean,
                     },
@@ -217,8 +229,14 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
                     date: {
                         record: String,
                         placeholder: String,
-                        from: String,
-                        to: String,
+                        from: {
+                            type: Date,
+                            default: Date.now(),
+                        },
+                        to: {
+                            type: Date,
+                            default: Date.now(),
+                        },
                         is_present: Boolean,
                         date_icon: Boolean,
                     },
