@@ -87,7 +87,6 @@ export const TypographyInput = ({
                                 year={year}
                                 value={field.value}
                                 onChange={field.onChange}
-                                {...props}
                             />
                         )
                     }}
