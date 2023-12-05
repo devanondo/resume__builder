@@ -194,7 +194,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                                         name={
                                                             `${name}.${i}.date.from` as const
                                                         }
-                                                        className="w-fit !text-xs !px-0 max-w-[30px]"
+                                                        className="w-fit !text-xs !px-0 max-w-[40px] text-center"
                                                         placeholder="From"
                                                         type="paragraph"
                                                         year={true}
@@ -207,12 +207,12 @@ const EducationItem = ({ name }: { name: string }) => {
                                                             Present
                                                         </p>
                                                     ) : (
-                                                        <div className="min-w-[50px]">
+                                                        <div className="">
                                                             <TypographyInput
                                                                 name={
                                                                     `${name}.${i}.date.to` as const
                                                                 }
-                                                                className="!text-xs pl-1"
+                                                                className="!text-xs  max-w-[40px] text-center"
                                                                 placeholder="To"
                                                                 type="paragraph"
                                                                 year={true}
@@ -243,7 +243,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                     </div>
                                     {watchValue[i]?.institution
                                         ?.enabled_gpa && (
-                                        <div className="border-l border-[#74767E] px-2 py-1 min-w-[80px]">
+                                        <div className="border-l border-[#74767E] px-2 py-1 min-w-[120px]">
                                             <TypographyInput
                                                 name={
                                                     `${name}[${i}].institution.gpa` as const
@@ -258,7 +258,7 @@ const EducationItem = ({ name }: { name: string }) => {
                                                 )}
                                                 type="paragraph"
                                             />
-                                            <div className="flex items-center -mt-2">
+                                            <div className="flex items-center ">
                                                 <TypographyInput
                                                     name={
                                                         `${name}[${i}].institution.gpa_score` as const

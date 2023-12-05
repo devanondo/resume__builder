@@ -96,8 +96,8 @@ const ProjectsGroupPopover = ({
 
                         date: {
                             record: 'DateRange',
-                            from: '09/2023',
-                            to: '09/2023',
+                            from: new Date(),
+                            to: new Date(),
                             is_present: false,
                             date_icon: true,
                         },

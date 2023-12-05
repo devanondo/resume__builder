@@ -7,7 +7,7 @@ export const initialUser = async () => {
     const user = await currentUser()
 
     if (!user) {
-        return redirectToSignIn()
+        return redirectToSignIn({ returnBackUrl: '/' })
     }
     const profile = await User.findOne({ uid: user.id })
 
@@ -23,12 +23,12 @@ export const initialUser = async () => {
     })
 
     // Initailize the resume
-    const resume = await Resume.create({ ...resumeFormData, uid: user.id })
+    await Resume.create({ ...resumeFormData, uid: user.id })
 
     // Initialize the layout
-    const layout = await Layout.create({ uid: user.id, sections: layoutData })
+    await Layout.create({ uid: user.id, sections: layoutData })
 
-    return { newUser, resume, layout }
+    return newUser
 }
 
 export const resumeFormData = {

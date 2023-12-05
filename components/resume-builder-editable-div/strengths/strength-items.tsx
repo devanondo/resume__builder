@@ -116,7 +116,7 @@ const StrengthItem = ({ name }: { name: string }) => {
     return (
         <div
             ref={ref}
-            className={cn('grid', 'group__item__border')}
+            className={cn('grid w-full group__item__border')}
             style={{
                 gridTemplateColumns: width > 370 ? '1fr 1fr' : '1fr',
             }}

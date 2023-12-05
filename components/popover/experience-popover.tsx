@@ -86,8 +86,8 @@ const ExperienceGroupPopover = ({
                         show_location: false,
 
                         date: {
-                            from: '',
-                            to: '',
+                            from: new Date(),
+                            to: new Date(),
                             is_present: true,
                         },
                         description: {
