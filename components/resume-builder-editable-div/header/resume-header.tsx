@@ -247,7 +247,7 @@ const ResumeHeader = () => {
                     <TypographyInput
                         name={`header.name` as const}
                         className={cn(
-                            'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 p-0'
+                            'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 !p-0'
                         )}
                         type="heading"
                         placeholder="Your Name"
@@ -258,7 +258,7 @@ const ResumeHeader = () => {
                             name="header.title"
                             placeholder="The role you are playing for?"
                             className={cn(
-                                `mb-1 !font-semibold`,
+                                `mb-1 !font-semibold !px-0`,
                                 watchingValue?.show_photo
                                     ? 'col-span-2'
                                     : 'col-span-3'

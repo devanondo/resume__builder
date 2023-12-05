@@ -145,6 +145,7 @@ export interface IResume extends Document {
                 placeholder: string
                 italic_description: boolean
                 enabled: boolean
+                text: string
             }
         }>
     }
