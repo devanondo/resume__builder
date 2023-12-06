@@ -26,8 +26,8 @@ Before you begin, ensure you have met the following requirements:
 
 ## TechStack
 
-**Client:** React, Next Js, TailwindCSS, ShadCN UI, Uploadthing, Context API & SCSS.
-**Server:** Node, Prisma & PostgreSQL.
+**Client:** React, Next Js, TailwindCSS, ShadCN UI, Uploadthing, Redux Toolkit, Clerk, & SCSS.
+**Server:** Node, Mongoose, MongoDB.
 
 ## Features
 
@@ -83,10 +83,6 @@ To run this project, you will need to add the following environment variables to
 
 `UPLOADTHING_APP_ID`
 
-### Notes
-
-`All crutial information has shown on the .env file.`
-
 ## Acknowledgements
 
 -   [Next.js](https://nextjs.org/docs)
@@ -98,7 +94,7 @@ To run this project, you will need to add the following environment variables to
 
 If you have any questions or need assistance, please don't hesitate to contact us at [dev.abormon28@gmail.com].
 
-Happy image gallery management!
+Happy Resume builder APP!
 ![Screenshots](https://i.ibb.co/hDp7rKC/Screenshot-from-2023-12-02-00-10-24.png)
 ![Screenshots](https://i.ibb.co/RSX80hJ/Screenshot-from-2023-12-02-00-10-08.png)
 ![Screenshots](https://i.ibb.co/W0tKn1P/Screenshot-from-2023-12-02-00-10-36.png)
