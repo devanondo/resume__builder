@@ -57,9 +57,9 @@ const RearrengeModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden max-h-full">
+            <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-4 px-6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                    <DialogTitle className="text-xl text-center font-bold">
                         Rearrenge Section
                     </DialogTitle>
                 </DialogHeader>

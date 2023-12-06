@@ -93,7 +93,7 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                         style={{ gridColumn: `span ${grp.column}` }}
                         className={cn(
                             // `col-span-${grp.column | 12}`,
-                            'dnd-group cursor-grab'
+                            'dnd-group cursor-grab h-full flex flex-col'
                         )}
                         onDragEnter={
                             dragging && !grp.items.length
@@ -126,7 +126,8 @@ const DragNDrop = ({ data, dragEnd }: DragNDropProps) => {
                                         className={cn(
                                             dragging
                                                 ? getStyles({ grpI, itemI })
-                                                : 'dnd-item'
+                                                : 'dnd-item',
+                                            ' h-full'
                                         )}
                                         // onDragEnd={(e) => {
                                         //     dragEnd(e, list)

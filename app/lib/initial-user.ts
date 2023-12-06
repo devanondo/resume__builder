@@ -2,8 +2,10 @@ import { currentUser, redirectToSignIn } from '@clerk/nextjs'
 import { User } from '../api/(modules)/user/user-model'
 import { Resume } from '../api/(modules)/resume/resume-model'
 import { Layout } from '../api/(modules)/layout/layout-model'
+import { connectToDB } from './dbconfig'
 
 export const initialUser = async () => {
+    await connectToDB()
     const user = await currentUser()
 
     if (!user) {

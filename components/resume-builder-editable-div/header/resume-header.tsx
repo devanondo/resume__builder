@@ -31,7 +31,7 @@ import { RxPerson } from 'react-icons/rx'
 import { TypographyInput } from '../components/Typography'
 
 const ResumeHeader = () => {
-    const { control, watch } = useFormContext()
+    const { control, watch, setValue } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
     const { onOpen } = useModal()
@@ -58,14 +58,6 @@ const ResumeHeader = () => {
     }
 
     const items = [
-        // {
-        //     title: 'Show Title',
-        //     name: 'title',
-        //     placeholder: 'Title',
-        //     render: 'show_title',
-        //     col: 2,
-        //     class: 'font-bold text-[16px]',
-        // },
         {
             title: 'Show Phone',
             name: 'phone',
@@ -112,14 +104,7 @@ const ResumeHeader = () => {
             col: 1,
             link: false,
         },
-        {
-            title: 'Show Icons',
-            name: 'icons',
-            placeholder: 'Show Icons',
-            render: 'show_icons',
-            class: '!font-medium',
-            col: 1,
-        },
+
         {
             title: 'Show Extra Field',
             name: 'extra_field',
@@ -147,6 +132,32 @@ const ResumeHeader = () => {
         name: 'header',
         control,
     })
+
+    const photoStyles = (key: string) => {
+        switch (key) {
+            case 'rect':
+                return ''
+            case 'circle':
+                return 'rounded-full'
+            case 'rounded':
+                return 'rounded'
+        }
+    }
+
+    const photoStylesType = [
+        {
+            className: '',
+            key: 'rect',
+        },
+        {
+            className: 'rounded-full',
+            key: 'circle',
+        },
+        {
+            className: 'rounded',
+            key: 'rounded',
+        },
+    ]
 
     return (
         <GroupItem
@@ -205,8 +216,6 @@ const ResumeHeader = () => {
                                     </div>
                                 ))}
 
-                                <Separator className="my-4" />
-
                                 <div className="flex justify-between items-center py-1">
                                     <div className="text-md">
                                         Uppercase name
@@ -221,6 +230,32 @@ const ResumeHeader = () => {
                                             />
                                         )}
                                     />
+                                </div>
+
+                                <Separator className="my-4" />
+
+                                <div className="flex justify-between items-center py-1">
+                                    <div className="text-md">Photo Style</div>
+                                    <div className="flex gap-x-2">
+                                        {photoStylesType?.map((sty) => (
+                                            <div
+                                                key={sty.key}
+                                                className={cn(
+                                                    'w-6 h-6 cursor-pointer bg-slate-200 hover:bg-slate-400',
+                                                    watchingValue.photo_style ===
+                                                        sty.key &&
+                                                        'bg-slate-400',
+                                                    sty.className
+                                                )}
+                                                onClick={() => {
+                                                    setValue(
+                                                        'header.photo_style',
+                                                        sty.key
+                                                    )
+                                                }}
+                                            ></div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </PopoverContent>
@@ -251,6 +286,10 @@ const ResumeHeader = () => {
                         )}
                         type="heading"
                         placeholder="Your Name"
+                        style={{
+                            textTransform:
+                                watchingValue.uppercase_name && 'uppercase',
+                        }}
                     />
 
                     {watchingValue?.show_title ? (
@@ -301,13 +340,16 @@ const ResumeHeader = () => {
                 </div>
 
                 {watchingValue?.show_photo ? (
-                    <div className="photo relative w-[125px] h-[140px] rounded flex items-center justify-center border group gap-x-2 bg-zinc-100  hover:bg-zinc-300 hover:bg-opacity-50 transition delay-200 cursor-pointer">
+                    <div className="photo relative w-[120px] h-[130px] rounded flex items-center justify-center group gap-x-2  transition delay-200 cursor-pointer">
                         {watchingValue?.photoUrl ? (
                             <Image
                                 width={140}
                                 height={140}
                                 src={watchingValue?.photoUrl}
-                                className="w-full h-full rounded object-cover border"
+                                className={cn(
+                                    'w-full h-full  object-cover border',
+                                    photoStyles(watchingValue.photo_style)
+                                )}
                                 alt="Server Image"
                             />
                         ) : (
@@ -331,6 +373,9 @@ const ResumeHeader = () => {
                                 className="bg-red-600  p-2"
                                 variant="secondary"
                                 type="button"
+                                onClick={() => {
+                                    setValue('header.show_photo', false)
+                                }}
                             >
                                 <TiTrash className="w-5 h-5" />
                             </Button>
