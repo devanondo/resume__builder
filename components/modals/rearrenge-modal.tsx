@@ -33,7 +33,6 @@ const RearrengeModal = () => {
     }, [response.isSuccess])
 
     const debouncedUpdate = debounce(async () => {
-        console.log('Mounting...')
         try {
             await toast.promise(saveLayout({ layoutKeys: values }), {
                 loading: 'Loading...',

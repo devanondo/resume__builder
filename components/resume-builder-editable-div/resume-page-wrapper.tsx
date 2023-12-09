@@ -40,7 +40,7 @@ const ResumePagewrapper = () => {
     useEffect(() => {
         if (resumeData.data) {
             setNestedFormValues(resumeData.data)
-            console.log(resumeData.data)
+            // console.log(resumeData.data)
         }
     }, [resumeData.data])
 

@@ -1,21 +1,25 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
+import SkillsPopover from '@/components/popover/skills-popover'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { debounce } from 'lodash'
 import { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { TypographyInput } from '../components/Typography'
 import { ResumeComponentProps } from '../types/resume-component-type'
-import ProjectDraggableItem from './project-draggable-item'
+import SkillsKeys from './skills-keys'
 
-const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
-    const { control, setValue, watch } = useFormContext()
+const SkillsItems = ({ name, itemIndex }: ResumeComponentProps) => {
     const dispatch = useAppDispatch()
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
+    const { control, setValue, watch } = useFormContext()
     const { fields, remove, append } = useFieldArray({
         name,
         control,
@@ -70,6 +74,7 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
 
                 nodeItem.current = index
                 setValue(name, newList)
+
                 return newList
             })
         }
@@ -102,9 +107,10 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
     }
 
     if (!mounted) return null
+
     return (
-        <div className={cn('group__item__border')}>
-            {fields.map((field: any, i: number) => {
+        <div>
+            {fields.map((field: any, i) => {
                 if (!itemIndex.includes(i)) {
                     return
                 }
@@ -125,14 +131,43 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
                             updateData()
                         }}
                     >
-                        <ProjectDraggableItem
-                            append={append}
-                            fields={fields}
-                            i={i}
-                            name={name}
-                            remove={remove}
-                            watchValue={watchValue}
-                        />
+                        <GroupItem
+                            popoverKey={name + i}
+                            className="relative pb-3"
+                        >
+                            <div className="w-full">
+                                {watchValue[i]?.show_title && (
+                                    <TypographyInput
+                                        placeholder={field.placeholder}
+                                        name={`${name}[${i}].title` as const}
+                                        className={cn(
+                                            'px-2',
+                                            watchValue[i].bold_title &&
+                                                'font-semibold',
+                                            watchValue[i].italic_title &&
+                                                'italic'
+                                        )}
+                                        type="subheading"
+                                    />
+                                )}
+                                <div className="pt-2">
+                                    <SkillsKeys
+                                        name={`${name}.${i}.keys`}
+                                        parentKey={`${name}.${i}`}
+                                    />
+                                </div>
+                            </div>
+
+                            {groupPopoverKey === name + i && (
+                                <SkillsPopover
+                                    append={append}
+                                    fields={fields}
+                                    index={i}
+                                    name={name}
+                                    remove={remove}
+                                />
+                            )}
+                        </GroupItem>
                     </div>
                 )
             })}
@@ -140,4 +175,4 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
     )
 }
 
-export default ProjectItems
+export default SkillsItems

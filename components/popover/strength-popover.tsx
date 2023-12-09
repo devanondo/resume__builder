@@ -61,8 +61,10 @@ const StrengthPopover = ({
                         enabled: true,
                         name: '',
                         placeholder: 'Your Unique Talent',
-                        icon: 'FcApproval',
+                        icon: 'CiMicrochip',
                         show_icon: true,
+                        grid: 1,
+                        height: 55,
                         description: {
                             text: '',
                             italic_description: false,

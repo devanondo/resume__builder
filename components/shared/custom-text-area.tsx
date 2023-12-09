@@ -51,7 +51,7 @@ const CustomTextArea = ({
         switch (e.key) {
             case 'Enter':
                 e.preventDefault()
-                append({ [fieldTitle]: '', placeholder })
+                append({ [fieldTitle]: '', placeholder, height: 10 })
                 debounce(() => {
                     setFocusField(focusKey(name, fields.length))
                 }, 50)()

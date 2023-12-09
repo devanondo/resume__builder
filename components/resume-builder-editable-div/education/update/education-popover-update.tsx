@@ -1,25 +1,36 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useAppDispatch } from '@/redux/hooks'
-import { showPopover } from '@/redux/slices/pop-slice'
-import {
-    FieldValues,
-    UseFieldArrayAppend,
-    UseFieldArrayRemove,
-} from 'react-hook-form'
-
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
 import { Switch } from '@/components/ui/switch'
-import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
-import { Controller, useFormContext } from 'react-hook-form'
-import { AItem } from '../shared/wrapper'
+import { useAppDispatch } from '@/redux/hooks'
+import { showPopover } from '@/redux/slices/pop-slice'
+import {
+    Calendar,
+    ChevronDown,
+    ChevronUp,
+    Plus,
+    Settings,
+    Trash,
+} from 'lucide-react'
+import 'react-day-picker/dist/style.css'
+import {
+    Controller,
+    FieldValues,
+    UseFieldArrayAppend,
+    UseFieldArrayRemove,
+    useFormContext,
+} from 'react-hook-form'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AItem } from '@/components/shared/wrapper'
+import { Card, CardContent } from '@/components/ui/card'
+import MonthYearPicker from '@/components/shared/month-year-picker'
 
-interface ProjectsGroupPopoverProps {
+interface EducationPopoverProps {
     fields: Record<'id', string>[]
     fieldArraykey?: string
     name: string
@@ -30,40 +41,24 @@ interface ProjectsGroupPopoverProps {
 
 const settings = [
     {
-        title: 'Bold Name',
-        render: 'bold_name',
+        title: 'Show Institution',
+        render: 'show__institution',
     },
     {
-        title: 'Show Link',
-        render: 'show_link',
+        title: 'Show GPA',
+        render: 'institution.enabled_gpa',
     },
     {
-        title: 'Link Icon',
-        render: 'link_icon',
+        title: 'Show Location',
+        render: 'show_location',
     },
     {
-        title: 'Extra Link',
-        render: 'show_extra_link',
+        title: 'Show Location Icon',
+        render: 'show_location_icon',
     },
     {
-        title: 'Show Description',
-        render: 'description.enabled',
-    },
-    {
-        title: 'Italic Description',
-        render: 'description.italic_description',
-    },
-    {
-        title: 'Show Bullet Items',
+        title: 'Show Bullets',
         render: 'bulets.enabled',
-    },
-    {
-        title: 'Show Point',
-        render: 'bulets.bulet_items',
-    },
-    {
-        title: 'Bulets Italic',
-        render: 'bulets.italic_items',
     },
     {
         title: 'Is Present',
@@ -71,13 +66,13 @@ const settings = [
     },
 ]
 
-const ProjectsGroupPopover = ({
+const EducationPopover = ({
     fields,
     name,
     index,
     append,
     remove,
-}: ProjectsGroupPopoverProps) => {
+}: EducationPopoverProps) => {
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
@@ -86,26 +81,36 @@ const ProjectsGroupPopover = ({
             <Button
                 onClick={() => {
                     append({
+                        enabled: true,
                         name: '',
-                        bold_name: false,
-                        show_link: false,
-                        link: '',
-                        link_icon: true,
-                        extra_link: '',
-                        show_extra_link: false,
-                        height: 92,
+                        placeholder: 'Degree and Field of Study!',
+                        icon: 'FcGraduationCap',
+                        show_icon: true,
+                        grid: 2,
+                        height: 78,
+                        institution: {
+                            name: '',
+                            placeholder: 'School / University',
+                            gpa: 'CGPA',
+                            placeholder_gpa: 'CGPA',
+                            gpa_score: '4.00',
+                            placeholder_gpa_score: '4.00',
+                            gpa_max: '4.00',
+                            placeholder_gpa_max: '4.00',
+                            enabled_gpa: false,
+                        },
+                        location: '',
+                        show_location: true,
+                        show_location_icon: true,
+                        show__institution: true,
 
                         date: {
                             record: 'DateRange',
+                            placeholder: 'Date',
                             from: new Date(),
                             to: new Date(),
                             is_present: false,
                             date_icon: true,
-                        },
-                        description: {
-                            text: '',
-                            italic_description: false,
-                            enabled: true,
                         },
 
                         bulets: {
@@ -163,6 +168,62 @@ const ProjectsGroupPopover = ({
 
             <Popover>
                 <PopoverTrigger className="px-3 bg-black text-white py-3">
+                    <Calendar className="w-4 h-4" />
+                </PopoverTrigger>
+
+                <PopoverContent>
+                    <Tabs defaultValue="from" className="w-full">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="from">From</TabsTrigger>
+                            <TabsTrigger value="to">To</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="from">
+                            <Card>
+                                <CardContent>
+                                    <Controller
+                                        name="selectedDate"
+                                        control={control}
+                                        defaultValue={new Date()} // Set the default value
+                                        render={({
+                                            field: { value, onChange },
+                                        }) => (
+                                            <MonthYearPicker
+                                                selectedDate={value}
+                                                onDateChange={onChange}
+                                            />
+                                        )}
+                                    />
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                        <TabsContent value="to">
+                            <Card>
+                                <CardContent>
+                                    <div className="flex justify-between items-center py-1">
+                                        <div className="text-md">Present</div>
+                                        <Controller
+                                            name={
+                                                `${name}.${index}.date.is_present` as const
+                                            }
+                                            control={control}
+                                            render={({ field: f }) => (
+                                                <Switch
+                                                    checked={f.value}
+                                                    onCheckedChange={f.onChange}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                    </Tabs>
+                </PopoverContent>
+            </Popover>
+
+            <Popover>
+                <PopoverTrigger className="px-3 bg-black text-white py-3">
                     <Settings className="w-4 h-4" />
                 </PopoverTrigger>
                 <PopoverContent>
@@ -210,7 +271,6 @@ const ProjectsGroupPopover = ({
                         )
                     }
                 }}
-                disabled={fields.length < 2}
                 className="rounded-none"
                 variant="secondary"
                 type="button"
@@ -221,4 +281,4 @@ const ProjectsGroupPopover = ({
     )
 }
 
-export default ProjectsGroupPopover
+export default EducationPopover

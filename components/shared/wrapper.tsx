@@ -1,26 +1,21 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { cn } from '@/lib/utils'
 
-interface GroupItemProps {
+interface GroupComponentProps extends HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode
     className?: string
     popoverKey?: string
-}
-
-interface AItemProps {
-    children: React.ReactNode
-    className?: string
-    popoverKey?: string
+    ref?: React.Ref<HTMLDivElement>
 }
 
 const GroupItemWrapper = ({
     children,
     popoverKey,
     className,
-}: GroupItemProps) => {
+}: GroupComponentProps) => {
     const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
@@ -48,7 +43,11 @@ const GroupItemWrapper = ({
     )
 }
 
-const GroupItem = ({ children, popoverKey, className }: GroupItemProps) => {
+const GroupItem = ({
+    children,
+    popoverKey,
+    className,
+}: GroupComponentProps) => {
     const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
@@ -76,7 +75,12 @@ const GroupItem = ({ children, popoverKey, className }: GroupItemProps) => {
     )
 }
 
-const AItem = ({ children, className, popoverKey, ...props }: AItemProps) => {
+const AItem = ({
+    children,
+    className,
+    popoverKey,
+    ...props
+}: GroupComponentProps) => {
     const dispatch = useAppDispatch()
     const { summeryPopoverKey } = useAppSelector((state) => state.popover)
 

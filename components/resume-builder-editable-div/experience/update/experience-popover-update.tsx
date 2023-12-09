@@ -17,9 +17,9 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { ChevronDown, ChevronUp, Plus, Settings, Trash } from 'lucide-react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { AItem } from '../shared/wrapper'
+import { AItem } from '@/components/shared/wrapper'
 
-interface SkillsPopoverProps {
+interface ExperienceGroupPopoverProps {
     fields: Record<'id', string>[]
     fieldArraykey?: string
     name: string
@@ -30,38 +30,46 @@ interface SkillsPopoverProps {
 
 const settings = [
     {
-        title: 'Show Title',
-        render: 'show_title',
+        title: 'Show Location',
+        render: 'show_location',
     },
     {
-        title: 'Bold Title',
-        render: 'bold_title',
+        title: 'Position Bold',
+        render: 'bold_position',
     },
     {
-        title: 'Italic Title',
-        render: 'italic_title',
+        title: 'Show Description',
+        render: 'description.enabled',
     },
     {
-        title: 'Key Underline',
-        render: 'underline_key',
+        title: 'Description Italic',
+        render: 'description.italic_description',
     },
     {
-        title: 'Key Italic',
-        render: 'italic_key',
+        title: 'Show Bullet Items',
+        render: 'bulets.enabled',
     },
     {
-        title: 'Key Bold',
-        render: 'bold_key',
+        title: 'Show Bulets',
+        render: 'bulets.bulet_items',
+    },
+    {
+        title: 'Bulets Italic',
+        render: 'bulets.italic_items',
+    },
+    {
+        title: 'Is Present',
+        render: 'date.is_present',
     },
 ]
 
-const SkillsPopover = ({
+const ExperienceGroupPopover = ({
     fields,
     name,
     index,
     append,
     remove,
-}: SkillsPopoverProps) => {
+}: ExperienceGroupPopoverProps) => {
     const dispatch = useAppDispatch()
     const { control } = useFormContext()
 
@@ -70,21 +78,37 @@ const SkillsPopover = ({
             <Button
                 onClick={() => {
                     append({
-                        title: '',
-                        placeholder: 'Language & Libraries',
-                        show_title: true,
-                        bold_title: true,
-                        italic_title: true,
-                        underline_key: true,
-                        italic_key: false,
-                        bold_key: true,
-                        height: 77,
+                        enabled: true,
+                        position: '',
+                        bold_position: true,
+                        workplace: '',
+                        location: 'San Fransisco, CA',
+                        show_location: false,
+                        height: 93,
+                        date: {
+                            from: new Date(),
+                            to: new Date(),
+                            is_present: true,
+                        },
+                        description: {
+                            text: '',
+                            italic_description: false,
+                            enabled: true,
+                        },
 
-                        keys: [
-                            {
-                                keyItem: '',
-                            },
-                        ],
+                        bulets: {
+                            enabled: true,
+                            bulet_items: false,
+                            italic_items: false,
+                            name: 'bulets',
+                            items: [
+                                {
+                                    text: '',
+                                    placeholder:
+                                        'Whats the one thing that makes you best candidate for this job?',
+                                },
+                            ],
+                        },
                     })
                     dispatch(
                         showPopover({
@@ -176,6 +200,7 @@ const SkillsPopover = ({
                         )
                     }
                 }}
+                disabled={fields.length < 2}
                 className="rounded-none"
                 variant="secondary"
                 type="button"
@@ -186,4 +211,4 @@ const SkillsPopover = ({
     )
 }
 
-export default SkillsPopover
+export default ExperienceGroupPopover

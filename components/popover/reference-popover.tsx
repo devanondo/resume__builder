@@ -58,6 +58,7 @@ const ReferencesPopover = ({
             <Button
                 onClick={() => {
                     append({
+                        height: 50,
                         name: '',
                         placeholder: 'Referece Name',
                         show_email: true,
