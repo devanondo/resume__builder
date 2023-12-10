@@ -1,5 +1,4 @@
 .App-header {
-    background-color: #282c34;
     font-size: calc(10px + 2vmin);
     color: white;
     padding: 8px;
@@ -9,14 +8,23 @@
         transition: 0.3s ease all;
     }
 }
+.App-header::-webkit-scrollbar {
+    display: none;
+}
 
+/* Hide scrollbar for IE, Edge and Firefox */
+.App-header {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 .drag-n-drop {
     padding-top: 0.5rem;
     gap: 0.5rem;
     width: 100%;
-    height: 100%;
+    height: 441px;
     align-items: start;
 }
+
 .dnd-group {
     background-color: #49505e;
     border-radius: 5px;

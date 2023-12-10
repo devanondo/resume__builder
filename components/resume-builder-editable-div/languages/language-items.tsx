@@ -1,22 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
-import LanguagePopover from '@/components/popover/language-popover'
-import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useAppDispatch } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { debounce } from 'lodash'
 import { useEffect, useRef, useState } from 'react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
-import { TypographyInput } from '../components/Typography'
-import Rating from '../components/rating'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import LanguageDraggableItems from './language-draggable-item'
+import { ResumeComponentProps } from '../types/resume-component-type'
 
-const LanguageItems = ({ name }: { name: string }) => {
+const LanguageItems = ({ name, itemIndex }: ResumeComponentProps) => {
     const { control, setValue, watch } = useFormContext()
-    const { groupPopoverKey } = useAppSelector((state) => state.popover)
     const dispatch = useAppDispatch()
 
     const { fields, remove, append } = useFieldArray({
@@ -103,115 +101,48 @@ const LanguageItems = ({ name }: { name: string }) => {
         return 'w-full'
     }
 
-    const [width, setWidth] = useState<number>(0)
-    const ref = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        setWidth(ref.current?.offsetWidth!)
-        return () => {}
-    })
+    const grid = watch('educations.grid')
 
     if (!mounted) return null
     return (
         <div
-            ref={ref}
             className={cn('grid', 'group__item__border')}
             style={{
-                gridTemplateColumns: width > 370 ? '1fr 1fr' : '1fr',
+                gridTemplateColumns: grid === 2 ? '1fr 1fr' : '1fr',
             }}
         >
-            {fields.map((field: any, i: number) => (
-                <div
-                    aria-disabled={false}
-                    aria-roledescription="sortable"
-                    draggable
-                    key={field.id}
-                    onDragStart={(e) => handleDragStart(e, i)}
-                    onDragEnter={(e) => handleDragEnter(e, i)}
-                    className={cn(
-                        'rounded cursor-move',
-                        dragging ? getStyles(i) : 'w-full'
-                    )}
-                    onDragEnd={() => {
-                        updateData()
-                    }}
-                >
-                    <GroupItem
-                        popoverKey={name + i}
+            {fields.map((field: any, i: number) => {
+                if (!itemIndex.includes(i)) {
+                    return
+                }
+                return (
+                    <div
+                        aria-disabled={false}
+                        aria-roledescription="sortable"
+                        draggable
                         key={field.id}
-                        className="relative"
-                    >
-                        <div
-                            className="w-full pb-1"
-                            onClick={() => {
-                                dispatch(
-                                    showPopover({
-                                        name: name + i,
-                                        type: 'group__entry',
-                                    })
-                                )
-                            }}
-                        >
-                            <div className="flex items-center justify-between pr-2">
-                                <div className="">
-                                    <TypographyInput
-                                        placeholder={field.placeholder}
-                                        name={`${name}[${i}].name` as const}
-                                        className=" px-2"
-                                        type="subtitle"
-                                    />
-
-                                    {watchValue[i]?.show_label && (
-                                        <TypographyInput
-                                            placeholder={'Native'}
-                                            name={
-                                                `${name}[${i}].level` as const
-                                            }
-                                            className="py-0"
-                                            type="paragraph"
-                                        />
-                                    )}
-                                </div>
-
-                                <Controller
-                                    name={`${name}[${i}].score.count` as const}
-                                    control={control}
-                                    render={({ field: f }) => (
-                                        <Rating
-                                            type={
-                                                watchValue[i]?.score?.slide_type
-                                            }
-                                            value={watchValue[i]?.score?.count}
-                                            // value={f.value}
-                                            onChange={(v) => {
-                                                f.onChange(v)
-                                            }}
-                                        />
-                                    )}
-                                />
-                            </div>
-                        </div>
-                        <div className="w-full px-2">
-                            <div
-                                className={cn(
-                                    'w-full',
-                                    width > 370 ? 'bord_b_2' : 'bord_b_1'
-                                )}
-                            ></div>
-                        </div>
-
-                        {groupPopoverKey === name + i && (
-                            <LanguagePopover
-                                append={append}
-                                fields={fields}
-                                index={i}
-                                name={name}
-                                remove={remove}
-                            />
+                        onDragStart={(e) => handleDragStart(e, i)}
+                        onDragEnter={(e) => handleDragEnter(e, i)}
+                        className={cn(
+                            'rounded cursor-move',
+                            dragging ? getStyles(i) : 'w-full'
                         )}
-                    </GroupItem>
-                </div>
-            ))}
+                        onDragEnd={() => {
+                            updateData()
+                        }}
+                    >
+                        <LanguageDraggableItems
+                            field={field}
+                            append={append}
+                            fields={fields}
+                            i={i}
+                            name={name}
+                            remove={remove}
+                            watchValue={watchValue}
+                        />
+                    </div>
+                )
+            })}
         </div>
     )
 }

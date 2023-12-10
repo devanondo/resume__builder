@@ -40,8 +40,12 @@ export interface IResume extends Document {
         name: string
         record: string
         enabled: boolean
+        height: number
+
         items: Array<{
             summery: string
+            height: number
+
             placeholder: string
         }>
     }
@@ -49,8 +53,10 @@ export interface IResume extends Document {
         record: string
         name: string
         enabled: boolean
+        height: number
         items: Array<{
             enabled: boolean
+            height: number
             position: string
             bold_position: boolean
             workplace: string
@@ -81,10 +87,12 @@ export interface IResume extends Document {
     skills: {
         record: string
         name: string
+        height: number
         enabled: boolean
         items: Array<{
             title: string
             placeholder: string
+            height: number
             show_title: boolean
             bold_title: boolean
             italic_title: boolean
@@ -99,15 +107,18 @@ export interface IResume extends Document {
     projects: {
         record: string
         name: string
+        height: number
         enabled: boolean
         items: Array<{
             name: string
+            height: number
             bold_name: boolean
             show_link: boolean
             link: string
             link_icon: boolean
             extra_link: string
             show_extra_link: boolean
+
             date: {
                 record: string
                 from: string
@@ -134,10 +145,13 @@ export interface IResume extends Document {
     strengths: {
         record: string
         name: string
+        height: number
         enabled: boolean
+        grid: 1 | 2
         items: Array<{
             enabled: boolean
             name: string
+            height: number
             placeholder: string
             icon: string
             show_icon: boolean
@@ -152,9 +166,12 @@ export interface IResume extends Document {
     languages?: {
         record: string
         name: string
+        height: number
+        grid: 1 | 2
         enabled: boolean
         items: Array<{
             name: string
+            height: number
             placeholder: string
             level: string
             show_label: boolean
@@ -168,7 +185,10 @@ export interface IResume extends Document {
         record: string
         name: string
         enabled: boolean
+        height: number
+        grid: 1 | 2
         items: Array<{
+            height: number
             enabled: boolean
             name: string
             placeholder: string
@@ -211,8 +231,10 @@ export interface IResume extends Document {
     declaration: {
         record: string
         name: string
+        height: number
         enabled: boolean
         items: Array<{
+            height: number
             description: string
             name: string
         }>
@@ -220,8 +242,10 @@ export interface IResume extends Document {
     references: {
         record: string
         name: string
+        height: number
         enabled: boolean
         items: Array<{
+            height: number
             name: string
             placeholder: string
             show_email: boolean

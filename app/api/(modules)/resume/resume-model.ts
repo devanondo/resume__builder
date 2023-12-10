@@ -41,20 +41,24 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
         summerySection: {
             name: String,
             record: String,
+            height: Number,
             enabled: Boolean,
             items: [
                 {
                     summery: String,
+                    height: Number,
                     placeholder: String,
                 },
             ],
         },
         experienceSummary: {
+            height: Number,
             record: String,
             name: String,
             enabled: Boolean,
             items: [
                 {
+                    height: Number,
                     enabled: Boolean,
                     position: String,
                     bold_position: Boolean,
@@ -96,9 +100,11 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             record: String,
             name: String,
             enabled: Boolean,
+            height: Number,
             items: [
                 {
                     title: String,
+                    height: Number,
                     placeholder: String,
                     show_title: Boolean,
                     bold_title: Boolean,
@@ -117,6 +123,7 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
         projects: {
             record: String,
             name: String,
+            height: Number,
             enabled: Boolean,
             items: [
                 {
@@ -127,6 +134,10 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
                     link_icon: Boolean,
                     extra_link: String,
                     show_extra_link: Boolean,
+                    height: {
+                        type: Number,
+                        default: 92,
+                    },
                     date: {
                         record: String,
                         from: {
@@ -163,12 +174,19 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             record: String,
             name: String,
             enabled: Boolean,
+            height: Number,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     enabled: Boolean,
                     name: String,
                     placeholder: String,
                     icon: String,
+                    height: Number,
                     show_icon: Boolean,
                     description: {
                         placeholder: String,
@@ -181,11 +199,18 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
         },
         languages: {
             record: String,
+            height: Number,
             name: String,
             enabled: Boolean,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     name: String,
+                    height: Number,
                     placeholder: String,
                     level: String,
                     show_label: Boolean,
@@ -202,11 +227,18 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
         },
         educations: {
             record: String,
+            height: Number,
             name: String,
             enabled: Boolean,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     enabled: Boolean,
+                    height: Number,
                     name: String,
                     placeholder: String,
                     icon: String,
@@ -257,10 +289,12 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
         declaration: {
             record: String,
             name: String,
+            height: Number,
             enabled: Boolean,
             items: [
                 {
                     description: String,
+                    height: Number,
                     name: String,
                 },
             ],
@@ -269,9 +303,11 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             record: String,
             name: String,
             enabled: Boolean,
+            height: Number,
             items: [
                 {
                     name: String,
+                    height: Number,
                     placeholder: String,
                     show_email: Boolean,
                     show_phone: Boolean,

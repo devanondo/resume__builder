@@ -62,12 +62,14 @@ const LanguagePopover = ({
             <Button
                 onClick={() => {
                     append({
-                        name: 'English',
+                        height: 45,
+                        name: '',
                         placeholder: 'Language',
                         level: 'Beginner',
+                        show_label: true,
                         score: {
-                            score: 0,
-                            type: 'circle',
+                            count: 0,
+                            slide_type: 'circle',
                         },
                     })
                     dispatch(

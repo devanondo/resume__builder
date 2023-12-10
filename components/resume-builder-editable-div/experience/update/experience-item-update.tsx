@@ -1,21 +1,27 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { debounce } from 'lodash'
 import { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { ResumeComponentProps } from '../types/resume-component-type'
-import ProjectDraggableItem from './project-draggable-item'
+import ExperienceDraggableItem from './experience-draggable-item'
 
-const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
-    const { control, setValue, watch } = useFormContext()
+const ExperienceItem = ({
+    name,
+    itemIndex,
+}: {
+    name: string
+    itemIndex: number[]
+}) => {
     const dispatch = useAppDispatch()
 
+    const { control, setValue, watch } = useFormContext()
     const { fields, remove, append } = useFieldArray({
         name,
         control,
@@ -70,6 +76,7 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
 
                 nodeItem.current = index
                 setValue(name, newList)
+
                 return newList
             })
         }
@@ -104,11 +111,10 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
     if (!mounted) return null
     return (
         <div className={cn('group__item__border')}>
-            {fields.map((field: any, i: number) => {
+            {fields.map((field: any, i) => {
                 if (!itemIndex.includes(i)) {
                     return
                 }
-
                 return (
                     <div
                         aria-disabled={false}
@@ -125,14 +131,21 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
                             updateData()
                         }}
                     >
-                        <ProjectDraggableItem
-                            append={append}
-                            fields={fields}
-                            i={i}
-                            name={name}
-                            remove={remove}
-                            watchValue={watchValue}
-                        />
+                        <GroupItem
+                            popoverKey={name + i}
+                            className="relative w-full "
+                            key={field.id + i}
+                        >
+                            <ExperienceDraggableItem
+                                field={field}
+                                append={append}
+                                fields={fields}
+                                i={i}
+                                name={name}
+                                remove={remove}
+                                watchValue={watchValue}
+                            />
+                        </GroupItem>
                     </div>
                 )
             })}
@@ -140,4 +153,4 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
     )
 }
 
-export default ProjectItems
+export default ExperienceItem

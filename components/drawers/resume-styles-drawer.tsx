@@ -36,7 +36,7 @@ const ResumeStylesDrawer = () => {
 
     return (
         <Sheet open={isDrawerOpen} onOpenChange={handleClose}>
-            <SheetContent side="left">
+            <SheetContent side="left" className="w-[300px]">
                 <SheetHeader>
                     <SheetTitle>Design & Fonts</SheetTitle>
                     <SheetDescription>
@@ -111,7 +111,7 @@ const ResumeStylesDrawer = () => {
 
                 <div className="py-5">
                     <p className="text-sm font-semibold">Colors</p>
-                    <div className="grid grid-cols-6 gap-2 mt-2">
+                    <div className="grid grid-cols-5 gap-2 mt-2">
                         {colors.map((color, i: number) => (
                             <div
                                 key={color.primary + i}

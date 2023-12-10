@@ -1,18 +1,24 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 'use client'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
+import { GroupItem } from '@/components/shared/wrapper'
 import { cn } from '@/lib/utils'
 import { useAppDispatch } from '@/redux/hooks'
 import { showPopover } from '@/redux/slices/pop-slice'
 import { debounce } from 'lodash'
 import { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { ResumeComponentProps } from '../types/resume-component-type'
-import ProjectDraggableItem from './project-draggable-item'
+import EducationDraggableItem from './education-draggable-item'
 
-const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
+const EducationItem = ({
+    name,
+    itemIndex,
+}: {
+    name: string
+    itemIndex: number[]
+}) => {
     const { control, setValue, watch } = useFormContext()
     const dispatch = useAppDispatch()
 
@@ -70,6 +76,7 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
 
                 nodeItem.current = index
                 setValue(name, newList)
+
                 return newList
             })
         }
@@ -101,14 +108,20 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
         return 'w-full'
     }
 
+    const grid = watch('educations.grid')
+
     if (!mounted) return null
     return (
-        <div className={cn('group__item__border')}>
-            {fields.map((field: any, i: number) => {
+        <div
+            className={cn('grid', 'group__item__border')}
+            style={{
+                gridTemplateColumns: grid === 2 ? '1fr 1fr' : '1fr',
+            }}
+        >
+            {fields.map((field: any, i) => {
                 if (!itemIndex.includes(i)) {
                     return
                 }
-
                 return (
                     <div
                         aria-disabled={false}
@@ -125,7 +138,8 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
                             updateData()
                         }}
                     >
-                        <ProjectDraggableItem
+                        <EducationDraggableItem
+                            field={field}
                             append={append}
                             fields={fields}
                             i={i}
@@ -140,4 +154,4 @@ const ProjectItems = ({ name, itemIndex }: ResumeComponentProps) => {
     )
 }
 
-export default ProjectItems
+export default EducationItem

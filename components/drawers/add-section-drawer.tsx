@@ -8,22 +8,11 @@ import {
     SheetTitle,
 } from '@/components/ui/sheet'
 import { Check, Minus, Plus } from 'lucide-react'
+import { useFormContext } from 'react-hook-form'
 import { useWatchForm } from '../hooks/use-form-watch'
 import { useModal } from '../hooks/use-modal-store'
-import ProjectsItems from '../resume-builder-editable-div/projects/projects'
-import DeclarationSection from '../resume-builder-editable-div/declaration/Declaretion'
-import EducationItems from '../resume-builder-editable-div/education/education-items'
-import ExperienceSummery from '../resume-builder-editable-div/experience/experience-summery'
-import ResumeHeader from '../resume-builder-editable-div/header/resume-header'
-import LanguageSection from '../resume-builder-editable-div/languages/language-section'
-import ReferencesSection from '../resume-builder-editable-div/references/references'
-import SkillsSection from '../resume-builder-editable-div/skills/skills-section'
-import StrengthSection from '../resume-builder-editable-div/strengths/strength-section'
-import ResumeSummery from '../resume-builder-editable-div/summery/resume-summery'
-import { ItemsComponents } from '../resume-builder-editable-div/types/resume-layout-types'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardTitle } from '../ui/card'
-import { useFormContext } from 'react-hook-form'
 
 const ResumeAddSectionDrawer = () => {
     const { isOpen, onClose, type } = useModal()
@@ -33,18 +22,18 @@ const ResumeAddSectionDrawer = () => {
         onClose()
     }
 
-    const itemsComponents: ItemsComponents = {
-        header: <ResumeHeader />,
-        summerySection: <ResumeSummery />,
-        experienceSummary: <ExperienceSummery />,
-        skills: <SkillsSection />,
-        strengths: <StrengthSection />,
-        educations: <EducationItems />,
-        languages: <LanguageSection />,
-        declaration: <DeclarationSection />,
-        references: <ReferencesSection />,
-        projects: <ProjectsItems />,
-    }
+    const sections = [
+        'header',
+        'summerySection',
+        'experienceSummary',
+        'skills',
+        'projects',
+        'strengths',
+        'languages',
+        'educations',
+        'declaration',
+        'references',
+    ]
 
     const AddRemoveButtons = ({ field }: { field: string }) => {
         const { watchValue: values } = useWatchForm({ name: field })
@@ -104,7 +93,7 @@ const ResumeAddSectionDrawer = () => {
                 </SheetHeader>
 
                 <div className=" mt-5 flex flex-col gap-y-2">
-                    {Object.keys(itemsComponents).map((key, i: number) => {
+                    {sections.map((key, i: number) => {
                         return <AddRemoveButtons key={key + i} field={key} />
                     })}
                 </div>

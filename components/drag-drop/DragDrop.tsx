@@ -18,7 +18,7 @@ export interface IGroup {
 
 const DragDrop = ({ items, dragEnd }: DragDropProps) => {
     return (
-        <div className="App-header">
+        <div className="App-header bg-emerald-100">
             <DragNDrop dragEnd={dragEnd} data={items} />
         </div>
     )

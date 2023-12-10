@@ -4,19 +4,26 @@ import { GroupItem } from '@/components/shared/wrapper'
 
 import { TypographyInput } from '../components/Typography'
 import ProjectItems from './project-items'
+import { ResumeComponentProps } from '../types/resume-component-type'
+import { useRef } from 'react'
+import { useSetHeight } from '../education/update/healper'
 
-const ProjectsItems = () => {
-    const name = 'projects.items'
+const ProjectsItems = ({ name, itemIndex }: ResumeComponentProps) => {
+    const divRef = useRef<HTMLDivElement>(null)
+
+    useSetHeight({ divRef, name: `${name}.height` })
 
     return (
-        <GroupItem popoverKey="projects" className="pb-1">
-            <TypographyInput
-                placeholder="Projects"
-                name={`projects.name` as const}
-                type="title"
-            />
+        <GroupItem popoverKey={name} className="pb-1">
+            <div ref={divRef}>
+                <TypographyInput
+                    placeholder="Projects"
+                    name={`${name}.name` as const}
+                    type="title"
+                />
+            </div>
 
-            <ProjectItems name={name} />
+            <ProjectItems name={`${name}.items`} itemIndex={itemIndex} />
         </GroupItem>
     )
 }
