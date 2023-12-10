@@ -109,20 +109,14 @@ textarea {
 
 [contenteditable='true']:empty:before {
     content: attr(placeholder);
+    opacity: 0.5;
     pointer-events: none;
     display: block; /* For Firefox */
-    color: rgb(121, 121, 121);
 }
 
 div[contenteditable='true'] {
     border: none;
     outline: none;
-}
-
-#resume-builder {
-    /* box-shadow:
-        rgba(0, 0, 0, 0.3) 0px 19px 38px,
-        rgba(0, 0, 0, 0.22) 0px 15px 12px; */
 }
 
 .resume__builder__pages {

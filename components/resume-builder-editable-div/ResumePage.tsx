@@ -28,18 +28,17 @@ import StrengthSection from './strengths/strength-section'
 import ResumeSummery from './summery/resume-summery'
 
 // import { resumeLayout } from '@/lib/resume-datares'
-import axios from 'axios'
+import { saveResume } from '@/redux/slices/resume-slice'
 import { useModal } from '../hooks/use-modal-store'
 import NavigationSidebar from '../navigation/navigation-sidebar'
 import { BuilderModalDraweProvider } from '../provider/builder-modal-drawer-provider'
+import DeclarationSection from './declaration/Declaretion'
 import EducationItemsUpdate from './education/update/education-items-update'
 import ExperienceItemsUpdate from './experience/update/experience-items-update'
-import Navigation from './navbar/navigation-bar'
-import ReferencesSection from './references/references'
-import ProjectsItems from './projects/projects'
 import LanguageSection from './languages/language-section'
-import { toast } from 'sonner'
-import DeclarationSection from './declaration/Declaretion'
+import Navigation from './navbar/navigation-bar'
+import ProjectsItems from './projects/projects'
+import ReferencesSection from './references/references'
 
 const ResumePage = () => {
     const { summeryPopoverKey, groupPopoverKey } = useAppSelector(
@@ -54,6 +53,17 @@ const ResumePage = () => {
     }, [])
 
     const dispatch = useAppDispatch()
+
+    const debouncedUpdate = debounce(() => {
+        const data = watch()
+        dispatch(saveResume(data as any))
+    }, 5000)
+
+    useEffect(() => {
+        debouncedUpdate()
+
+        return debouncedUpdate.cancel
+    }, [watch, debouncedUpdate])
 
     const parentClick = () => {
         dispatch(showPopover(null))
@@ -73,15 +83,6 @@ const ResumePage = () => {
         content: () => divRef.current!,
     })
 
-    const saveToServer = async (values: any) => {
-        try {
-            await axios.patch('/api/resume', values)
-            return 'Saved successfully!'
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -95,27 +96,6 @@ const ResumePage = () => {
     })
 
     const wathcData = watch()
-
-    const debouncedUpdate = debounce(async () => {
-        const data = watch()
-        try {
-            await toast.promise(saveToServer(data), {
-                loading: 'Loading...',
-                success: (data: any) => {
-                    return data
-                },
-                error: 'Error',
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }, 10000)
-
-    useEffect(() => {
-        debouncedUpdate()
-
-        return debouncedUpdate.cancel
-    }, [watch, debouncedUpdate])
 
     if (!isMounted) return null
 

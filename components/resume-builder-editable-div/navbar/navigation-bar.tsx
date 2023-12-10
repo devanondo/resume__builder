@@ -5,12 +5,15 @@ import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { UserNav } from './user-nav'
 
-import { FaExclamationCircle } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
+import { useAppSelector } from '@/redux/hooks'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { FaExclamationCircle } from 'react-icons/fa'
 
 export default function Navigation() {
     const [isMuted, setIsMuted] = useState(false)
-
+    const { loading } = useAppSelector((state) => state.resume)
     useEffect(() => {
         setIsMuted(true)
     }, [])
@@ -41,7 +44,7 @@ export default function Navigation() {
                                 >
                                     <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
                                 </svg>
-                                AMRCV.in
+                                AMRCV
                             </div>
                         </Link>
 
@@ -53,6 +56,17 @@ export default function Navigation() {
                         </div>
 
                         <div className="ml-auto flex items-center space-x-4">
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                disabled={loading ? true : false}
+                            >
+                                {loading && (
+                                    <Loader2 className="h-4 w-4 mr-2 text-zinc-500 animate-spin my-4" />
+                                )}
+                                {loading ? 'Saving...' : 'Saved'}
+                            </Button>
+
                             <UserNav />
                         </div>
                     </div>
