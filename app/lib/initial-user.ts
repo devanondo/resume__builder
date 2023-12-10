@@ -235,6 +235,7 @@ export const resumeFormData = {
         height: 25,
         enabled: false,
         column: 12,
+        grid: 1,
 
         items: [
             {

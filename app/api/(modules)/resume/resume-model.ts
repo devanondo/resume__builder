@@ -175,6 +175,11 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             name: String,
             enabled: Boolean,
             height: Number,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     enabled: Boolean,
@@ -197,6 +202,11 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             height: Number,
             name: String,
             enabled: Boolean,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     name: String,
@@ -220,6 +230,11 @@ const ResumeSchema = new Schema<IResume, ResumeModel>(
             height: Number,
             name: String,
             enabled: Boolean,
+            grid: {
+                type: Number,
+                default: 1,
+                required: true,
+            },
             items: [
                 {
                     enabled: Boolean,

@@ -102,6 +102,7 @@ const ExperienceDraggableItem = ({
                             watchValue[i].description?.italic_description &&
                                 'italic'
                         )}
+                        placeholder="Describe your experience!"
                         type="paragraph"
                     />
                 )}

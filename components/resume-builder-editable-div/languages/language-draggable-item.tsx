@@ -8,7 +8,6 @@ import { useRef } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { TypographyInput } from '../components/Typography'
 import Rating from '../components/rating'
-import { useSetHeight } from '../education/update/healper'
 
 const LanguageDraggableItems = ({
     fields,
@@ -18,15 +17,29 @@ const LanguageDraggableItems = ({
     append,
     remove,
     field,
-    width,
 }: any) => {
-    const { control } = useFormContext()
-
+    const { setValue, watch, control } = useFormContext()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
     const divRef = useRef<HTMLDivElement>(null)
 
-    useSetHeight({ divRef, name: `${name}.${i}.height` })
+    const height = divRef?.current?.offsetHeight
+
+    const grid = watch('educations.grid')
+
+    if (grid === 2 && divRef) {
+        if (
+            height &&
+            Math.floor(height! / 2) !== Math.floor(watchValue[i]?.height)
+        ) {
+            setValue(`${name}.${i}.height`, Math.floor(height! / 2))
+        }
+    } else {
+        if (height && height !== Math.floor(watchValue[i]?.height)) {
+            setValue(`${name}.${i}.height`, Math.floor(height!))
+        }
+    }
+
     return (
         <GroupItem popoverKey={name + i} className="relative" ref={divRef}>
             <div className="w-full pb-1">
@@ -69,7 +82,7 @@ const LanguageDraggableItems = ({
                 <div
                     className={cn(
                         'w-full',
-                        width > 370 ? 'bord_b_2' : 'bord_b_1'
+                        grid === 2 ? 'bord_b_2' : 'bord_b_1'
                     )}
                 ></div>
             </div>

@@ -123,12 +123,10 @@ const ResumePage = () => {
         switch (key) {
             case 'educations':
                 return <EducationItemsUpdate name={key} itemIndex={itemIndex} />
-
             case 'experienceSummary':
                 return (
                     <ExperienceItemsUpdate name={key} itemIndex={itemIndex} />
                 )
-
             case 'summerySection':
                 return <ResumeSummery name={key} itemIndex={itemIndex} />
             case 'strengths':
@@ -427,8 +425,6 @@ const ResumePage = () => {
 
     const exData = packItems(wathcData)
     const groupData = getGroupedData(exData)
-
-    console.log(exData)
 
     return (
         <>

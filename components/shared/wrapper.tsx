@@ -47,6 +47,7 @@ const GroupItem = ({
     children,
     popoverKey,
     className,
+    ref,
 }: GroupComponentProps) => {
     const dispatch = useAppDispatch()
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
@@ -64,10 +65,11 @@ const GroupItem = ({
                     )
                 }
             }}
+            ref={ref}
             className={cn(
-                'rounded border border-[transparent] pt-1',
+                'rounded outline outline-1 outline-transparent pt-1',
                 className,
-                groupPopoverKey === popoverKey && 'bg-white border-emerald-500'
+                groupPopoverKey === popoverKey && 'bg-white outline-emerald-500'
             )}
         >
             {children}

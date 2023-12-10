@@ -101,21 +101,14 @@ const LanguageItems = ({ name, itemIndex }: ResumeComponentProps) => {
         return 'w-full'
     }
 
-    const [width, setWidth] = useState<number>(0)
-    const ref = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        setWidth(ref.current?.offsetWidth!)
-        return () => {}
-    })
+    const grid = watch('educations.grid')
 
     if (!mounted) return null
     return (
         <div
-            ref={ref}
             className={cn('grid', 'group__item__border')}
             style={{
-                gridTemplateColumns: width > 370 ? '1fr 1fr' : '1fr',
+                gridTemplateColumns: grid === 2 ? '1fr 1fr' : '1fr',
             }}
         >
             {fields.map((field: any, i: number) => {
@@ -146,7 +139,6 @@ const LanguageItems = ({ name, itemIndex }: ResumeComponentProps) => {
                             name={name}
                             remove={remove}
                             watchValue={watchValue}
-                            width={width}
                         />
                     </div>
                 )

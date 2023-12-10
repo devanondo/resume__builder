@@ -340,14 +340,14 @@ export const resumeFormData = {
         record: 'DeclarationSection',
         name: 'Application Declaration',
         enabled: false,
-        height: 139,
+        height: 24,
         items: [
             {
                 description:
                     'Upon reviewing and assessing this resume, I declare and certify that I have accurately and truthfully described myself and my qualifications.',
 
                 name: 'ABormon',
-                height: 139,
+                height: 45,
             },
         ],
     },

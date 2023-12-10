@@ -147,6 +147,7 @@ export interface IResume extends Document {
         name: string
         height: number
         enabled: boolean
+        grid: 1 | 2
         items: Array<{
             enabled: boolean
             name: string
@@ -166,6 +167,7 @@ export interface IResume extends Document {
         record: string
         name: string
         height: number
+        grid: 1 | 2
         enabled: boolean
         items: Array<{
             name: string
@@ -184,6 +186,7 @@ export interface IResume extends Document {
         name: string
         enabled: boolean
         height: number
+        grid: 1 | 2
         items: Array<{
             height: number
             enabled: boolean

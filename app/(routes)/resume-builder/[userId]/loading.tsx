@@ -8,7 +8,7 @@ export default function Loading() {
             <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
 
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Loading Resume...
+                Preparing Content...
             </p>
         </div>
     )
