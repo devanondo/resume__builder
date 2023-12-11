@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
 import { useWatchForm } from '@/components/hooks/use-form-watch'
@@ -15,8 +15,10 @@ import { useEffect, useRef, useState } from 'react'
 import { TypographyInput } from '../components/Typography'
 import { ResumeComponentProps } from '../types/resume-component-type'
 import ReferencesDraggableItem from './references-draggable-items'
+import GropPopover from '@/components/popover/group-popover'
 
 const ReferencesSection = ({ name, itemIndex }: ResumeComponentProps) => {
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
     const { control, setValue, watch } = useFormContext()
     const dispatch = useAppDispatch()
 
@@ -108,7 +110,7 @@ const ReferencesSection = ({ name, itemIndex }: ResumeComponentProps) => {
     if (!mounted) return null
 
     return (
-        <GroupItem popoverKey={name}>
+        <GroupItem popoverKey={name} className="relative">
             <TypographyInput
                 name={`${name}.name` as const}
                 placeholder="References"
@@ -156,6 +158,10 @@ const ReferencesSection = ({ name, itemIndex }: ResumeComponentProps) => {
                     )
                 })}
             </div>
+
+            {groupPopoverKey === name && (
+                <GropPopover name={name} hasGrid={true} />
+            )}
         </GroupItem>
     )
 }
