@@ -1,6 +1,7 @@
 import { Model } from 'mongoose'
 
 export interface IResume extends Document {
+    title: string
     style: {
         record: string
         layout: string

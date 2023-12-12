@@ -63,10 +63,10 @@ export default class ContentEditable extends React.Component<Props> {
                               this.el.current = current
                           }
                         : innerRef || this.el,
-                onInput: this.emitChange,
+                // onInput: this.emitChange,
                 onBlur: this.props.onBlur || this.emitChange,
-                onKeyUp: this.props.onKeyUp || this.emitChange,
-                onKeyDown: this.props.onKeyDown || this.emitChange,
+                // onKeyUp: this.props.onKeyUp || this.emitChange,
+                // onKeyDown: this.props.onKeyDown || this.emitChange,
                 contentEditable: !this.props.disabled,
                 dangerouslySetInnerHTML: { __html: html },
             },

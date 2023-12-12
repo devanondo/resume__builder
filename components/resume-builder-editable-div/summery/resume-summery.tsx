@@ -16,7 +16,7 @@ const ResumeSummery = ({ name, itemIndex }: ResumeComponentProps) => {
     useSetHeight({ divRef, name: `${name}.height` })
     return (
         <GroupItem popoverKey={name} className="relative">
-            <div ref={divRef}>
+            <div className="pb-1" ref={divRef}>
                 <TypographyInput
                     placeholder="Summery"
                     name={`${name}.name` as const}

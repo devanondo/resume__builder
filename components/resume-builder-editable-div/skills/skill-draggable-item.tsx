@@ -24,48 +24,40 @@ const SkillsDraggableItem = ({
     useSetHeight({ divRef, name: `${name}.height` })
 
     return (
-        <GroupItem popoverKey={name + i} className="relative pb-3">
-            <div
-                className="w-full"
-                // onClick={() => {
-                //     dispatch(
-                //         showPopover({
-                //             name: name + i,
-                //             type: 'group__entry',
-                //         })
-                //     )
-                // }}
-            >
-                {watchValue[i]?.show_title && (
-                    <TypographyInput
-                        placeholder={field.placeholder}
-                        name={`${name}[${i}].title` as const}
-                        className={cn(
-                            'px-2',
-                            watchValue[i].bold_title && 'font-semibold',
-                            watchValue[i].italic_title && 'italic'
-                        )}
-                        type="subheading"
+        <div ref={divRef}>
+            <GroupItem popoverKey={name + i} className="relative pb-3">
+                <div className="w-full">
+                    {watchValue[i]?.show_title && (
+                        <TypographyInput
+                            placeholder={field.placeholder}
+                            name={`${name}[${i}].title` as const}
+                            className={cn(
+                                'px-2',
+                                watchValue[i].bold_title && 'font-semibold',
+                                watchValue[i].italic_title && 'italic'
+                            )}
+                            type="subheading"
+                        />
+                    )}
+                    <div className="pt-2">
+                        <SkillsKeys
+                            name={`${name}.${i}.keys`}
+                            parentKey={`${name}.${i}`}
+                        />
+                    </div>
+                </div>
+
+                {groupPopoverKey === name + i && (
+                    <SkillsPopover
+                        append={append}
+                        fields={fields}
+                        index={i}
+                        name={name}
+                        remove={remove}
                     />
                 )}
-                <div className="pt-2">
-                    <SkillsKeys
-                        name={`${name}.${i}.keys`}
-                        parentKey={`${name}.${i}`}
-                    />
-                </div>
-            </div>
-
-            {groupPopoverKey === name + i && (
-                <SkillsPopover
-                    append={append}
-                    fields={fields}
-                    index={i}
-                    name={name}
-                    remove={remove}
-                />
-            )}
-        </GroupItem>
+            </GroupItem>
+        </div>
     )
 }
 

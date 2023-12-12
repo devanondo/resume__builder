@@ -34,6 +34,7 @@ export const initialUser = async () => {
 }
 
 export const resumeFormData = {
+    title: 'untitled',
     style: {
         record: 'ResumeStyle',
         layout: 'double',
