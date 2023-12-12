@@ -14,6 +14,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { TypographyInput } from '../components/Typography'
 import { ResumeComponentProps } from '../types/resume-component-type'
 import SkillsKeys from './skills-keys'
+import SkillsDraggableItem from './skill-draggable-item'
 
 const SkillsItems = ({ name, itemIndex }: ResumeComponentProps) => {
     const dispatch = useAppDispatch()
@@ -131,43 +132,15 @@ const SkillsItems = ({ name, itemIndex }: ResumeComponentProps) => {
                             updateData()
                         }}
                     >
-                        <GroupItem
-                            popoverKey={name + i}
-                            className="relative pb-3"
-                        >
-                            <div className="w-full">
-                                {watchValue[i]?.show_title && (
-                                    <TypographyInput
-                                        placeholder={field.placeholder}
-                                        name={`${name}[${i}].title` as const}
-                                        className={cn(
-                                            'px-2',
-                                            watchValue[i].bold_title &&
-                                                'font-semibold',
-                                            watchValue[i].italic_title &&
-                                                'italic'
-                                        )}
-                                        type="subheading"
-                                    />
-                                )}
-                                <div className="pt-2">
-                                    <SkillsKeys
-                                        name={`${name}.${i}.keys`}
-                                        parentKey={`${name}.${i}`}
-                                    />
-                                </div>
-                            </div>
-
-                            {groupPopoverKey === name + i && (
-                                <SkillsPopover
-                                    append={append}
-                                    fields={fields}
-                                    index={i}
-                                    name={name}
-                                    remove={remove}
-                                />
-                            )}
-                        </GroupItem>
+                        <SkillsDraggableItem
+                            field={field}
+                            append={append}
+                            fields={fields}
+                            i={i}
+                            name={name}
+                            remove={remove}
+                            watchValue={watchValue}
+                        />
                     </div>
                 )
             })}

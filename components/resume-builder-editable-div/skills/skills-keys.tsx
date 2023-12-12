@@ -92,6 +92,7 @@ const SkillsKeys = ({ name, parentKey }: SkillsKeysProps) => {
                                     ? `2px solid ${watch('style.colors.1')}`
                                     : 'none',
                             }}
+                            isChange={true}
                         />
                     </div>
                 </div>

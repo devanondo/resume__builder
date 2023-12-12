@@ -146,19 +146,19 @@ const ResumePage = () => {
         const headerHeight = data['header'].height + margin || 0
 
         let totalHeight = 0
+        let currentPage = 0
 
-        resumeLayout.map((layout) => {
+        resumeLayout?.map((layout) => {
             let column = layout.column
 
             let result: ResultTypeArr[] = []
             if (column !== 12) {
                 totalHeight = 0
+                currentPage = 0
             }
 
-            let currentPage = 0
-
             const compareHeight =
-                currentPage === 0 ? 1325 - headerHeight : 1325 - margin
+                currentPage === 0 ? 1300 - headerHeight : 1300 - margin
 
             const items = layout.items
             items.forEach((item) => {
@@ -274,7 +274,7 @@ const ResumePage = () => {
 
     const exData = packItems(wathcData)
     const groupData = getGroupedData(exData)
-
+    console.log(exData)
     return (
         <>
             <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">

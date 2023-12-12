@@ -21,7 +21,7 @@ const SkillsDraggableItem = ({
     const { groupPopoverKey } = useAppSelector((state) => state.popover)
     const divRef = useRef<HTMLDivElement>(null)
 
-    useSetHeight({ divRef, name: `${name}.height` })
+    useSetHeight({ divRef, name: `${name}.${i}.height` })
 
     return (
         <div ref={divRef}>

@@ -82,6 +82,7 @@ const CustomTextArea = ({
                 className={cn('py-[1px] px-2', className)}
                 type="paragraph"
                 id={name}
+                isChange={true}
             />
 
             {/* <URL
