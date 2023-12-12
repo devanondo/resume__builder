@@ -40,73 +40,72 @@ const StrengthDraggableItem = ({
         }
     }
     return (
-        <GroupItem
-            ref={divRef}
-            popoverKey={name + i}
-            className="relative col-span-1"
-        >
-            <div
-                className="w-full flex pb-1 "
-                onClick={() => {
-                    dispatch(
-                        showPopover({
-                            name: name + i,
-                            type: 'group__entry',
-                        })
-                    )
-                }}
-            >
-                {watchValue[i]?.show_icon && (
-                    <Icon
-                        name={`${name}[${i}].icon` as const}
-                        className={cn(
-                            'text-xl',
-                            watchValue[i]?.description?.enabled && 'text-2xl'
-                        )}
-                    />
-                )}
-                <div className="flex flex-col justify-center">
-                    <TypographyInput
-                        name={`${name}[${i}].name` as const}
-                        placeholder={field.placeholder}
-                        className="pl-0"
-                        type="subtitle"
-                    />
-
-                    {watchValue[i]?.description?.enabled && (
-                        <TypographyInput
-                            name={`${name}[${i}].description.text` as const}
-                            placeholder={field.description.placeholder}
+        <div ref={divRef}>
+            <GroupItem popoverKey={name + i} className="relative col-span-1">
+                <div
+                    className="w-full flex pb-1 "
+                    onClick={() => {
+                        dispatch(
+                            showPopover({
+                                name: name + i,
+                                type: 'group__entry',
+                            })
+                        )
+                    }}
+                >
+                    {watchValue[i]?.show_icon && (
+                        <Icon
+                            name={`${name}[${i}].icon` as const}
                             className={cn(
-                                'text-sm px-0',
-                                watchValue[i].description.italic_description &&
-                                    'italic'
+                                'text-xl',
+                                watchValue[i]?.description?.enabled &&
+                                    'text-2xl'
                             )}
-                            type="paragraph"
                         />
                     )}
+                    <div className="flex flex-col justify-center">
+                        <TypographyInput
+                            name={`${name}[${i}].name` as const}
+                            placeholder={field.placeholder}
+                            className="pl-0"
+                            type="subtitle"
+                        />
+
+                        {watchValue[i]?.description?.enabled && (
+                            <TypographyInput
+                                name={`${name}[${i}].description.text` as const}
+                                placeholder={field.description.placeholder}
+                                className={cn(
+                                    'text-sm px-0',
+                                    watchValue[i].description
+                                        .italic_description && 'italic'
+                                )}
+                                type="paragraph"
+                            />
+                        )}
+                    </div>
                 </div>
-            </div>
 
-            <div className="w-full px-2">
-                <div
-                    className={cn(
-                        'w-full pt-1',
-                        grid === 2 ? 'bord_b_2' : 'bord_b_1'
-                    )}
-                ></div>
-            </div>
+                <div className="w-full px-2">
+                    <div
+                        className={cn(
+                            'w-full pt-1',
+                            grid === 2 ? 'bord_b_2' : 'bord_b_1'
+                        )}
+                    ></div>
+                </div>
 
-            {groupPopoverKey === name + i && (
-                <StrengthPopover
-                    append={append}
-                    fields={fields}
-                    index={i}
-                    name={name}
-                    remove={remove}
-                />
-            )}
-        </GroupItem>
+                {groupPopoverKey === name + i && (
+                    <StrengthPopover
+                        append={append}
+                        fields={fields}
+                        index={i}
+                        name={name}
+                        remove={remove}
+                    />
+                )}
+            </GroupItem>
+        </div>
     )
 }
 

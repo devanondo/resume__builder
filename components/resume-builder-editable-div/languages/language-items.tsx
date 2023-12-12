@@ -101,7 +101,7 @@ const LanguageItems = ({ name, itemIndex }: ResumeComponentProps) => {
         return 'w-full'
     }
 
-    const grid = watch('educations.grid')
+    const grid = watch('languages.grid')
 
     if (!mounted) return null
     return (

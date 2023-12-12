@@ -31,7 +31,7 @@ export interface IResumeLayout {
     items: IItem[]
 }
 
-export type ILayoutStyle = 'double' | 'single' | 'onethird'
+export type ILayoutStyle = 'double' | 'single' | 'onethird' | 'faltmaster'
 
 export interface ILayoutItems {
     id: string
@@ -39,7 +39,10 @@ export interface ILayoutItems {
     isActive: boolean
     imgUrl?: string
     layoutStyle: ILayoutStyle
-    layout: IResumeLayout[]
+    layout: {
+        title: string
+        column: number
+    }[]
     typo: any
 }
 

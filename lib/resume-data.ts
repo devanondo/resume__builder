@@ -692,19 +692,6 @@ export const colors = [
     },
 ]
 
-// {
-//     height: 100,
-//     key: 'key1',
-//     items: [{ height: 100 }, { height: 200 }, { height: 200 }],
-// },
-
-// {
-//     itemsIndex: [2],
-//     key: 'key3',
-//     pack: 3,
-//     totalHeight: 170,
-// },
-
 export const resumeLayout: IResumeLayout[] = [
     {
         title: 'Group-1',
@@ -803,74 +790,16 @@ export const layoutItems: ILayoutItems[] = [
         isActive: true,
         imgUrl: 'https://utfs.io/f/792beefb-c09f-49b9-948f-65af2c19fb19-bcf9ow.png',
         layoutStyle: 'double',
+
         layout: [
             {
                 title: 'Group-1',
                 column: 7,
-                items: [
-                    {
-                        title: 'Summery',
-                        height: 1,
-                        key: 'summerySection',
-                        position: 1,
-                    },
-
-                    {
-                        title: 'Experience',
-                        height: 1,
-                        key: 'experienceSummary',
-                        position: 3,
-                    },
-                    {
-                        title: 'Educations',
-                        height: 1,
-                        key: 'educations',
-                        position: 5,
-                    },
-                    {
-                        title: 'Declaration',
-                        height: 1,
-                        key: 'declaration',
-                        position: 2,
-                    },
-                    {
-                        title: 'References',
-                        height: 1,
-                        key: 'references',
-                        position: 2,
-                    },
-                    {
-                        title: 'Projects',
-                        height: 1,
-                        key: 'projects',
-                        position: 2,
-                    },
-                ],
             },
 
             {
                 title: 'Group-2',
                 column: 5,
-                items: [
-                    {
-                        title: 'Strength',
-                        height: 1,
-                        key: 'strengths',
-                        position: 4,
-                    },
-                    {
-                        title: 'Skills',
-                        height: 1,
-                        key: 'skills',
-                        position: 2,
-                    },
-                    {
-                        title: 'Languages',
-                        height: 1,
-                        key: 'languages',
-                        position: 2,
-                    },
-                ],
             },
         ],
 
@@ -1015,70 +944,161 @@ export const layoutItems: ILayoutItems[] = [
             {
                 title: 'Group-1',
                 column: 12,
-                items: [
-                    {
-                        title: 'Summery',
-                        height: 1,
-                        key: 'summerySection',
-                        position: 1,
-                    },
-
-                    {
-                        title: 'Experience',
-                        height: 1,
-                        key: 'experienceSummary',
-                        position: 3,
-                    },
-                    {
-                        title: 'Educations',
-                        height: 1,
-                        key: 'educations',
-                        position: 5,
-                    },
-                    {
-                        title: 'Declaration',
-                        height: 1,
-                        key: 'declaration',
-                        position: 2,
-                    },
-                    {
-                        title: 'References',
-                        height: 1,
-                        key: 'references',
-                        position: 2,
-                    },
-                    {
-                        title: 'Projects',
-                        height: 1,
-                        key: 'projects',
-                        position: 2,
-                    },
-                ],
             },
 
             {
                 title: 'Group-2',
                 column: 12,
-                items: [
-                    {
-                        title: 'Strength',
-                        height: 1,
-                        key: 'strengths',
-                        position: 4,
-                    },
-                    {
-                        title: 'Skills',
-                        height: 1,
-                        key: 'skills',
-                        position: 2,
-                    },
-                    {
-                        title: 'Languages',
-                        height: 1,
-                        key: 'languages',
-                        position: 2,
-                    },
-                ],
+            },
+        ],
+        typo: {
+            small: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 600,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            medium: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 600,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            large: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 600,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+            extralarge: {
+                heading: {
+                    fontSize: '28px',
+                    lineHeight: '32px',
+                    fontWeight: 600,
+                },
+                role: {
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    fontWeight: 600,
+                },
+                title: {
+                    fontSize: '22px',
+                    lineHeight: '26px',
+                    fontWeight: 600,
+                },
+                subheading: {
+                    fontSize: '18px',
+                    lineHeight: '22px',
+                    fontWeight: 400,
+                },
+                subtitle: {
+                    fontSize: '16px',
+                    lineHeight: '19px',
+                    fontWeight: 400,
+                },
+                paragraph: {
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    fontWeight: 400,
+                },
+            },
+        },
+    },
+
+    {
+        id: '355as1d51aea1dee1a5e',
+        title: 'Narrow Roller',
+        isActive: false,
+        imgUrl: 'https://utfs.io/f/05afe5a5-6931-4984-bcdc-7bf1e51105bb-1sak5p.png',
+        layoutStyle: 'onethird',
+        layout: [
+            {
+                title: 'Group-1',
+                column: 8,
+            },
+
+            {
+                title: 'Group-2',
+                column: 4,
             },
         ],
         typo: {
@@ -1093,7 +1113,6 @@ export const layoutItems: ILayoutItems[] = [
                     lineHeight: '24px',
                     fontWeight: 600,
                 },
-
                 title: {
                     fontSize: '22px',
                     lineHeight: '26px',
@@ -1213,93 +1232,42 @@ export const layoutItems: ILayoutItems[] = [
             },
         },
     },
-
     {
-        id: '355as1d51aea1dee1a5e',
-        title: 'Narrow Roller',
+        id: '355as1d51aea1dee1a5yt',
+        title: 'Thin Master',
         isActive: false,
-        imgUrl: 'https://utfs.io/f/05afe5a5-6931-4984-bcdc-7bf1e51105bb-1sak5p.png',
-        layoutStyle: 'onethird',
+        imgUrl: 'https://utfs.io/f/1146bdad-171b-43bd-840a-d9a9bd0e5086-t4f23.png',
+        layoutStyle: 'faltmaster',
         layout: [
             {
                 title: 'Group-1',
-                column: 8,
-                items: [
-                    {
-                        title: 'Summery',
-                        height: 1,
-                        key: 'summerySection',
-                        position: 1,
-                    },
-
-                    {
-                        title: 'Experience',
-                        height: 1,
-                        key: 'experienceSummary',
-                        position: 3,
-                    },
-                    {
-                        title: 'Educations',
-                        height: 1,
-                        key: 'educations',
-                        position: 5,
-                    },
-                    {
-                        title: 'Declaration',
-                        height: 1,
-                        key: 'declaration',
-                        position: 2,
-                    },
-                ],
+                column: 12,
             },
 
             {
                 title: 'Group-2',
-                column: 4,
-                items: [
-                    {
-                        title: 'Skills',
-                        height: 1,
-                        key: 'skills',
-                        position: 2,
-                    },
-                    {
-                        title: 'Projects',
-                        height: 1,
-                        key: 'projects',
-                        position: 2,
-                    },
-                    {
-                        title: 'Strength',
-                        height: 1,
-                        key: 'strengths',
-                        position: 4,
-                    },
-                    {
-                        title: 'Languages',
-                        height: 1,
-                        key: 'languages',
-                        position: 2,
-                    },
-                ],
+                column: 12,
             },
         ],
         typo: {
             small: {
                 heading: {
-                    fontSize: '28px',
-                    lineHeight: '32px',
+                    fontSize: '18px',
+                    lineHeight: '22px',
                     fontWeight: 500,
+                    textAlign: 'center',
                 },
                 role: {
                     fontSize: '20px',
-                    lineHeight: '24px',
+                    lineHeight: '22px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 title: {
-                    fontSize: '22px',
-                    lineHeight: '26px',
+                    fontSize: '18px',
+                    lineHeight: '20px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 subheading: {
                     fontSize: '18px',
@@ -1319,19 +1287,22 @@ export const layoutItems: ILayoutItems[] = [
             },
             medium: {
                 heading: {
-                    fontSize: '28px',
-                    lineHeight: '32px',
-                    fontWeight: 500,
-                },
-                role: {
                     fontSize: '20px',
                     lineHeight: '24px',
+                    fontWeight: 500,
+                    textAlign: 'center',
+                },
+                role: {
+                    fontSize: '18px',
+                    lineHeight: '20px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 title: {
-                    fontSize: '22px',
-                    lineHeight: '26px',
+                    fontSize: '18px',
+                    lineHeight: '20px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 subheading: {
                     fontSize: '18px',
@@ -1351,19 +1322,22 @@ export const layoutItems: ILayoutItems[] = [
             },
             large: {
                 heading: {
-                    fontSize: '28px',
-                    lineHeight: '32px',
+                    fontSize: '22px',
+                    lineHeight: '24px',
                     fontWeight: 500,
+                    textAlign: 'center',
                 },
                 role: {
                     fontSize: '20px',
-                    lineHeight: '24px',
+                    lineHeight: '22px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 title: {
-                    fontSize: '22px',
-                    lineHeight: '26px',
+                    fontSize: '20px',
+                    lineHeight: '22px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 subheading: {
                     fontSize: '18px',
@@ -1383,19 +1357,22 @@ export const layoutItems: ILayoutItems[] = [
             },
             extralarge: {
                 heading: {
-                    fontSize: '28px',
-                    lineHeight: '32px',
+                    fontSize: '24px',
+                    lineHeight: '24px',
                     fontWeight: 500,
+                    textAlign: 'center',
                 },
                 role: {
-                    fontSize: '20px',
+                    fontSize: '24px',
                     lineHeight: '24px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 title: {
-                    fontSize: '22px',
-                    lineHeight: '26px',
+                    fontSize: '21px',
+                    lineHeight: '24px',
                     fontWeight: 600,
+                    textAlign: 'center',
                 },
                 subheading: {
                     fontSize: '18px',

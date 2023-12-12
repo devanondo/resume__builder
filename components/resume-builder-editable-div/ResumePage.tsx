@@ -137,137 +137,6 @@ const ResumePage = () => {
         record: string
         sectionIndex: string
     }
-    // function packItems(data: any) {
-    //     let fullArray: ResultTypeArr[] = []
-
-    //     const margin = data['style'].pageMarginOption * 2
-
-    //     const headerHeight = data['header'].height + margin || 0
-
-    //     resumeLayout.map((layout) => {
-    //         let column = layout.column
-
-    //         let result: ResultTypeArr[] = []
-    //         let totalHeight = 0
-    //         let currentPage = 0
-
-    //         const compareHeight = currentPage === 0 ? 1325 - headerHeight : 1325 - margin
-
-    //         const items = layout.items
-    //         items.forEach((item) => {
-    //             let obj = data[item.key]
-
-    //             let titleHeight = obj.height
-    //             totalHeight += titleHeight
-    //             // console.log(obj)
-    //             let currentItemsIndex = []
-    //             let currentHeight = titleHeight
-
-    //             for (let i = 0; i < obj.items?.length; i++) {
-    //                 let itemHeight = obj.items[i].height
-    //                 totalHeight += itemHeight
-    //                 currentItemsIndex.push(i)
-    //                 currentHeight += itemHeight
-
-    //                 if (totalHeight >= compareHeight) {
-    //                     currentItemsIndex.pop()
-    //                     currentHeight -= itemHeight
-
-    //                     result.push({
-    //                         column: column, // Adjust as needed
-    //                         height: currentHeight,
-    //                         itemIndex: currentItemsIndex,
-    //                         page: currentPage,
-    //                         record: 'LayoutItem', // Adjust as needed
-    //                         sectionIndex: item.key,
-    //                     })
-
-    //                     // Reset for the new page
-    //                     currentHeight = 0
-    //                     currentItemsIndex = []
-    //                     currentItemsIndex.push(i)
-    //                     currentPage++
-
-    //                     totalHeight = itemHeight + titleHeight
-    //                     currentHeight = itemHeight + titleHeight
-
-    //                     if (i === obj.items.length - 1) {
-    //                         // If this is the last item, create a new page for it
-    //                         result.push({
-    //                             column: column, // Adjust as needed
-    //                             height: currentHeight,
-    //                             itemIndex: currentItemsIndex,
-    //                             page: currentPage,
-    //                             record: 'LayoutItem', // Adjust as needed
-    //                             sectionIndex: item.key,
-    //                         })
-    //                         currentHeight = 0
-    //                     }
-    //                 } else if (totalHeight < compareHeight && i === obj.items.length - 1) {
-    //                     // If this is the last item and the total height is below the threshold, create a page
-    //                     result.push({
-    //                         column: column, // Adjust as needed
-    //                         height: currentHeight,
-    //                         itemIndex: currentItemsIndex,
-    //                         page: currentPage,
-    //                         record: 'LayoutItem', // Adjust as needed
-    //                         sectionIndex: item.key,
-    //                     })
-    //                 }
-    //             }
-    //         })
-    //         const newResult = result.filter((res) => res.itemIndex.length)
-    //         fullArray.push(...newResult)
-    //     })
-
-    //     // Group items based on the 'column' property
-    //     // const groupedData = fullArray.reduce((result, item) => {
-    //     //     const page = item.page
-    //     //     const column = item.column
-
-    //     //     if (!result[page]) {
-    //     //         result[page] = []
-    //     //     }
-
-    //     //     if (!result[page][column]) {
-    //     //         result[page][column] = []
-    //     //     }
-
-    //     //     result[page][column].push(item)
-    //     //     return result
-    //     // }, {})
-
-    //     // let gropD = []
-    //     // Object.keys(groupedData).forEach((key) => {
-    //     //     const obj = groupedData[key]
-    //     //     console.log(obj)
-    //     // })
-
-    //     // const groupedData = fullArray.reduce((result, item) => {
-    //     //     const pack = item.pack
-    //     //     const column = item.column
-
-    //     //     if (!result[pack]) {
-    //     //         result[pack] = []
-    //     //     }
-
-    //     //     const existingColumnGroup = result[pack].find(
-    //     //         (group) => group[0].column === column
-    //     //     )
-
-    //     //     if (existingColumnGroup) {
-    //     //         existingColumnGroup.push(item)
-    //     //     } else {
-    //     //         result[pack].push([{ column }, item])
-    //     //     }
-
-    //     //     return result
-    //     // }, {})
-
-    //     // console.log(groupedData)
-
-    //     return fullArray
-    // }
 
     function packItems(data: any) {
         let fullArray: ResultTypeArr[] = []
@@ -629,3 +498,134 @@ const ResumePage = () => {
 }
 
 export default ResumePage
+// function packItems(data: any) {
+//     let fullArray: ResultTypeArr[] = []
+
+//     const margin = data['style'].pageMarginOption * 2
+
+//     const headerHeight = data['header'].height + margin || 0
+
+//     resumeLayout.map((layout) => {
+//         let column = layout.column
+
+//         let result: ResultTypeArr[] = []
+//         let totalHeight = 0
+//         let currentPage = 0
+
+//         const compareHeight = currentPage === 0 ? 1325 - headerHeight : 1325 - margin
+
+//         const items = layout.items
+//         items.forEach((item) => {
+//             let obj = data[item.key]
+
+//             let titleHeight = obj.height
+//             totalHeight += titleHeight
+//             // console.log(obj)
+//             let currentItemsIndex = []
+//             let currentHeight = titleHeight
+
+//             for (let i = 0; i < obj.items?.length; i++) {
+//                 let itemHeight = obj.items[i].height
+//                 totalHeight += itemHeight
+//                 currentItemsIndex.push(i)
+//                 currentHeight += itemHeight
+
+//                 if (totalHeight >= compareHeight) {
+//                     currentItemsIndex.pop()
+//                     currentHeight -= itemHeight
+
+//                     result.push({
+//                         column: column, // Adjust as needed
+//                         height: currentHeight,
+//                         itemIndex: currentItemsIndex,
+//                         page: currentPage,
+//                         record: 'LayoutItem', // Adjust as needed
+//                         sectionIndex: item.key,
+//                     })
+
+//                     // Reset for the new page
+//                     currentHeight = 0
+//                     currentItemsIndex = []
+//                     currentItemsIndex.push(i)
+//                     currentPage++
+
+//                     totalHeight = itemHeight + titleHeight
+//                     currentHeight = itemHeight + titleHeight
+
+//                     if (i === obj.items.length - 1) {
+//                         // If this is the last item, create a new page for it
+//                         result.push({
+//                             column: column, // Adjust as needed
+//                             height: currentHeight,
+//                             itemIndex: currentItemsIndex,
+//                             page: currentPage,
+//                             record: 'LayoutItem', // Adjust as needed
+//                             sectionIndex: item.key,
+//                         })
+//                         currentHeight = 0
+//                     }
+//                 } else if (totalHeight < compareHeight && i === obj.items.length - 1) {
+//                     // If this is the last item and the total height is below the threshold, create a page
+//                     result.push({
+//                         column: column, // Adjust as needed
+//                         height: currentHeight,
+//                         itemIndex: currentItemsIndex,
+//                         page: currentPage,
+//                         record: 'LayoutItem', // Adjust as needed
+//                         sectionIndex: item.key,
+//                     })
+//                 }
+//             }
+//         })
+//         const newResult = result.filter((res) => res.itemIndex.length)
+//         fullArray.push(...newResult)
+//     })
+
+//     // Group items based on the 'column' property
+//     // const groupedData = fullArray.reduce((result, item) => {
+//     //     const page = item.page
+//     //     const column = item.column
+
+//     //     if (!result[page]) {
+//     //         result[page] = []
+//     //     }
+
+//     //     if (!result[page][column]) {
+//     //         result[page][column] = []
+//     //     }
+
+//     //     result[page][column].push(item)
+//     //     return result
+//     // }, {})
+
+//     // let gropD = []
+//     // Object.keys(groupedData).forEach((key) => {
+//     //     const obj = groupedData[key]
+//     //     console.log(obj)
+//     // })
+
+//     // const groupedData = fullArray.reduce((result, item) => {
+//     //     const pack = item.pack
+//     //     const column = item.column
+
+//     //     if (!result[pack]) {
+//     //         result[pack] = []
+//     //     }
+
+//     //     const existingColumnGroup = result[pack].find(
+//     //         (group) => group[0].column === column
+//     //     )
+
+//     //     if (existingColumnGroup) {
+//     //         existingColumnGroup.push(item)
+//     //     } else {
+//     //         result[pack].push([{ column }, item])
+//     //     }
+
+//     //     return result
+//     // }, {})
+
+//     // console.log(groupedData)
+
+//     return fullArray
+// }

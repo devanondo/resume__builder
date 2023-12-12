@@ -294,7 +294,11 @@ const ResumeHeader = () => {
                         <TypographyInput
                             name={`header.name` as const}
                             className={cn(
-                                'col-span-2 w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 !p-0'
+                                'w-full resize-none outline-none text-3xl font-bold bg-transparent  border-b-5 border-black m-0 !p-0',
+
+                                watchingValue?.show_photo
+                                    ? 'col-span-2'
+                                    : 'col-span-3'
                             )}
                             type="heading"
                             placeholder="Your Name"
@@ -303,7 +307,6 @@ const ResumeHeader = () => {
                                     watchingValue.uppercase_name && 'uppercase',
                             }}
                         />
-
                         {watchingValue?.show_title ? (
                             <TypographyInput
                                 name="header.title"

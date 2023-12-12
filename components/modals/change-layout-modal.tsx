@@ -3,17 +3,24 @@
 
 import { cn } from '@/lib/utils'
 import { useUpdateLayoutMutation } from '@/redux/apis/layout.api'
-import { useAppSelector } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useFormContext } from 'react-hook-form'
 import { useModal } from '../hooks/use-modal-store'
 import { Card, CardContent, CardTitle } from '../ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog'
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+} from '../ui/sheet'
+import { setActiveLayout } from '@/redux/slices/resume-layout-slice'
 
 const ChangeLayoutModal = () => {
     const { isOpen, onClose, type } = useModal()
     const { resumeLayoutItems } = useAppSelector((state) => state.layout)
     const { setValue, watch } = useFormContext()
-
+    const dispatch = useAppDispatch()
     const isModalOpen = isOpen && type === 'changeLayout'
 
     const handleClose = () => {
@@ -23,22 +30,25 @@ const ChangeLayoutModal = () => {
     const [updateLayout] = useUpdateLayoutMutation()
 
     return (
-        <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="max-w-5xl bg-white text-black p-0 overflow-hidden ">
-                <DialogHeader className="pt-4 px-6">
-                    <DialogTitle className="text-2xl text-center font-bold">
-                        Change Layout
-                    </DialogTitle>
-                </DialogHeader>
+        <Sheet open={isModalOpen} onOpenChange={handleClose}>
+            <SheetContent side="left" className="w-[400px]">
+                <SheetHeader>
+                    <SheetTitle>Templates Layouts</SheetTitle>
+                    <SheetDescription>
+                        This action cannot be undone. This will permanently
+                        delete your account and remove your data from our
+                        servers.
+                    </SheetDescription>
+                </SheetHeader>
 
-                <div className="grid grid-cols-5 px-5 pb-5 gap-x-3 ">
+                <div className="grid grid-cols-2 pt-5 gap-2 ">
                     {resumeLayoutItems.map((item, index) => {
                         return (
                             <Card
                                 className="col-span-1 overflow-hidden cursor-pointer group"
                                 key={index}
                                 onClick={() => {
-                                    // dispatch(setActiveLayout(item.id))
+                                    dispatch(setActiveLayout(item.id))
                                     setValue('style.layout', item.layoutStyle)
 
                                     const keys = item.layout.map((itm) => {
@@ -77,8 +87,8 @@ const ChangeLayoutModal = () => {
                         )
                     })}
                 </div>
-            </DialogContent>
-        </Dialog>
+            </SheetContent>
+        </Sheet>
     )
 }
 

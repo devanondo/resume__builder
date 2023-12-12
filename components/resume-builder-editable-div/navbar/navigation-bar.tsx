@@ -10,9 +10,12 @@ import { useAppSelector } from '@/redux/hooks'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { FaExclamationCircle } from 'react-icons/fa'
+import { IoDocumentText } from 'react-icons/io5'
+import TextBox from '../components/Editable'
 
 export default function Navigation() {
     const [isMuted, setIsMuted] = useState(false)
+
     const { loading } = useAppSelector((state) => state.resume)
     useEffect(() => {
         setIsMuted(true)
@@ -53,6 +56,19 @@ export default function Navigation() {
                                 <FaExclamationCircle className="text-red-500 w-5 h-5" />
                             </div>
                             This app is not convenient for small device!
+                        </div>
+
+                        <div className="flex items-center pl-4 ">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-zinc-200">
+                                <IoDocumentText className="text-zinc-500 w-5 h-5" />
+                            </div>
+                            <div className="w-fit">
+                                <TextBox
+                                    name="title"
+                                    className="w-full"
+                                    placeholder="Title of your resume"
+                                />
+                            </div>
                         </div>
 
                         <div className="ml-auto flex items-center space-x-4">

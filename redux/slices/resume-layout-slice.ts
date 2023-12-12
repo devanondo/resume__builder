@@ -5,6 +5,7 @@ import {
 import { layoutItems, layoutStyles, resumeLayout } from '@/lib/resume-data'
 import { createSlice } from '@reduxjs/toolkit'
 import { layoutApi } from '../apis/layout.api'
+import { resumeApi } from '../apis/resume.api'
 
 export const resumeSlice = createSlice({
     name: 'layout',
@@ -22,6 +23,15 @@ export const resumeSlice = createSlice({
                 state.resumeLayout = payload?.sections
             }
         )
+        builder.addMatcher(
+            resumeApi.endpoints.getResume.matchFulfilled,
+            (state, { payload }) => {
+                const layout = payload?.style?.layout
+                state.layoutWithStyles = layoutItems.find(
+                    (item) => item.layoutStyle.toString() === layout.toString()
+                )
+            }
+        )
     },
     reducers: {
         setLayoutData: (state, action) => {
@@ -31,6 +41,7 @@ export const resumeSlice = createSlice({
         // SetActivelayout should be removed after backend integration
         setActiveLayout: (state, action) => {
             const layouts = state.resumeLayoutItems
+
             const newLayouts = layouts.map((layout) => {
                 if (layout.id === action.payload) {
                     layout.isActive = true
@@ -45,7 +56,6 @@ export const resumeSlice = createSlice({
                 (layout) => layout.id === action.payload
             )
             if (activeLayout) {
-                state.resumeLayout = activeLayout?.layout
                 state.layoutWithStyles = activeLayout
             }
 

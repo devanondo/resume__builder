@@ -1,6 +1,6 @@
 import { api } from './api'
 
-const resumeApi = api.injectEndpoints({
+export const resumeApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getResume: builder.query({
             query: () => ({

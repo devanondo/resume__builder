@@ -3,6 +3,11 @@ import { IResume, ResumeModel } from './resume-interface'
 
 const ResumeSchema = new Schema<IResume, ResumeModel>(
     {
+        title: {
+            type: String,
+            required: true,
+            default: 'untitled',
+        },
         style: {
             record: String,
             layout: String,

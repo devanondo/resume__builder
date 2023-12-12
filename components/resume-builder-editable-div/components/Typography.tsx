@@ -18,6 +18,7 @@ export const TypographyInput = ({
     ref,
     datePicker,
     year,
+    style: styles,
     ...props
 }: CommonSectionProps) => {
     const { layoutWithStyles } = useAppSelector((state) => state.layout)
@@ -100,6 +101,7 @@ export const TypographyInput = ({
                         getFontFamilly(type as TypeProps)?.className
                     )}
                     style={{
+                        ...styles,
                         ...fontStyle,
                         color: getColors(type as TypeProps),
                     }}
