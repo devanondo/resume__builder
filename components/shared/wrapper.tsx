@@ -56,7 +56,7 @@ const GroupItem = ({
         <div
             onClick={(e) => {
                 e.stopPropagation()
-                if (popoverKey) {
+                if (popoverKey && groupPopoverKey !== popoverKey) {
                     dispatch(
                         showPopover({
                             name: popoverKey,
@@ -100,7 +100,7 @@ const AItem = ({
                 }
             }}
             className={cn(
-                'rounded border border-transparent hover:border-emerald-500',
+                'rounded',
                 className,
                 summeryPopoverKey === popoverKey && 'bg-white'
             )}

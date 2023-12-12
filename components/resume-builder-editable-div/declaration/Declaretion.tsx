@@ -7,6 +7,8 @@ import { TypographyInput } from '../components/Typography'
 import { useSetHeight } from '../education/update/healper'
 import { ResumeComponentProps } from '../types/resume-component-type'
 import DeclaretionItem from './declaretion-item'
+import { useAppSelector } from '@/redux/hooks'
+import GropPopover from '@/components/popover/group-popover'
 
 const DeclarationSection = ({
     name: wname,
@@ -18,12 +20,13 @@ const DeclarationSection = ({
         name,
         control,
     })
+    const { groupPopoverKey } = useAppSelector((state) => state.popover)
 
     const divRef = useRef<HTMLDivElement>(null)
     useSetHeight({ divRef, name: `${wname}.height` })
 
     return (
-        <GroupItem popoverKey={wname}>
+        <GroupItem popoverKey={wname} className="relative">
             <div ref={divRef}>
                 <TypographyInput
                     name={'declaration.name' as const}
@@ -46,6 +49,7 @@ const DeclarationSection = ({
                     />
                 )
             })}
+            {groupPopoverKey === wname && <GropPopover name={wname} />}
         </GroupItem>
     )
 }
