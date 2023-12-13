@@ -16,4 +16,5 @@ export interface CommonSectionProps extends HTMLAttributes<HTMLDivElement> {
     type: TypeProps
     datePicker?: boolean
     year?: boolean
+    isChange?: boolean
 }

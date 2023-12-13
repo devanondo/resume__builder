@@ -19,6 +19,7 @@ export const TypographyInput = ({
     datePicker,
     year,
     style: styles,
+    isChange,
     ...props
 }: CommonSectionProps) => {
     const { layoutWithStyles } = useAppSelector((state) => state.layout)
@@ -109,6 +110,7 @@ export const TypographyInput = ({
                     href={href}
                     link={link}
                     ref={ref}
+                    isChange={isChange}
                     {...props}
                 />
             )}

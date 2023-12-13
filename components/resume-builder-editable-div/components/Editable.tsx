@@ -11,6 +11,7 @@ interface TextBoxProps extends HTMLAttributes<HTMLDivElement> {
     link?: boolean
     href?: string
     ref?: any
+    isChange?: boolean
 }
 
 const TextBox = ({
@@ -19,6 +20,7 @@ const TextBox = ({
     link,
     href,
     ref,
+    isChange,
     ...props
 }: TextBoxProps) => {
     const { control } = useFormContext()
@@ -39,6 +41,7 @@ const TextBox = ({
                                     className,
                                     'cursor-auto px-2 editable__div__st'
                                 )}
+                                isChange={isChange}
                                 ref={ref}
                                 {...props}
                             />

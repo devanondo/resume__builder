@@ -50,7 +50,7 @@ export default class ContentEditable extends React.Component<Props> {
         ).current
 
     render() {
-        const { tagName, html, innerRef, ...props } = this.props
+        const { tagName, html, innerRef, isChange, ...props } = this.props
 
         return React.createElement(
             tagName || 'div',
@@ -63,7 +63,7 @@ export default class ContentEditable extends React.Component<Props> {
                               this.el.current = current
                           }
                         : innerRef || this.el,
-                // onInput: this.emitChange,
+                onInput: isChange && this.emitChange,
                 onBlur: this.props.onBlur || this.emitChange,
                 // onKeyUp: this.props.onKeyUp || this.emitChange,
                 // onKeyDown: this.props.onKeyDown || this.emitChange,
@@ -138,6 +138,7 @@ export default class ContentEditable extends React.Component<Props> {
         tagName: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
+        isChange: PropTypes.bool,
         innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     }
 }
@@ -157,5 +158,6 @@ export interface Props extends DivProps {
     tagName?: string
     className?: string
     style?: Object
+    isChange?: boolean
     innerRef?: React.RefObject<HTMLElement> | Function
 }
