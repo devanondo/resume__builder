@@ -274,7 +274,6 @@ const ResumePage = () => {
 
     const exData = packItems(wathcData)
     const groupData = getGroupedData(exData)
-    console.log(exData)
     return (
         <>
             <div className="hidden md:!flex h-fit left-4  top-20 w-fit z-30 flex-col fixed inset-y-0">

@@ -64,6 +64,12 @@ const CustomTextArea = ({
                     debounce(() => {
                         remove(index)
                     }, 50)()
+                } else if (e.target?.innerHTML === '<br>') {
+                    setFocusField(focusKey(name, index - 1))
+
+                    debounce(() => {
+                        remove(index)
+                    }, 50)()
                 }
 
                 break
