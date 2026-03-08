@@ -33,7 +33,9 @@ const ProjectDraggableItem = ({
                         name={`${name}.${i}.name` as const}
                         className={cn(
                             'py-0 px-2 leading-[26px]',
-                            watchValue[i]?.bold_position && 'font-normal'
+                            watchValue[i]?.bold_name
+                                ? '!font-bold'
+                                : '!font-normal'
                         )}
                         placeholder="Identify Your Project!"
                         type="subheading"
